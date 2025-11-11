@@ -6,7 +6,7 @@ public class GustavGameManager : MonoBehaviour
     private int currentBiomass;
     void Update()
     {
-        currentBiomass++;
+        currentBiomass+=10000;
         UIManager.Instance.UpdateBiomassLabel(currentBiomass);
     }
 }
