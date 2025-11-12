@@ -6,13 +6,17 @@ using UnityEngine;
 public class TyrantController : MonoBehaviour
 {
     [Header("Scene references")]
-    [SerializeField] private CapsuleCollider2D absorbArea;
+    [SerializeField] private CapsuleCollider2D grabArea;
     [SerializeField] private CircleCollider2D catchTrigger;
     [SerializeField] private GameManager gameManager;
     [SerializeField] public Transform mouthPoint;
 
-    [Header("Absorption settings")]
+    [Header("Larynx Ability Dependencies")]
+    [SerializeField] private Collider2D tyrantBodyCollider;
+    [SerializeField] private HumanSpawner humanSpawner;
+    [SerializeField] private AudioSource larynxSound;
 
+    [Header("Grab settings")]
     public TMP_Text liftSpeedCountText;
     public TMP_Text liftSpeedPriceText;
     [SerializeField] public float liftSpeed = 6f;
@@ -25,7 +29,9 @@ public class TyrantController : MonoBehaviour
     [SerializeField] private float liftSpeedUpgradePriceGrowthRate = 1.1f;
     public Animator TentacleAnimator;
 
+    private bool larynxIsActive = false;
 
+    [Header("Biomass modification")]
     public TMP_Text biomassPerHumanCountText;
     public TMP_Text biomassPerHumanPriceText;
     [SerializeField] public float biomassPerHuman = 5;
@@ -39,7 +45,7 @@ public class TyrantController : MonoBehaviour
 
     private void Reset()
     {
-        absorbArea = GetComponentInChildren<CapsuleCollider2D>();
+        grabArea = GetComponentInChildren<CapsuleCollider2D>();
         catchTrigger = GetComponent<CircleCollider2D>();
         if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
         if (mouthPoint == null) mouthPoint = transform;
@@ -48,7 +54,7 @@ public class TyrantController : MonoBehaviour
     private void Awake()
     {
         if (catchTrigger != null) catchTrigger.isTrigger = true;
-        if (absorbArea != null) absorbArea.isTrigger = true;
+        if (grabArea != null) grabArea.isTrigger = true;
 
     }
     void Start()
@@ -75,42 +81,44 @@ public class TyrantController : MonoBehaviour
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (absorbArea != null && absorbArea.OverlapPoint(worldPoint))
+            if (larynxIsActive && tyrantBodyCollider.OverlapPoint(worldPoint))
             {
-                TryStartAbsorbingOneHuman();
+                Sing();
+            }
+
+            else if (grabArea != null && grabArea.OverlapPoint(worldPoint))
+            {
+                TryStartGrabbingOneHuman();
             }
         }
+
     }
 
-    private void TryStartAbsorbingOneHuman()
+    private void TryStartGrabbingOneHuman()
     {
         var results = new Collider2D[32];
         var filter = ContactFilter2D.noFilter;
-        int count = Physics2D.OverlapCollider(absorbArea, filter, results);
+        int count = Physics2D.OverlapCollider(grabArea, filter, results);
 
-        HumanMovement chosen = null;
-        float bestDist = float.PositiveInfinity;
+        bool canStartGrab = false;
 
         for (int i = 0; i < count; i++)
         {
-            var col = results[i];
-            if (col == null) continue;
-            if (!col.CompareTag("Human")) continue;
-            if (!col.TryGetComponent(out HumanMovement hm)) continue;
-            if (hm.IsBeingAbsorbed) continue;
-
-            float d = ((Vector2)(col.transform.position - transform.position)).sqrMagnitude;
-            if (d < bestDist)
+            if (results[i].TryGetComponent<HumanMovement>(out var human))
             {
-                bestDist = d;
-                chosen = hm;
+                if (!human.IsBeingGrabbed)
+                {
+                    canStartGrab = true;
+                    break;
+                }
             }
         }
 
-        if (chosen)
+        if (canStartGrab)
         {
             Debug.Log(biomassPerHuman);
-            chosen.StartAbsorption(mouthPoint, liftSpeed, biomassPerHuman);
+
+            TentacleAnimator.SetTrigger("StartGrab");
         }
     }
 
@@ -142,6 +150,26 @@ public class TyrantController : MonoBehaviour
             UpdateTextFields();
         }
 
+    }
+
+    public void ActivateLarynx()
+    {
+        larynxIsActive = true;
+    }
+
+    private void Sing()
+    {
+        if (larynxSound != null)
+        {
+            larynxSound.Play();
+        }
+        if (humanSpawner != null)
+        {
+            humanSpawner.SpawnHuman();
+            humanSpawner.SpawnHuman();
+            humanSpawner.SpawnHuman();
+            humanSpawner.SpawnHuman();
+        }
     }
 
 

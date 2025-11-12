@@ -3,8 +3,8 @@ using UnityEngine;
 public class HumanSpawner : MonoBehaviour
 {
     public GameObject humanPrefab;
-    public Transform absorbPoint;
-    public float spawnInterval = 2f;
+    public Transform grabPoint;
+    public float spawnInterval = 5f;
     public float spawnDistance = 20f;
     public float spawnHeight = -8f;
 
@@ -20,7 +20,7 @@ public class HumanSpawner : MonoBehaviour
         }
     }
 
-    void SpawnHuman()
+    public void SpawnHuman()
     {
         int side = Random.Range(0, 2) == 0 ? -1 : 1;
 
@@ -28,7 +28,7 @@ public class HumanSpawner : MonoBehaviour
         GameObject human = Instantiate(humanPrefab, spawnPos, Quaternion.identity);
 
         HumanMovement move = human.GetComponent<HumanMovement>();
-        move.target = absorbPoint;
+        move.target = grabPoint;
     }
 
 }
