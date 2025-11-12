@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5065811262322031042}
   - component: {fileID: 7612813120585995461}
   - component: {fileID: 271536519837153668}
+  - component: {fileID: 7060711115243155326}
   m_Layer: 0
   m_Name: Human
   m_TagString: Human
@@ -115,6 +116,19 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 4
   absorbSpeed: 6
+--- !u!114 &7060711115243155326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020388542444068852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54a50a6458b8b24e83b0ffb71278260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DieInTrigger
+  triggerTag: MouthZone
 --- !u!1 &2165169711949840190
 GameObject:
   m_ObjectHideFlags: 0
