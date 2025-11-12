@@ -5,7 +5,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI bioMassText;
-    public double biomass = 0;
+    public double biomass = 100;
     public double brainpower = 0;
     private double biomassMultiplier = 1;
 

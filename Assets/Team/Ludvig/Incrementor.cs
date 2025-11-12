@@ -57,6 +57,6 @@ public class Incrementor : MonoBehaviour
         //     }
         // }
 
-        // slider.normalizedValue = _currentTime / targetTime;
+        //slider.normalizedValue = _currentTime / targetTime;
     }
 }

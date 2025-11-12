@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TyrantController : MonoBehaviour
@@ -10,8 +11,28 @@ public class TyrantController : MonoBehaviour
     [SerializeField] private Transform mouthPoint;
 
     [Header("Absorption settings")]
+
+    public TMP_Text liftSpeedCountText;
+    public TMP_Text liftSpeedPriceText;
     [SerializeField] private float liftSpeed = 6f;
+    [SerializeField] private float liftSpeedBase = 6f;
+    [SerializeField] private float liftSpeedPercentageIncrement = 0.25f;
+    [SerializeField] private int liftSpeedUpgradesOwned = 0;
+    [SerializeField] private int liftSpeedUpgradeBasePrice = 10;
+    [SerializeField] private int liftSpeedUpgradeNextPrice = 10;
+    [SerializeField] private float liftSpeedUpgradePriceGrowthRate = 1.1f;
+
+
+    public TMP_Text biomassPerHumanCountText;
+    public TMP_Text biomassPerHumanPriceText;
     [SerializeField] private double biomassPerHuman = 5;
+    [SerializeField] private double biomassPerHumanBase = 5;
+    [SerializeField] private double biomassPerHumanIncrement = 5f;
+    [SerializeField] private double biomassPerHumanUpgradesOwned = 0;
+    [SerializeField] private double biomassPerHumanUpgradeBasePrice = 10;
+    [SerializeField] private double biomassPerHumanUpgradeNextPrice = 10;
+    [SerializeField] private float biomassPerHumanUpgradePriceGrowthRate = 1.1f;
+
 
     private void Reset()
     {
@@ -26,6 +47,23 @@ public class TyrantController : MonoBehaviour
         if (catchTrigger != null) catchTrigger.isTrigger = true;
         if (absorbArea != null) absorbArea.isTrigger = true;
 
+    }
+    void Start()
+    {
+        liftSpeedCountText.text = 0f.ToString("F0");
+        liftSpeedPriceText.text = 0f.ToString("F0");
+        biomassPerHumanCountText.text = 0f.ToString("F0");
+        biomassPerHumanPriceText.text = 0f.ToString("F0");
+
+
+    }
+
+    public void UpdateTextFields()
+    {
+        liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
+        liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
+        biomassPerHumanCountText.text = 0f.ToString("F0");
+        biomassPerHumanPriceText.text = 0f.ToString("F0");
     }
 
     private void Update()
@@ -71,6 +109,20 @@ public class TyrantController : MonoBehaviour
             chosen.StartAbsorption(mouthPoint, liftSpeed, biomassPerHuman);
         }
     }
+
+    public void IncrementLiftSpeed()
+    {
+        if (gameManager.biomass > liftSpeedUpgradeNextPrice)
+        {
+            gameManager.biomass -= liftSpeedUpgradeNextPrice;
+            liftSpeed += liftSpeedBase * liftSpeedPercentageIncrement;
+            liftSpeedUpgradesOwned++;
+            liftSpeedUpgradeNextPrice = (int)(liftSpeedUpgradeBasePrice * Mathf.Pow(liftSpeedUpgradePriceGrowthRate, liftSpeedUpgradesOwned));
+            UpdateTextFields();
+        }
+
+    }
+
 
 
 }
