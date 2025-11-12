@@ -5,13 +5,15 @@ public class DieInTrigger : MonoBehaviour
     [SerializeField]
     private string triggerTag = "MouthZone";
 
-    private double biomassValue = 10;
+    private float biomassValue = 10;
 
     private GameManager gameManager;
+    private TyrantController tyrantController;
 
     private void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        tyrantController = FindFirstObjectByType<TyrantController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,7 +22,8 @@ public class DieInTrigger : MonoBehaviour
         {
             Debug.Log("Tyrant ate " + gameObject.name + "... Om nom nom");
             Destroy(gameObject);
-            gameManager?.AddBiomass(biomassValue);
+            gameManager?.AddBiomass(tyrantController.biomassPerHuman);
+
         }
     }
 }

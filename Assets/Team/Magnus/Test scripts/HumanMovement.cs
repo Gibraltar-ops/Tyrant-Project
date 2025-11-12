@@ -11,6 +11,7 @@ public class HumanMovement : MonoBehaviour
     public bool IsBeingAbsorbed { get; private set; }
 
     private GameManager gameManager;
+    private TyrantController tyrantController;
     private double biomassValue;
 
     Rigidbody2D rb;
@@ -21,6 +22,10 @@ public class HumanMovement : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         gameManager = FindFirstObjectByType<GameManager>();
+    }
+    void Start()
+    {
+        tyrantController = FindFirstObjectByType<TyrantController>();
     }
 
     void FixedUpdate()
@@ -44,9 +49,8 @@ public class HumanMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (IsBeingAbsorbed && other.gameObject == target.gameObject)
+        if (other.gameObject == tyrantController.mouthPoint.gameObject)
         {
-            gameManager?.AddBiomass(biomassValue);
             Destroy(gameObject);
         }
     }

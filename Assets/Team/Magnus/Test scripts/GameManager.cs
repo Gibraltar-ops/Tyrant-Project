@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
             bioMassText.text = $"Biomass: {biomass:N0}";
     }
 
-    public void AddBiomass(double amount)
+    public void AddBiomass(float amount)
     {
         double scaledAmount = amount * System.Math.Pow(biomassMultiplier, biomass / 100);
-        biomass += scaledAmount;
+        biomass += amount;
     }
 
     public void AddBrainpower(double amount)
