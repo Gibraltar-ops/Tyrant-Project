@@ -31,7 +31,7 @@ public static class PrototypeSaveSystem
         }
         else
         {
-            Debug.LogError("No save file found in " + path);
+            Debug.Log("No save file found in " + path);
             return null;
         }
     }
@@ -40,44 +40,30 @@ public static class PrototypeSaveSystem
 [Serializable]
 public class PrototypeSaveData
 {
+    public double biomass;
     public float liftSpeed;
     public float liftSpeedMultiplier;
-    public float liftSpeedBase;
-    public float liftSpeedPercentageIncrement;
     public int liftSpeedUpgradesOwned;
-    public int liftSpeedUpgradeBasePrice;
     public int liftSpeedUpgradeNextPrice;
-    public float liftSpeedUpgradePriceGrowthRate;
 
     public bool larynxIsActive;
 
     public float biomassPerHuman;
-    public float biomassPerHumanBase;
-    public float biomassPerHumanIncrement;
     public int biomassPerHumanUpgradesOwned;
-    public int biomassPerHumanUpgradeBasePrice;
     public int biomassPerHumanUpgradeNextPrice;
-    public float biomassPerHumanUpgradePriceGrowthRate;
 
     public PrototypeSaveData(TyrantController tyrant)
     {
+        biomass = tyrant.gameManager.biomass;
         liftSpeed = tyrant.liftSpeed;
         liftSpeedMultiplier = tyrant.liftSpeedMultiplier;
-        liftSpeedBase = tyrant.liftSpeedBase;
-        liftSpeedPercentageIncrement = tyrant.liftSpeedPercentageIncrement;
         liftSpeedUpgradesOwned = tyrant.liftSpeedUpgradesOwned;
-        liftSpeedUpgradeBasePrice = tyrant.liftSpeedUpgradeBasePrice;
         liftSpeedUpgradeNextPrice = tyrant.liftSpeedUpgradeNextPrice;
-        liftSpeedUpgradePriceGrowthRate = tyrant.liftSpeedUpgradePriceGrowthRate;
 
         larynxIsActive = tyrant.larynxIsActive;
 
         biomassPerHuman = tyrant.biomassPerHuman;
-        biomassPerHumanBase = tyrant.biomassPerHumanBase;
-        biomassPerHumanIncrement = tyrant.biomassPerHumanIncrement;
         biomassPerHumanUpgradesOwned = tyrant.biomassPerHumanUpgradesOwned;
-        biomassPerHumanUpgradeBasePrice = tyrant.biomassPerHumanUpgradeBasePrice;
         biomassPerHumanUpgradeNextPrice = tyrant.biomassPerHumanUpgradeNextPrice;
-        biomassPerHumanUpgradePriceGrowthRate = tyrant.biomassPerHumanUpgradePriceGrowthRate;
     }
 }

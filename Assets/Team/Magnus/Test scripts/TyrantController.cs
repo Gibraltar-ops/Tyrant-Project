@@ -8,7 +8,7 @@ public class TyrantController : MonoBehaviour
     [Header("Scene references")]
     [SerializeField] private CapsuleCollider2D grabArea;
     [SerializeField] private CircleCollider2D catchTrigger;
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] public GameManager gameManager;
     [SerializeField] public Transform mouthPoint;
 
     [Header("Larynx Ability Dependencies")]
@@ -42,6 +42,31 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public int biomassPerHumanUpgradeNextPrice = 10;
     [SerializeField] public float biomassPerHumanUpgradePriceGrowthRate = 1.1f;
 
+    public void SaveTyrant()
+    {
+        PrototypeSaveSystem.PrototypeSavePlayer(this);
+        Debug.Log("Saved Tyrant");
+    }
+
+    public void LoadTyrant()
+    {
+        PrototypeSaveData data = PrototypeSaveSystem.PrototypeLoadPlayer();
+        if (data != null)
+        {
+            gameManager.biomass = data.biomass;
+            liftSpeed = data.liftSpeed;
+            liftSpeedMultiplier = data.liftSpeedMultiplier;
+            liftSpeedUpgradesOwned = data.liftSpeedUpgradesOwned;
+            liftSpeedUpgradeNextPrice = data.liftSpeedUpgradeNextPrice;
+
+            larynxIsActive = data.larynxIsActive;
+
+            biomassPerHuman = data.biomassPerHuman;
+            biomassPerHumanUpgradesOwned = data.biomassPerHumanUpgradesOwned;
+            biomassPerHumanUpgradeNextPrice = data.biomassPerHumanUpgradeNextPrice;
+        }
+    }
+
 
     private void Reset()
     {
@@ -59,12 +84,20 @@ public class TyrantController : MonoBehaviour
     }
     void Start()
     {
+        LoadTyrant();
+        TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
+
         liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
         liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
         biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
         biomassPerHumanPriceText.text = biomassPerHumanUpgradeNextPrice.ToString("F0");
 
 
+    }
+
+    void OnDestroy()
+    {
+        SaveTyrant();
     }
 
     public void UpdateTextFields()
