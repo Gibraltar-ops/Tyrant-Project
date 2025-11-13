@@ -9,15 +9,17 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button btn_NewGame;
     [SerializeField] private Button btn_Settings;
     [SerializeField] private Button btn_Extras;
+    [SerializeField] private Button btn_Credits;
     [SerializeField] private Button btn_Quit;
 
     [Header("Submenu Panels")]
     [SerializeField] private GameObject canvas_MainMenu;
     [SerializeField] private GameObject canvas_Settings;
     [SerializeField] private GameObject canvas_Extras;
+    [SerializeField] private GameObject canvas_Credits;
 
     [Header("Game Settings")]
-    [SerializeField] private string sceneName = "GameScene"; // Set main game scene name here
+    private string sceneName = "Level1"; // Set main game scene name here
     [SerializeField] private string saveFileKey = "SaveExists";   // Used to check if a save exists
 
     private void Start()
@@ -27,6 +29,7 @@ public class MainMenuUI : MonoBehaviour
         btn_NewGame.onClick.AddListener(OnNewGameClicked);
         btn_Settings.onClick.AddListener(OnSettingsClicked);
         btn_Extras.onClick.AddListener(OnExtrasClicked);
+        btn_Credits.onClick.AddListener(OnCreditsClicked);
         btn_Quit.onClick.AddListener(OnQuitClicked);
 
         // Check if a saved game exists and enable/disable Continue button
@@ -76,6 +79,12 @@ public class MainMenuUI : MonoBehaviour
         canvas_MainMenu.SetActive(false);
         canvas_Extras.SetActive(true);
     }
+    private void OnCreditsClicked()
+    {
+        Debug.Log("Open Extras");
+        canvas_MainMenu.SetActive(false);
+        canvas_Credits.SetActive(true);
+    }
 
     private void OnQuitClicked()
     {
@@ -97,12 +106,14 @@ public class MainMenuUI : MonoBehaviour
         canvas_MainMenu.SetActive(true);
         canvas_Settings.SetActive(false);
         canvas_Extras.SetActive(false);
+        canvas_Credits.SetActive(false);
     }
 
     public void CloseAllSubmenus()
     {
         canvas_Settings.SetActive(false);
         canvas_Extras.SetActive(false);
+        canvas_Credits.SetActive(false);
     }
 
     #endregion
