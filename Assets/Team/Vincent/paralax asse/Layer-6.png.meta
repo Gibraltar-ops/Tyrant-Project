@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 8132ee6fe4679cf4c92c79f186c70b7f
+guid: e240e1a64f3b44949a4e1246e4b011c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1673732733077124514
-    second: trees_0
+      213: -1227309137918047807
+    second: Tree_no_window_0
   - first:
-      213: 3611188691014843535
-    second: trees_1
+      213: 8009409270570654254
+    second: Tree_no_window_1
   - first:
-      213: 2249915519335348110
-    second: trees_2
-  - first:
-      213: 5223556475179290604
-    second: trees_3
-  - first:
-      213: 384058854656272681
-    second: trees_4
+      213: 5874664925249418854
+    second: Tree_no_window_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +54,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -112,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trees_0
+      name: Tree_no_window_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 448
-        width: 43
-        height: 58
+        x: 0
+        y: 462
+        width: 5
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,19 +121,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5a8ef372f4b5c8e0800000000000000
-      internalID: -1673732733077124514
+      spriteID: 1c9cdc477d8b7fee0800000000000000
+      internalID: -1227309137918047807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trees_1
+      name: Tree_no_window_1
       rect:
         serializedVersion: 2
-        x: 103
+        x: 162
         y: 0
-        width: 689
+        width: 628
         height: 857
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -149,17 +143,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8cf8d84bf48d1230800000000000000
-      internalID: 3611188691014843535
+      spriteID: e2a9511cb43272f60800000000000000
+      internalID: 8009409270570654254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trees_2
+      name: Tree_no_window_2
       rect:
         serializedVersion: 2
-        x: 2280
+        x: 2278
         y: 151
         width: 588
         height: 582
@@ -171,52 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e873f988e3e493f10800000000000000
-      internalID: 2249915519335348110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees_3
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 337
-        width: 63
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cefc04740fccd7840800000000000000
-      internalID: 5223556475179290604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trees_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 196
-        width: 47
-        height: 71
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 92961a45e73745500800000000000000
-      internalID: 384058854656272681
+      spriteID: 66630fbcf90078150800000000000000
+      internalID: 5874664925249418854
       vertices: []
       indices: 
       edges: []
@@ -235,11 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      trees_0: -1673732733077124514
-      trees_1: 3611188691014843535
-      trees_2: 2249915519335348110
-      trees_3: 5223556475179290604
-      trees_4: 384058854656272681
+      Tree_no_window_0: -1227309137918047807
+      Tree_no_window_1: 8009409270570654254
+      Tree_no_window_2: 5874664925249418854
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
