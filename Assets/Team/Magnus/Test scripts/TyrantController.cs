@@ -20,27 +20,27 @@ public class TyrantController : MonoBehaviour
     public TMP_Text liftSpeedCountText;
     public TMP_Text liftSpeedPriceText;
     [SerializeField] public float liftSpeed = 6f;
-    [SerializeField] private float liftSpeedMultiplier = 1f;
-    [SerializeField] private float liftSpeedBase = 6f;
-    [SerializeField] private float liftSpeedPercentageIncrement = 0.25f;
-    [SerializeField] private int liftSpeedUpgradesOwned = 0;
-    [SerializeField] private int liftSpeedUpgradeBasePrice = 10;
-    [SerializeField] private int liftSpeedUpgradeNextPrice = 10;
-    [SerializeField] private float liftSpeedUpgradePriceGrowthRate = 1.1f;
+    [SerializeField] public float liftSpeedMultiplier = 1f;
+    [SerializeField] public float liftSpeedBase = 6f;
+    [SerializeField] public float liftSpeedPercentageIncrement = 0.25f;
+    [SerializeField] public int liftSpeedUpgradesOwned = 0;
+    [SerializeField] public int liftSpeedUpgradeBasePrice = 10;
+    [SerializeField] public int liftSpeedUpgradeNextPrice = 10;
+    [SerializeField] public float liftSpeedUpgradePriceGrowthRate = 1.1f;
     public Animator TentacleAnimator;
 
-    private bool larynxIsActive = false;
+    public bool larynxIsActive = false;
 
     [Header("Biomass modification")]
     public TMP_Text biomassPerHumanCountText;
     public TMP_Text biomassPerHumanPriceText;
     [SerializeField] public float biomassPerHuman = 5;
-    [SerializeField] private float biomassPerHumanBase = 5;
-    [SerializeField] private float biomassPerHumanIncrement = 1f;
-    [SerializeField] private int biomassPerHumanUpgradesOwned = 0;
-    [SerializeField] private int biomassPerHumanUpgradeBasePrice = 10;
-    [SerializeField] private int biomassPerHumanUpgradeNextPrice = 10;
-    [SerializeField] private float biomassPerHumanUpgradePriceGrowthRate = 1.1f;
+    [SerializeField] public float biomassPerHumanBase = 5;
+    [SerializeField] public float biomassPerHumanIncrement = 1f;
+    [SerializeField] public int biomassPerHumanUpgradesOwned = 0;
+    [SerializeField] public int biomassPerHumanUpgradeBasePrice = 10;
+    [SerializeField] public int biomassPerHumanUpgradeNextPrice = 10;
+    [SerializeField] public float biomassPerHumanUpgradePriceGrowthRate = 1.1f;
 
 
     private void Reset()
