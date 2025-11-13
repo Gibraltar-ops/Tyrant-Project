@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -33,8 +34,8 @@ public class MainMenuUI : MonoBehaviour
         btn_Quit.onClick.AddListener(OnQuitClicked);
 
         // Check if a saved game exists and enable/disable Continue button
-        bool hasSave = PlayerPrefs.HasKey(saveFileKey);
-        btn_Continue.interactable = hasSave;
+        //bool hasSave = PlayerPrefs.HasKey(saveFileKey);
+        //btn_Continue.interactable = hasSave;
 
         // Ensure only the main menu is shown on start
         SetupMainMenu();
@@ -44,21 +45,28 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnContinueClicked()
     {
-        Debug.Log("Continue Game");
-        // Example: Load saved game
-        if (PlayerPrefs.HasKey(saveFileKey))
-        {
-            string savedScene = PlayerPrefs.GetString("SavedScene", sceneName);
-            SceneManager.LoadScene(savedScene);
-        }
-        else
-        {
-            Debug.LogWarning("No save found!");
-        }
+        SceneManager.LoadScene("Level1");
+        // Debug.Log("Continue Game");
+        // // Example: Load saved game
+        // if (PlayerPrefs.HasKey(saveFileKey))
+        // {
+        //     string savedScene = PlayerPrefs.GetString("SavedScene", sceneName);
+        //     SceneManager.LoadScene(savedScene);
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("No save found!");
+        // }
     }
 
     private void OnNewGameClicked()
     {
+        string path = Application.persistentDataPath + "/prototypePlayer.fun";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
         Debug.Log("New Game Started");
         // Clear save data if necessary
         PlayerPrefs.DeleteKey(saveFileKey);
