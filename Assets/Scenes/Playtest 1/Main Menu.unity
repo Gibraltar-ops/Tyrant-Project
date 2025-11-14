@@ -244,7 +244,6 @@ MonoBehaviour:
   canvas_Settings: {fileID: 961599391}
   canvas_Extras: {fileID: 724322982}
   canvas_Credits: {fileID: 474697309}
-  sceneName: GameScene
   saveFileKey: SaveExists
 --- !u!1 &66197547
 GameObject:
@@ -4776,7 +4775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
