@@ -10,6 +10,9 @@ public class DieInTrigger : MonoBehaviour
     private GameManager gameManager;
     private TyrantController tyrantController;
 
+    public delegate void OnHumanEaten();
+    public static event OnHumanEaten onHumanEaten;
+
     private void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -21,6 +24,7 @@ public class DieInTrigger : MonoBehaviour
         if (other.CompareTag(triggerTag))
         {
             Debug.Log("Tyrant ate " + gameObject.name + "... Om nom nom");
+            onHumanEaten?.Invoke();
             Destroy(gameObject);
             gameManager?.AddBiomass(tyrantController.biomassPerHuman);
 

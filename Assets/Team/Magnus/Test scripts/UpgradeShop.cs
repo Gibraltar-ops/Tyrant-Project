@@ -10,6 +10,7 @@ public class UpgradeShop : MonoBehaviour
     [SerializeField] private GameObject larynxUpgradeButton;
     [SerializeField] private int larynxCost = 150;
     private bool larynxIsPurchased = false;
+    private bool initialized = false;
 
     void Start()
     {
@@ -17,13 +18,26 @@ public class UpgradeShop : MonoBehaviour
         {
             larynxUpgradeButton.SetActive(false);
         }
+
+        Invoke("SetLarynxActive", 0.05f);
+    }
+
+    public void SetLarynxActive()
+    {
+        larynxIsPurchased = tyrantController.larynxIsActive;
+        Debug.Log("Larynx is purchased = " + larynxIsPurchased);
+        initialized = true;
     }
 
     void Update()
     {
-        if (!larynxIsPurchased && gameManager.biomass >= larynxCost)
+        if (!larynxIsPurchased && gameManager.biomass >= larynxCost && initialized)
         {
             larynxUpgradeButton.SetActive(true);
+        }
+        else
+        {
+            larynxUpgradeButton.SetActive(false);
         }
     }
 

@@ -7,17 +7,39 @@ public class HumanSpawner : MonoBehaviour
     public float spawnInterval = 5f;
     public float spawnDistance = 20f;
     public float spawnHeight = -8f;
+    public int maxCount = 50;
+    public int victimCount = 0;
 
     private float timer;
+
+    void OnEnable()
+    {
+        DieInTrigger.onHumanEaten += DecreaseCount;
+    }
+    void OnDisable()
+    {
+        DieInTrigger.onHumanEaten -= DecreaseCount;
+    }
 
     void Update()
     {
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {
-            SpawnHuman();
+            if (victimCount < maxCount)
+            {
+                SpawnHuman();
+                victimCount++;
+            }
+
             timer = 0f;
         }
+    }
+
+    public void DecreaseCount()
+    {
+        victimCount--;
+
     }
 
     public void SpawnHuman()

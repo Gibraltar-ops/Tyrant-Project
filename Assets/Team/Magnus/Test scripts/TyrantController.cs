@@ -149,7 +149,7 @@ public class TyrantController : MonoBehaviour
 
         if (canStartGrab)
         {
-            Debug.Log(biomassPerHuman);
+
 
             TentacleAnimator.SetTrigger("StartGrab");
         }
@@ -196,12 +196,18 @@ public class TyrantController : MonoBehaviour
         {
             larynxSound.Play();
         }
-        if (humanSpawner != null)
+
+        if (humanSpawner != null && humanSpawner.victimCount < humanSpawner.maxCount)
         {
             humanSpawner.SpawnHuman();
             humanSpawner.SpawnHuman();
             humanSpawner.SpawnHuman();
             humanSpawner.SpawnHuman();
+            humanSpawner.victimCount += 4;
+        }
+        else
+        {
+            return;
         }
     }
 

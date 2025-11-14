@@ -22,6 +22,7 @@ public class HumanMovement : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         gameManager = FindFirstObjectByType<GameManager>();
+
     }
     void Start()
     {
