@@ -11,6 +11,9 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public GameManager gameManager;
     [SerializeField] public Transform mouthPoint;
 
+    [Header("Tentacle Settings")]
+    [SerializeField] private List <TentacleController> tentacles;
+
     [Header("Larynx Ability Dependencies")]
     [SerializeField] private Collider2D tyrantBodyCollider;
     [SerializeField] private HumanSpawner humanSpawner;
@@ -118,41 +121,47 @@ public class TyrantController : MonoBehaviour
             {
                 Sing();
             }
-
-            else if (grabArea != null && grabArea.OverlapPoint(worldPoint))
+else
             {
-                TryStartGrabbingOneHuman();
+                TryGrabHumanAtClick(worldPoint);
             }
         }
 
     }
 
-    private void TryStartGrabbingOneHuman()
+    private void TryGrabHumanAtClick(Vector2 clickPosition)
     {
-        var results = new Collider2D[32];
-        var filter = ContactFilter2D.noFilter;
-        int count = Physics2D.OverlapCollider(grabArea, filter, results);
+        RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
 
-        bool canStartGrab = false;
-
-        for (int i = 0; i < count; i++)
+        if (hit.collider != null)
         {
-            if (results[i].TryGetComponent<HumanMovement>(out var human))
+            if (hit.collider.TryGetComponent<HumanMovement>(out var human))
             {
                 if (!human.IsBeingGrabbed)
                 {
-                    canStartGrab = true;
-                    break;
+                    TentacleController freeTentacle = FindFreeTentacle();
+                    if (freeTentacle != null)
+                    {
+                        freeTentacle.StartGrab(human.transform);
+                        human.MarkAsGrabbed();
+                    }
+                    else
+                    {
+                        Debug.Log ("Alla tentakler är upptagna");
+                    }
                 }
             }
         }
+    }
 
-        if (canStartGrab)
+    private TentacleController FindFreeTentacle()
+    {
+        foreach (var tentacle in tentacles)
         {
-
-
-            TentacleAnimator.SetTrigger("StartGrab");
+            if (!tentacle.IsBusy())
+            {return tentacle;}
         }
+        return null;
     }
 
     public void IncrementLiftSpeed()
