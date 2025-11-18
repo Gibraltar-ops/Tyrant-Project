@@ -28,15 +28,18 @@ public class ButtonSong : MonoBehaviour
             slider1.value = Mathf.MoveTowards(slider1.value, 0f, drainSpeed * Time.deltaTime);
             slider2.value = Mathf.MoveTowards(slider2.value, 0f, drainSpeed * Time.deltaTime);
         }
+
+        //Place code here for sending slider current value or
+        //add new method further down for getting the value at will/need.
     }
 
-    // When finger/mouse presses the button
+    // When button is pressed.
     public void OnPointerDown(BaseEventData data)
     {
         isPressed = true;
     }
 
-    // When finger/mouse releases the button
+    // When button is realeased.
     public void OnPointerUp(BaseEventData data)
     {
         isPressed = false;
