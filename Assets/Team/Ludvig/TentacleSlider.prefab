@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3516820123734647299}
   - component: {fileID: 616097044755177972}
-  - component: {fileID: 4128186367447091377}
+  - component: {fileID: -5233148167419917847}
   m_Layer: 5
   m_Name: TentacleSlider
   m_TagString: Untagged
@@ -61,7 +61,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374625854783478665}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4128186367447091377
+--- !u!114 &-5233148167419917847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,12 +136,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1374625854783478665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9370602a1ee5d340add207416f3cf4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f2d1a03681ade2419eb5f28a1ede3c1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Incrementor
-  Values: {fileID: 0}
-  Active: 1
-  slider: {fileID: 616097044755177972}
+  m_EditorClassIdentifier: Assembly-CSharp::SliderAnimation
+  Slider: {fileID: 616097044755177972}
 --- !u!1 &3108380502460934751
 GameObject:
   m_ObjectHideFlags: 0
