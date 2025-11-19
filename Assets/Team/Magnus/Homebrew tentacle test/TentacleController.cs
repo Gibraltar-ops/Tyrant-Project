@@ -1,192 +1,191 @@
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
 
-public class TentacleController : MonoBehaviour
-{
- [Header ("IK Settings")]
- public int segments = 5; 
- public float [] segmentLengths;
- public float totalLength;
 
- [Header("Target")]
-
+public class TentacleController : MonoBehaviour {
+    
+  [Header ("Target")]
 public Transform mouthPoint;
 
-[Header ("Movement settings")]
-public float reachSpeed = 20f;
+ [Header ("2D IK (Unity)")]
+ public Transform ikTarget;
+ public Transform tipBone;
 
-public float returnToIdleSpeed = 10f;
-public float retractSpeed = 1.5f; 
+  [Header ("Movement settings")]
+  public float reachSpeed = 20f;
+  public float returnToIdleSpeed = 10f;
+  public float retractSpeed = 1.5f;
+  public float retractArcHeight = 2.0f;
 
-public float retractArcHeight = 2.0f;
+  [Header ("Simulated Physics")]
+  public float weightLagTime = 0.2f;
+  public float weightAmount = 1.5f;
 
-private Transform grabTarget;
-private Vector3 animatedTargetPosition;
-private Vector3 idlePosition;
+   [Header ("Tentacle Length")]
+   public float totalLength = 5f; 
+   private Transform grabTarget;
+   private Vector3 animatedTargetPosition;
+   private Vector3 currentIkPosition;
+   private Vector3 ikVelocity;
+   private Vector3 idlePosition;
 
-private Vector3[] segmentPositions;
-private LineRenderer lineRenderer;
+   private float retractProgress = 0f;
+   private Vector3 retractStartPoint;
 
-private float retractProgress = 0f;
-private Vector3 retractStartPoint;
-private Vector3 retractControlPoint;
+   public enum TentacleState {Idle, Reaching, Retracting, ReturningToIdle}
+   private TentacleState currentState = TentacleState.Idle;
+   private bool isBusy = false;
 
-public enum TentacleState {Idle, Reaching, Retracting, ReturningToIdle}
-private TentacleState currentState = TentacleState.Idle;
-private bool isBusy = false;
-
-void Awake ()
+   private void Start()
+{
+    if (tipBone != null && totalLength <= 0f)
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        segmentPositions = new Vector3[segments + 1];
-        segmentLengths = new float[segments];
-
-        for (int i = 0; i < segments; i++)
-        {
-            segmentLengths[i] = 1f; 
-        }
-
-        ResetPositions();
+        totalLength = Vector3.Distance(transform.position, tipBone.position);
     }
-void Start()
+
+    if (totalLength <= 0f)
+    totalLength = 5f; //Fallback
+
+    idlePosition = transform.position - Vector3.up * totalLength * 1.5f;
+    animatedTargetPosition = idlePosition;
+    currentIkPosition = idlePosition;
+}
+
+private void Update ()
+{
+    Debug.DrawLine(transform.position, animatedTargetPosition, Color.red);
+
+    switch (currentState)
     {
-        idlePosition = transform.position - Vector3.up * totalLength * 1.5f;
+        case TentacleState.Idle:
         animatedTargetPosition = idlePosition;
-    }
-    void Update()
-    {
-        segmentPositions[0] = transform.position;
+        break;
 
-        switch (currentState)
-        {
-            case TentacleState.Idle:
-                
-                animatedTargetPosition = idlePosition; 
+        case TentacleState.Reaching:
+        if (grabTarget == null)
+            {
+                currentState = TentacleState.ReturningToIdle;
                 break;
+            }
 
-            case TentacleState.Reaching:
-                if (grabTarget == null)
-                {
-                    currentState = TentacleState.ReturningToIdle; 
-                    break;
-                }
-                animatedTargetPosition = Vector3.MoveTowards(animatedTargetPosition, grabTarget.position, Time.deltaTime * reachSpeed);
-                if (Vector3.Distance(animatedTargetPosition, grabTarget.position) < 0.1f)
-                {
-                    currentState = TentacleState.Retracting;
-                    retractProgress = 0f;
-                    retractStartPoint = grabTarget.position;
-                    float horizontalDirection = Mathf.Sign(retractStartPoint.x - mouthPoint.position.x);
-                    Vector3 arcDirection = Vector3.left * horizontalDirection;
-                    retractControlPoint = (retractStartPoint + mouthPoint.position) / 2 + arcDirection * retractArcHeight;
-                }
-                break;
+            animatedTargetPosition = Vector3.MoveTowards (
+                animatedTargetPosition,
+                grabTarget.position,
+                Time.deltaTime* reachSpeed
+            );
+
+            if (Vector3.Distance(animatedTargetPosition, grabTarget.position) < 0.1f)
+            {
+                currentState = TentacleState.Retracting;
+                retractProgress = 0f;
+                retractStartPoint = grabTarget.position;
+            }
+            break;
 
             case TentacleState.Retracting:
-          
             if (mouthPoint == null || grabTarget == null)
             {
-              
                 if (grabTarget != null) Destroy(grabTarget.gameObject);
                 grabTarget = null;
                 currentState = TentacleState.ReturningToIdle;
                 break;
             }
 
-         
             retractProgress += Time.deltaTime * retractSpeed;
+            retractProgress = Mathf.Clamp01(retractProgress);
 
-          
-            Vector3 posOnCurve = CalculateQuadraticBezierPoint(retractProgress, retractStartPoint, retractControlPoint, mouthPoint.position);
-            animatedTargetPosition = posOnCurve;
+ 
+            Vector3 p0 = retractStartPoint;
+            Vector3 p_final = mouthPoint.position;
+            
+            Vector3 p_intermediate = transform.position - (Vector3.up * retractArcHeight);
 
-           
+            if (retractProgress < 0.5f)
+            {
+             
+                float t = retractProgress * 2f; 
+                animatedTargetPosition = Vector3.Lerp(p0, p_intermediate, t);
+            }
+            else
+            {
+              
+                float t = (retractProgress - 0.5f) * 2f;
+                animatedTargetPosition = Vector3.Lerp(p_intermediate, p_final, t);
+            }
+
             if (retractProgress >= 1.0f)
             {
                 Destroy(grabTarget.gameObject);
                 grabTarget = null;
                 currentState = TentacleState.ReturningToIdle;
             }
+
             break;
 
-
             case TentacleState.ReturningToIdle:
-                animatedTargetPosition = Vector3.MoveTowards(animatedTargetPosition, idlePosition, Time.deltaTime * returnToIdleSpeed);
-                if (Vector3.Distance(animatedTargetPosition, idlePosition) < 0.1f)
-                {
-                    ResetTentacle();
-                }
-                break;
-        }
+            animatedTargetPosition = Vector3.MoveTowards(animatedTargetPosition, idlePosition, Time.deltaTime * returnToIdleSpeed);
 
-        IKSolver.Solve(segmentPositions, segmentLengths, animatedTargetPosition);
-        UpdateLineRenderer();
+            if (Vector3.Distance(animatedTargetPosition, idlePosition) < 0.1f)
+            {
+                ResetTentacle();
+            }
+            break;
     }
-
-    void LateUpdate()
+    if (ikTarget != null)
     {
-        if (currentState == TentacleState.Retracting && grabTarget != null)
+        ikTarget.position = animatedTargetPosition;
+    }
+}
+
+private void LateUpdate()
+{
+    if (currentState == TentacleState.Retracting && grabTarget != null && tipBone != null)
     {
-        grabTarget.position = segmentPositions[segments];
+        grabTarget.position = tipBone.position;
     }
-    }
+}
 
-     Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+public void StartGrab(Transform newGrabTarget)
+{
+    if (newGrabTarget == null)
+    return;
+
+    if (!isBusy)
     {
-        float u = 1 - t;
-        float tt = t * t;
-        float uu = u * u;
-        Vector3 p = uu * p0; 
-        p += 2 * u * t * p1; 
-        p += tt * p2; 
-        return p;
+        grabTarget = newGrabTarget;
+
+        if (tipBone != null)
+        animatedTargetPosition = tipBone.position;
+        else 
+        animatedTargetPosition = transform.position;
+
+        currentState = TentacleState.Reaching;
+        isBusy = true; 
+        Debug.Log ($"Tentacle {name} is reaching for {newGrabTarget.name}");
     }
+}
 
-        void UpdateLineRenderer()
-        {lineRenderer.positionCount = segments +1;
-        lineRenderer.SetPositions (segmentPositions);
-        }
-    void ResetPositions()
-    {
-        totalLength = 0;
-        for (int i = 0; i < segments; i++)
-        {
-            totalLength += segmentLengths[i];
-        }
+public void ResetTentacle()
+{
+    isBusy = false;
+    grabTarget = null;
+    currentState = TentacleState.Idle;
+    Debug.Log ($"Tentacle {name} is available");
+}
 
-        segmentPositions[0] = transform.position;
-        for (int i = 1; i <= segments; i++)
-        {
-            segmentPositions[i] = segmentPositions[i - 1] - Vector3.up * segmentLengths[i - 1];
-        }
+public bool IsBusy()
+{
+    return isBusy;
+}
 
-
-    }
-
-    public void StartGrab(Transform newGrabTarget)
-    {
-        if (!isBusy)
-        {
-            this.grabTarget = newGrabTarget;
-            animatedTargetPosition = segmentPositions [segments];
-            currentState = TentacleState.Reaching;
-            isBusy = true; 
-            Debug.Log ($"Tentakel {name} sträcer sig efter {newGrabTarget.name}");
-
-        }
-    }
-
-    public void ResetTentacle()
-    {
-        isBusy = false; 
-        grabTarget = null;
-        currentState = TentacleState.Idle;
-        Debug.Log ($"Tentakel {name} är ledig");
-    }
-
-    public bool IsBusy()
-    {
-        return isBusy;
-    }
+private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+{
+    float u = 1 - t;
+    float tt = t * t;
+    float uu = u * u;
+    Vector3 p = uu * p0;
+    p += 2 * u * t * p1;
+    p += tt * p2;
+    return p;
+}
 }

@@ -30,8 +30,8 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public int liftSpeedUpgradeBasePrice = 10;
     [SerializeField] public int liftSpeedUpgradeNextPrice = 10;
     [SerializeField] public float liftSpeedUpgradePriceGrowthRate = 1.1f;
-    public Animator TentacleAnimator;
-
+/*     public Animator TentacleAnimator;
+ */
     public bool larynxIsActive = false;
 
     [Header("Biomass modification")]
@@ -88,8 +88,8 @@ public class TyrantController : MonoBehaviour
     void Start()
     {
         LoadTyrant();
-        TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
-
+/*         TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
+ */
         liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
         liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
         biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
@@ -113,6 +113,8 @@ public class TyrantController : MonoBehaviour
 
     private void Update()
     {
+
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -172,8 +174,8 @@ else
             liftSpeed += liftSpeedBase * liftSpeedPercentageIncrement;
             liftSpeedMultiplier += liftSpeedPercentageIncrement;
 
-            TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
-
+/*             TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
+ */
             liftSpeedUpgradesOwned++;
             liftSpeedUpgradeNextPrice = (int)(liftSpeedUpgradeBasePrice * Mathf.Pow(liftSpeedUpgradePriceGrowthRate, liftSpeedUpgradesOwned));
             UpdateTextFields();
