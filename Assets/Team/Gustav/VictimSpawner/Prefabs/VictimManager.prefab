@@ -44,7 +44,20 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56f209aacebdb0a4fa38e2340f4ebae3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HumanSystem
+  m_EditorClassIdentifier: Assembly-CSharp::VictimSystem
+  enableSpawning: 1
+  spawnInterval: 1
+  maxVictims: 1000
+  spawnRegions:
+  - center: {x: -45, y: -16}
+    size: {x: 4, y: 20}
+  - center: {x: 45, y: -16}
+    size: {x: 4, y: 20}
+  - center: {x: 0, y: -23}
+    size: {x: 80, y: 4}
+  centerCircles:
+  - center: {x: 0, y: -12}
+    radius: 2
 --- !u!114 &1359637981827827607
 MonoBehaviour:
   m_ObjectHideFlags: 0

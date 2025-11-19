@@ -3,42 +3,77 @@ using UnityEngine;
 
 public class VictimSystem : MonoBehaviour
 {
+    [Header("Spawning")]
+    public bool enableSpawning = true;
+    public float spawnInterval = 1.0f;
+    public int maxVictims = 1000;
+
+    public List<SpawnRegion> spawnRegions = new List<SpawnRegion>();
+    public List<DestinationRegion> centerCircles = new List<DestinationRegion>();
+
+    private float spawnTimer;
     public List<VictimData> victims = new List<VictimData>();
 
     void Start()
     {
-        // Initialize savefile data here.
-        // Load victims from savefile if any exist.
+        spawnTimer = spawnInterval;
 
-        // Example starter victims
-        for (int i = 0; i < 1000; i++)
-        {
-            victims.Add(new VictimData
-            {
-                position = Random.insideUnitCircle * 5f,
-                destination = Vector2.zero,
-                speed = Random.Range(1.5f, 3f),
-                scale = Random.Range(0.75f, 1.25f),
-                wanderTimer = Random.Range(0.5f, 1.5f),
-                wanderDirection = Random.insideUnitCircle.normalized
-            });
-        }
+        //// Spawn some initial crowd (optional)
+        //for (int i = 0; i < 50; i++)
+        //    SpawnVictim();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        spawnTimer -= Time.deltaTime;
+
+        if (enableSpawning && victims.Count < maxVictims && spawnTimer <= 0f)
+        {
+            SpawnVictim();
+            spawnTimer = spawnInterval;
+        }
+
+        SimulateVictims();
+    }
+
+    private void SpawnVictim()
+    {
+        if (spawnRegions.Count == 0 || centerCircles.Count == 0)
+            return;
+
+        var spawnRegion = spawnRegions[Random.Range(0, spawnRegions.Count)];
+        var centerRegion = centerCircles[Random.Range(0, centerCircles.Count)];
+
+        victims.Add(new VictimData
+        {
+            position = spawnRegion.RandomPointInside(),
+            destination = centerRegion.RandomPointInside(),
+
+            speed = Random.Range(1.5f, 3f),
+            scale = Random.Range(0.75f, 1.25f),
+
+            wanderDirection = Random.insideUnitCircle.normalized,
+            wanderTimer = Random.Range(0.5f, 1.5f),
+
+            isCenter = false
+        });
+    }
+
+    private void SimulateVictims()
     {
         foreach (var victim in victims)
         {
             if (!victim.isCenter)
             {
-                Vector2 dir = (victim.destination - victim.position).normalized; // Calculate the movement direction toward the destination
+                Vector2 dir = (victim.destination - victim.position).normalized;
+                victim.position += dir * victim.speed * Time.deltaTime;
 
-                victim.position += dir * victim.speed * Time.deltaTime; // Move the victim
-
-                // Update scale based on distance to center (smaller when further up and bigger when further down on screen)
-
-                if (Vector2.Distance(victim.position, victim.destination) < 0.1f) { victim.isCenter = true; } // Check if victim reached destination
+                if (Vector2.Distance(victim.position, victim.destination) < 0.1f)
+                {
+                    victim.isCenter = true;
+                    victim.wanderTimer = Random.Range(0.5f, 1.5f);
+                    victim.wanderDirection = Random.insideUnitCircle.normalized;
+                }
             }
             else
             {
@@ -50,10 +85,20 @@ public class VictimSystem : MonoBehaviour
                 }
 
                 victim.position += victim.wanderDirection * (victim.speed * 0.5f) * Time.deltaTime;
-
-                // Check if victim is out of bounds, if so set new destination toward center and change isCenter to false.
-                // Check if victim is marked for death, start timer/wait for feedback then move to itempool if so.
             }
         }
+    }
+
+    // Visualize spawn regions in editor
+    private void OnDrawGizmosSelected()
+    {
+        if (spawnRegions == null) return;
+
+        foreach (var r in spawnRegions)
+            r.DrawGizmo(Color.yellow);
+        
+        if (centerCircles != null)
+            foreach (var c in centerCircles)
+                c.DrawGizmo(Color.green);
     }
 }
