@@ -31,7 +31,10 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public int liftSpeedUpgradeBasePrice = 10;
     [SerializeField] public int liftSpeedUpgradeNextPrice = 10;
     [SerializeField] public float liftSpeedUpgradePriceGrowthRate = 1.1f;
+
     [SerializeField] private float grabRadius = 5.0f;
+
+
 /*     public Animator TentacleAnimator;
  */
     public bool larynxIsActive = false;
@@ -79,7 +82,9 @@ public class TyrantController : MonoBehaviour
         catchTrigger = GetComponent<CircleCollider2D>();
         if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
          if (humanSpawner == null) humanSpawner = FindFirstObjectByType<HumanSpawner>();
+
         if (victimSystem == null) victimSystem = FindFirstObjectByType<VictimSystem>(); 
+
         if (mouthPoint == null) mouthPoint = transform;
     }
 
@@ -135,7 +140,9 @@ else
 
     }
 
+
   private void TryGrabVictimAtClick(Vector2 clickPosition)
+
     {
         VictimData victimToGrab = FindClosestVictim(clickPosition, grabRadius);
 
@@ -151,7 +158,9 @@ else
                 }
                 else
                 {
-                    Debug.Log("Alla tentakler är upptagna");
+
+                    Debug.Log("All tentacles busy");
+
                 }
             }
         }
