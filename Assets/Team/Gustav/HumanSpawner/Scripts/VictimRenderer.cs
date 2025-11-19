@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanRenderer : MonoBehaviour
+public class VictimRenderer : MonoBehaviour
 {
     // Reference to the simulation system
-    public HumanSystem humanSystem;
+    public VictimSystem victimSystem;
 
     // Prefab for visual representation
-    public GameObject humanPrefab;
+    public GameObject victimPrefab;
 
     private readonly List<GameObject> visuals = new List<GameObject>();
 
@@ -27,9 +27,9 @@ public class HumanRenderer : MonoBehaviour
     // ---------------------------------------------------------------
     void CreateInitialPool()
     {
-        foreach (var human in humanSystem.humans)
+        foreach (var human in victimSystem.victims)
         {
-            GameObject visual = Instantiate(humanPrefab, transform);
+            GameObject visual = Instantiate(victimPrefab, transform);
             visuals.Add(visual);
         }
     }
@@ -39,13 +39,13 @@ public class HumanRenderer : MonoBehaviour
     // ---------------------------------------------------------------
     void SyncPoolSize()
     {
-        int simCount = humanSystem.humans.Count;
+        int simCount = victimSystem.victims.Count;
         int visCount = visuals.Count;
 
         // Add more visuals if needed
         while (visCount < simCount)
         {
-            GameObject visual = Instantiate(humanPrefab, transform);
+            GameObject visual = Instantiate(victimPrefab, transform);
             visuals.Add(visual);
             visCount++;
         }
@@ -63,11 +63,11 @@ public class HumanRenderer : MonoBehaviour
     // ---------------------------------------------------------------
     void UpdateVisuals()
     {
-        var humans = humanSystem.humans;
+        var victims = victimSystem.victims;
 
-        for (int i = 0; i < humans.Count; i++)
+        for (int i = 0; i < victims.Count; i++)
         {
-            var data = humans[i];
+            var data = victims[i];
             var visual = visuals[i];
 
             visual.SetActive(true); // ensure enabled (in case reused from pool)

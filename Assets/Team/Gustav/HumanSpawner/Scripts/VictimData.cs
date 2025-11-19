@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HumanData
+public class VictimData
 {
     public Vector2 position;
     public Vector2 destination;

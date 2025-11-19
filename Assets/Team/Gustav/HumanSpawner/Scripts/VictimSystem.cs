@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HumanSystem : MonoBehaviour
+public class VictimSystem : MonoBehaviour
 {
-    public List<HumanData> humans = new List<HumanData>();
+    public List<VictimData> victims = new List<VictimData>();
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class HumanSystem : MonoBehaviour
         // Example starter humans
         for (int i = 0; i < 100; i++)
         {
-            humans.Add(new HumanData
+            victims.Add(new VictimData
             {
                 position = Random.insideUnitCircle * 5f,
                 destination = Vector2.zero,
@@ -29,7 +29,7 @@ public class HumanSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var human in humans)
+        foreach (var human in victims)
         {
             if (!human.isCenter)
             {

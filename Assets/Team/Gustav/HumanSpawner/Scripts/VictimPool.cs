@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class HumanPool : MonoBehaviour
+public class VictimPool : MonoBehaviour
 {
     private IObjectPool<GameObject> pool;
-    public GameObject prefabHumanAI;
+    public GameObject prefabVictimUnit;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class HumanPool : MonoBehaviour
     // Creates a new pooled GameObject the first time (and whenever the pool needs more).
     private GameObject CreateItem()
     {
-        GameObject gameObject = Instantiate(prefabHumanAI);
+        GameObject gameObject = Instantiate(prefabVictimUnit);
         gameObject.name = "PooledHumanAI";
         gameObject.SetActive(false);
         return gameObject;
