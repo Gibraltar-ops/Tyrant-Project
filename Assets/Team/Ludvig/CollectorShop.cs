@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class CollectorShop : MonoBehaviour
 {
     public string Tag;
-    public Currency CollectedCurrency;
     public Currency BoughtWithCurrency;
-
+    public float TicksPerSecondBase = 1f;
+    public float TicksPerSecondMultiplier = 1f;
     //Labels
     public TMP_Text CurrentCountLabel;
     public TMP_Text NextPriceLabel;
@@ -16,7 +16,8 @@ public class CollectorShop : MonoBehaviour
 
     //Shop settings and data for the collector
     public ShopSettings shopSettings;
-    public CollectorData data;
+
+    public List<CollectorData> Data;
 
     public bool Active = false;
     public bool SpawnObject = true;
@@ -25,23 +26,32 @@ public class CollectorShop : MonoBehaviour
     private float _ticksPerSecondCurrent;
     private List<Collector> _collectors;
 
-
+    void OnEnable()
+    {
+        EconomyManager.onCurrencyChanged += CheckAffordability;
+    }
+    void OnDisable()
+    {
+        EconomyManager.onCurrencyChanged -= CheckAffordability;
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PurchaseButton.onClick.AddListener(SpawnCollector);
+
         _objectSpawner = GetComponent<CollectorObjectSpawner>();
-        data.CurrentCollect = (int)(data.BaseCollect * data.CollectMultiplier);
+
         _collectors = new List<Collector>();
-        _ticksPerSecondCurrent = data.TicksPerSecondBase * data.TicksPerSecondMultiplier;
+        _ticksPerSecondCurrent = TicksPerSecondBase * TicksPerSecondMultiplier;
 
         for (int i = 0; i < shopSettings.NumberOwned; i++)
         {
             StartupSpawn();
         }
         Active = true;
-        CheckAffordability();
+        CheckAffordability(BoughtWithCurrency);
         UpdateLabels();
     }
 
@@ -50,11 +60,9 @@ public class CollectorShop : MonoBehaviour
         shopSettings.NextPrice = (int)(shopSettings.PriceBase * Mathf.Pow(shopSettings.PriceGrowthRate, shopSettings.NumberOwned));
     }
 
-
-
-    public void CollectCurrency(Currency collectedCurrency)
+    public void CollectCurrency(Currency collectedCurrency, int amount)
     {
-        EconomyManager.Instance.IncrementCurrency(collectedCurrency, data.CurrentCollect);
+        EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
     }
 
     public void StartupSpawn()
@@ -76,16 +84,20 @@ public class CollectorShop : MonoBehaviour
         NextPriceLabel.text = shopSettings.NextPrice.ToString();
     }
 
-    public void CheckAffordability()
+    public void CheckAffordability(Currency currency)
     {
-        if (EconomyManager.Instance.CanAfford(BoughtWithCurrency, shopSettings.NextPrice))
+        if (currency == BoughtWithCurrency)
         {
-            PurchaseButton.interactable = true;
+            if (EconomyManager.Instance.CanAfford(BoughtWithCurrency, shopSettings.NextPrice))
+            {
+                PurchaseButton.interactable = true;
+            }
+            else
+            {
+                PurchaseButton.interactable = false;
+            }
         }
-        else
-        {
-            PurchaseButton.interactable = false;
-        }
+
     }
 
     public void SpawnCollector()
@@ -105,8 +117,18 @@ public class CollectorShop : MonoBehaviour
     }
     public float CurrentTicksPerSecond()
     {
-        _ticksPerSecondCurrent = data.TicksPerSecondBase * data.TicksPerSecondMultiplier;
+        _ticksPerSecondCurrent = TicksPerSecondBase * TicksPerSecondMultiplier;
         return _ticksPerSecondCurrent;
+    }
+    public int ModifiedCollectAmount(CollectorData data)
+    {
+        float finalCurrency = data.BaseCollect;
+
+        finalCurrency += data.CollectAdd;
+
+        finalCurrency *= data.CollectMultiplier;
+
+        return (int)finalCurrency;
     }
     // Update is called once per frame
     void Update()
@@ -117,8 +139,11 @@ public class CollectorShop : MonoBehaviour
             {
                 if (collector.Collect(Time.deltaTime, CurrentTicksPerSecond()))
                 {
-                    CollectCurrency(CollectedCurrency);
-                    CheckAffordability();
+                    foreach (var data in Data)
+                    {
+                        CollectCurrency(data.CollectedCurrency, ModifiedCollectAmount(data));
+                    }
+
                 }
 
             }

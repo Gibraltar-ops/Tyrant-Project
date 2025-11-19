@@ -1,6 +1,4 @@
 using UnityEngine;
-using Manager;
-using System.Collections.Generic;
 
 public class EconomyManager : MonoBehaviour
 {
@@ -8,6 +6,7 @@ public class EconomyManager : MonoBehaviour
 
     public long Biomass = 12;
     public long Brains;
+    public long Keratin;
 
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
@@ -58,6 +57,10 @@ public class EconomyManager : MonoBehaviour
                 Brains += value;
                 onCurrencyChanged?.Invoke(Currency.Brains);
                 break;
+            case Currency.Keratin:
+                Keratin += value;
+                onCurrencyChanged?.Invoke(Currency.Keratin);
+                break;
             default:
                 break;
         }
@@ -71,6 +74,8 @@ public class EconomyManager : MonoBehaviour
                 return cost <= Biomass ? true : false;
             case Currency.Brains:
                 return cost <= Brains ? true : false;
+            case Currency.Keratin:
+                return cost <= Keratin ? true : false;
             default:
                 return false;
         }

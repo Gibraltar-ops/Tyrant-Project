@@ -26,6 +26,9 @@ public class CurrencyDisplay : MonoBehaviour
             case Currency.Brains:
                 label.text = EconomyManager.Instance.Brains.ToString();
                 break;
+            case Currency.Keratin:
+                label.text = EconomyManager.Instance.Keratin.ToString();
+                break;
             default: break;
         }
     }
@@ -41,6 +44,9 @@ public class CurrencyDisplay : MonoBehaviour
                     break;
                 case Currency.Brains:
                     label.text = EconomyManager.Instance.Brains.ToString();
+                    break;
+                case Currency.Keratin:
+                    label.text = EconomyManager.Instance.Keratin.ToString();
                     break;
                 default: break;
             }
