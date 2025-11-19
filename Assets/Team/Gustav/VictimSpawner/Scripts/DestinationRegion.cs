@@ -9,8 +9,11 @@ public class DestinationRegion
     // Returns a random point inside the circle (uniform distribution)
     public Vector2 RandomPointInside()
     {
-        // Use Random.insideUnitCircle for perfect circular distribution
         return center + (Random.insideUnitCircle * radius);
+    }
+    public bool Contains(Vector2 point)
+    {
+        return Vector2.Distance(point, center) <= radius;
     }
 
     public void DrawGizmo(Color color)

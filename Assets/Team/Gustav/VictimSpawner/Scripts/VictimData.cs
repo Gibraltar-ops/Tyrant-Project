@@ -5,6 +5,8 @@ public class VictimData
     public Vector2 position;
     public Vector2 destination;
     public Vector2 wanderDirection;
+    public DestinationRegion homeRegion;
+
     public float wanderTimer;
     public float wanderRadius; // ??? Behövs kanske inte ???
 

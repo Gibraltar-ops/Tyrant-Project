@@ -47,6 +47,8 @@ public class VictimSystem : MonoBehaviour
         victims.Add(new VictimData
         {
             position = spawnRegion.RandomPointInside(),
+
+            homeRegion = centerRegion,
             destination = centerRegion.RandomPointInside(),
 
             speed = Random.Range(1.5f, 3f),
@@ -75,16 +77,27 @@ public class VictimSystem : MonoBehaviour
                     victim.wanderDirection = Random.insideUnitCircle.normalized;
                 }
             }
-            else
+            else // wandering
             {
                 victim.wanderTimer -= Time.deltaTime;
+
                 if (victim.wanderTimer <= 0f)
                 {
                     victim.wanderDirection = Random.insideUnitCircle.normalized;
                     victim.wanderTimer = Random.Range(0.5f, 1.5f);
                 }
 
+                // Apply wandering movement
                 victim.position += victim.wanderDirection * (victim.speed * 0.5f) * Time.deltaTime;
+
+                // If victim has wandered outside the circle walk back inside
+                if (!victim.homeRegion.Contains(victim.position))
+                {
+                    Vector2 returnPoint = victim.homeRegion.RandomPointInside();
+                    Vector2 dir = (returnPoint - victim.position).normalized;
+
+                    victim.position += dir * victim.speed * Time.deltaTime;
+                }
             }
         }
     }
