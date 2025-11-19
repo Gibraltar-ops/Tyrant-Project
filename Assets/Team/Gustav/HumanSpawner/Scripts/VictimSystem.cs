@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class VictimSystem : MonoBehaviour
@@ -9,10 +8,10 @@ public class VictimSystem : MonoBehaviour
     void Start()
     {
         // Initialize savefile data here.
-        // Load humans from savefile if any exist.
+        // Load victims from savefile if any exist.
 
-        // Example starter humans
-        for (int i = 0; i < 100; i++)
+        // Example starter victims
+        for (int i = 0; i < 1000; i++)
         {
             victims.Add(new VictimData
             {
@@ -29,31 +28,31 @@ public class VictimSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var human in victims)
+        foreach (var victim in victims)
         {
-            if (!human.isCenter)
+            if (!victim.isCenter)
             {
-                Vector2 dir = (human.destination - human.position).normalized; // Calculate the movement direction toward the destination
+                Vector2 dir = (victim.destination - victim.position).normalized; // Calculate the movement direction toward the destination
 
-                human.position += dir * human.speed * Time.deltaTime; // Move the human
+                victim.position += dir * victim.speed * Time.deltaTime; // Move the victim
 
                 // Update scale based on distance to center (smaller when further up and bigger when further down on screen)
 
-                if (Vector2.Distance(human.position, human.destination) < 0.1f) { human.isCenter = true; } // Check if human reached destination
+                if (Vector2.Distance(victim.position, victim.destination) < 0.1f) { victim.isCenter = true; } // Check if victim reached destination
             }
             else
             {
-                human.wanderTimer -= Time.deltaTime;
-                if (human.wanderTimer <= 0f)
+                victim.wanderTimer -= Time.deltaTime;
+                if (victim.wanderTimer <= 0f)
                 {
-                    human.wanderDirection = Random.insideUnitCircle.normalized;
-                    human.wanderTimer = Random.Range(0.5f, 1.5f);
+                    victim.wanderDirection = Random.insideUnitCircle.normalized;
+                    victim.wanderTimer = Random.Range(0.5f, 1.5f);
                 }
 
-                human.position += human.wanderDirection * (human.speed * 0.5f) * Time.deltaTime;
+                victim.position += victim.wanderDirection * (victim.speed * 0.5f) * Time.deltaTime;
 
-                // Check if human is out of bounds, if so set new destination toward center and change isCenter to false.
-                // Check if human is marked for death, start timer/wait for feedback then move to itempool if so.
+                // Check if victim is out of bounds, if so set new destination toward center and change isCenter to false.
+                // Check if victim is marked for death, start timer/wait for feedback then move to itempool if so.
             }
         }
     }

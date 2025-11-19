@@ -1,66 +1,85 @@
 using System.Collections.Generic;
+using UnityEngine.Pool;
 using UnityEngine;
-
 public class VictimRenderer : MonoBehaviour
 {
-    // Reference to the simulation system
     public VictimSystem victimSystem;
-
-    // Prefab for visual representation
     public GameObject victimPrefab;
 
-    private readonly List<GameObject> visuals = new List<GameObject>();
+    private IObjectPool<GameObject> pool;
 
-    void Start()
+    // All currently active visual objects
+    private readonly List<GameObject> activeVisuals = new();
+
+    void Awake()
     {
-        CreateInitialPool();
+        pool = new ObjectPool<GameObject>(
+            CreateVisual,
+            OnTakeFromPool,
+            OnReturnedToPool,
+            OnDestroyVisual,
+            collectionCheck: false,
+            defaultCapacity: 100,
+            maxSize: 5000
+        );
     }
 
     void LateUpdate()
     {
-        SyncPoolSize();
+        SyncActiveCount();
         UpdateVisuals();
     }
 
-    // ---------------------------------------------------------------
-    // Create pool matching initial human count
-    // ---------------------------------------------------------------
-    void CreateInitialPool()
+    // -------------------------------------------------------
+    // Create a pooled visual object
+    // -------------------------------------------------------
+    GameObject CreateVisual()
     {
-        foreach (var human in victimSystem.victims)
-        {
-            GameObject visual = Instantiate(victimPrefab, transform);
-            visuals.Add(visual);
-        }
+        GameObject obj = Instantiate(victimPrefab, transform);
+        obj.SetActive(false);
+        return obj;
     }
 
-    // ---------------------------------------------------------------
-    // Add/remove visuals if humans list size changes at runtime
-    // ---------------------------------------------------------------
-    void SyncPoolSize()
+    void OnTakeFromPool(GameObject obj)
+    {
+        obj.SetActive(true);
+    }
+
+    void OnReturnedToPool(GameObject obj)
+    {
+        obj.SetActive(false);
+    }
+
+    void OnDestroyVisual(GameObject obj)
+    {
+        Destroy(obj);
+    }
+
+    // -------------------------------------------------------
+    // Make sure active visuals match victim count
+    // -------------------------------------------------------
+    void SyncActiveCount()
     {
         int simCount = victimSystem.victims.Count;
-        int visCount = visuals.Count;
 
-        // Add more visuals if needed
-        while (visCount < simCount)
+        // Need more visuals?
+        while (activeVisuals.Count < simCount)
         {
-            GameObject visual = Instantiate(victimPrefab, transform);
-            visuals.Add(visual);
-            visCount++;
+            activeVisuals.Add(pool.Get());
         }
 
-        // Disable excess visuals
-        while (visCount > simCount)
+        // Too many visuals?
+        while (activeVisuals.Count > simCount)
         {
-            visuals[visCount - 1].SetActive(false);
-            visCount--;
+            var last = activeVisuals[^1];
+            activeVisuals.RemoveAt(activeVisuals.Count - 1);
+            pool.Release(last);
         }
     }
 
-    // ---------------------------------------------------------------
-    // Apply simulation data to pooled GameObjects
-    // ---------------------------------------------------------------
+    // -------------------------------------------------------
+    // Update visual transforms from simulation data
+    // -------------------------------------------------------
     void UpdateVisuals()
     {
         var victims = victimSystem.victims;
@@ -68,9 +87,8 @@ public class VictimRenderer : MonoBehaviour
         for (int i = 0; i < victims.Count; i++)
         {
             var data = victims[i];
-            var visual = visuals[i];
+            var visual = activeVisuals[i];
 
-            visual.SetActive(true); // ensure enabled (in case reused from pool)
             visual.transform.position = data.position;
             visual.transform.localScale = Vector3.one * data.scale;
         }
