@@ -10,6 +10,7 @@ public class TyrantController : MonoBehaviour
     [SerializeField] private CircleCollider2D catchTrigger;
     [SerializeField] public GameManager gameManager;
     [SerializeField] public Transform mouthPoint;
+    [SerializeField] private VictimSystem victimSystem;
 
     [Header("Tentacle Settings")]
     [SerializeField] private List <TentacleController> tentacles;
@@ -30,6 +31,7 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public int liftSpeedUpgradeBasePrice = 10;
     [SerializeField] public int liftSpeedUpgradeNextPrice = 10;
     [SerializeField] public float liftSpeedUpgradePriceGrowthRate = 1.1f;
+    [SerializeField] private float grabRadius = 5.0f;
 /*     public Animator TentacleAnimator;
  */
     public bool larynxIsActive = false;
@@ -76,6 +78,8 @@ public class TyrantController : MonoBehaviour
         grabArea = GetComponentInChildren<CapsuleCollider2D>();
         catchTrigger = GetComponent<CircleCollider2D>();
         if (gameManager == null) gameManager = FindFirstObjectByType<GameManager>();
+         if (humanSpawner == null) humanSpawner = FindFirstObjectByType<HumanSpawner>();
+        if (victimSystem == null) victimSystem = FindFirstObjectByType<VictimSystem>(); 
         if (mouthPoint == null) mouthPoint = transform;
     }
 
@@ -125,36 +129,53 @@ public class TyrantController : MonoBehaviour
             }
 else
             {
-                TryGrabHumanAtClick(worldPoint);
+                TryGrabVictimAtClick(worldPoint);
             }
         }
 
     }
 
-    private void TryGrabHumanAtClick(Vector2 clickPosition)
+  private void TryGrabVictimAtClick(Vector2 clickPosition)
     {
-        RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
+        VictimData victimToGrab = FindClosestVictim(clickPosition, grabRadius);
 
-        if (hit.collider != null)
+        if (victimToGrab != null)
         {
-            if (hit.collider.TryGetComponent<HumanMovement>(out var human))
+            if (!victimToGrab.isMarkedForDeath)
             {
-                if (!human.IsBeingGrabbed)
+                TentacleController freeTentacle = FindFreeTentacle();
+                if (freeTentacle != null)
                 {
-                    TentacleController freeTentacle = FindFreeTentacle();
-                    if (freeTentacle != null)
-                    {
-                        freeTentacle.StartGrab(human.transform);
-                        human.MarkAsGrabbed();
-                    }
-                    else
-                    {
-                        Debug.Log ("Alla tentakler är upptagna");
-                    }
+                    freeTentacle.StartGrab(victimToGrab, victimSystem);
+                    victimToGrab.isMarkedForDeath = true; 
+                }
+                else
+                {
+                    Debug.Log("Alla tentakler är upptagna");
                 }
             }
         }
     }
+
+    private VictimData FindClosestVictim(Vector2 position, float maxDistance)
+    {
+        VictimData closest = null;
+        float closestDistSqr = maxDistance * maxDistance;
+
+        foreach (var victim in victimSystem.victims)
+        {
+            if (victim.isMarkedForDeath) continue; 
+
+            float distSqr = (victim.position - position).sqrMagnitude;
+            if (distSqr < closestDistSqr)
+            {
+                closestDistSqr = distSqr;
+                closest = victim;
+            }
+        }
+        return closest;
+    }
+
 
     private TentacleController FindFreeTentacle()
     {

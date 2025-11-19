@@ -23,7 +23,10 @@ public Transform mouthPoint;
 
    [Header ("Tentacle Length")]
    public float totalLength = 5f; 
-   private Transform grabTarget;
+   private VictimData grabTarget;
+
+   private VictimSystem victimSystem;
+   private TyrantController tyrantController;
    private Vector3 animatedTargetPosition;
    private Vector3 currentIkPosition;
    private Vector3 ikVelocity;
@@ -38,13 +41,20 @@ public Transform mouthPoint;
 
    private void Start()
 {
+     
+    tyrantController = FindObjectOfType<TyrantController>();
+    if (mouthPoint == null && tyrantController != null)
+    {
+        mouthPoint = tyrantController.mouthPoint;
+    }
+
     if (tipBone != null && totalLength <= 0f)
     {
         totalLength = Vector3.Distance(transform.position, tipBone.position);
     }
 
     if (totalLength <= 0f)
-    totalLength = 5f; //Fallback
+        totalLength = 5f; //Fallback
 
     idlePosition = transform.position - Vector3.up * totalLength * 1.5f;
     animatedTargetPosition = idlePosition;
@@ -85,7 +95,7 @@ private void Update ()
             case TentacleState.Retracting:
             if (mouthPoint == null || grabTarget == null)
             {
-                if (grabTarget != null) Destroy(grabTarget.gameObject);
+                
                 grabTarget = null;
                 currentState = TentacleState.ReturningToIdle;
                 break;
@@ -115,7 +125,17 @@ private void Update ()
 
             if (retractProgress >= 1.0f)
             {
-                Destroy(grabTarget.gameObject);
+
+                 if (victimSystem != null && victimSystem.victims.Contains(grabTarget))
+                {
+                    victimSystem.victims.Remove(grabTarget);
+                    if (tyrantController != null)
+                    {
+                        tyrantController.gameManager.biomass += tyrantController.biomassPerHuman;
+                        tyrantController.UpdateTextFields();
+                    }
+                }
+                
                 grabTarget = null;
                 currentState = TentacleState.ReturningToIdle;
             }
@@ -145,7 +165,7 @@ private void LateUpdate()
     }
 }
 
-public void StartGrab(Transform newGrabTarget)
+public void StartGrab(VictimData newGrabTarget, VictimSystem system)
 {
     if (newGrabTarget == null)
     return;
@@ -153,6 +173,7 @@ public void StartGrab(Transform newGrabTarget)
     if (!isBusy)
     {
         grabTarget = newGrabTarget;
+        victimSystem = system;
 
         if (tipBone != null)
         animatedTargetPosition = tipBone.position;
@@ -161,7 +182,7 @@ public void StartGrab(Transform newGrabTarget)
 
         currentState = TentacleState.Reaching;
         isBusy = true; 
-        Debug.Log ($"Tentacle {name} is reaching for {newGrabTarget.name}");
+        Debug.Log ($"Tentacle {name} is reaching for a victim");
     }
 }
 
@@ -169,6 +190,7 @@ public void ResetTentacle()
 {
     isBusy = false;
     grabTarget = null;
+    victimSystem = null;
     currentState = TentacleState.Idle;
     Debug.Log ($"Tentacle {name} is available");
 }

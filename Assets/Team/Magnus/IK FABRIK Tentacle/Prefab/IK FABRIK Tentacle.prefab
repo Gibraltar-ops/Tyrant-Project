@@ -145,7 +145,7 @@ MonoBehaviour:
   m_SolveFromDefaultPose: 1
   m_Weight: 0.19
   m_Chain:
-    m_EffectorTransform: {fileID: 1202113676836790767}
+    m_EffectorTransform: {fileID: 0}
     m_TargetTransform: {fileID: 7946799886129986212}
     m_TransformCount: 11
     m_Transforms:
@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 8273367898899655977}
   - component: {fileID: 8222385560034807081}
   - component: {fileID: 7149851986763399120}
+  - component: {fileID: 5205089390465390081}
   m_Layer: 0
   m_Name: TentacleSpriteRootBone - Texture to be replaced
   m_TagString: Untagged
@@ -436,6 +437,34 @@ MonoBehaviour:
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
 --- !u!114 &7149851986763399120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234980275670432170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6086fa553e7a6b4c912083410a1e5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleSpriteStretch
+  rootBone: {fileID: 1338112975856402369}
+  bones:
+  - {fileID: 6525601516805657148}
+  - {fileID: 282686786657865233}
+  - {fileID: 1973617304757102528}
+  - {fileID: 5337139876866594965}
+  - {fileID: 7573684631149674381}
+  - {fileID: 1284639813000633914}
+  - {fileID: 6521197627695102986}
+  - {fileID: 3628613568225793085}
+  - {fileID: 1928613631350473656}
+  - {fileID: 1096536917629533721}
+  - {fileID: 7228966396051308551}
+  target: {fileID: 7946799886129986212}
+  iterations: 10
+  tolerance: 0.01
+--- !u!114 &5205089390465390081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -602,6 +631,8 @@ GameObject:
   - component: {fileID: 3413546328148398075}
   - component: {fileID: 5659100438311384338}
   - component: {fileID: 4500562084311431683}
+  - component: {fileID: 6023822472343131315}
+  - component: {fileID: 9195414550095389736}
   m_Layer: 0
   m_Name: IK FABRIK Tentacle
   m_TagString: Untagged
@@ -641,12 +672,56 @@ MonoBehaviour:
   mouthPoint: {fileID: 0}
   ikTarget: {fileID: 7946799886129986212}
   tipBone: {fileID: 7228966396051308551}
+  reachSpeed: 100
+  returnToIdleSpeed: 10
+  retractSpeed: 1.5
+  retractArcHeight: 2
+  weightLagTime: 0.2
+  weightAmount: 1.5
+  totalLength: 5
+--- !u!114 &4500562084311431683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5725834029006412399}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563545e060598e54e9ca7498e2638419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  visualBones:
+  - {fileID: 6525601516805657148}
+  - {fileID: 1284639813000633914}
+  - {fileID: 7228966396051308551}
+  physicsBones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &6023822472343131315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5725834029006412399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+  mouthPoint: {fileID: 0}
+  ikTarget: {fileID: 7946799886129986212}
+  tipBone: {fileID: 7228966396051308551}
   reachSpeed: 150
   returnToIdleSpeed: 10
   retractSpeed: 1.5
   retractArcHeight: 2
+  weightLagTime: 0.2
+  weightAmount: 1.5
   totalLength: 5
---- !u!114 &4500562084311431683
+--- !u!114 &9195414550095389736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
