@@ -53,10 +53,13 @@ public class UpgradeStore : MonoBehaviour
 
     public void PurchaseUpgrade()
     {
+        GetComponent<Upgrade>().ApplyUpgrade();
         EconomyManager.Instance.IncrementCurrency(BoughtWithCurrency, -shopSettings.NextPrice);
         shopSettings.NumberOwned++;
         IncrementPrice();
         UpdateLabels();
     }
+
+    
 
 }
