@@ -14,7 +14,6 @@ public class EconomyManager : MonoBehaviour
 
     private static EconomyManager _instance;
     public static EconomyManager Instance
-
     {
         get
         {
