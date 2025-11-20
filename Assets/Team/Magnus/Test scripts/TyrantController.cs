@@ -184,7 +184,7 @@ public class TyrantController : MonoBehaviour
                 else
                 {
 
-                    Debug.Log("All tentacles busy");
+                    //Debug.Log("All tentacles busy");
 
                 }
             }

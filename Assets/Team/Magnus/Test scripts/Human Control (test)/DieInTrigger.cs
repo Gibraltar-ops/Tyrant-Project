@@ -25,7 +25,6 @@ public class DieInTrigger : MonoBehaviour
         {
             Debug.Log("Tyrant ate " + gameObject.name + "... Om nom nom");
             onHumanEaten?.Invoke();
-            EconomyManager.Instance.IncrementCurrency(Currency.Biomass, (long)tyrantController.biomassPerHuman);
             Destroy(gameObject);
 
             

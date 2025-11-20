@@ -139,7 +139,7 @@ private void Update ()
                 grabTarget = null;
 
                 currentState = TentacleState.ReturningToIdle;
-                EconomyManager.Instance.IncrementCurrency(Currency.Biomass, 10);
+                EconomyManager.Instance.IncrementCurrency(Currency.Biomass, (long)tyrantController.biomassPerHuman);
             }
 
             break;
@@ -185,7 +185,7 @@ public void StartGrab(VictimData newGrabTarget, VictimSystem system)
 
         currentState = TentacleState.Reaching;
         isBusy = true; 
-        Debug.Log ($"Tentacle {name} is reaching for a victim");
+        //Debug.Log ($"Tentacle {name} is reaching for a victim");
     }
 }
 
@@ -195,7 +195,7 @@ public void ResetTentacle()
     grabTarget = null;
     victimSystem = null;
     currentState = TentacleState.Idle;
-    Debug.Log ($"Tentacle {name} is available");
+    //Debug.Log ($"Tentacle {name} is available");
 }
 
 public bool IsBusy()
