@@ -14,6 +14,9 @@ public class VictimSystem : MonoBehaviour
     private float spawnTimer;
     public List<VictimData> victims = new List<VictimData>();
 
+    [HideInInspector]
+    public float spawnRateMultiplier = 1f; // Adjust spawn rate with UI Btn/Slider.
+
     void Start()
     {
         spawnTimer = spawnInterval;
@@ -25,7 +28,7 @@ public class VictimSystem : MonoBehaviour
 
     void Update()
     {
-        spawnTimer -= Time.deltaTime;
+        spawnTimer -= Time.deltaTime * spawnRateMultiplier;
 
         if (enableSpawning && victims.Count < maxVictims && spawnTimer <= 0f)
         {

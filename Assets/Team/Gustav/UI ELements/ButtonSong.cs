@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ButtonSong : MonoBehaviour
 {
+    private VictimSystem victimSystem;
+
     [Header("References")]
     public Slider slider1;
     public Slider slider2;
@@ -13,6 +15,11 @@ public class ButtonSong : MonoBehaviour
     public float drainSpeed = 0.1f;
 
     public bool isPressed = false;
+
+    void Start()
+    {
+        victimSystem = FindAnyObjectByType<VictimSystem>();
+    }
 
     void Update()
     {
@@ -29,8 +36,11 @@ public class ButtonSong : MonoBehaviour
             slider2.value = Mathf.MoveTowards(slider2.value, 0f, drainSpeed * Time.deltaTime);
         }
 
-        //Place code here for sending slider current value or
-        //add new method further down for getting the value at will/need.
+        if (victimSystem != null)
+        {
+            // slider goes from 0–1, we convert it to 1–5
+            victimSystem.spawnRateMultiplier = Mathf.Lerp(1f, 5f, slider1.value);
+        }
     }
 
     // When button is pressed.
