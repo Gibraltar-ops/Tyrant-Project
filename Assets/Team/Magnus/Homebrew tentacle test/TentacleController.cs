@@ -137,7 +137,9 @@ private void Update ()
                 }
                 
                 grabTarget = null;
+
                 currentState = TentacleState.ReturningToIdle;
+                EconomyManager.Instance.IncrementCurrency(Currency.Biomass, 10);
             }
 
             break;
@@ -147,6 +149,7 @@ private void Update ()
 
             if (Vector3.Distance(animatedTargetPosition, idlePosition) < 0.1f)
             {
+                
                 ResetTentacle();
             }
             break;

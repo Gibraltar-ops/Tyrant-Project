@@ -67,7 +67,7 @@ public class TentacleSpriteStretch : MonoBehaviour
             Vector3 dir = p1 - p0;
 
             bones[i].position = p0;
-            Debug.Log(bones[i].position); 
+            
 
             if (dir.sqrMagnitude > 0.0001f)
             {

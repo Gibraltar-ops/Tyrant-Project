@@ -55,27 +55,27 @@ public class TyrantController : MonoBehaviour
 
     public void SaveTyrant()
     {
-        PrototypeSaveSystem.PrototypeSavePlayer(this);
-        Debug.Log("Saved Tyrant");
+        // PrototypeSaveSystem.PrototypeSavePlayer(this);
+        // Debug.Log("Saved Tyrant");
     }
 
     public void LoadTyrant()
     {
-        PrototypeSaveData data = PrototypeSaveSystem.PrototypeLoadPlayer();
-        if (data != null)
-        {
-            gameManager.biomass = data.biomass;
-            liftSpeed = data.liftSpeed;
-            liftSpeedMultiplier = data.liftSpeedMultiplier;
-            liftSpeedUpgradesOwned = data.liftSpeedUpgradesOwned;
-            liftSpeedUpgradeNextPrice = data.liftSpeedUpgradeNextPrice;
+        // PrototypeSaveData data = PrototypeSaveSystem.PrototypeLoadPlayer();
+        // if (data != null)
+        // {
+        //     gameManager.biomass = data.biomass;
+        //     liftSpeed = data.liftSpeed;
+        //     liftSpeedMultiplier = data.liftSpeedMultiplier;
+        //     liftSpeedUpgradesOwned = data.liftSpeedUpgradesOwned;
+        //     liftSpeedUpgradeNextPrice = data.liftSpeedUpgradeNextPrice;
 
-            larynxIsActive = data.larynxIsActive;
+        //     larynxIsActive = data.larynxIsActive;
 
-            biomassPerHuman = data.biomassPerHuman;
-            biomassPerHumanUpgradesOwned = data.biomassPerHumanUpgradesOwned;
-            biomassPerHumanUpgradeNextPrice = data.biomassPerHumanUpgradeNextPrice;
-        }
+        //     biomassPerHuman = data.biomassPerHuman;
+        //     biomassPerHumanUpgradesOwned = data.biomassPerHumanUpgradesOwned;
+        //     biomassPerHumanUpgradeNextPrice = data.biomassPerHumanUpgradeNextPrice;
+        // }
     }
 
 
@@ -103,10 +103,10 @@ public class TyrantController : MonoBehaviour
         UpdateTentacleVisuals();
 /*         TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
  */
-        liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
-        liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
-        biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
-        biomassPerHumanPriceText.text = biomassPerHumanUpgradeNextPrice.ToString("F0");
+        // liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
+        // liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
+        // biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
+        // biomassPerHumanPriceText.text = biomassPerHumanUpgradeNextPrice.ToString("F0");
 
 
     }
@@ -118,10 +118,10 @@ public class TyrantController : MonoBehaviour
 
     public void UpdateTextFields()
     {
-        liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
-        liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
-        biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
-        biomassPerHumanPriceText.text = biomassPerHumanUpgradeNextPrice.ToString("F0");
+        // liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
+        // liftSpeedPriceText.text = liftSpeedUpgradeNextPrice.ToString("F0");
+        // biomassPerHumanCountText.text = biomassPerHumanUpgradesOwned.ToString("F0");
+        // biomassPerHumanPriceText.text = biomassPerHumanUpgradeNextPrice.ToString("F0");
     }
 
     private void Update()

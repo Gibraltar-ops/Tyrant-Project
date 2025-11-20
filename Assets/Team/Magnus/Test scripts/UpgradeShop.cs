@@ -31,14 +31,14 @@ public class UpgradeShop : MonoBehaviour
 
     void Update()
     {
-        if (!larynxIsPurchased && gameManager.biomass >= larynxCost && initialized)
-        {
-            larynxUpgradeButton.SetActive(true);
-        }
-        else
-        {
-            larynxUpgradeButton.SetActive(false);
-        }
+        // if (!larynxIsPurchased && gameManager.biomass >= larynxCost && initialized)
+        // {
+        //     larynxUpgradeButton.SetActive(true);
+        // }
+        // else
+        // {
+        //     larynxUpgradeButton.SetActive(false);
+        // }
     }
 
     public void PurchaseLarynx()

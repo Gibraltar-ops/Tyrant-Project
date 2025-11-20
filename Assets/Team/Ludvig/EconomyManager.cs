@@ -99,7 +99,7 @@ public enum Currency
 
 public enum ShopTag
 {
-    AutoTentacleBiomassCollect,
-    AutoTentacleBrainsCollect,
+    BiomassCollect,
+    BrainsCollect,
 
 }
