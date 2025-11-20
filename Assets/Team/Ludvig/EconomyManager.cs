@@ -7,6 +7,7 @@ public class EconomyManager : MonoBehaviour
     public long Biomass = 12;
     public long Brains;
     public long Keratin;
+    public long Victims;
 
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
@@ -60,6 +61,10 @@ public class EconomyManager : MonoBehaviour
                 Keratin += value;
                 onCurrencyChanged?.Invoke(Currency.Keratin);
                 break;
+            case Currency.Victims:
+                Victims += value;
+                onCurrencyChanged?.Invoke(Currency.Victims);
+                break;
             default:
                 break;
         }
@@ -75,6 +80,8 @@ public class EconomyManager : MonoBehaviour
                 return cost <= Brains ? true : false;
             case Currency.Keratin:
                 return cost <= Keratin ? true : false;
+            case Currency.Victims:
+                return cost <= Victims ? true : false;
             default:
                 return false;
         }
@@ -86,15 +93,13 @@ public enum Currency
 {
     Biomass,
     Brains,
-    Keratin
+    Keratin,
+    Victims
 }
 
 public enum ShopTag
 {
-    AutomaticTentacle,
-    AttackTentacle,
-    GadflyBrute,
-    GadflySuicideBomber,
-    GadflySwarm,
+    AutoTentacleBiomassCollect,
+    AutoTentacleBrainsCollect,
 
 }

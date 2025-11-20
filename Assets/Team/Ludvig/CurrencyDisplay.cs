@@ -29,6 +29,9 @@ public class CurrencyDisplay : MonoBehaviour
             case Currency.Keratin:
                 label.text = EconomyManager.Instance.Keratin.ToString();
                 break;
+            case Currency.Victims:
+                label.text = EconomyManager.Instance.Victims.ToString();
+                break;
             default: break;
         }
     }
@@ -47,6 +50,9 @@ public class CurrencyDisplay : MonoBehaviour
                     break;
                 case Currency.Keratin:
                     label.text = EconomyManager.Instance.Keratin.ToString();
+                    break;
+                case Currency.Victims:
+                    label.text = EconomyManager.Instance.Victims.ToString();
                     break;
                 default: break;
             }

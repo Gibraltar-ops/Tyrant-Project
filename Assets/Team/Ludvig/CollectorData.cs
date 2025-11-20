@@ -3,7 +3,6 @@ using System;
 [Serializable]
 public class CollectorData
 {
-   public string Tag;
    public Currency CollectedCurrency;
    public int BaseCollect = 10;
    public float CollectMultiplier = 1f;
