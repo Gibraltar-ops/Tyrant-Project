@@ -13,7 +13,9 @@ public class TyrantController : MonoBehaviour
     [SerializeField] private VictimSystem victimSystem;
 
     [Header("Tentacle Settings")]
-    [SerializeField] private List <TentacleController> tentacles;
+    [SerializeField] private List<TentacleController> tentacles;
+    [SerializeField] private int activeTentacleCount = 1;
+
 
     [Header("Larynx Ability Dependencies")]
     [SerializeField] private Collider2D tyrantBodyCollider;
@@ -33,6 +35,7 @@ public class TyrantController : MonoBehaviour
     [SerializeField] public float liftSpeedUpgradePriceGrowthRate = 1.1f;
 
     [SerializeField] private float grabRadius = 5.0f;
+    private int lastUsedTentacleIndex = -1;
 
 
 /*     public Animator TentacleAnimator;
@@ -97,6 +100,7 @@ public class TyrantController : MonoBehaviour
     void Start()
     {
         LoadTyrant();
+        UpdateTentacleVisuals();
 /*         TentacleAnimator.SetFloat("SpeedMult", liftSpeedMultiplier);
  */
         liftSpeedCountText.text = liftSpeedUpgradesOwned.ToString("F0");
@@ -132,7 +136,7 @@ public class TyrantController : MonoBehaviour
             {
                 Sing();
             }
-else
+            else
             {
                 TryGrabVictimAtClick(worldPoint);
             }
@@ -140,8 +144,29 @@ else
 
     }
 
+     public void ActivateNewTentacle()
+    {
+        if (activeTentacleCount < tentacles.Count)
+        {
+            activeTentacleCount++;
+            UpdateTentacleVisuals(); 
+        }
+    }
+    
+    private void UpdateTentacleVisuals()
+{
+    for (int i = 0; i < tentacles.Count; i++)
+    {
+        if (tentacles[i] != null)
+        {
+            bool shouldBeActive = i < activeTentacleCount;
+            tentacles[i].gameObject.SetActive(shouldBeActive);
+        }
+    }
+}
 
-  private void TryGrabVictimAtClick(Vector2 clickPosition)
+
+    private void TryGrabVictimAtClick(Vector2 clickPosition)
 
     {
         VictimData victimToGrab = FindClosestVictim(clickPosition, grabRadius);
@@ -154,7 +179,7 @@ else
                 if (freeTentacle != null)
                 {
                     freeTentacle.StartGrab(victimToGrab, victimSystem);
-                    victimToGrab.isMarkedForDeath = true; 
+                    victimToGrab.isMarkedForDeath = true;
                 }
                 else
                 {
@@ -165,6 +190,8 @@ else
             }
         }
     }
+    
+   
 
     private VictimData FindClosestVictim(Vector2 position, float maxDistance)
     {
@@ -186,13 +213,27 @@ else
     }
 
 
-    private TentacleController FindFreeTentacle()
+        private TentacleController FindFreeTentacle()
     {
-        foreach (var tentacle in tentacles)
+        if (tentacles == null || activeTentacleCount == 0)
         {
-            if (!tentacle.IsBusy())
-            {return tentacle;}
+            return null;
         }
+
+       
+        for (int i = 0; i < activeTentacleCount; i++)
+        {
+        
+            int indexToTry = (lastUsedTentacleIndex + 1 + i) % activeTentacleCount;
+
+            if (!tentacles[indexToTry].IsBusy())
+            {
+                lastUsedTentacleIndex = indexToTry;
+                return tentacles[indexToTry];
+            }
+        }
+        
+   
         return null;
     }
 
