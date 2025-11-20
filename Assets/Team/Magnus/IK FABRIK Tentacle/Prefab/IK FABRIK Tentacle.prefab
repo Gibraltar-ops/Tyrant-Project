@@ -629,8 +629,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3413546328148398075}
-  - component: {fileID: 5659100438311384338}
-  - component: {fileID: 4500562084311431683}
   - component: {fileID: 6023822472343131315}
   - component: {fileID: 9195414550095389736}
   m_Layer: 0
@@ -657,48 +655,6 @@ Transform:
   - {fileID: 7498792408926808331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5659100438311384338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5725834029006412399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
-  mouthPoint: {fileID: 0}
-  ikTarget: {fileID: 7946799886129986212}
-  tipBone: {fileID: 7228966396051308551}
-  reachSpeed: 100
-  returnToIdleSpeed: 10
-  retractSpeed: 1.5
-  retractArcHeight: 2
-  weightLagTime: 0.2
-  weightAmount: 1.5
-  totalLength: 5
---- !u!114 &4500562084311431683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5725834029006412399}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 563545e060598e54e9ca7498e2638419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  visualBones:
-  - {fileID: 6525601516805657148}
-  - {fileID: 1284639813000633914}
-  - {fileID: 7228966396051308551}
-  physicsBones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6023822472343131315
 MonoBehaviour:
   m_ObjectHideFlags: 0

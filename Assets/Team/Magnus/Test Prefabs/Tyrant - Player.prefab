@@ -83,8 +83,14 @@ MonoBehaviour:
   catchTrigger: {fileID: 0}
   gameManager: {fileID: 0}
   mouthPoint: {fileID: 3292449879092169869}
+  victimSystem: {fileID: 0}
   tentacles:
-  - {fileID: 4325654188190160026}
+  - {fileID: 2681904430476028465}
+  - {fileID: 8177648721327943134}
+  - {fileID: 3526671872746191127}
+  - {fileID: 6912193421055671901}
+  - {fileID: 7367191527396117965}
+  activeTentacleCount: 1
   tyrantBodyCollider: {fileID: 5657533916971263740}
   humanSpawner: {fileID: 0}
   larynxSound: {fileID: 8296287235066095644}
@@ -98,7 +104,7 @@ MonoBehaviour:
   liftSpeedUpgradeBasePrice: 10
   liftSpeedUpgradeNextPrice: 10
   liftSpeedUpgradePriceGrowthRate: 1.1
-  TentacleAnimator: {fileID: 0}
+  grabRadius: 3
   larynxIsActive: 0
   biomassPerHumanCountText: {fileID: 0}
   biomassPerHumanPriceText: {fileID: 0}
@@ -231,46 +237,12 @@ Transform:
   m_GameObject: {fileID: 2813026680982097874}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014084507, y: -2.6197183, z: 0}
+  m_LocalPosition: {x: -0.067, y: -1.709, z: 0}
   m_LocalScale: {x: 0.35211268, y: 0.35211268, z: 0.35211268}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2373412326981170649}
-  - {fileID: 4248780570381650384}
   - {fileID: 830271602152660918}
   m_Father: {fileID: 8709147168808653563}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4296012547543237848
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2373412326981170649}
-  m_Layer: 0
-  m_Name: Root 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2373412326981170649
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4296012547543237848}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1977356489116532387}
-  m_Father: {fileID: 7907039296609686805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5529582959980792544
 GameObject:
@@ -436,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830271602152660918}
   m_Layer: 0
-  m_Name: Root 3
+  m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +426,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6485105453981839737}
+  - {fileID: 989499977282958998}
+  - {fileID: 5491842541659431519}
+  - {fileID: 2534044004262634773}
+  - {fileID: 1943924991446636165}
   m_Father: {fileID: 7907039296609686805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6789590697677049522
@@ -525,37 +502,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 1.1345801, y: 0}
   m_Radius: 2.920094
---- !u!1 &8100508056003627705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4248780570381650384}
-  m_Layer: 0
-  m_Name: Root 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4248780570381650384
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100508056003627705}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7907039296609686805}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8697011770422591778
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,76 +570,84 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 3.49
---- !u!1001 &2825401867625911815
+--- !u!1001 &897872002299701998
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2373412326981170649}
+    m_TransformParent: {fileID: 830271602152660918}
     m_Modifications:
-    - target: {fileID: 1959654728250950301, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
-      propertyPath: mouthPoint
-      value: 
-      objectReference: {fileID: 3292449879092169869}
-    - target: {fileID: 2546759148539021434, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
-      propertyPath: m_Name
-      value: Homebrew IK Tentacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.072520025
+      value: -1.63
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.994819
+      value: 2.14
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5659100438311384338, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_Name
+      value: IK FABRIK Tentacle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
---- !u!4 &1977356489116532387 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+--- !u!4 &2534044004262634773 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4342916205456910500, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
-  m_PrefabInstance: {fileID: 2825401867625911815}
+  m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 897872002299701998}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4325654188190160026 stripped
+--- !u!114 &6912193421055671901 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1959654728250950301, guid: babb0e3be0c2946479f4b6bcfae8de01, type: 3}
-  m_PrefabInstance: {fileID: 2825401867625911815}
+  m_CorrespondingSourceObject: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 897872002299701998}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -701,3 +655,339 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+--- !u!1001 &2514190224056842605
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 830271602152660918}
+    m_Modifications:
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659100438311384338, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_Name
+      value: IK FABRIK Tentacle (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+--- !u!4 &989499977282958998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 2514190224056842605}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8177648721327943134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 2514190224056842605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+--- !u!1001 &3865618133971736958
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 830271602152660918}
+    m_Modifications:
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659100438311384338, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_Name
+      value: IK FABRIK Tentacle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+--- !u!4 &1943924991446636165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 3865618133971736958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7367191527396117965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 3865618133971736958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+--- !u!1001 &7163445787175873956
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 830271602152660918}
+    m_Modifications:
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659100438311384338, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_Name
+      value: IK FABRIK Tentacle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+--- !u!114 &3526671872746191127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 7163445787175873956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+--- !u!4 &5491842541659431519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 7163445787175873956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8548081964183649922
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 830271602152660918}
+    m_Modifications:
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659100438311384338, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    - target: {fileID: 5725834029006412399, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: m_Name
+      value: IK FABRIK Tentacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+      propertyPath: mouthPoint
+      value: 
+      objectReference: {fileID: 3292449879092169869}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+--- !u!114 &2681904430476028465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023822472343131315, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 8548081964183649922}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f55a3fce2600143ac0ac372b4be259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TentacleController
+--- !u!4 &6485105453981839737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
+  m_PrefabInstance: {fileID: 8548081964183649922}
+  m_PrefabAsset: {fileID: 0}
