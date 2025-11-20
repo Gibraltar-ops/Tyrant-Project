@@ -8,6 +8,8 @@ public class VictimRenderer : MonoBehaviour
 
     private IObjectPool<GameObject> pool;
 
+    public int preloadAmount = 1000;
+
     // All currently active visual objects
     private readonly List<GameObject> activeVisuals = new();
 

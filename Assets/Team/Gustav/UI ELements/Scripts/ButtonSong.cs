@@ -11,8 +11,10 @@ public class ButtonSong : MonoBehaviour
     public Slider slider2;
 
     [Header("Settings")]
-    public float fillSpeed = 0.5f;
-    public float drainSpeed = 0.1f;
+    public float fillSpeed = 0.5f; // Speed at which the slider fills when pressed
+    public float drainSpeed = 0.1f; // Speed at which the slider drains when not pressed
+    public float minSpawnRateMultiplier = 1f; // Minimal spawn rate multiplier (Lerps between min/max based on slider 0%->100%)
+    public float maxSpawnRateMultiplier = 5f; // Maximal spawn rate multiplier (Lerps between min/max based on slider 0%->100%)
 
     public bool isPressed = false;
 
@@ -38,8 +40,8 @@ public class ButtonSong : MonoBehaviour
 
         if (victimSystem != null)
         {
-            // slider goes from 0–1, we convert it to 1–5
-            victimSystem.spawnRateMultiplier = Mathf.Lerp(1f, 5f, slider1.value);
+            // slider goes from 0–1, it gets converted it to 1–5
+            victimSystem.spawnRateMultiplier = Mathf.Lerp(minSpawnRateMultiplier, maxSpawnRateMultiplier, slider1.value);
         }
     }
 
