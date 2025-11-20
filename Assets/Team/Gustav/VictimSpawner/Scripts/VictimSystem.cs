@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class VictimSystem : MonoBehaviour
 
     private float spawnTimer;
     public List<VictimData> victims = new List<VictimData>();
+
+    public event Action<int> OnVictimCountChanged;
 
     [HideInInspector]
     public float spawnRateMultiplier = 1f; // Adjust spawn rate with UI Btn/Slider.
@@ -44,24 +47,22 @@ public class VictimSystem : MonoBehaviour
         if (spawnRegions.Count == 0 || centerCircles.Count == 0)
             return;
 
-        var spawnRegion = spawnRegions[Random.Range(0, spawnRegions.Count)];
-        var centerRegion = centerCircles[Random.Range(0, centerCircles.Count)];
+        var spawnRegion = spawnRegions[UnityEngine.Random.Range(0, spawnRegions.Count)];
+        var centerRegion = centerCircles[UnityEngine.Random.Range(0, centerCircles.Count)];
 
         victims.Add(new VictimData
         {
             position = spawnRegion.RandomPointInside(),
-
             homeRegion = centerRegion,
             destination = centerRegion.RandomPointInside(),
-
-            speed = Random.Range(1.5f, 3f),
-            scale = Random.Range(0.75f, 1.25f),
-
-            wanderDirection = Random.insideUnitCircle.normalized,
-            wanderTimer = Random.Range(0.5f, 1.5f),
-
+            speed = UnityEngine.Random.Range(1.5f, 3f),
+            scale = UnityEngine.Random.Range(0.75f, 1.25f),
+            wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
+            wanderTimer = UnityEngine.Random.Range(0.5f, 1.5f),
             isCenter = false
         });
+        
+        NotifyVictimCountChanged(); // Update UI count.
     }
 
     private void SimulateVictims()
@@ -76,8 +77,8 @@ public class VictimSystem : MonoBehaviour
                 if (Vector2.Distance(victim.position, victim.destination) < 0.1f)
                 {
                     victim.isCenter = true;
-                    victim.wanderTimer = Random.Range(0.5f, 1.5f);
-                    victim.wanderDirection = Random.insideUnitCircle.normalized;
+                    victim.wanderTimer = UnityEngine.Random.Range(0.5f, 1.5f);
+                    victim.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
                 }
             }
             else // wandering
@@ -86,8 +87,8 @@ public class VictimSystem : MonoBehaviour
 
                 if (victim.wanderTimer <= 0f)
                 {
-                    victim.wanderDirection = Random.insideUnitCircle.normalized;
-                    victim.wanderTimer = Random.Range(0.5f, 1.5f);
+                    victim.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+                    victim.wanderTimer = UnityEngine.Random.Range(0.5f, 1.5f);
                 }
 
                 // Apply wandering movement
@@ -103,6 +104,11 @@ public class VictimSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void NotifyVictimCountChanged()
+    {
+        OnVictimCountChanged?.Invoke(victims.Count);
     }
 
     // Visualize spawn regions in editor
