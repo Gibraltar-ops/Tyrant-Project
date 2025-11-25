@@ -5361,6 +5361,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: victimPrefab
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: f443202f02c5b8041beb9a68618e9577, type: 3}
     - target: {fileID: 3664445610999413223, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_Name
       value: VictimManager
@@ -5427,7 +5431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: spawnRegions.Array.data[2].center.y
-      value: -33.1
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: centerCircles.Array.data[0].center.x
