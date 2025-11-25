@@ -120,6 +120,7 @@ public class CollectorShop : MonoBehaviour
         _ticksPerSecondCurrent = TicksPerSecondBase * TicksPerSecondMultiplier;
         return _ticksPerSecondCurrent;
     }
+    
     public int ModifiedCollectAmount(CollectorData data)
     {
         float finalCurrency = data.BaseCollect;

@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class ShopSettings
 {
+   public string Tag;
    public int PriceBase = 12;
    public float PriceGrowthRate = 1.1f;
    public int NumberOwned = 0;

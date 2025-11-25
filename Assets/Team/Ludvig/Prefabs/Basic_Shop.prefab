@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2783781618307443694}
   - component: {fileID: 4372229418683676081}
   m_Layer: 5
-  m_Name: Item Name
-  m_TagString: Untagged
+  m_Name: ItemName
+  m_TagString: UI_ItemName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,10 +282,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8043696324130555201}
   - component: {fileID: 3287221958465838510}
-  - component: {fileID: 317814294806730603}
-  - component: {fileID: 851122047499379460}
   m_Layer: 5
-  m_Name: SlaveTentacle_Shop
+  m_Name: Basic_Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,63 +338,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &317814294806730603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5750061717269635400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1fb5da35ce9d64184635fe022f8c67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectorShop
-  Tag: AutomaticTentacle
-  BoughtWithCurrency: 0
-  TicksPerSecondBase: 0.2
-  TicksPerSecondMultiplier: 1
-  CurrentCountLabel: {fileID: 452047686581081815}
-  NextPriceLabel: {fileID: 8914421894065961332}
-  PurchaseButton: {fileID: 2866381375008053659}
-  shopSettings:
-    PriceBase: 12
-    PriceGrowthRate: 1.3
-    NumberOwned: 0
-    NextPrice: 12
-  Data:
-  - CollectedCurrency: 0
-    BaseCollect: 10
-    CollectMultiplier: 1
-    CollectAdd: 0
-  - CollectedCurrency: 1
-    BaseCollect: 0
-    CollectMultiplier: 1
-    CollectAdd: 0
-  - CollectedCurrency: 2
-    BaseCollect: 0
-    CollectMultiplier: 1
-    CollectAdd: 0
-  Active: 1
-  SpawnObject: 1
---- !u!114 &851122047499379460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5750061717269635400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f653d11670089524c82b3074979af7b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectorObjectSpawner
-  AnimatedObject: {fileID: 4343620184493266046, guid: b55ee7fe3886093418b1a98ae5195821, type: 3}
-  InstanceParent: {fileID: 0}
-  SpawnOnLine: 1
-  line:
-    Start: {x: -4, y: -5}
-    End: {x: 4, y: -5}
 --- !u!1 &7564547392137451628
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +351,7 @@ GameObject:
   - component: {fileID: 452047686581081815}
   m_Layer: 5
   m_Name: CurrentCount
-  m_TagString: Untagged
+  m_TagString: UI_CurrentCount
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,7 +488,7 @@ GameObject:
   - component: {fileID: 2866381375008053659}
   m_Layer: 5
   m_Name: PurchaseButton
-  m_TagString: Untagged
+  m_TagString: UI_BuyButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -667,7 +608,7 @@ GameObject:
   - component: {fileID: 8914421894065961332}
   m_Layer: 5
   m_Name: NextPrice
-  m_TagString: Untagged
+  m_TagString: UI_NextPrice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
