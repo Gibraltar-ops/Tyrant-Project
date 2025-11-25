@@ -79,22 +79,6 @@ public class VictimRenderer : MonoBehaviour
         }
     }
 
-    // -------------------------------------------------------
-    // Update visual transforms from simulation data
-    // -------------------------------------------------------
-    //void UpdateVisuals()
-    //{
-    //    var victims = victimSystem.victims;
-
-    //    for (int i = 0; i < victims.Count; i++)
-    //    {
-    //        var data = victims[i];
-    //        var visual = activeVisuals[i];
-
-    //        visual.transform.position = data.position;
-    //        visual.transform.localScale = Vector3.one * data.scale;
-    //    }
-    //}
     void UpdateVisuals()
     {
         var victims = victimSystem.victims;

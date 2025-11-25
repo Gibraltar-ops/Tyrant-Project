@@ -12,7 +12,6 @@ public class VictimVisual : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-
     public void ApplyScale(float scale)
     {
         gfx.localScale = Vector3.one * scale; // scaling only on child

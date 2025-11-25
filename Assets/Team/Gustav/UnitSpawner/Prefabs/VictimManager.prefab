@@ -47,17 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VictimSystem
   enableSpawning: 1
   spawnInterval: 1
-  maxVictims: 1000
+  maxVictims: 10000
   spawnRegions:
-  - center: {x: -45, y: -16}
-    size: {x: 4, y: 20}
-  - center: {x: 45, y: -16}
-    size: {x: 4, y: 20}
-  - center: {x: 0, y: -23}
-    size: {x: 80, y: 4}
-  centerCircles:
-  - center: {x: 0, y: -12}
-    radius: 2
+  - center: {x: -75, y: -30}
+    size: {x: 4, y: 30}
+  - center: {x: 75, y: -30}
+    size: {x: 4, y: 30}
+  - center: {x: 0, y: -60}
+    size: {x: 120, y: 4}
+  destinationRegions:
+  - center: {x: 0, y: -30}
+    radius: 10
+    length: 30
+  spawnRateMultiplier: 1
 --- !u!114 &1359637981827827607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,3 +74,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanRenderer
   victimSystem: {fileID: 5033727170748230060}
   victimPrefab: {fileID: 441874911214380755, guid: 131e9542c4ec344449880271ac767c46, type: 3}
+  preloadAmount: 1000

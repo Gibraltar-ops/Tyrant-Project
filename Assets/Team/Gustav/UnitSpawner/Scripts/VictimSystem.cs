@@ -7,10 +7,10 @@ public class VictimSystem : MonoBehaviour
     [Header("Spawning")]
     public bool enableSpawning = true;
     public float spawnInterval = 1.0f;
-    public int maxVictims = 1000;
+    public int maxVictims = 10000;
 
     public List<SpawnRegion> spawnRegions = new List<SpawnRegion>();
-    public List<DestinationRegion> centerCircles = new List<DestinationRegion>();
+    public List<DestinationRegion> destinationRegions = new List<DestinationRegion>();
 
     private float spawnTimer;
     public List<VictimData> victims = new List<VictimData>();
@@ -44,11 +44,11 @@ public class VictimSystem : MonoBehaviour
 
     private void SpawnVictim()
     {
-        if (spawnRegions.Count == 0 || centerCircles.Count == 0)
+        if (spawnRegions.Count == 0 || destinationRegions.Count == 0)
             return;
 
         var spawnRegion = spawnRegions[UnityEngine.Random.Range(0, spawnRegions.Count)];
-        var centerRegion = centerCircles[UnityEngine.Random.Range(0, centerCircles.Count)];
+        var centerRegion = destinationRegions[UnityEngine.Random.Range(0, destinationRegions.Count)];
 
         victims.Add(new VictimData
         {
@@ -119,8 +119,12 @@ public class VictimSystem : MonoBehaviour
         foreach (var r in spawnRegions)
             r.DrawGizmo(Color.yellow);
         
-        if (centerCircles != null)
-            foreach (var c in centerCircles)
+        if (destinationRegions != null)
+            foreach (var c in destinationRegions)
                 c.DrawGizmo(Color.green);
+    }
+    public void ApplyScale(float scale)
+    {
+        transform.localScale = Vector3.one * scale;
     }
 }
