@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LineRendererUpdater : MonoBehaviour
 {
-    public Transform[] chainTransforms; 
+    public Transform[] chainTransforms;
     private LineRenderer lineRenderer;
 
     void Start()
@@ -10,7 +10,7 @@ public class LineRendererUpdater : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         if (lineRenderer == null || chainTransforms == null || chainTransforms.Length == 0)
         {
-            Debug.LogError("LineRenderer eller kedjans Transforms saknas!");
+            Debug.LogError("LineRenderer missing!");
             enabled = false;
             return;
         }
@@ -20,9 +20,9 @@ public class LineRendererUpdater : MonoBehaviour
 
     void LateUpdate()
     {
-        if (chainTransforms == null || lineRenderer == null) return;
+        if (chainTransforms == null || lineRenderer == null)
+            return;
 
-       
         for (int i = 0; i < chainTransforms.Length; i++)
         {
             if (chainTransforms[i] != null)
