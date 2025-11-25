@@ -82,6 +82,19 @@ public class VictimRenderer : MonoBehaviour
     // -------------------------------------------------------
     // Update visual transforms from simulation data
     // -------------------------------------------------------
+    //void UpdateVisuals()
+    //{
+    //    var victims = victimSystem.victims;
+
+    //    for (int i = 0; i < victims.Count; i++)
+    //    {
+    //        var data = victims[i];
+    //        var visual = activeVisuals[i];
+
+    //        visual.transform.position = data.position;
+    //        visual.transform.localScale = Vector3.one * data.scale;
+    //    }
+    //}
     void UpdateVisuals()
     {
         var victims = victimSystem.victims;
@@ -91,8 +104,16 @@ public class VictimRenderer : MonoBehaviour
             var data = victims[i];
             var visual = activeVisuals[i];
 
-            visual.transform.position = data.position;
-            visual.transform.localScale = Vector3.one * data.scale;
+            // Movement direction from simulation
+            Vector2 dir = data.isCenter ? data.wanderDirection :
+                          (data.destination - data.position).normalized;
+
+            // Update animator + flip + position
+            visual.GetComponent<VictimVisual>().UpdateVisual(data.position, dir);
+
+            // Scale
+            visual.GetComponent<VictimVisual>().ApplyScale(data.scale);
         }
     }
+
 }
