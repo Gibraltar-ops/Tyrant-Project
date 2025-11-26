@@ -42,6 +42,9 @@ public class VictimSystem : MonoBehaviour
         SimulateVictims();
     }
 
+    // --------------------------------------------
+    // SPAWNING
+    // --------------------------------------------
     private void SpawnVictim()
     {
         if (spawnRegions.Count == 0 || destinationRegions.Count == 0)
@@ -61,10 +64,13 @@ public class VictimSystem : MonoBehaviour
             wanderTimer = UnityEngine.Random.Range(0.5f, 1.5f),
             isCenter = false
         });
-        
-        NotifyVictimCountChanged(); // Update UI count.
+
+        OnVictimCountChanged?.Invoke(victims.Count); // Update UI count.
     }
 
+    // --------------------------------------------
+    // MOVEMENT
+    // --------------------------------------------
     private void SimulateVictims()
     {
         foreach (var victim in victims)
@@ -81,7 +87,7 @@ public class VictimSystem : MonoBehaviour
                     victim.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
                 }
             }
-            else // wandering
+            else // Wandering
             {
                 victim.wanderTimer -= Time.deltaTime;
 
@@ -106,12 +112,9 @@ public class VictimSystem : MonoBehaviour
         }
     }
 
-    private void NotifyVictimCountChanged()
-    {
-        OnVictimCountChanged?.Invoke(victims.Count);
-    }
-
-    // Visualize spawn regions in editor
+    // --------------------------------------------
+    // Editor Gizmos
+    // --------------------------------------------
     private void OnDrawGizmosSelected()
     {
         if (spawnRegions == null) return;
@@ -122,9 +125,5 @@ public class VictimSystem : MonoBehaviour
         if (destinationRegions != null)
             foreach (var c in destinationRegions)
                 c.DrawGizmo(Color.green);
-    }
-    public void ApplyScale(float scale)
-    {
-        transform.localScale = Vector3.one * scale;
     }
 }

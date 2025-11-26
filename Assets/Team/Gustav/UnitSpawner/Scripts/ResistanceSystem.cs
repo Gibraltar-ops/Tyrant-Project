@@ -30,12 +30,13 @@ public class ResistanceSystem : MonoBehaviour
 
     public event Action<int> OnFighterCountChanged;
 
-    // --------------------------------------------
-    // Unity
-    // --------------------------------------------
     void Start()
     {
         spawnTimer = spawnInterval;
+        
+        //// Spawn some initial crowd (optional)
+        //for (int i = 0; i < 50; i++)
+        //    SpawnVictim();
     }
 
     void Update()
@@ -74,13 +75,14 @@ public class ResistanceSystem : MonoBehaviour
             homeRegion = gatherRegion,
             destination = gatherRegion.RandomPointInside(),
             speed = UnityEngine.Random.Range(1.6f, 2.8f),
+            scale = UnityEngine.Random.Range(0.75f, 1.25f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
             wanderTimer = UnityEngine.Random.Range(1f, 2f),
             isCenter = false,
             isLeftSide = spawnLeft
         });
 
-        OnFighterCountChanged?.Invoke(fighters.Count);
+        OnFighterCountChanged?.Invoke(fighters.Count); // Update UI count.
     }
 
     // --------------------------------------------
@@ -88,39 +90,40 @@ public class ResistanceSystem : MonoBehaviour
     // --------------------------------------------
     private void SimulateFighters()
     {
-        foreach (var f in fighters)
+        foreach (var fighter in fighters)
         {
-            if (!f.isCenter)
+            if (!fighter.isCenter)
             {
-                Vector2 dir = (f.destination - f.position).normalized;
-                f.position += dir * f.speed * Time.deltaTime;
+                Vector2 dir = (fighter.destination - fighter.position).normalized;
+                fighter.position += dir * fighter.speed * Time.deltaTime;
 
-                if (Vector2.Distance(f.position, f.destination) < 0.1f)
+                if (Vector2.Distance(fighter.position, fighter.destination) < 0.1f)
                 {
-                    f.isCenter = true;
-                    f.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
-                    f.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+                    fighter.isCenter = true;
+                    fighter.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
+                    fighter.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
                 }
             }
-            else
+            else // Wandering
             {
-                // Wandering
-                f.wanderTimer -= Time.deltaTime;
+                fighter.wanderTimer -= Time.deltaTime;
 
-                if (f.wanderTimer <= 0f)
+                if (fighter.wanderTimer <= 0f)
                 {
-                    f.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
-                    f.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+                    fighter.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized; 
+                    fighter.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
                 }
 
-                f.position += f.wanderDirection * (f.speed * 0.4f) * Time.deltaTime;
+                // Apply wandering movement
+                fighter.position += fighter.wanderDirection * (fighter.speed * 0.4f) * Time.deltaTime;
 
-                // Keep them inside capsule / circle
-                if (!f.homeRegion.Contains(f.position))
+                // If victim has wandered outside the capsule walk back inside
+                if (!fighter.homeRegion.Contains(fighter.position))
                 {
-                    Vector2 target = f.homeRegion.RandomPointInside();
-                    Vector2 dir = (target - f.position).normalized;
-                    f.position += dir * f.speed * Time.deltaTime;
+                    Vector2 target = fighter.homeRegion.RandomPointInside();
+                    Vector2 dir = (target - fighter.position).normalized;
+
+                    fighter.position += dir * fighter.speed * Time.deltaTime;
                 }
             }
         }

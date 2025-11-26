@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.Pool;
 using UnityEngine;
 
-public class ResistancRenderer : MonoBehaviour
+public class ResistanceRenderer : MonoBehaviour
 {
     public ResistanceSystem resistanceSystem;
     public GameObject resistancePrefab;
@@ -53,9 +53,13 @@ public class ResistancRenderer : MonoBehaviour
     {
         int simCount = resistanceSystem.fighters.Count;
 
+        // Need more visuals?
         while (activeVisuals.Count < simCount)
+        {
             activeVisuals.Add(pool.Get());
+        }
 
+        // Too many visuals?
         while (activeVisuals.Count > simCount)
         {
             var last = activeVisuals[^1];
@@ -77,9 +81,8 @@ public class ResistancRenderer : MonoBehaviour
             var visual = activeVisuals[i];
 
             // Movement direction
-            Vector2 dir = data.isCenter ?
-                data.wanderDirection :
-                (data.destination - data.position).normalized;
+            Vector2 dir = data.isCenter ? data.wanderDirection :
+                        (data.destination - data.position).normalized;
 
             // Update animator + flip + position
             visual.GetComponent<VictimVisual>().UpdateVisual(data.position, dir);

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine.Pool;
 using UnityEngine;
+
 public class VictimRenderer : MonoBehaviour
 {
     public VictimSystem victimSystem;
@@ -41,21 +42,9 @@ public class VictimRenderer : MonoBehaviour
         obj.SetActive(false);
         return obj;
     }
-
-    void OnTakeFromPool(GameObject obj)
-    {
-        obj.SetActive(true);
-    }
-
-    void OnReturnedToPool(GameObject obj)
-    {
-        obj.SetActive(false);
-    }
-
-    void OnDestroyVisual(GameObject obj)
-    {
-        Destroy(obj);
-    }
+    void OnTakeFromPool(GameObject obj) => obj.SetActive(true);
+    void OnReturnedToPool(GameObject obj) => obj.SetActive(false);
+    void OnDestroyVisual(GameObject obj) => Destroy(obj);
 
     // -------------------------------------------------------
     // Make sure active visuals match victim count
@@ -79,6 +68,9 @@ public class VictimRenderer : MonoBehaviour
         }
     }
 
+    // -------------------------------------------------------
+    // Update visuals from victim simulation data
+    // -------------------------------------------------------
     void UpdateVisuals()
     {
         var victims = victimSystem.victims;
@@ -88,9 +80,9 @@ public class VictimRenderer : MonoBehaviour
             var data = victims[i];
             var visual = activeVisuals[i];
 
-            // Movement direction from simulation
+            // Movement direction
             Vector2 dir = data.isCenter ? data.wanderDirection :
-                          (data.destination - data.position).normalized;
+                        (data.destination - data.position).normalized;
 
             // Update animator + flip + position
             visual.GetComponent<VictimVisual>().UpdateVisual(data.position, dir);
