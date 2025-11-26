@@ -1,5 +1,5 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,42 +14,62 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         [Header("Rope Transforms")]
         [Tooltip("The rope will start at this point")]
-        [SerializeField] private Transform startPoint;
+        [SerializeField]
+        private Transform startPoint;
         public Transform StartPoint => startPoint;
 
-        [Tooltip("This will move at the center hanging from the rope, like a necklace, for example")]
-        [SerializeField] private Transform midPoint;
+        [Tooltip(
+            "This will move at the center hanging from the rope, like a necklace, for example"
+        )]
+        [SerializeField]
+        private Transform midPoint;
         public Transform MidPoint => midPoint;
 
         [Tooltip("The rope will end at this point")]
-        [SerializeField] private Transform endPoint;
+        [SerializeField]
+        private Transform endPoint;
         public Transform EndPoint => endPoint;
 
         [Header("Rope Settings")]
-        [Tooltip("How many points should the rope have, 2 would be a triangle with straight lines, 100 would be a very flexible rope with many parts")]
-        [Range(2, 100)] public int linePoints = 10;
+        [Tooltip(
+            "How many points should the rope have, 2 would be a triangle with straight lines, 100 would be a very flexible rope with many parts"
+        )]
+        [Range(2, 100)]
+        public int linePoints = 10;
 
-        [Tooltip("Value highly dependent on use case, a metal cable would have high stiffness, a rubber rope would have a low one")]
+        [Tooltip(
+            "Value highly dependent on use case, a metal cable would have high stiffness, a rubber rope would have a low one"
+        )]
         public float stiffness = 350f;
 
         [Tooltip("0 is no damping, 50 is a lot")]
         public float damping = 15f;
 
-        [Tooltip("How long is the rope, it will hang more or less from starting point to end point depending on this value")]
+        [Tooltip(
+            "How long is the rope, it will hang more or less from starting point to end point depending on this value"
+        )]
         public float ropeLength = 15;
 
-        [Tooltip("The Rope width set at start (changing this value during run time will produce no effect)")]
+        [Tooltip(
+            "The Rope width set at start (changing this value during run time will produce no effect)"
+        )]
         public float ropeWidth = 0.1f;
 
         [Header("Rational Bezier Weight Control")]
         [Tooltip("Adjust the middle control point weight for the Rational Bezier curve")]
-        [Range(1, 15)] public float midPointWeight = 1f;
+        [Range(1, 15)]
+        public float midPointWeight = 1f;
         private const float StartPointWeight = 1f; //these need to stay at 1, could be removed but makes calling the rational bezier function easier to read and understand
         private const float EndPointWeight = 1f;
 
         [Header("Midpoint Position")]
         [Tooltip("Position of the midpoint along the line between start and end points")]
-        [Range(0.25f, 0.75f)] public float midPointPosition = 0.5f;
+        [Range(0.25f, 0.75f)]
+        public float midPointPosition = 0.5f;
+
+        [Header("2D Mode")]
+        [Tooltip("When true z will be locked to 0 for all positions (use for a 2D project)")]
+        public bool use2D = true;
 
         private Vector3 currentValue;
         private Vector3 currentVelocity;
@@ -71,10 +91,9 @@ namespace GogoGaga.OptimizedRopesAndCables
         private float prevstiffness;
         private float prevDampness;
         private float prevRopeLength;
-        
-        
+
         public bool IsPrefab => gameObject.scene.rootCount == 0;
-        
+
         private void Start()
         {
             InitializeLineRenderer();
@@ -121,7 +140,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             {
                 return;
             }
-            
+
             if (AreEndPointsValid())
             {
                 SetSplinePoint();
@@ -132,8 +151,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                     NotifyPointsChanged();
                 }
 
-                prevStartPointPosition = startPoint.position;
-                prevEndPointPosition = endPoint.position;
+                prevStartPointPosition = GetLockedPosition(startPoint);
+                prevEndPointPosition = GetLockedPosition(endPoint);
                 prevMidPointPosition = midPointPosition;
                 prevMidPointWeight = midPointWeight;
 
@@ -150,6 +169,18 @@ namespace GogoGaga.OptimizedRopesAndCables
             return startPoint != null && endPoint != null;
         }
 
+        private Vector3 LockZ(Vector3 v)
+        {
+            return use2D ? new Vector3(v.x, v.y, 0f) : v;
+        }
+
+        private Vector3 GetLockedPosition(Transform t)
+        {
+            if (t == null)
+                return Vector3.zero;
+            return LockZ(t.position);
+        }
+
         private void SetSplinePoint()
         {
             if (lineRenderer.positionCount != linePoints + 1)
@@ -163,16 +194,35 @@ namespace GogoGaga.OptimizedRopesAndCables
 
             if (midPoint != null)
             {
-                midPoint.position = GetRationalBezierPoint(startPoint.position, mid, endPoint.position, midPointPosition, StartPointWeight, midPointWeight, EndPointWeight);
+                Vector3 bez = GetRationalBezierPoint(
+                    GetLockedPosition(startPoint),
+                    mid,
+                    GetLockedPosition(endPoint),
+                    midPointPosition,
+                    StartPointWeight,
+                    midPointWeight,
+                    EndPointWeight
+                );
+                midPoint.position = LockZ(bez);
             }
 
             for (int i = 0; i < linePoints; i++)
             {
-                Vector3 p = GetRationalBezierPoint(startPoint.position, mid, endPoint.position, i / (float)linePoints, StartPointWeight, midPointWeight, EndPointWeight);
+                float t = i / (float)linePoints;
+                Vector3 p = GetRationalBezierPoint(
+                    GetLockedPosition(startPoint),
+                    mid,
+                    GetLockedPosition(endPoint),
+                    t,
+                    StartPointWeight,
+                    midPointWeight,
+                    EndPointWeight
+                );
+                p = LockZ(p);
                 lineRenderer.SetPosition(i, p);
             }
 
-            lineRenderer.SetPosition(linePoints, endPoint.position);
+            lineRenderer.SetPosition(linePoints, LockZ(endPoint.position));
         }
 
         private float CalculateYFactorAdjustment(float weight)
@@ -185,15 +235,27 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         private Vector3 GetMidPoint()
         {
-            Vector3 startPointPosition = startPoint.position;
-            Vector3 endPointPosition = endPoint.position;
+            Vector3 startPointPosition = GetLockedPosition(startPoint);
+            Vector3 endPointPosition = GetLockedPosition(endPoint);
             Vector3 midpos = Vector3.Lerp(startPointPosition, endPointPosition, midPointPosition);
-            float yFactor = (ropeLength - Mathf.Min(Vector3.Distance(startPointPosition, endPointPosition), ropeLength)) / CalculateYFactorAdjustment(midPointWeight);
+            float yFactor =
+                (
+                    ropeLength
+                    - Mathf.Min(Vector3.Distance(startPointPosition, endPointPosition), ropeLength)
+                ) / CalculateYFactorAdjustment(midPointWeight);
             midpos.y -= yFactor;
             return midpos;
         }
 
-        private Vector3 GetRationalBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t, float w0, float w1, float w2)
+        private Vector3 GetRationalBezierPoint(
+            Vector3 p0,
+            Vector3 p1,
+            Vector3 p2,
+            float t,
+            float w0,
+            float w1,
+            float w2
+        )
         {
             //scale each point by its weight (can probably remove w0 and w2 if the midpoint is the only adjustable weight)
             Vector3 wp0 = w0 * p0;
@@ -201,9 +263,12 @@ namespace GogoGaga.OptimizedRopesAndCables
             Vector3 wp2 = w2 * p2;
 
             //calculate the denominator of the rational Bézier curve
-            float denominator = w0 * Mathf.Pow(1 - t, 2) + 2 * w1 * (1 - t) * t + w2 * Mathf.Pow(t, 2);
+            float denominator =
+                w0 * Mathf.Pow(1 - t, 2) + 2 * w1 * (1 - t) * t + w2 * Mathf.Pow(t, 2);
             //calculate the numerator and devide by the demoninator to get the point on the curve
-            Vector3 point = (wp0 * Mathf.Pow(1 - t, 2) + wp1 * 2 * (1 - t) * t + wp2 * Mathf.Pow(t, 2)) / denominator;
+            Vector3 point =
+                (wp0 * Mathf.Pow(1 - t, 2) + wp1 * 2 * (1 - t) * t + wp2 * Mathf.Pow(t, 2))
+                / denominator;
 
             return point;
         }
@@ -216,7 +281,17 @@ namespace GogoGaga.OptimizedRopesAndCables
                 return Vector3.zero;
             }
 
-            return GetRationalBezierPoint(startPoint.position, currentValue, endPoint.position, t, StartPointWeight, midPointWeight, EndPointWeight);
+            return LockZ(
+                GetRationalBezierPoint(
+                    GetLockedPosition(startPoint),
+                    currentValue,
+                    GetLockedPosition(endPoint),
+                    t,
+                    StartPointWeight,
+                    midPointWeight,
+                    EndPointWeight
+                )
+            );
         }
 
         private void FixedUpdate()
@@ -225,7 +300,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             {
                 return;
             }
-            
+
             if (AreEndPointsValid())
             {
                 if (!isFirstFrame)
@@ -244,7 +319,16 @@ namespace GogoGaga.OptimizedRopesAndCables
             currentVelocity = currentVelocity * dampingFactor + acceleration + otherPhysicsFactors;
             currentValue += currentVelocity * Time.fixedDeltaTime;
 
-            if (Vector3.Distance(currentValue, targetValue) < valueThreshold && currentVelocity.magnitude < velocityThreshold)
+            if (use2D)
+            {
+                currentValue = LockZ(currentValue);
+                currentVelocity = LockZ(currentVelocity);
+            }
+
+            if (
+                Vector3.Distance(currentValue, targetValue) < valueThreshold
+                && currentVelocity.magnitude < velocityThreshold
+            )
             {
                 currentValue = targetValue;
                 currentVelocity = Vector3.zero;
@@ -263,14 +347,14 @@ namespace GogoGaga.OptimizedRopesAndCables
         }
 
         // New API methods for setting start and end points
-        // with instantAssign parameter to recalculate the rope immediately, without 
+        // with instantAssign parameter to recalculate the rope immediately, without
         // animating the rope to the new position.
         // When newStartPoint or newEndPoint is null, the rope will be recalculated immediately
 
         public void SetStartPoint(Transform newStartPoint, bool instantAssign = false)
         {
             startPoint = newStartPoint;
-            prevStartPointPosition = startPoint == null ? Vector3.zero : startPoint.position;
+            prevStartPointPosition = GetLockedPosition(startPoint);
 
             if (instantAssign || newStartPoint == null)
             {
@@ -279,22 +363,23 @@ namespace GogoGaga.OptimizedRopesAndCables
 
             NotifyPointsChanged();
         }
+
         public void SetMidPoint(Transform newMidPoint, bool instantAssign = false)
         {
             midPoint = newMidPoint;
             prevMidPointPosition = midPoint == null ? 0.5f : midPointPosition;
-            
+
             if (instantAssign || newMidPoint == null)
             {
                 RecalculateRope();
             }
             NotifyPointsChanged();
         }
-        
+
         public void SetEndPoint(Transform newEndPoint, bool instantAssign = false)
         {
             endPoint = newEndPoint;
-            prevEndPointPosition = endPoint == null ? Vector3.zero : endPoint.position;
+            prevEndPointPosition = GetLockedPosition(endPoint);
 
             if (instantAssign || newEndPoint == null)
             {
@@ -325,8 +410,8 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         private bool IsPointsMoved()
         {
-            var startPointMoved = startPoint.position != prevStartPointPosition;
-            var endPointMoved = endPoint.position != prevEndPointPosition;
+            var startPointMoved = GetLockedPosition(startPoint) != prevStartPointPosition;
+            var endPointMoved = GetLockedPosition(endPoint) != prevEndPointPosition;
             return startPointMoved || endPointMoved;
         }
 
@@ -337,16 +422,19 @@ namespace GogoGaga.OptimizedRopesAndCables
             var stiffnessChanged = !Mathf.Approximately(stiffness, prevstiffness);
             var dampnessChanged = !Mathf.Approximately(damping, prevDampness);
             var ropeLengthChanged = !Mathf.Approximately(ropeLength, prevRopeLength);
-            var midPointPositionChanged = !Mathf.Approximately(midPointPosition, prevMidPointPosition);
+            var midPointPositionChanged = !Mathf.Approximately(
+                midPointPosition,
+                prevMidPointPosition
+            );
             var midPointWeightChanged = !Mathf.Approximately(midPointWeight, prevMidPointWeight);
 
             return lineQualityChanged
-                   || ropeWidthChanged
-                   || stiffnessChanged
-                   || dampnessChanged
-                   || ropeLengthChanged
-                   || midPointPositionChanged
-                   || midPointWeightChanged;
+                || ropeWidthChanged
+                || stiffnessChanged
+                || dampnessChanged
+                || ropeLengthChanged
+                || midPointPositionChanged
+                || midPointWeightChanged;
         }
     }
 }
