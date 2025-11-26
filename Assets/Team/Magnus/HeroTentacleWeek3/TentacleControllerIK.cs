@@ -17,20 +17,20 @@ public class TentacleControllerIK : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
-
-            if (effectorJoint != null)
-            {
-                effectorJoint.target = targetPosition;
-            }
+        }
+        if (effectorJoint != null)
+        {
+            effectorJoint.target = targetPosition;
         }
 
         transform.position = targetPosition;
 
-        HandleStretching();
+        /*         HandleStretching();
+         */
     }
 
     void HandleStretching()

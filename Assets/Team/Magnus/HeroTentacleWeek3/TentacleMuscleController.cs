@@ -1,0 +1,44 @@
+using UnityEngine;
+
+public class TentacleMuscleController : MonoBehaviour
+{
+    private HingeJoint2D joint;
+    private JointMotor2D motor;
+
+    [Header("Muscle/Wiggle Settings")]
+    public float baseMotorSpeed = 0.5f; // Base rotation
+    public float wiggleAmplitude = 0.5f; // Speed variation
+    public float wiggleFrequency = 1f;
+    public float maxTorque = 20f; // Must match editor
+
+    private float timeOffset;
+
+    void Start()
+    {
+        joint = GetComponent<HingeJoint2D>();
+
+        if (joint == null)
+        {
+            Debug.LogError("TentacleMuscleController kräver en HingeJoint2D på samma GameObject.");
+            return;
+        }
+
+        timeOffset = Random.Range(0f, 100f);
+
+        motor = joint.motor;
+        motor.maxMotorTorque = maxTorque;
+        joint.useMotor = true;
+    }
+
+    void FixedUpdate()
+    {
+        if (joint == null)
+            return;
+
+        float wiggle = Mathf.Sin(Time.time * wiggleFrequency + timeOffset) * wiggleAmplitude;
+
+        motor.motorSpeed = baseMotorSpeed + wiggle;
+
+        joint.motor = motor;
+    }
+}
