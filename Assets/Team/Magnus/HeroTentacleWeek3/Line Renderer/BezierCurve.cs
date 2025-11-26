@@ -26,7 +26,6 @@ public class BezierCurve
         get { return Points[3]; }
     }
 
-    // KORREKT KOD
     public Vector3 GetSegment(float Time)
     {
         Time = Mathf.Clamp01(Time);
