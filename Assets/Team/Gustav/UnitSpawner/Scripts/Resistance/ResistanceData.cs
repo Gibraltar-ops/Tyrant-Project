@@ -10,6 +10,8 @@ public class ResistanceData
 
     public float wanderTimer;
     public float attackTimer;
+    public float attackCooldown;
+    public int attackDamage;
 
     public float speed;
     public float scale;

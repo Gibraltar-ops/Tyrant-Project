@@ -29,6 +29,8 @@ public class ResistanceSystem : MonoBehaviour
     public List<ResistanceData> fighters = new();
 
     public event Action<int> OnFighterCountChanged;
+    
+    public event System.Action<int> OnEnemyAttack;
 
     void Start()
     {
@@ -55,7 +57,7 @@ public class ResistanceSystem : MonoBehaviour
     // --------------------------------------------
     // SPAWNING
     // --------------------------------------------
-    private void SpawnResistance()
+    public void SpawnResistance()
     {
         bool spawnLeft = UnityEngine.Random.value < 0.5f;
 
@@ -74,6 +76,9 @@ public class ResistanceSystem : MonoBehaviour
             position = spawnRegion.RandomPointInside(),
             homeRegion = gatherRegion,
             destination = gatherRegion.RandomPointInside(),
+            attackCooldown = UnityEngine.Random.Range(1f, 2f),
+            attackDamage = 10,  // Base damage
+            attackTimer = UnityEngine.Random.Range(0.3f, 1f), // offset so they don't sync
             speed = UnityEngine.Random.Range(1.6f, 2.8f),
             scale = UnityEngine.Random.Range(0.75f, 1.25f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
@@ -125,6 +130,18 @@ public class ResistanceSystem : MonoBehaviour
 
                     fighter.position += dir * fighter.speed * Time.deltaTime;
                 }
+            }
+            // --------------------------------
+            // ATTACK LOGIC
+            // --------------------------------
+            fighter.attackTimer -= Time.deltaTime;
+
+            if (fighter.attackTimer <= 0f)
+            {
+                fighter.attackTimer = fighter.attackCooldown;
+
+                // Send attack event
+                AttackDirector.Instance.SpawnProjectile(fighter.position, fighter.attackDamage);
             }
         }
     }

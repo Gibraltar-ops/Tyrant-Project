@@ -4935,6 +4935,54 @@ MonoBehaviour:
   CurrentCountLabel: {fileID: 279144097}
   NextPriceLabel: {fileID: 1394741240}
   PurchaseButton: {fileID: 164783092}
+--- !u!1 &950583662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950583664}
+  - component: {fileID: 950583663}
+  m_Layer: 0
+  m_Name: AttackDirectorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &950583663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950583662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3e56c4a1779714ebd4cd1e50c3d3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackDirector
+  projectilePrefab: {fileID: 2023335759495716118, guid: 1138244fe25b9944a86b1cd3f9b15947, type: 3}
+  explosionPrefab: {fileID: 823177533608343208, guid: b987069b9eb52574cbc6935bd7160dfb, type: 3}
+  targetPosition: {x: 0, y: 0}
+  projectileSpeed: 6
+--- !u!4 &950583664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950583662}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1044641748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3292449879092169869, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
@@ -8384,6 +8432,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: enableSpawning
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079449840702064240, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: waveInterval
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6404760494727083455, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8453,3 +8509,4 @@ SceneRoots:
   - {fileID: 263913897}
   - {fileID: 1111298810}
   - {fileID: 5520297482817651978}
+  - {fileID: 950583664}

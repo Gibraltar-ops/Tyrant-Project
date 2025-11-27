@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6404760494727083455}
   - component: {fileID: 3286441314551350293}
   - component: {fileID: 5986743156173139134}
+  - component: {fileID: 5079449840702064240}
   m_Layer: 0
   m_Name: ResistanceManager
   m_TagString: Untagged
@@ -82,3 +83,21 @@ MonoBehaviour:
   resistanceSystem: {fileID: 3286441314551350293}
   resistancePrefab: {fileID: 441874911214380755, guid: 2c8cc136cd7bdc94895fb87e36717abc, type: 3}
   preloadAmount: 1000
+--- !u!114 &5079449840702064240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7887457422423889654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae26c05ea95d6bb45b4e2ea637c19354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResistanceWaveDirector
+  resistanceSystem: {fileID: 3286441314551350293}
+  waveInterval: 30
+  baseBudget: 10
+  pointsPerUpgrade: 2
+  pointsPerWave: 1
+  fighterCost: 5

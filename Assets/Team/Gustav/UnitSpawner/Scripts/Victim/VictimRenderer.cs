@@ -85,10 +85,10 @@ public class VictimRenderer : MonoBehaviour
                         (data.destination - data.position).normalized;
 
             // Update animator + flip + position
-            visual.GetComponent<VictimVisual>().UpdateVisual(data.position, dir);
+            visual.GetComponent<UnitVisual>().UpdateVisual(data.position, dir);
 
             // Scale
-            visual.GetComponent<VictimVisual>().ApplyScale(data.scale);
+            visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
         }
     }
 

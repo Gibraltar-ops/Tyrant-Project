@@ -1,0 +1,81 @@
+using UnityEngine;
+
+public class ResistanceWaveDirector : MonoBehaviour
+{
+    public ResistanceSystem resistanceSystem;
+
+    [Header("Wave Timing")]
+    public float waveInterval = 30f;
+    private float waveTimer;
+
+    [Header("Budget Logic")]
+    public int baseBudget = 10;   // starting per-wave income
+    public int perWaveIncrease = 1; // baseBudget += this every wave
+    public int upgradeBonus = 2;  // added whenever external upgrades call AddUpgrade()
+
+    private int currentBudget = 0;  // stored points that carry over
+    private int waveIndex = 0;  // If I want to track wave number
+
+    [Header("Enemy Costs")]
+    public int basicEnemyCost = 5;
+
+    void Start()
+    {
+        waveTimer = waveInterval;
+    }
+
+    void Update()
+    {
+        waveTimer -= Time.deltaTime;
+
+        if (waveTimer <= 0f)
+        {
+            RunWave();
+            waveTimer = waveInterval;
+        }
+    }
+
+    // ---------------------------------------------
+    // Called every 30 seconds
+    // ---------------------------------------------
+    private void RunWave()
+    {
+        waveIndex++;
+
+        // Add per-wave income
+        currentBudget += baseBudget;
+
+        // Increase base income for future waves
+        baseBudget += perWaveIncrease;
+
+        SpawnEnemiesFromBudget();
+    }
+
+    // ---------------------------------------------
+    // Spawn as many enemies as possible
+    // ---------------------------------------------
+    private void SpawnEnemiesFromBudget()
+    {
+        int spawned = 0;
+
+        // Try to buy as many as possible
+        while (currentBudget >= basicEnemyCost &&
+               resistanceSystem.fighters.Count < resistanceSystem.maxResistanceUnits)
+        {
+            resistanceSystem.SpawnResistance();
+            currentBudget -= basicEnemyCost;
+            spawned++;
+        }
+
+        // Debug.Log($"Wave {waveIndex}: spawned {spawned} fighters. Remaining budget: {currentBudget}");
+    }
+
+    // ---------------------------------------------
+    // Called by upgrades
+    // ---------------------------------------------
+    public void AddUpgrade()
+    {
+        baseBudget += upgradeBonus;
+        // Debug.Log("Upgrade purchased — future wave budget increased!");
+    }
+}
