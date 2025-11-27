@@ -219,16 +219,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae55e36794cf7f4ca21b72b0139131e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyCollector
+  TicksPerSecondBase: 1
   Data:
-    Tag: 
-    TicksPerSecondBase: 1
+    Tag: AutoTentacle
+    Active: 1
     TicksPerSecondMultiplier: 1
     CollectorTypes:
     - CollectedCurrency: 0
       BaseCollect: 10
-      CollectMultiplier: 1.1
+      CollectMultiplier: 1
       CollectAdd: 0
-  Active: 1
+      Upgrade_perhumanmultiplier: 0
+    - CollectedCurrency: 1
+      BaseCollect: 0
+      CollectMultiplier: 1
+      CollectAdd: 0
+      Upgrade_perhumanmultiplier: 0
   SpawnObject: 0
 --- !u!114 &80800212
 MonoBehaviour:
@@ -256,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shop
   ParentOrgan: 0
   Category: 0
+  Tag: AutoTentacle
   Name: Slave Tentacle
   Effect: Harvests victims automatically.
   Snippet: 
@@ -267,7 +274,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  ParentMenu: {fileID: 0}
+  ParentMenu: {fileID: 65491017}
 --- !u!1 &342083179
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +346,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412045905}
-  - component: {fileID: 412045906}
   - component: {fileID: 412045907}
+  - component: {fileID: 412045908}
   m_Layer: 0
   m_Name: AutoCollectUp
   m_TagString: Untagged
@@ -363,21 +370,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2002362290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &412045906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412045904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f921c043ebf33448bdf386496f4a62e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeCollectAdd
-  Currency: 0
-  shop: {fileID: 0}
-  AddValue: 1
 --- !u!114 &412045907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,19 +383,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shop
   ParentOrgan: 0
-  Category: 0
-  Name: Dense Fibers
+  Category: 1
+  Tag: 
+  Name: Brain Drain
   Effect: 
   Snippet: 
   UIPrefab: {fileID: 5750061717269635400, guid: 260316098d5d0d84f8ee7455ca5aca4e, type: 3}
   shopSettings:
-    Tag: 
+    Tag: AutoTentacleCollectUp
     PriceBase: 12
     PriceGrowthRate: 1.1
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  ParentMenu: {fileID: 0}
+  ParentMenu: {fileID: 65491017}
+--- !u!114 &412045908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412045904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f35d37b8f86b8428e11ba90c3523cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeBaseValue
+  Currency: 1
+  Value: 0
+  AddValue: 1
+  OnUpgrade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 80800211}
+        m_TargetAssemblyTypeName: Harvester, Assembly-CSharp
+        m_MethodName: IncrementBaseValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &461592235 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7293110504931857064, guid: 19b9545f85aa9594aa41d4d684d97fa9, type: 3}
@@ -440,6 +463,96 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1348246234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348246235}
+  - component: {fileID: 1348246236}
+  - component: {fileID: 1348246237}
+  m_Layer: 0
+  m_Name: BrainCollectionUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1348246235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348246234}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2002362290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348246236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348246234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faf0848bbe9e1c44885635adff6bb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shop
+  ParentOrgan: 0
+  Category: 1
+  Tag: 
+  Name: BrainCollectionUp
+  Effect: 
+  Snippet: 
+  UIPrefab: {fileID: 5750061717269635400, guid: 260316098d5d0d84f8ee7455ca5aca4e, type: 3}
+  shopSettings:
+    Tag: 
+    PriceBase: 12
+    PriceGrowthRate: 1.1
+    NumberOwned: 0
+    NextPrice: 12
+  BoughtWithCurrency: 0
+  ParentMenu: {fileID: 65491017}
+--- !u!114 &1348246237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348246234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f35d37b8f86b8428e11ba90c3523cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeBaseValue
+  Currency: 0
+  Value: 3
+  AddValue: 0.1
+  OnUpgrade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 80800211}
+        m_TargetAssemblyTypeName: Harvester, Assembly-CSharp
+        m_MethodName: IncrementBaseValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1358654764
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +882,7 @@ Transform:
   m_Children:
   - {fileID: 80800209}
   - {fileID: 412045905}
+  - {fileID: 1348246235}
   m_Father: {fileID: 1874582626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2002362291

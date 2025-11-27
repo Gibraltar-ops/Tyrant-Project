@@ -6,6 +6,7 @@ public class Shop : MonoBehaviour
 {
     public Organ ParentOrgan;
     public UpgradeCategory Category;
+    public string Tag;
 
     public string Name;
     public string Effect;
@@ -32,6 +33,12 @@ public class Shop : MonoBehaviour
     }
     void Start()
     {   //CreateStoreItem();
+        shopSettings.Tag = Tag;
+        
+        if (TryGetComponent(out Harvester harvester))
+        {
+            harvester.Data.Tag = Tag;
+        }
         
     }
 
