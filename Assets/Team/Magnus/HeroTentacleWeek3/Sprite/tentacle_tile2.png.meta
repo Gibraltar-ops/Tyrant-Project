@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: b9e72e76f6a2a1a4e895fc84de77548c
+guid: b14229847c7fc794d9a885dcecfc2420
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3171247178881647272
-    second: Floor Tile Fill_0
+      213: -4128451683352156813
+    second: tentacle_tile2_0
+  - first:
+      213: 1987331181592404716
+    second: tentacle_tile2_1
+  - first:
+      213: -8270992065677996290
+    second: tentacle_tile2_2
+  - first:
+      213: 2457422996626468730
+    second: tentacle_tile2_3
+  - first:
+      213: 7634755789520435768
+    second: tentacle_tile2_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,11 +49,11 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Floor Tile Fill_0
+      name: tentacle_tile2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 256
-        height: 256
+        y: 1
+        width: 1024
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85dbcc72e777df3d0800000000000000
-      internalID: -3171247178881647272
+      spriteID: 3756e65411bc4b6c0800000000000000
+      internalID: -4128451683352156813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentacle_tile2_1
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 70
+        width: 22
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce26fd92e2b649b10800000000000000
+      internalID: 1987331181592404716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentacle_tile2_2
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 77
+        width: 37
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe4031b988873d80800000000000000
+      internalID: -8270992065677996290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentacle_tile2_3
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 73
+        width: 33
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7febc802358a1220800000000000000
+      internalID: 2457422996626468730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentacle_tile2_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 71
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83af83d90f914f960800000000000000
+      internalID: 7634755789520435768
       vertices: []
       indices: 
       edges: []
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Floor Tile Fill_0: -3171247178881647272
+      tentacle_tile2_0: -4128451683352156813
+      tentacle_tile2_1: 1987331181592404716
+      tentacle_tile2_2: -8270992065677996290
+      tentacle_tile2_3: 2457422996626468730
+      tentacle_tile2_4: 7634755789520435768
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
