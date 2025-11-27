@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VictimVisual : MonoBehaviour
+public class UnitVisual : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;

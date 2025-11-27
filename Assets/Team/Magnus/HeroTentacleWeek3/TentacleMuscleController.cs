@@ -27,6 +27,8 @@ public class TentacleMuscleController : MonoBehaviour
 
         motor = joint.motor;
         motor.maxMotorTorque = maxTorque;
+
+        joint.useLimits = true;
         joint.useMotor = true;
     }
 
