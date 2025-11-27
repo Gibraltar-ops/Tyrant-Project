@@ -6,11 +6,13 @@ public class Shop : MonoBehaviour
 {
     public Organ ParentOrgan;
     public UpgradeCategory Category;
+
+    
     public string Tag;
 
-    public string Name;
-    public string Effect;
-    public string Snippet;
+    public string ItemName;
+    public string ButtonText;
+    public Tooltip tooltip;
 
     public GameObject UIPrefab;
 
@@ -77,7 +79,7 @@ public class Shop : MonoBehaviour
 
     public void UpdateLabels()
     {
-        _itemName.text = Name;
+        _itemName.text = ItemName;
         _currentCountLabel.text = shopSettings.NumberOwned.ToString();
         _nextPriceLabel.text = shopSettings.NextPrice.ToString();
     }
