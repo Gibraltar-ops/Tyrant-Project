@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class AttackDirector : MonoBehaviour
 {
+    // TODO: Attack thrown in an arc instead of straight line.
+    // TODO: Attack thrown in random destination within the gizmo tool.
+    // TODO: Different projectyle Types based on enemy.
+    // TODO: Random Explosion sizes.
+    // TODO: Different projectile speeds.
+    // TODO: Scale Object based on distance to target. (Maybe based on height)
+    // TODO: Sound effects.
+    // TODO: Pooling of projectiles and explosions.
+    // TODO: ONLY ATTACK if enemy is in center region.
+    // TODO: Longer random attack cooldowns.
+
     public static AttackDirector Instance;
 
     [Header("Prefabs")]
