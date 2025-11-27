@@ -19,7 +19,7 @@ public class Harvester : MonoBehaviour
     {
         _objectSpawner = GetComponent<CollectorObjectSpawner>();
         _collectors = new List<Collector>();
-        valueLinker = GetComponent<ValueLinker>();
+        //valueLinker = GetComponent<ValueLinker>();
     }
 
     public void SpawnCollector()

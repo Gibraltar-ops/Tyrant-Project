@@ -1,10 +1,15 @@
 using UnityEngine;
 
-public class MenuGroup : MonoBehaviour
+public class MenuCreator : MonoBehaviour
 {
     public Organ organ;
     public Transform MenuOrigin;
     public GameObject MenuPrefab;
+
+    public GameObject MenuInstance;
+
+    public string Headline;
+    [TextArea(2, 3)]public string Description;
     void Start()
     {
       CreateMenu();
@@ -13,13 +18,12 @@ public class MenuGroup : MonoBehaviour
     public void CreateMenu()
     {
         GameObject menu = Instantiate(MenuPrefab, MenuOrigin);
-        foreach (Transform child in transform)
-        {
-            Shop shop = child.gameObject.GetComponent<Shop>();
-            shop.ParentMenu = menu;
-            shop.CreateStoreItem();
-            
-        }
+        MenuInstance = menu;
+
+        UIMenuInfo menuInfo = menu.GetComponent<UIMenuInfo>();
+        menuInfo.organ = organ;
+        menuInfo.SetMenuFields(Headline, Description);
+
     }
 
     // Update is called once per frame

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 787887226776547639}
   - component: {fileID: 5236215453452006607}
   - component: {fileID: 2696592344223349024}
+  - component: {fileID: 8873940345626518408}
   m_Layer: 5
   m_Name: ItemPanel
   m_TagString: Untagged
@@ -239,7 +240,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821a4893588de2449bdb49e9af706524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPanel
-  tooltip: {fileID: 11400000, guid: c2bdac5ab8fb5854f92b84a0d7d68e5c, type: 2}
+  Tooltip: {fileID: 0}
+--- !u!114 &8873940345626518408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753844242606117633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b50ca3acbeb0aa47862f715e4668068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIItemPanelInfo
+  ItemName: {fileID: 5057083008340141321}
+  CurrentCount: {fileID: 3323640643685761322}
+  Price: {fileID: 5628108508686379054}
+  PurchaseButton: {fileID: 6975454465750702322}
 --- !u!1 &1582825663326770007
 GameObject:
   m_ObjectHideFlags: 0

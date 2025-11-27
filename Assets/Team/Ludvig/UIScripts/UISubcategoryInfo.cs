@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
 
-public class UIHeadlineGroup : MonoBehaviour
+public class UISubcategoryInfo : MonoBehaviour
 {
+    public UpgradeCategory category;
     public string HeadlineText;
     public TMP_Text HeadlineTextPanel;
+    public GameObject ShopPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

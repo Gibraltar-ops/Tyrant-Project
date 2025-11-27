@@ -119,41 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &65491017
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 65491018}
-  m_Layer: 5
-  m_Name: ShopMenu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &65491018
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65491017}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2091257426}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 180.21133, y: 95.822395}
-  m_SizeDelta: {x: 471.3118, y: 352.6229}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &80800208
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,11 +227,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shop
   ParentOrgan: 0
   Category: 0
-  Tag: AutoTentacle
-  Name: Slave Tentacle
-  Effect: Harvests victims automatically.
-  Snippet: 
-  UIPrefab: {fileID: 5750061717269635400, guid: 260316098d5d0d84f8ee7455ca5aca4e, type: 3}
+  ItemName: Hunter Tentacle
+  ButtonText: GROW
+  Tooltip: {fileID: 11400000, guid: c2bdac5ab8fb5854f92b84a0d7d68e5c, type: 2}
+  UIPrefab: {fileID: 753844242606117633, guid: deb8de8c976aaff4c9dc74a4b80b52a1, type: 3}
   shopSettings:
     Tag: 
     PriceBase: 12
@@ -274,7 +238,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  ParentMenu: {fileID: 65491017}
+  ParentMenu: {fileID: 0}
 --- !u!1 &342083179
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,11 +348,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shop
   ParentOrgan: 0
   Category: 1
-  Tag: 
-  Name: Brain Drain
-  Effect: 
-  Snippet: 
-  UIPrefab: {fileID: 5750061717269635400, guid: 260316098d5d0d84f8ee7455ca5aca4e, type: 3}
+  ItemName: Tentacle Speed
+  ButtonText: EVOLVE
+  Tooltip: {fileID: 11400000, guid: 82d1f8f19e311f442a16b5037eff2319, type: 2}
+  UIPrefab: {fileID: 753844242606117633, guid: deb8de8c976aaff4c9dc74a4b80b52a1, type: 3}
   shopSettings:
     Tag: AutoTentacleCollectUp
     PriceBase: 12
@@ -396,7 +359,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  ParentMenu: {fileID: 65491017}
+  ParentMenu: {fileID: 0}
 --- !u!114 &412045908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,11 +473,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shop
   ParentOrgan: 0
   Category: 1
-  Tag: 
-  Name: BrainCollectionUp
-  Effect: 
-  Snippet: 
-  UIPrefab: {fileID: 5750061717269635400, guid: 260316098d5d0d84f8ee7455ca5aca4e, type: 3}
+  ItemName: Brain Separation
+  ButtonText: EVOLVE
+  Tooltip: {fileID: 11400000, guid: aa08da85708592148af6721c698d894a, type: 2}
+  UIPrefab: {fileID: 753844242606117633, guid: deb8de8c976aaff4c9dc74a4b80b52a1, type: 3}
   shopSettings:
     Tag: 
     PriceBase: 12
@@ -522,7 +484,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  ParentMenu: {fileID: 65491017}
+  ParentMenu: {fileID: 0}
 --- !u!114 &1348246237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,6 +767,41 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19b9545f85aa9594aa41d4d684d97fa9, type: 3}
+--- !u!1 &1853598232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853598233}
+  m_Layer: 5
+  m_Name: MenuParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1853598233
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853598232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2091257426}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -89, y: 211}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1874582625
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,8 +895,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu
   organ: 0
-  MenuOrigin: {fileID: 65491018}
-  MenuPrefab: {fileID: 4631890930653327735, guid: b86f7bcc98858854dbaf6d99dab79d37, type: 3}
+  MenuOrigin: {fileID: 1853598233}
+  MenuPrefab: {fileID: 3614774377990186473, guid: fb705de9f9261d24b9d5fd23af95cb2a, type: 3}
+  MenuInstance: {fileID: 0}
+  Headline: The Maw
+  Description: A collection of organs that collects and processes Biomass.
 --- !u!1 &2091257422
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,8 +995,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 342083180}
-  - {fileID: 65491018}
   - {fileID: 461592235}
+  - {fileID: 1853598233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

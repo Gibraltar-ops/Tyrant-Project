@@ -24,7 +24,7 @@ public class TooltipPanel : MonoBehaviour
         DescriptionLabel.text = Tooltip.Description;
         //CurrentEffectLabel.text = Tooltip.CurrentEffect;
         LoreLabel.text = Tooltip.Lore;
-        LayoutRebuilder.MarkLayoutForRebuild(GetComponent<RectTransform>());
+        LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
 
     }
    
