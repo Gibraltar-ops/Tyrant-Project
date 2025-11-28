@@ -83,7 +83,8 @@ MonoBehaviour:
   catchTrigger: {fileID: 0}
   gameManager: {fileID: 0}
   mouthPoint: {fileID: 3292449879092169869}
-  victimSystem: {fileID: 0}
+  victimSystem: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+  resistanceSystem: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
   tentacles:
   - {fileID: 2681904430476028465}
   - {fileID: 8177648721327943134}
@@ -327,12 +328,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5525647177734416215, guid: 1cfae4bed4c9ec34f8243bb1f51aa150, type: 3}
+  m_Sprite: {fileID: -1012380283985742646, guid: f96ca30c750c8cd4da068c84884d78f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.76, y: 2.8}
+  m_Size: {x: 9.35, y: 8.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
