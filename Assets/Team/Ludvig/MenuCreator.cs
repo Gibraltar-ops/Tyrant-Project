@@ -12,7 +12,7 @@ public class MenuCreator : MonoBehaviour
     [TextArea(2, 3)]public string Description;
     void Start()
     {
-      CreateMenu();
+      Invoke("CreateMenu", 0.01f);
     }
 
     public void CreateMenu()
@@ -23,6 +23,9 @@ public class MenuCreator : MonoBehaviour
         UIMenuInfo menuInfo = menu.GetComponent<UIMenuInfo>();
         menuInfo.organ = organ;
         menuInfo.SetMenuFields(Headline, Description);
+        transform.parent.gameObject.GetComponent<UpgradeManager>().AddOrgan(menuInfo);
+
+        MenuInstance.SetActive(false);
 
     }
 
