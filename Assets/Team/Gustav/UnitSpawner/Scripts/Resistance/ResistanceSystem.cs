@@ -77,8 +77,8 @@ public class ResistanceSystem : MonoBehaviour
             homeRegion = gatherRegion,
             destination = gatherRegion.RandomPointInside(),
             attackCooldown = UnityEngine.Random.Range(1f, 2f),
-            attackDamage = 10,  // Base damage
-            attackTimer = UnityEngine.Random.Range(0.3f, 1f), // offset so they don't sync
+            attackDamage = -10,  // Base damage
+            attackTimer = UnityEngine.Random.Range(4f, 6f), // offset so they don't sync with each other
             speed = UnityEngine.Random.Range(1.6f, 2.8f),
             scale = UnityEngine.Random.Range(0.75f, 1.25f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
@@ -136,12 +136,15 @@ public class ResistanceSystem : MonoBehaviour
             // --------------------------------
             fighter.attackTimer -= Time.deltaTime;
 
-            if (fighter.attackTimer <= 0f)
+            if (fighter.isCenter && fighter.attackTimer <= 0f)
             {
-                fighter.attackTimer = fighter.attackCooldown;
+                // FIRE!
+                AttackDirector.Instance.SpawnProjectile(
+                    fighter.position,
+                    fighter.attackDamage
+                );
 
-                // Send attack event
-                AttackDirector.Instance.SpawnProjectile(fighter.position, fighter.attackDamage);
+                fighter.attackTimer = UnityEngine.Random.Range(1f, 2f);
             }
         }
     }
