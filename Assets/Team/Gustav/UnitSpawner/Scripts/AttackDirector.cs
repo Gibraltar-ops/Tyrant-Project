@@ -15,6 +15,7 @@ public class AttackDirector : MonoBehaviour
     // TODO: ONLY ATTACK if enemy is in center region.
     // TODO: Longer attack cooldowns.
 
+
     public static AttackDirector Instance;
 
     [Header("Prefabs")]
@@ -88,13 +89,13 @@ public class AttackDirector : MonoBehaviour
             projectile.obj.transform.position = projectile.position;
 
             // Reached target?
-            if (Vector2.Distance(projectile.position, targetPosition) < 0.1f)
+            if (Vector2.Distance(projectile.position, projectile.target) < 0.1f)
             {
                 // Spawn explosion effect
                 Instantiate(explosionPrefab, projectile.position, Quaternion.identity);
 
-                // Send damage event
-                OnExplosionDamage?.Invoke(projectile.damage);
+                // Send damage to EconomyManager
+                EconomyManager.Instance.IncrementCurrency(Currency.Biomass, projectile.damage);
 
                 // Destroy projectile
                 Destroy(projectile.obj);
@@ -105,7 +106,6 @@ public class AttackDirector : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (grenadeImpactRegions == null) return;
-
         foreach (var region in grenadeImpactRegions)
             region.DrawGizmo(Color.yellow);
     }

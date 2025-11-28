@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResistanceWaveDirector
   resistanceSystem: {fileID: 3286441314551350293}
-  waveInterval: 30
+  waveInterval: 15
   baseBudget: 10
-  pointsPerUpgrade: 2
-  pointsPerWave: 1
-  fighterCost: 5
+  perWaveIncrease: 1
+  upgradeBonus: 2
+  basicEnemyCost: 5
