@@ -2,6 +2,56 @@ using UnityEngine;
 
 public class TentacleController : MonoBehaviour
 {
+    private class Grabbable
+    {
+        private VictimData victim;
+        private ResistanceData resistance;
+
+        public bool IsVictim => victim != null;
+        public bool IsResistance => resistance != null;
+
+        public Vector3 Position
+        {
+            get
+            {
+                if (IsVictim)
+                    return victim.position;
+                if (IsResistance)
+                    return resistance.position;
+                return Vector3.zero;
+            }
+            set
+            {
+                if (IsVictim)
+                    victim.position = value;
+                if (IsResistance)
+                    resistance.position = value;
+            }
+        }
+
+        public Grabbable(VictimData data)
+        {
+            victim = data;
+        }
+
+        public Grabbable(ResistanceData data)
+        {
+            resistance = data;
+        }
+
+        public void RemoveFromSystem(VictimSystem vSystem, ResistanceSystem rSystem)
+        {
+            if (IsVictim && vSystem != null && vSystem.victims.Contains(victim))
+            {
+                vSystem.victims.Remove(victim);
+            }
+            else if (IsResistance && rSystem != null && rSystem.fighters.Contains(resistance))
+            {
+                rSystem.fighters.Remove(resistance);
+            }
+        }
+    }
+
     [Header("Target")]
     public Transform mouthPoint;
 
@@ -22,11 +72,16 @@ public class TentacleController : MonoBehaviour
     [Header("Tentacle Length")]
     public float totalLength = 5f;
 
-    [SerializeField]
-    private VictimData grabTarget;
+    private Grabbable currentGrabTarget;
+
+    /*   [SerializeField]
+      private VictimData grabTarget; */
 
     [SerializeField]
     private VictimSystem victimSystem;
+
+    [SerializeField]
+    private ResistanceSystem resistanceSystem;
     private TyrantController tyrantController;
     private Vector3 animatedTargetPosition;
     private Vector3 currentIkPosition;
@@ -49,7 +104,7 @@ public class TentacleController : MonoBehaviour
 
     private void Start()
     {
-        tyrantController = FindObjectOfType<TyrantController>();
+        tyrantController = FindFirstObjectByType<TyrantController>();
         if (mouthPoint == null && tyrantController != null)
         {
             mouthPoint = tyrantController.mouthPoint;
@@ -79,7 +134,7 @@ public class TentacleController : MonoBehaviour
                 break;
 
             case TentacleState.Reaching:
-                if (grabTarget == null)
+                if (currentGrabTarget == null)
                 {
                     currentState = TentacleState.ReturningToIdle;
                     break;
@@ -87,22 +142,22 @@ public class TentacleController : MonoBehaviour
 
                 animatedTargetPosition = Vector3.MoveTowards(
                     animatedTargetPosition,
-                    grabTarget.position,
+                    currentGrabTarget.Position,
                     Time.deltaTime * reachSpeed
                 );
 
-                if (Vector3.Distance(animatedTargetPosition, grabTarget.position) < 0.1f)
+                if (Vector3.Distance(animatedTargetPosition, currentGrabTarget.Position) < 0.1f) // ÄNDRAD
                 {
                     currentState = TentacleState.Retracting;
                     retractProgress = 0f;
-                    retractStartPoint = grabTarget.position;
+                    retractStartPoint = currentGrabTarget.Position;
                 }
                 break;
 
             case TentacleState.Retracting:
-                if (mouthPoint == null || grabTarget == null)
+                if (mouthPoint == null || currentGrabTarget == null)
                 {
-                    grabTarget = null;
+                    currentGrabTarget = null;
                     currentState = TentacleState.ReturningToIdle;
                     break;
                 }
@@ -128,24 +183,20 @@ public class TentacleController : MonoBehaviour
 
                 if (retractProgress >= 1.0f)
                 {
-                    if (victimSystem != null && victimSystem.victims.Contains(grabTarget))
+                    currentGrabTarget.RemoveFromSystem(victimSystem, resistanceSystem);
+
+                    if (tyrantController != null)
                     {
-                        victimSystem.victims.Remove(grabTarget);
-                        if (tyrantController != null)
-                        {
-                            tyrantController.gameManager.biomass +=
-                                tyrantController.biomassPerHuman;
-                            tyrantController.UpdateTextFields();
-                        }
+                        tyrantController.gameManager.biomass += tyrantController.biomassPerHuman;
+                        tyrantController.UpdateTextFields();
+                        EconomyManager.Instance.IncrementCurrency(
+                            Currency.Biomass,
+                            (long)tyrantController.biomassPerHuman
+                        );
                     }
 
-                    grabTarget = null;
-
+                    currentGrabTarget = null;
                     currentState = TentacleState.ReturningToIdle;
-                    EconomyManager.Instance.IncrementCurrency(
-                        Currency.Biomass,
-                        (long)tyrantController.biomassPerHuman
-                    );
                 }
 
                 break;
@@ -171,38 +222,57 @@ public class TentacleController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (currentState == TentacleState.Retracting && grabTarget != null && tipBone != null)
+        if (
+            currentState == TentacleState.Retracting
+            && currentGrabTarget != null
+            && tipBone != null
+        )
         {
-            grabTarget.position = tipBone.position;
+            currentGrabTarget.Position = tipBone.position;
         }
     }
 
     public void StartGrab(VictimData newGrabTarget, VictimSystem system)
     {
-        if (newGrabTarget == null)
+        if (newGrabTarget == null || isBusy)
             return;
 
-        if (!isBusy)
-        {
-            grabTarget = newGrabTarget;
-            victimSystem = system;
+        currentGrabTarget = new Grabbable(newGrabTarget);
+        victimSystem = system;
+        resistanceSystem = null; // Nollställ den andra
 
-            if (tipBone != null)
-                animatedTargetPosition = tipBone.position;
-            else
-                animatedTargetPosition = transform.position;
+        StartGrabbing();
+    }
 
-            currentState = TentacleState.Reaching;
-            isBusy = true;
-            //Debug.Log ($"Tentacle {name} is reaching for a victim");
-        }
+    public void StartGrab(ResistanceData newGrabTarget, ResistanceSystem system)
+    {
+        if (newGrabTarget == null || isBusy)
+            return;
+
+        currentGrabTarget = new Grabbable(newGrabTarget);
+        resistanceSystem = system;
+        victimSystem = null; // Nollställ den andra
+
+        StartGrabbing();
+    }
+
+    private void StartGrabbing()
+    {
+        if (tipBone != null)
+            animatedTargetPosition = tipBone.position;
+        else
+            animatedTargetPosition = transform.position;
+
+        currentState = TentacleState.Reaching;
+        isBusy = true;
     }
 
     public void ResetTentacle()
     {
         isBusy = false;
-        grabTarget = null;
+        currentGrabTarget = null;
         victimSystem = null;
+        resistanceSystem = null;
         currentState = TentacleState.Idle;
         //Debug.Log ($"Tentacle {name} is available");
     }

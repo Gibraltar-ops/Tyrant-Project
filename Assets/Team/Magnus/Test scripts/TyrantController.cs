@@ -239,6 +239,11 @@ public class TyrantController : MonoBehaviour
                 {
                     Debug.Log("Caught resistance");
                     ResistanceData resistanceData = targetToGrab.resistance;
+                    if (!resistanceData.isMarkedForDeath)
+                    {
+                        freeTentacle.StartGrab(resistanceData, resistanceSystem);
+                        resistanceData.isMarkedForDeath = true;
+                    }
                 }
                 else
                 {
