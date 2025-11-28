@@ -339,7 +339,7 @@ public class TyrantController : MonoBehaviour
         {
             foreach (var resistance in resistanceSystem.fighters)
             {
-                if (resistance.isBeingGrabbed)
+                if (resistance.isMarkedForDeath)
                     continue;
 
                 float distSqr = (resistance.position - position).sqrMagnitude;
