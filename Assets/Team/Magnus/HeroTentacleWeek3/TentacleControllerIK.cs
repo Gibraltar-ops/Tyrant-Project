@@ -67,18 +67,14 @@ public class TentacleControllerIK : MonoBehaviour
         if (effectorJoint == null || effectorBody == null)
             return;
 
-        // Beräkna avståndet mellan effektorns FYSISKA position och dess TargetJoint-MÅL
+        // Distance between effectorbody and target
         float distanceToTarget = Vector3.Distance(effectorBody.position, effectorJoint.target);
 
-        // Normaliseringsfaktor: 1.0 = Långt bort / 0.0 = Inom avslappningsavstånd
+        // Normalisation: 1.0 = Far away, 0.0 = Within reach
         float tensionFactor = Mathf.Clamp01(distanceToTarget / relaxationDistance);
 
-        // Interpolera mellan minJointFrequency (slapp) och maxJointFrequency (spänd)
-        // Eftersom vi satte maxJointFrequency i LateUpdate, kommer denna kod
-        // gradvis minska frekvensen så fort effektorn kommer nära.
         float newFrequency = Mathf.Lerp(minJointFrequency, maxJointFrequency, tensionFactor);
 
-        // Uppdatera TargetJoint2D frekvens
         effectorJoint.frequency = newFrequency;
     }
 
