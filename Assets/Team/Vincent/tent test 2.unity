@@ -509,7 +509,7 @@ SpriteRenderer:
   m_Size: {x: 10.274479, y: 9.258097}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &335608017
@@ -1482,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: e33967d159b36004f80afd2b1ba57ae8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.48384282
+      value: 0.48384276
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: e33967d159b36004f80afd2b1ba57ae8, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1494,7 +1494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: e33967d159b36004f80afd2b1ba57ae8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.875155
+      value: -0.87515503
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: e33967d159b36004f80afd2b1ba57ae8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1644,7 +1644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088243994}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.062017255, w: 0.99807507}
+  m_LocalRotation: {x: -0, y: -0, z: 0.28241804, w: 0.95929146}
   m_LocalPosition: {x: 4.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2278,6 +2278,14 @@ PrefabInstance:
     - target: {fileID: -1960851197917871804, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 11.715
+      objectReference: {fileID: 0}
+    - target: {fileID: -624961724238884164, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6154194
+      objectReference: {fileID: 0}
+    - target: {fileID: -624961724238884164, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0067523867
       objectReference: {fileID: 0}
     - target: {fileID: -624961724238884164, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalRotation.w
