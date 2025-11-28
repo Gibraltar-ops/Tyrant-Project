@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EconomyManager : MonoBehaviour
@@ -84,6 +85,23 @@ public class EconomyManager : MonoBehaviour
                 return cost <= Victims ? true : false;
             default:
                 return false;
+        }
+    }
+
+    public long GetCurrent(Currency currency)
+    {
+        switch (currency)
+        {
+            case Currency.Biomass:
+                return Biomass;
+            case Currency.Brains:
+                return Brains;
+            case Currency.Keratin:
+                return Keratin;
+            case Currency.Victims:
+                return Victims;
+            default:
+                return 0;
         }
     }
 

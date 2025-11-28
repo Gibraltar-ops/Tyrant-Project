@@ -10,7 +10,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         SendMessageUpwards("ShowTooltipPanel", Tooltip, SendMessageOptions.DontRequireReceiver);
-        Debug.Log("PointerEntered");
+        //Debug.Log("PointerEntered");
     }
 
     public void OnPointerExit(PointerEventData eventData)

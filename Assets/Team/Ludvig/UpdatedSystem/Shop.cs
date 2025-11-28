@@ -18,12 +18,13 @@ public class Shop : MonoBehaviour
     public ShopSettings shopSettings;
     public Currency BoughtWithCurrency;
 
-    public GameObject ParentMenu;
+    //public GameObject ParentMenu;
     private TMP_Text _itemName;
     private TMP_Text _currentCountLabel;
     private TMP_Text _nextPriceLabel;
     private Button _purchaseButton;
     private GameObject instancedUIPanel;
+    public bool Active = false;
 
     void OnEnable()
     {
@@ -34,15 +35,7 @@ public class Shop : MonoBehaviour
         EconomyManager.onCurrencyChanged -= CheckAffordability;
     }
     void Start()
-    {   //CreateStoreItem();
-        // shopSettings.Tag = Tag;
-        
-        // if (TryGetComponent(out Harvester harvester))
-        // {
-        //     harvester.Data.Tag = Tag;
-        // }
-
-        Invoke("CreateStoreItem", 0.2f);
+    {   
         
     }
 
@@ -58,11 +51,11 @@ public class Shop : MonoBehaviour
             if(subcategory.gameObject.GetComponent<UISubcategoryInfo>().category == Category)
             {
                 instanceParent = subcategory.gameObject.GetComponent<UISubcategoryInfo>().ShopPanel.transform;
-                Debug.Log(instanceParent.name);
+                //Debug.Log(instanceParent.name);
             }
         }
 
-        if (instanceParent)
+        if (instanceParent != null)
         {
             instancedUIPanel = Instantiate(UIPrefab, instanceParent);
             instancedUIPanel.GetComponent<TooltipTrigger>().Tooltip = Tooltip;
@@ -76,6 +69,8 @@ public class Shop : MonoBehaviour
             UpdateLabels();
 
         }
+        Active = true;
+        CheckAffordability(BoughtWithCurrency);
 
         // _itemName = StoreItem.transform.Find("ItemName").GetComponent<TMP_Text>();
         // _currentCountLabel = StoreItem.transform.Find("CurrentCount").GetComponent<TMP_Text>();
@@ -96,6 +91,10 @@ public class Shop : MonoBehaviour
 
     public void CheckAffordability(Currency currency)
     {
+        if (!Active)
+        {
+            return;
+        }
         if (currency == BoughtWithCurrency)
         {
             if (EconomyManager.Instance.CanAfford(BoughtWithCurrency, shopSettings.NextPrice))
