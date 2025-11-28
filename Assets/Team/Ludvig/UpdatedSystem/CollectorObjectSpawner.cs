@@ -30,7 +30,7 @@ public class CollectorObjectSpawner : MonoBehaviour
     {
         if (SpawnOnLine)
         {
-            Vector2 spawnPos = Vector2.Lerp(LineStart.position, LineEnd.position, UnityEngine.Random.Range(0f, 1f));
+            Vector3 spawnPos = Vector3.Lerp(LineStart.position, LineEnd.position, UnityEngine.Random.Range(0f, 1f));
             SpawnAtPoint(collector, spawnPos);
             return;
         }
@@ -39,7 +39,7 @@ public class CollectorObjectSpawner : MonoBehaviour
         newInstance.GetComponent<CollectorDrivenAnimation>().collector = collector;
     }
 
-    private void SpawnAtPoint(Collector collector, Vector2 spawnPosition)
+    private void SpawnAtPoint(Collector collector, Vector3 spawnPosition)
     {
         GameObject newInstance = Instantiate(AnimatedObject, spawnPosition, Quaternion.identity, InstanceParent);
         newInstance.GetComponent<CollectorDrivenAnimation>().collector = collector;

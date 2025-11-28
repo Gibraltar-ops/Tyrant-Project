@@ -208,6 +208,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &65105164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &80800214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +469,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 200
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!4 &124650824
 Transform:
   m_ObjectHideFlags: 0
@@ -799,6 +802,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &412045908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1648,6 +1652,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 1000
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &1044222300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,6 +1757,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &1348246237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3110,6 +3116,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 400
   BoughtWithCurrency: 0
+  Active: 0
 --- !u!114 &2023800829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3137,7 +3144,7 @@ GameObject:
   - component: {fileID: 2091257424}
   - component: {fileID: 2091257423}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: LOCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
