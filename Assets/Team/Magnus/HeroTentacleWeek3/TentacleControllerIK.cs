@@ -1,11 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class TentacleControllerIK : MonoBehaviour
 {
+    [Header("IK Setup")]
     public TargetJoint2D effectorJoint;
     public Rigidbody2D effectorBody;
-
     public Rigidbody2D rootBody;
 
     private Vector3 targetPosition;
@@ -13,53 +13,86 @@ public class TentacleControllerIK : MonoBehaviour
     [Header("Visual Tip")]
     public Transform tentacleTip;
 
-    [Header("Stretching Parameters")]
+    [Header("Stretching Settings")]
+    public bool enableStretching = true;
     public float totalUnstretchedLength = 9.5f;
-    public float maxStretchLimit = 3.0f;
     public Transform rootBone;
     public Transform[] bonesToStretch;
 
-    [Header("IK Dead Zone")]
+    [Tooltip("Öka denna (t.ex. 10-15) för snabbare respons på stretchen")]
+    public float stretchSmoothSpeed = 10f;
+
+    private List<Vector3> initialBoneScales = new List<Vector3>();
+    private float currentStretchFactor = 1.0f;
+
+    [Header("IK Dead Zone & Response")]
     public float targetDeadZone = 0.5f;
 
     [Header("Target Joint Dynamics")]
     public float maxJointFrequency = 80f;
     public float minJointFrequency = 0.5f;
-    public float relaxationDistance = 0.5f;
+
+    [Tooltip("Hur nära målet den måste vara för att slappna av")]
+    public float relaxationDistance = 2.0f;
+
+    [Tooltip("Extra kraft vid stretching för att motverka hävstångseffekten")]
+    public float stretchedForceMultiplier = 1.5f;
+
+    void Start()
+    {
+        if (bonesToStretch != null)
+        {
+            foreach (Transform bone in bonesToStretch)
+            {
+                initialBoneScales.Add(bone.localScale);
+            }
+        }
+        else
+        {
+            Debug.LogError("BonesToStretch är inte tilldelad i inspectorn!");
+        }
+    }
 
     void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        bool newClick = false;
+
+        // Input hantering
+        if (Input.GetMouseButton(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
+            newClick = true;
         }
+
+        // Target Joint Logik
         if (effectorJoint != null)
         {
             float distanceToNewTarget = Vector3.Distance(effectorJoint.target, targetPosition);
 
-            if (distanceToNewTarget > targetDeadZone)
+            // Uppdatera målet om vi rört musen tillräckligt eller klickat
+            if (distanceToNewTarget > targetDeadZone || newClick)
             {
                 effectorJoint.target = targetPosition;
-                effectorJoint.frequency = maxJointFrequency;
             }
         }
 
+        // Hantera Stretch FÖRST, så fysiken vet längden innan vi applicerar krafter
+        HandleStretching();
+
+        // Applicera krafter/tension baserat på nya längden
         AdjustTargetJointTension();
 
+        // Flytta debug-transform (själva script-objektet)
         transform.position = targetPosition;
 
+        // Rotera tippen
         if (tentacleTip != null && effectorBody != null)
         {
             Vector3 directionToTarget = targetPosition - (Vector3)effectorBody.position;
-
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
-
             tentacleTip.rotation = Quaternion.Euler(0f, 0f, angle - -90f);
         }
-
-        /*         HandleStretching();
-         */
     }
 
     private void AdjustTargetJointTension()
@@ -67,42 +100,62 @@ public class TentacleControllerIK : MonoBehaviour
         if (effectorJoint == null || effectorBody == null)
             return;
 
-        // Distance between effectorbody and target
         float distanceToTarget = Vector3.Distance(effectorBody.position, effectorJoint.target);
 
-        // Normalisation: 1.0 = Far away, 0.0 = Within reach
+        // Normalisera spänningen. Clamp01 gör att den går från 0 till 1.
         float tensionFactor = Mathf.Clamp01(distanceToTarget / relaxationDistance);
 
-        float newFrequency = Mathf.Lerp(minJointFrequency, maxJointFrequency, tensionFactor);
+        // Beräkna frekvensen
+        float targetFreq = Mathf.Lerp(minJointFrequency, maxJointFrequency, tensionFactor);
 
-        effectorJoint.frequency = newFrequency;
+        // BOOST: Om vi är utsträckta, öka frekvensen/kraften för att orka dra den längre armen
+        if (currentStretchFactor > 1.1f)
+        {
+            targetFreq *= stretchedForceMultiplier;
+        }
+
+        effectorJoint.frequency = targetFreq;
     }
 
     void HandleStretching()
     {
-        if (rootBone == null || bonesToStretch == null || totalUnstretchedLength <= 0.01f)
+        if (
+            rootBone == null
+            || bonesToStretch == null
+            || initialBoneScales.Count != bonesToStretch.Length
+        )
             return;
 
-        float distanceToTarget = Vector3.Distance(rootBone.position, targetPosition);
+        float targetStretch = 1.0f;
 
-        float stretchFactor = 1.0f;
-
-        if (distanceToTarget > totalUnstretchedLength)
+        if (enableStretching)
         {
-            stretchFactor = distanceToTarget / totalUnstretchedLength;
+            float distanceToTarget = Vector3.Distance(rootBone.position, targetPosition);
 
-            stretchFactor = Mathf.Min(stretchFactor, maxStretchLimit);
-        }
-        else
-        {
-            stretchFactor = distanceToTarget / totalUnstretchedLength;
-
-            stretchFactor = Mathf.Max(stretchFactor, 0.8f);
+            if (distanceToTarget > totalUnstretchedLength)
+            {
+                targetStretch = distanceToTarget / totalUnstretchedLength;
+            }
         }
 
-        foreach (Transform bone in bonesToStretch)
+        // Lerp för mjukhet, men snabbare respons
+        currentStretchFactor = Mathf.Lerp(
+            currentStretchFactor,
+            targetStretch,
+            Time.deltaTime * stretchSmoothSpeed
+        );
+
+        for (int i = 0; i < bonesToStretch.Length; i++)
         {
-            bone.localScale = new Vector3(bone.localScale.x, stretchFactor, bone.localScale.z);
+            Transform bone = bonesToStretch[i];
+            Vector3 originalScale = initialBoneScales[i];
+
+            // Applicera skalan
+            bone.localScale = new Vector3(
+                originalScale.x,
+                originalScale.y * currentStretchFactor,
+                originalScale.z
+            );
         }
     }
 }

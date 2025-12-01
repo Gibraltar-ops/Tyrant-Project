@@ -144,7 +144,7 @@ RectTransform:
   m_GameObject: {fileID: 20998873}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1426632595}
@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -783, y: 446.5}
+  m_AnchoredPosition: {x: -661, y: 400}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &61633750
@@ -896,8 +896,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -1342,8 +1342,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 434593344}
+  - component: {fileID: 434593345}
   m_Layer: 5
-  m_Name: MenuParent
+  m_Name: LarynxMenuParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1358,8 +1359,8 @@ RectTransform:
   m_GameObject: {fileID: 434593343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 140497540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1368,6 +1369,22 @@ RectTransform:
   m_AnchoredPosition: {x: -44.5, y: 105.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &434593345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434593343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe45ecfff1f3ce47a706b7da506dcb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
+  target: {fileID: 1996696524}
+  offset: {x: -10, y: 10, z: 0}
+  limit: 500
+  mainCamera: {fileID: 0}
 --- !u!1001 &487696981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2006,7 +2023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4731390583804897412, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4896495341946691592, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
       propertyPath: m_UiScaleMode
@@ -3200,7 +3217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuCreator
   organ: 1
-  MenuOrigin: {fileID: 1295374128}
+  MenuOrigin: {fileID: 434593344}
   MenuPrefab: {fileID: 3614774377990186473, guid: fb705de9f9261d24b9d5fd23af95cb2a, type: 3}
   MenuInstance: {fileID: 0}
   Headline: Larynx
@@ -4057,8 +4074,8 @@ RectTransform:
   m_GameObject: {fileID: 776643194}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 744362891}
   - {fileID: 1010458529}
@@ -4067,7 +4084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -783, y: 392}
+  m_AnchoredPosition: {x: -661, y: 182}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &777265744
@@ -4655,6 +4672,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 502791879125362506, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
   m_PrefabInstance: {fileID: 487696981}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &843828665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 843828666}
+  m_Layer: 0
+  m_Name: MawMenuPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &843828666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843828665}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14, y: -5.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 695214982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &864962352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5306,6 +5354,10 @@ PrefabInstance:
     - target: {fileID: 4731390583804897412, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
       propertyPath: m_Name
       value: Canvas-Upgrade Menu Larynx
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731390583804897412, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4896495341946691592, guid: 210136161bf3eae40a8009449ea3cf99, type: 3}
       propertyPath: m_UiScaleMode
@@ -6098,6 +6150,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3292449879092169869, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
   m_PrefabInstance: {fileID: 4040080251725817678}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094430067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1094430068}
+  m_Layer: 0
+  m_Name: LarynxMenuPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1094430068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094430067}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.5, y: 20.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 695214982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1144061632
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,8 +6771,8 @@ RectTransform:
   m_GameObject: {fileID: 1214483616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 642388119}
   m_Father: {fileID: 140497540}
@@ -6726,6 +6809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 707773719}
   offset: {x: 0, y: 0, z: 0}
+  limit: 500
   mainCamera: {fileID: 0}
 --- !u!114 &1214483620
 MonoBehaviour:
@@ -7277,8 +7361,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1295374128}
+  - component: {fileID: 1295374129}
   m_Layer: 5
-  m_Name: MenuParent (1)
+  m_Name: MawMenuParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7293,16 +7378,32 @@ RectTransform:
   m_GameObject: {fileID: 1295374127}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 140497540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -44.5, y: 105.5}
+  m_AnchoredPosition: {x: 42, y: 455}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1295374129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295374127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe45ecfff1f3ce47a706b7da506dcb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
+  target: {fileID: 707773719}
+  offset: {x: 0, y: 0, z: 0}
+  limit: 500
+  mainCamera: {fileID: 0}
 --- !u!1 &1307735300
 GameObject:
   m_ObjectHideFlags: 0
@@ -9022,8 +9123,8 @@ RectTransform:
   m_GameObject: {fileID: 1868512738}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 343741542}
   m_Father: {fileID: 140497540}
@@ -9060,6 +9161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 1996696524}
   offset: {x: 0, y: 50, z: 0}
+  limit: 500
   mainCamera: {fileID: 0}
 --- !u!114 &1868512742
 MonoBehaviour:
@@ -9997,8 +10099,8 @@ RectTransform:
   m_GameObject: {fileID: 2093292345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 597726836}
   - {fileID: 1004367375}
@@ -10007,7 +10109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -734.86, y: 419}
+  m_AnchoredPosition: {x: -661, y: 291}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2123128986 stripped
@@ -10324,9 +10426,15 @@ PrefabInstance:
       addedObject: {fileID: 1996696524}
     - targetCorrespondingSourceObject: {fileID: 9068511463647121795, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 707773719}
+      addedObject: {fileID: 1094430068}
     - targetCorrespondingSourceObject: {fileID: 9068511463647121795, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
       insertIndex: 2
+      addedObject: {fileID: 707773719}
+    - targetCorrespondingSourceObject: {fileID: 9068511463647121795, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 843828666}
+    - targetCorrespondingSourceObject: {fileID: 9068511463647121795, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
+      insertIndex: 4
       addedObject: {fileID: 647787010}
     - targetCorrespondingSourceObject: {fileID: 830271602152660918, guid: f021403ca23b802468fd77cbed6d8603, type: 3}
       insertIndex: -1
