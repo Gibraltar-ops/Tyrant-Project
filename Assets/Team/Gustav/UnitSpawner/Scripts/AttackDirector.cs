@@ -89,7 +89,7 @@ public class AttackDirector : MonoBehaviour
             projectile.obj.transform.position = projectile.position;
 
             // Reached target?
-            if (Vector2.Distance(projectile.position, projectile.target) < 0.1f)
+            if (Vector2.Distance(projectile.position, projectile.target) < 0.5f)
             {
                 // Spawn explosion effect
                 Instantiate(explosionPrefab, projectile.position, Quaternion.identity);

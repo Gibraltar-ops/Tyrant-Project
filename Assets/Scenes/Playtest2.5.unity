@@ -5954,11 +5954,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 965868461754953203, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.02924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965868461754953203, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48175
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 965868461754953203, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5999,6 +5999,10 @@ PrefabInstance:
     - target: {fileID: 3664445610999413223, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_Name
       value: VictimManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: destinationRegions.Array.data[0].center.y
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6131,6 +6135,10 @@ PrefabInstance:
     - target: {fileID: 4265973334920709956, guid: c3532ebcc7c7230468147d18a82c6a30, type: 3}
       propertyPath: m_Name
       value: AttackDirectorManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6354706823185014410, guid: c3532ebcc7c7230468147d18a82c6a30, type: 3}
+      propertyPath: projectileSpeed
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7765,13 +7773,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 557269057}
     m_Modifications:
+    - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: leftGatherRegions.Array.data[0].center.x
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: leftGatherRegions.Array.data[0].center.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: rightGatherRegions.Array.data[0].center.x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: rightGatherRegions.Array.data[0].center.y
+      value: -25
+      objectReference: {fileID: 0}
     - target: {fileID: 6404760494727083455, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.02924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6404760494727083455, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48175
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6404760494727083455, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: m_LocalPosition.z
