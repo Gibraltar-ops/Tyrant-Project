@@ -10,6 +10,10 @@ public class EconomyManager : MonoBehaviour
     public long Keratin;
     public long Victims;
 
+    public long BiomassWinThreshold = 1000;
+
+    public long BiomassLifetime = 12;
+
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
 
@@ -52,6 +56,12 @@ public class EconomyManager : MonoBehaviour
         {
             case Currency.Biomass:
                 Biomass += value;
+
+                if(Mathf.Sign(value) == 1)
+                {
+                    BiomassLifetime += value;
+                }
+                
                 onCurrencyChanged?.Invoke(Currency.Biomass);
                 break;
             case Currency.Brains:
@@ -100,6 +110,8 @@ public class EconomyManager : MonoBehaviour
                 return Keratin;
             case Currency.Victims:
                 return Victims;
+            case Currency.BiomassLifetime:
+                return BiomassLifetime;
             default:
                 return 0;
         }
@@ -112,7 +124,8 @@ public enum Currency
     Biomass,
     Brains,
     Keratin,
-    Victims
+    Victims,
+    BiomassLifetime
 }
 
 public enum ShopTag

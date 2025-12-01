@@ -12,6 +12,9 @@ public class UIItemPanelInfo : MonoBehaviour
 
    public Button PurchaseButton;
 
+   public Image NewItemIcon;
+   public GameObject ProgressBar;
+
     void OnEnable()
     {
         transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.3f, 1);

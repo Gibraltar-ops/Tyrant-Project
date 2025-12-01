@@ -7,11 +7,19 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     //This script lives on all UI shop items. It sends messages upwards to trigger showing and hiding of the tooltip panel
     //and sending the correct tooltip info.
     public Tooltip Tooltip;
+    private bool _playerHasInteracted = false;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<UIItemPanelInfo>().PurchaseButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f);
         SendMessageUpwards("ShowTooltipPanel", Tooltip, SendMessageOptions.DontRequireReceiver);
+
+        if (!_playerHasInteracted)
+        {
+            GetComponent<UIItemPanelInfo>().NewItemIcon.enabled = false;
+            _playerHasInteracted = true;
+        }
         //Debug.Log("PointerEntered");
     }
 

@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using DG.Tweening;
 
 public class Shop : MonoBehaviour
@@ -24,8 +22,10 @@ public class Shop : MonoBehaviour
     private TMP_Text _currentCountLabel;
     private TMP_Text _nextPriceLabel;
     private Button _purchaseButton;
+    private RectTransform _progressBar;
     private GameObject instancedUIPanel;
     public bool Active = false;
+    private bool _upgradeButtonClicked = false;
 
     void OnEnable()
     {
@@ -64,6 +64,8 @@ public class Shop : MonoBehaviour
             _currentCountLabel = instancedUIPanel.GetComponent<UIItemPanelInfo>().CurrentCount;
             _nextPriceLabel = instancedUIPanel.GetComponent<UIItemPanelInfo>().Price;
             _purchaseButton = instancedUIPanel.GetComponent<UIItemPanelInfo>().PurchaseButton;
+            _progressBar = instancedUIPanel.GetComponent<UIItemPanelInfo>().ProgressBar.GetComponent<RectTransform>();
+
 
             _purchaseButton.onClick.AddListener(PurchaseUpgrade);
 
@@ -100,7 +102,21 @@ public class Shop : MonoBehaviour
             return;
         }
         if (currency == BoughtWithCurrency)
-        {
+        {   
+            long currentCurrency = EconomyManager.Instance.GetCurrent(BoughtWithCurrency);
+
+            float normalizedProgressBarScale;
+
+            if(currentCurrency >= 1)
+            {
+                normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency/shopSettings.NextPrice, 0f, 1f);
+            }
+            else
+            {
+                normalizedProgressBarScale = 0f;
+            }
+            _progressBar.localScale = new Vector3(normalizedProgressBarScale, 1f, 1f);
+
             if (EconomyManager.Instance.CanAfford(BoughtWithCurrency, shopSettings.NextPrice))
             {
                 _purchaseButton.interactable = true;
@@ -118,7 +134,17 @@ public class Shop : MonoBehaviour
         _itemName.text = ItemName;
         _currentCountLabel.text = shopSettings.NumberOwned.ToString();
         _nextPriceLabel.text = shopSettings.NextPrice.ToString();
-        _currentCountLabel.gameObject.transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), .5f, 1, 0f);
+
+        if (!_upgradeButtonClicked)
+        {   
+            _upgradeButtonClicked = true;
+             _currentCountLabel.gameObject.transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), .5f, 1, 0f).onComplete = ResetButton;
+        }
+ 
+    }
+    private void ResetButton()
+    {
+        _upgradeButtonClicked = false;
     }
 
     public void PurchaseUpgrade()
