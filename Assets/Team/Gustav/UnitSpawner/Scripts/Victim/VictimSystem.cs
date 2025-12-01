@@ -59,9 +59,9 @@ public class VictimSystem : MonoBehaviour
             homeRegion = centerRegion,
             destination = centerRegion.RandomPointInside(),
             speed = UnityEngine.Random.Range(1.5f, 3f),
-            scale = UnityEngine.Random.Range(0.75f, 1.25f),
+            scale = UnityEngine.Random.Range(0.99f, 1.01f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
-            wanderTimer = UnityEngine.Random.Range(0.5f, 1.5f),
+            wanderTimer = UnityEngine.Random.Range(1f, 2f),
             isCenter = false
         });
 

@@ -103,7 +103,7 @@ public class AttackDirector : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (grenadeImpactRegions == null) return;
         foreach (var region in grenadeImpactRegions)

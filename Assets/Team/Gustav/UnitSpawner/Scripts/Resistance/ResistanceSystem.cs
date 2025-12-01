@@ -8,6 +8,7 @@ public class ResistanceSystem : MonoBehaviour
     public bool enableSpawning = true;
     public float spawnInterval = 2f;
     public int maxResistanceUnits = 500;
+    public float attackCooldown = 7f;
 
     [Tooltip("Multiplier controlled by UI, similar to VictimSystem.")]
     public float spawnRateMultiplier = 1f;
@@ -76,11 +77,10 @@ public class ResistanceSystem : MonoBehaviour
             position = spawnRegion.RandomPointInside(),
             homeRegion = gatherRegion,
             destination = gatherRegion.RandomPointInside(),
-            attackCooldown = UnityEngine.Random.Range(1f, 2f),
             attackDamage = -1,  // Base damage
-            attackTimer = UnityEngine.Random.Range(4f, 6f), // offset so they don't sync with each other
+            attackTimer = attackCooldown, // offset so they don't sync with each other
             speed = UnityEngine.Random.Range(1.6f, 2.8f),
-            scale = UnityEngine.Random.Range(0.75f, 1.25f),
+            scale = UnityEngine.Random.Range(0.99f, 1.01f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
             wanderTimer = UnityEngine.Random.Range(1f, 2f),
             isCenter = false,
@@ -97,7 +97,7 @@ public class ResistanceSystem : MonoBehaviour
     {
         foreach (var fighter in fighters)
         {
-            if (!fighter.isCenter)
+            if (!fighter.isCenter) // Moving to center
             {
                 Vector2 dir = (fighter.destination - fighter.position).normalized;
                 fighter.position += dir * fighter.speed * Time.deltaTime;
@@ -144,7 +144,7 @@ public class ResistanceSystem : MonoBehaviour
                     fighter.attackDamage
                 );
 
-                fighter.attackTimer = UnityEngine.Random.Range(1f, 2f);
+                fighter.attackTimer = attackCooldown;
             }
         }
     }

@@ -15,6 +15,7 @@ public class ResistanceWaveDirector : MonoBehaviour
 
     private int currentBudget = 0;  // stored points that carry over
     private int waveIndex = 0;  // If I want to track wave number
+    private bool secondWaveFlag = false; // Flag to track every other wave
 
     [Header("Enemy Costs")]
     public int basicEnemyCost = 5;
@@ -45,8 +46,12 @@ public class ResistanceWaveDirector : MonoBehaviour
         // Add per-wave income
         currentBudget += baseBudget;
 
-        // Increase base income for future waves
-        baseBudget += perWaveIncrease;
+        // Increase base income for future waves (every other wave)
+        if (secondWaveFlag)
+        {
+            baseBudget += perWaveIncrease;
+        }
+        secondWaveFlag = !secondWaveFlag;
 
         SpawnEnemiesFromBudget();
     }
