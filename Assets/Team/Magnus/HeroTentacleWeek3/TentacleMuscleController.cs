@@ -8,7 +8,7 @@ public class TentacleMuscleController : MonoBehaviour
     [Header("Muscle/Wiggle Settings")]
     public float baseMotorSpeed = 0.5f; // Base rotation
     public float wiggleAmplitude = 0.5f; // Speed variation
-    public float wiggleFrequency = 1f;
+    public float wiggleFrequency = 1f; // How frequently it will change amplitude
     public float maxTorque = 20f; // Must match editor
 
     private float timeOffset;
@@ -19,7 +19,9 @@ public class TentacleMuscleController : MonoBehaviour
 
         if (joint == null)
         {
-            Debug.LogError("TentacleMuscleController kräver en HingeJoint2D på samma GameObject.");
+            Debug.LogError(
+                "TentacleMuscleController needs a hinge joint 2d on the same game object."
+            );
             return;
         }
 

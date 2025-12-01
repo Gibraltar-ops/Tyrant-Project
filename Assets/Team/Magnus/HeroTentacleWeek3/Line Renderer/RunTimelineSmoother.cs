@@ -8,6 +8,8 @@ public class RuntimeLineSmoother : MonoBehaviour
     public float smoothingLength = 0.5f;
     public int smoothingSections = 10;
 
+    public Vector3? overrideEndPosition = null;
+
     private LineRenderer lineRenderer;
     private List<Vector3> positions = new List<Vector3>();
     private BezierCurve[] curves;
@@ -25,19 +27,24 @@ public class RuntimeLineSmoother : MonoBehaviour
             return;
         }
 
-        if (curves == null || curves.Length != chainTransforms.Length - 1)
+        int requiredCurves = chainTransforms.Length - 1;
+        if (overrideEndPosition.HasValue)
         {
-            InitializeCurves();
+            requiredCurves = chainTransforms.Length; //Extra stretch for curve
+        }
+
+        if (curves == null || curves.Length != requiredCurves)
+        {
+            InitializeCurves(requiredCurves);
         }
 
         CalculateCurves();
-
         PopulateLineRenderer();
     }
 
-    private void InitializeCurves()
+    private void InitializeCurves(int count)
     {
-        curves = new BezierCurve[chainTransforms.Length - 1];
+        curves = new BezierCurve[count];
         for (int i = 0; i < curves.Length; i++)
         {
             curves[i] = new BezierCurve();
@@ -46,7 +53,10 @@ public class RuntimeLineSmoother : MonoBehaviour
 
     private void CalculateCurves()
     {
-        for (int i = 0; i < curves.Length; i++)
+        // Loop physical legs first
+        int physicalSegments = chainTransforms.Length - 1;
+
+        for (int i = 0; i < physicalSegments; i++)
         {
             Vector3 p0 = chainTransforms[i].position;
             Vector3 p3 = chainTransforms[i + 1].position;
@@ -54,6 +64,7 @@ public class RuntimeLineSmoother : MonoBehaviour
             Vector3 p1,
                 p2;
 
+            // calculate tangent p1
             if (i == 0)
             {
                 Vector3 tangent = (p3 - p0).normalized;
@@ -66,7 +77,16 @@ public class RuntimeLineSmoother : MonoBehaviour
                 p1 = p0 + tangent * smoothingLength;
             }
 
-            if (i == curves.Length - 1)
+            // Calculate tanget p2
+            // last physical leg check, calculate override
+            if (i == physicalSegments - 1 && overrideEndPosition.HasValue)
+            {
+                // point tangent towards click pos
+                Vector3 nextPoint = overrideEndPosition.Value;
+                Vector3 tangent = (p0 - nextPoint).normalized;
+                p2 = p3 + tangent * smoothingLength;
+            }
+            else if (i == physicalSegments - 1)
             {
                 Vector3 tangent = (p0 - p3).normalized;
                 p2 = p3 + tangent * smoothingLength;
@@ -83,15 +103,37 @@ public class RuntimeLineSmoother : MonoBehaviour
             curves[i].Points[2] = p2;
             curves[i].Points[3] = p3;
         }
+
+        if (overrideEndPosition.HasValue)
+        {
+            int lastIndex = curves.Length - 1;
+            Vector3 p0 = chainTransforms[chainTransforms.Length - 1].position;
+            Vector3 p3 = overrideEndPosition.Value;
+
+            // Tangent out from last bone
+            Vector3 prevPoint = chainTransforms[chainTransforms.Length - 2].position;
+            Vector3 tangentP1 = (p3 - prevPoint).normalized; //point it forward
+            Vector3 p1 = p0 + tangentP1 * smoothingLength;
+
+            // Tangent towards target
+            Vector3 tangentP2 = (p0 - p3).normalized;
+            Vector3 p2 = p3 + tangentP2 * smoothingLength;
+
+            curves[lastIndex].Points[0] = p0;
+            curves[lastIndex].Points[1] = p1;
+            curves[lastIndex].Points[2] = p2;
+            curves[lastIndex].Points[3] = p3;
+        }
     }
 
     private void PopulateLineRenderer()
     {
         positions.Clear();
 
-        positions.AddRange(curves[0].GetSegments(smoothingSections));
+        if (curves.Length > 0)
+            positions.Add(curves[0].StartPosition);
 
-        for (int i = 1; i < curves.Length; i++)
+        for (int i = 0; i < curves.Length; i++)
         {
             Vector3[] segments = curves[i].GetSegments(smoothingSections);
             for (int j = 1; j < segments.Length; j++)
@@ -99,9 +141,6 @@ public class RuntimeLineSmoother : MonoBehaviour
                 positions.Add(segments[j]);
             }
         }
-
-        // Lägg till den absolut sista punkten
-        positions.Add(curves[curves.Length - 1].EndPosition);
 
         lineRenderer.positionCount = positions.Count;
         lineRenderer.SetPositions(positions.ToArray());
