@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -9,12 +10,14 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        GetComponent<UIItemPanelInfo>().PurchaseButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f);
         SendMessageUpwards("ShowTooltipPanel", Tooltip, SendMessageOptions.DontRequireReceiver);
         //Debug.Log("PointerEntered");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        GetComponent<UIItemPanelInfo>().PurchaseButton.transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f);
         SendMessageUpwards("HideTooltipPanel", SendMessageOptions.DontRequireReceiver);
     }
 

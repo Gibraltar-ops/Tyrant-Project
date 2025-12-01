@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -661, y: 400}
+  m_AnchoredPosition: {x: -697, y: 452.59998}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &61633750
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 1996696524}
   offset: {x: -10, y: 10, z: 0}
-  limit: 500
+  limit: 300
   mainCamera: {fileID: 0}
 --- !u!1001 &487696981
 PrefabInstance:
@@ -3478,7 +3478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9160107431783875512, guid: f96ca30c750c8cd4da068c84884d78f4, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -9160107431783875512, guid: f96ca30c750c8cd4da068c84884d78f4, type: 3}
       propertyPath: m_SortingLayerID
@@ -3490,7 +3490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8250169266279454816, guid: f96ca30c750c8cd4da068c84884d78f4, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -8250169266279454816, guid: f96ca30c750c8cd4da068c84884d78f4, type: 3}
       propertyPath: m_SortingLayerID
@@ -4084,7 +4084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -661, y: 182}
+  m_AnchoredPosition: {x: -697, y: 350}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &777265744
@@ -6181,6 +6181,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 695214982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1102252110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102252111}
+  - component: {fileID: 1102252114}
+  - component: {fileID: 1102252113}
+  - component: {fileID: 1102252115}
+  m_Layer: 0
+  m_Name: SPAWN_EfficiencyUpgrade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1102252111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102252110}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1273869212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1102252113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102252110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faf0848bbe9e1c44885635adff6bb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shop
+  ParentOrgan: 0
+  Category: 0
+  ItemName: Organic Fracking
+  ButtonText: MUTATE
+  Tooltip: {fileID: 11400000, guid: 318fd88caf15bba44b67f05dd996d774, type: 2}
+  UIPrefab: {fileID: 753844242606117633, guid: deb8de8c976aaff4c9dc74a4b80b52a1, type: 3}
+  shopSettings:
+    Tag: 
+    PriceBase: 12
+    PriceGrowthRate: 1.1
+    NumberOwned: 0
+    NextPrice: 12
+  BoughtWithCurrency: 0
+  Active: 0
+--- !u!114 &1102252114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102252110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582670dbe6602ba4d8bcdd3e905a6eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThresholdSpawn
+  HasSpawned: 0
+  Threshold: 30
+--- !u!114 &1102252115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102252110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  OnUpgrade:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1361152518}
+        m_TargetAssemblyTypeName: EventSpawn, Assembly-CSharp
+        m_MethodName: SpawnUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1144061632
 GameObject:
   m_ObjectHideFlags: 0
@@ -6757,7 +6858,7 @@ GameObject:
   - component: {fileID: 1214483618}
   m_Layer: 5
   m_Name: MawButton
-  m_TagString: UI_BuyButton
+  m_TagString: UI_OrganButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6809,7 +6910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 707773719}
   offset: {x: 0, y: 0, z: 0}
-  limit: 500
+  limit: 700
   mainCamera: {fileID: 0}
 --- !u!114 &1214483620
 MonoBehaviour:
@@ -7073,6 +7174,7 @@ Transform:
   m_Children:
   - {fileID: 1950530610}
   - {fileID: 730298618}
+  - {fileID: 1102252111}
   - {fileID: 1361152515}
   - {fileID: 61633751}
   m_Father: {fileID: 1208594671}
@@ -7402,7 +7504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 707773719}
   offset: {x: 0, y: 0, z: 0}
-  limit: 500
+  limit: 300
   mainCamera: {fileID: 0}
 --- !u!1 &1307735300
 GameObject:
@@ -7669,11 +7771,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361152514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582670dbe6602ba4d8bcdd3e905a6eba, type: 3}
+  m_Script: {fileID: 11500000, guid: 76b8214747029b7478ae2c5407a9e482, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ThresholdSpawn
+  m_EditorClassIdentifier: Assembly-CSharp::EventSpawn
   HasSpawned: 0
-  Threshold: 120
 --- !u!4 &1363584407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3413546328148398075, guid: 674cc74004281704fab1dfcf74d0d9a9, type: 3}
@@ -9109,7 +9210,7 @@ GameObject:
   - component: {fileID: 1868512740}
   m_Layer: 5
   m_Name: LarynxButton
-  m_TagString: UI_BuyButton
+  m_TagString: UI_OrganButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9161,7 +9262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 1996696524}
   offset: {x: 0, y: 50, z: 0}
-  limit: 500
+  limit: 700
   mainCamera: {fileID: 0}
 --- !u!114 &1868512742
 MonoBehaviour:
@@ -10109,7 +10210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -661, y: 291}
+  m_AnchoredPosition: {x: -603.62, y: 399.99997}
   m_SizeDelta: {x: 407.44104, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2123128986 stripped

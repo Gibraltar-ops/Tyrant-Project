@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using DG.Tweening;
 
 public class Shop : MonoBehaviour
 {
@@ -82,7 +83,10 @@ public class Shop : MonoBehaviour
         // UpdateLabels();
     }
 
-    
+    public GameObject GetUIPanel()
+    {
+        return instancedUIPanel;
+    }
 
     public void IncrementPrice()
     {
@@ -114,10 +118,12 @@ public class Shop : MonoBehaviour
         _itemName.text = ItemName;
         _currentCountLabel.text = shopSettings.NumberOwned.ToString();
         _nextPriceLabel.text = shopSettings.NextPrice.ToString();
+        _currentCountLabel.gameObject.transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), .5f, 1, 0f);
     }
 
     public void PurchaseUpgrade()
-    {
+    {   
+
         GetComponent<Upgrade>().ApplyUpgrade();
         EconomyManager.Instance.IncrementCurrency(BoughtWithCurrency, -shopSettings.NextPrice);
         shopSettings.NumberOwned++;

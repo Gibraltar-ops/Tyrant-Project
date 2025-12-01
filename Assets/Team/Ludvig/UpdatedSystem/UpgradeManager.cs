@@ -8,20 +8,26 @@ public class UpgradeManager : MonoBehaviour
     private UIState State;
     private List<UIMenuInfo> UpgradeMenusInScene;
     private UIMenuInfo ActiveMenu;
+    private GameObject[] OrganButtons;
 
     void OnEnable()
     {
         OrganButton.onButtonClick += ReceiveButtonEvent;
+        UI_MenuCloseButton.onButtonClick += CloseMenu;
+        
     }
      void OnDisable()
     {
         OrganButton.onButtonClick -= ReceiveButtonEvent;
+        UI_MenuCloseButton.onButtonClick -= CloseMenu;
     }
     void Start()
     {   
         UpgradeMenusInScene = new List<UIMenuInfo>();
         State = UIState.Null;
         ActiveMenu = null;
+        OrganButtons = GameObject.FindGameObjectsWithTag("UI_OrganButton");
+
     }
     public void AddOrgan(UIMenuInfo organ)
     {
@@ -42,6 +48,10 @@ public class UpgradeManager : MonoBehaviour
             }
 
             ActiveMenu.gameObject.SetActive(true);
+            foreach (var button in OrganButtons)
+            {
+                button.SetActive(false);
+            }
 
             switch (organ)
             {
@@ -64,6 +74,10 @@ public class UpgradeManager : MonoBehaviour
             ActiveMenu.gameObject.SetActive(false);
             ActiveMenu = null;
             State = UIState.Null;
+            foreach (var button in OrganButtons)
+            {
+                button.SetActive(true);
+            }
             return;
         }
 
@@ -71,6 +85,10 @@ public class UpgradeManager : MonoBehaviour
         {
             ActiveMenu.gameObject.SetActive(false);
             State = UIState.Null;
+             foreach (var button in OrganButtons)
+            {
+                button.SetActive(false);
+            }
             return;
         }
 
@@ -102,6 +120,18 @@ public class UpgradeManager : MonoBehaviour
                 default: break;
             }
         }
+    }
+
+public void CloseMenu()
+    {
+        ActiveMenu.gameObject.SetActive(false);
+            ActiveMenu = null;
+            State = UIState.Null;
+            foreach (var button in OrganButtons)
+            {
+                button.SetActive(true);
+            }
+            return;
     }
 
 }
