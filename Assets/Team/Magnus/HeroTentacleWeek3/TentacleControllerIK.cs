@@ -3,12 +3,35 @@ using UnityEngine;
 
 public class TentacleControllerIK : MonoBehaviour
 {
+    private enum TentacleState
+    {
+        Idle,
+        Reaching,
+        Retracting,
+        ReturningToIdle,
+    }
+
+    private TentacleState currentState = TentacleState.Idle;
+
+    private VictimData currentVictim;
+    private Transform mouthPoint;
+    private Vector3 idleAnchorPosition;
+    private bool isBusy = false;
+
+    [Header("Grabbing")]
+    public float reachSpeed = 20f;
+    public float retractSpeed = 5f;
+
+    [Header("Dependencies")]
+    [SerializeField]
+    private TentacleSprawlController sprawlController;
+
     [Header("IK Setup")]
     public TargetJoint2D effectorJoint;
     public Rigidbody2D effectorBody;
     public Rigidbody2D rootBody;
 
-    private Vector3 targetPosition;
+    private Vector3 currentTarget;
 
     [Header("Visual Tip")]
     public Transform tentacleTip;
@@ -19,7 +42,6 @@ public class TentacleControllerIK : MonoBehaviour
     public Transform rootBone;
     public Transform[] bonesToStretch;
 
-    [Tooltip("Öka denna (t.ex. 10-15) för snabbare respons på stretchen")]
     public float stretchSmoothSpeed = 10f;
 
     private List<Vector3> initialBoneScales = new List<Vector3>();
@@ -32,10 +54,10 @@ public class TentacleControllerIK : MonoBehaviour
     public float maxJointFrequency = 80f;
     public float minJointFrequency = 0.5f;
 
-    [Tooltip("Hur nära målet den måste vara för att slappna av")]
+    [Tooltip("relaxation distance")]
     public float relaxationDistance = 2.0f;
 
-    [Tooltip("Extra kraft vid stretching för att motverka hävstångseffekten")]
+    [Tooltip("Hävstångs-counter")]
     public float stretchedForceMultiplier = 1.5f;
 
     void Start()
@@ -51,47 +73,131 @@ public class TentacleControllerIK : MonoBehaviour
         {
             Debug.LogError("BonesToStretch är inte tilldelad i inspectorn!");
         }
+
+        idleAnchorPosition = effectorBody.position; // Set idle starting point
+        currentTarget = idleAnchorPosition;
+
+        if (sprawlController == null)
+            sprawlController = GetComponentInChildren<TentacleSprawlController>();
     }
 
     void LateUpdate()
     {
-        bool newClick = false;
+        UpdateState();
 
-        // Input hantering
-        if (Input.GetMouseButton(0))
-        {
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPosition.z = 0;
-            newClick = true;
-        }
-
-        // Target Joint Logik
+        // Target Joint logic
         if (effectorJoint != null)
         {
-            float distanceToNewTarget = Vector3.Distance(effectorJoint.target, targetPosition);
-
-            // Uppdatera målet om vi rört musen tillräckligt eller klickat
-            if (distanceToNewTarget > targetDeadZone || newClick)
-            {
-                effectorJoint.target = targetPosition;
-            }
+            effectorJoint.target = currentTarget;
         }
 
-        // Hantera Stretch FÖRST, så fysiken vet längden innan vi applicerar krafter
+        // stretch?
         HandleStretching();
 
-        // Applicera krafter/tension baserat på nya längden
+        // apply force / tension on length
         AdjustTargetJointTension();
 
-        // Flytta debug-transform (själva script-objektet)
-        transform.position = targetPosition;
-
-        // Rotera tippen
+        // rotate tip
         if (tentacleTip != null && effectorBody != null)
         {
-            Vector3 directionToTarget = targetPosition - (Vector3)effectorBody.position;
+            Vector3 directionToTarget = currentTarget - (Vector3)effectorBody.position;
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
             tentacleTip.rotation = Quaternion.Euler(0f, 0f, angle - -90f);
+        }
+
+        if (currentState == TentacleState.Retracting && currentVictim != null)
+        {
+            currentVictim.position = tentacleTip.position;
+        }
+    }
+
+    private void UpdateState()
+    {
+        switch (currentState)
+        {
+            case TentacleState.Idle:
+                // Move tentacle around their idle position
+                float noiseX = (Mathf.PerlinNoise(Time.time * 0.5f, 0) - 0.5f) * 2f;
+                float noiseY = (Mathf.PerlinNoise(0, Time.time * 0.5f) - 0.5f) * 2f;
+                currentTarget = idleAnchorPosition + new Vector3(noiseX, noiseY, 0);
+                break;
+
+            case TentacleState.Reaching:
+                // move towards victim
+                currentTarget = Vector3.MoveTowards(
+                    currentTarget,
+                    currentVictim.position,
+                    Time.deltaTime * reachSpeed
+                );
+                if (Vector3.Distance(currentTarget, currentVictim.position) < 0.1f)
+                {
+                    currentState = TentacleState.Retracting;
+                    // Stop sprawl tentacles
+                    if (sprawlController != null)
+                        sprawlController.StopAttack();
+                }
+                break;
+
+            case TentacleState.Retracting:
+                // move to mouth
+                currentTarget = Vector3.MoveTowards(
+                    currentTarget,
+                    mouthPoint.position,
+                    Time.deltaTime * retractSpeed
+                );
+                if (Vector3.Distance(currentTarget, mouthPoint.position) < 0.1f)
+                {
+                    ConsumeVictim();
+                    currentState = TentacleState.ReturningToIdle;
+                }
+                break;
+
+            case TentacleState.ReturningToIdle:
+                // return to idle position
+                currentTarget = Vector3.MoveTowards(
+                    currentTarget,
+                    idleAnchorPosition,
+                    Time.deltaTime * reachSpeed
+                );
+                if (Vector3.Distance(currentTarget, idleAnchorPosition) < 0.1f)
+                {
+                    currentState = TentacleState.Idle;
+                    isBusy = false;
+                }
+                break;
+        }
+    }
+
+    public void StartGrab(VictimData victim, Transform mouth)
+    {
+        if (isBusy)
+            return;
+
+        currentVictim = victim;
+        mouthPoint = mouth;
+        isBusy = true;
+        currentState = TentacleState.Reaching;
+
+        // Activate sprawl tentacles
+        if (sprawlController != null)
+        {
+            sprawlController.SetNewTarget(victim.position);
+        }
+    }
+
+    public bool IsBusy()
+    {
+        return isBusy;
+    }
+
+    private void ConsumeVictim()
+    {
+        // Eating / Biomass controll
+        if (currentVictim != null)
+        {
+            Debug.Log("Yum!");
+
+            currentVictim = null;
         }
     }
 
@@ -102,13 +208,12 @@ public class TentacleControllerIK : MonoBehaviour
 
         float distanceToTarget = Vector3.Distance(effectorBody.position, effectorJoint.target);
 
-        // Normalisera spänningen. Clamp01 gör att den går från 0 till 1.
+        // Normalize tension
         float tensionFactor = Mathf.Clamp01(distanceToTarget / relaxationDistance);
 
-        // Beräkna frekvensen
+        // calulate frequency
         float targetFreq = Mathf.Lerp(minJointFrequency, maxJointFrequency, tensionFactor);
 
-        // BOOST: Om vi är utsträckta, öka frekvensen/kraften för att orka dra den längre armen
         if (currentStretchFactor > 1.1f)
         {
             targetFreq *= stretchedForceMultiplier;
@@ -130,7 +235,7 @@ public class TentacleControllerIK : MonoBehaviour
 
         if (enableStretching)
         {
-            float distanceToTarget = Vector3.Distance(rootBone.position, targetPosition);
+            float distanceToTarget = Vector3.Distance(rootBone.position, currentTarget);
 
             if (distanceToTarget > totalUnstretchedLength)
             {
@@ -138,7 +243,7 @@ public class TentacleControllerIK : MonoBehaviour
             }
         }
 
-        // Lerp för mjukhet, men snabbare respons
+        // Lerp softness
         currentStretchFactor = Mathf.Lerp(
             currentStretchFactor,
             targetStretch,
@@ -150,7 +255,7 @@ public class TentacleControllerIK : MonoBehaviour
             Transform bone = bonesToStretch[i];
             Vector3 originalScale = initialBoneScales[i];
 
-            // Applicera skalan
+            // apply scale
             bone.localScale = new Vector3(
                 originalScale.x,
                 originalScale.y * currentStretchFactor,

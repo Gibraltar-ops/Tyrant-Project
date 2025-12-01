@@ -190,7 +190,7 @@ public class TyrantController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /* if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -202,7 +202,7 @@ public class TyrantController : MonoBehaviour
             {
                 TryGrabTargetAtClick(worldPoint);
             }
-        }
+        } */
     }
 
     public void ActivateNewTentacle()

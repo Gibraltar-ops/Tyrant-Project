@@ -244,7 +244,6 @@ MonoBehaviour:
   canvas_Settings: {fileID: 961599391}
   canvas_Extras: {fileID: 724322982}
   canvas_Credits: {fileID: 474697309}
-  sceneName: GameScene
   saveFileKey: SaveExists
 --- !u!1 &66197547
 GameObject:
@@ -1218,11 +1217,11 @@ RectTransform:
   - {fileID: 636599034}
   m_Father: {fileID: 474697310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -567}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &286231085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,8 +1549,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -170}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -170}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &408212991
 MonoBehaviour:
@@ -1573,7 +1572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Felicia Iversen - '
+  m_text: Felicia Iversen - Artist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1824,8 +1823,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -220}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -220}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &440653450
 MonoBehaviour:
@@ -1847,7 +1846,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vincent Meriot -
+  m_text: Vincent Meriot - Artist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1966,8 +1965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 93, y: 40}
-  m_SizeDelta: {x: -1360, y: -480}
+  m_AnchoredPosition: {x: 0, y: 80}
+  m_SizeDelta: {x: -1000, y: -480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474697311
 MonoBehaviour:
@@ -2914,8 +2913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -120}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -120}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &819626622
 MonoBehaviour:
@@ -2937,7 +2936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Magnus Henry - '
+  m_text: Magnus Henry - Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4775,10 +4774,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -5109,8 +5108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -20}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -20}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1494901311
 MonoBehaviour:
@@ -5132,7 +5131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ludvig Orveg\xE5rd - "
+  m_text: "Ludvig Orveg\xE5rd - Programmer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5381,8 +5380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -270}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -270}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1515517352
 MonoBehaviour:
@@ -5404,7 +5403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Linnea L\xF6fstrand - "
+  m_text: "Linnea L\xF6fstrand - Artist"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5774,8 +5773,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -70}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -70}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1575557280
 MonoBehaviour:
@@ -5797,7 +5796,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gustav Engelbrektsson -
+  m_text: Gustav Engelbrektsson - Programmer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7331,8 +7330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -320}
-  m_SizeDelta: {x: 520, y: 50}
+  m_AnchoredPosition: {x: 460, y: -320}
+  m_SizeDelta: {x: 880, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2000746155
 MonoBehaviour:
@@ -7354,7 +7353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Isabella Johansson -
+  m_text: Isabella Johansson - Artist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
