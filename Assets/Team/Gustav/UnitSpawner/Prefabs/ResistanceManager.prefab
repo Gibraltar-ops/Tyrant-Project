@@ -49,24 +49,25 @@ MonoBehaviour:
   enableSpawning: 1
   spawnInterval: 2
   maxResistanceUnits: 500
+  attackCooldown: 7
   spawnRateMultiplier: 1
   leftSpawnRegions:
-  - center: {x: -85, y: -35}
-    size: {x: 4, y: 30}
-  - center: {x: -75, y: -55}
-    size: {x: 20, y: 4}
+  - center: {x: -28, y: -12}
+    size: {x: 2, y: 10}
+  - center: {x: -20, y: -20}
+    size: {x: 15, y: 2}
   leftGatherRegions:
-  - center: {x: -45, y: -30}
-    radius: 10
+  - center: {x: -15, y: -9.25}
+    radius: 2
     length: 5
   rightSpawnRegions:
-  - center: {x: 85, y: -35}
-    size: {x: 4, y: 30}
-  - center: {x: 75, y: -55}
-    size: {x: 20, y: 4}
+  - center: {x: 28, y: -12}
+    size: {x: 2, y: 10}
+  - center: {x: 20, y: -20}
+    size: {x: 15, y: 2}
   rightGatherRegions:
-  - center: {x: 45, y: -30}
-    radius: 10
+  - center: {x: 15, y: -9.25}
+    radius: 2
     length: 5
 --- !u!114 &5986743156173139134
 MonoBehaviour:

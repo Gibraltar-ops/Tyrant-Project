@@ -79,8 +79,8 @@ public class ResistanceSystem : MonoBehaviour
             destination = gatherRegion.RandomPointInside(),
             attackDamage = -1,  // Base damage
             attackTimer = attackCooldown, // offset so they don't sync with each other
-            speed = UnityEngine.Random.Range(1.6f, 2.8f),
-            scale = UnityEngine.Random.Range(0.99f, 1.01f),
+            speed = UnityEngine.Random.Range(0.4f, 1f),
+            scale = UnityEngine.Random.Range(0.19f, 0.21f),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
             wanderTimer = UnityEngine.Random.Range(1f, 2f),
             isCenter = false,
