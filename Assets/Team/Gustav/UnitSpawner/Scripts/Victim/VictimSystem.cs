@@ -20,6 +20,14 @@ public class VictimSystem : MonoBehaviour
     [HideInInspector]
     public float spawnRateMultiplier = 1f; // Adjust spawn rate with UI Btn/Slider.
 
+    void Awake() // Använd Awake för att logga tidigt
+    {
+        Debug.Log(
+            $"VICTIMSYSTEM AWAKE! Instance ID: {this.GetInstanceID()}, Name: {this.gameObject.name}",
+            this.gameObject
+        );
+    } // Magnus kommentera bort det här sedan
+
     void Start()
     {
         spawnTimer = spawnInterval;
@@ -51,19 +59,23 @@ public class VictimSystem : MonoBehaviour
             return;
 
         var spawnRegion = spawnRegions[UnityEngine.Random.Range(0, spawnRegions.Count)];
-        var centerRegion = destinationRegions[UnityEngine.Random.Range(0, destinationRegions.Count)];
+        var centerRegion = destinationRegions[
+            UnityEngine.Random.Range(0, destinationRegions.Count)
+        ];
 
-        victims.Add(new VictimData
-        {
-            position = spawnRegion.RandomPointInside(),
-            homeRegion = centerRegion,
-            destination = centerRegion.RandomPointInside(),
-            speed = UnityEngine.Random.Range(0.4f, 1f),
-            scale = UnityEngine.Random.Range(0.19f, 0.21f),
-            wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
-            wanderTimer = UnityEngine.Random.Range(1f, 2f),
-            isCenter = false
-        });
+        victims.Add(
+            new VictimData
+            {
+                position = spawnRegion.RandomPointInside(),
+                homeRegion = centerRegion,
+                destination = centerRegion.RandomPointInside(),
+                speed = UnityEngine.Random.Range(0.4f, 1f),
+                scale = UnityEngine.Random.Range(0.079f, 0.081f),
+                wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
+                wanderTimer = UnityEngine.Random.Range(1f, 2f),
+                isCenter = false,
+            }
+        );
 
         OnVictimCountChanged?.Invoke(victims.Count); // Update UI count.
     }
@@ -75,6 +87,10 @@ public class VictimSystem : MonoBehaviour
     {
         foreach (var victim in victims)
         {
+            if (victim.isMarkedForDeath)
+            {
+                continue;
+            }
             if (!victim.isCenter)
             {
                 Vector2 dir = (victim.destination - victim.position).normalized;
@@ -117,11 +133,12 @@ public class VictimSystem : MonoBehaviour
     // --------------------------------------------
     private void OnDrawGizmosSelected()
     {
-        if (spawnRegions == null) return;
+        if (spawnRegions == null)
+            return;
 
         foreach (var r in spawnRegions)
             r.DrawGizmo(Color.yellow);
-        
+
         if (destinationRegions != null)
             foreach (var c in destinationRegions)
                 c.DrawGizmo(Color.green);

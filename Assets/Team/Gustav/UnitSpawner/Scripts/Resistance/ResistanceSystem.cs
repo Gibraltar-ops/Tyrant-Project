@@ -30,13 +30,13 @@ public class ResistanceSystem : MonoBehaviour
     public List<ResistanceData> fighters = new();
 
     public event Action<int> OnFighterCountChanged;
-    
+
     public event System.Action<int> OnEnemyAttack;
 
     void Start()
     {
         spawnTimer = spawnInterval;
-        
+
         //// Spawn some initial crowd (optional)
         //for (int i = 0; i < 50; i++)
         //    SpawnVictim();
@@ -72,20 +72,22 @@ public class ResistanceSystem : MonoBehaviour
         var spawnRegion = spawnList[UnityEngine.Random.Range(0, spawnList.Count)];
         var gatherRegion = gatherList[UnityEngine.Random.Range(0, gatherList.Count)];
 
-        fighters.Add(new ResistanceData
-        {
-            position = spawnRegion.RandomPointInside(),
-            homeRegion = gatherRegion,
-            destination = gatherRegion.RandomPointInside(),
-            attackDamage = -1,  // Base damage
-            attackTimer = attackCooldown, // offset so they don't sync with each other
-            speed = UnityEngine.Random.Range(0.4f, 1f),
-            scale = UnityEngine.Random.Range(0.19f, 0.21f),
-            wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
-            wanderTimer = UnityEngine.Random.Range(1f, 2f),
-            isCenter = false,
-            isLeftSide = spawnLeft
-        });
+        fighters.Add(
+            new ResistanceData
+            {
+                position = spawnRegion.RandomPointInside(),
+                homeRegion = gatherRegion,
+                destination = gatherRegion.RandomPointInside(),
+                attackDamage = -1, // Base damage
+                attackTimer = attackCooldown, // offset so they don't sync with each other
+                speed = UnityEngine.Random.Range(0.4f, 1f),
+                scale = UnityEngine.Random.Range(0.079f, 0.081f),
+                wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
+                wanderTimer = UnityEngine.Random.Range(1f, 2f),
+                isCenter = false,
+                isLeftSide = spawnLeft,
+            }
+        );
 
         OnFighterCountChanged?.Invoke(fighters.Count); // Update UI count.
     }
@@ -115,12 +117,13 @@ public class ResistanceSystem : MonoBehaviour
 
                 if (fighter.wanderTimer <= 0f)
                 {
-                    fighter.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized; 
+                    fighter.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
                     fighter.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
                 }
 
                 // Apply wandering movement
-                fighter.position += fighter.wanderDirection * (fighter.speed * 0.4f) * Time.deltaTime;
+                fighter.position +=
+                    fighter.wanderDirection * (fighter.speed * 0.4f) * Time.deltaTime;
 
                 // If victim has wandered outside the capsule walk back inside
                 if (!fighter.homeRegion.Contains(fighter.position))
@@ -139,10 +142,7 @@ public class ResistanceSystem : MonoBehaviour
             if (fighter.isCenter && fighter.attackTimer <= 0f)
             {
                 // FIRE!
-                AttackDirector.Instance.SpawnProjectile(
-                    fighter.position,
-                    fighter.attackDamage
-                );
+                AttackDirector.Instance.SpawnProjectile(fighter.position, fighter.attackDamage);
 
                 fighter.attackTimer = attackCooldown;
             }

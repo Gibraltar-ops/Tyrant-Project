@@ -1,18 +1,35 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class TentacleControllerIK : MonoBehaviour
 {
+    /*  [Header("Capture Sprite")]
+     [SerializeField]
+     private CaptureSprite captureSprite; */
+
+    [Header("Capture Visuals")]
+    [Tooltip("Dra hit ditt 'VictimVisuals' GameObject")]
+    [SerializeField]
+    private GameObject victimCaptureVisual;
+
+    [Tooltip("Dra hit ditt 'FighterVisuals' GameObject")]
+    [SerializeField]
+    private GameObject fighterCaptureVisual;
+
+    private GameObject activeCaptureVisual;
+
     private enum TentacleState
     {
         Idle,
         Reaching,
+        PullingSprite,
         Retracting,
         ReturningToIdle,
     }
 
     private TentacleState currentState = TentacleState.Idle;
-
+    private IGrabbable currentItem;
     private VictimData currentVictim;
     private Transform mouthPoint;
     private Vector3 idleAnchorPosition;
@@ -79,6 +96,11 @@ public class TentacleControllerIK : MonoBehaviour
 
         if (sprawlController == null)
             sprawlController = GetComponentInChildren<TentacleSprawlController>();
+
+        if (victimCaptureVisual != null)
+            victimCaptureVisual.SetActive(false);
+        if (fighterCaptureVisual != null)
+            fighterCaptureVisual.SetActive(false);
     }
 
     void LateUpdate()
@@ -104,11 +126,6 @@ public class TentacleControllerIK : MonoBehaviour
             float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
             tentacleTip.rotation = Quaternion.Euler(0f, 0f, angle - -90f);
         }
-
-        if (currentState == TentacleState.Retracting && currentVictim != null)
-        {
-            currentVictim.position = tentacleTip.position;
-        }
     }
 
     private void UpdateState()
@@ -123,31 +140,67 @@ public class TentacleControllerIK : MonoBehaviour
                 break;
 
             case TentacleState.Reaching:
-                // move towards victim
-                currentTarget = Vector3.MoveTowards(
-                    currentTarget,
-                    currentVictim.position,
-                    Time.deltaTime * reachSpeed
-                );
-                if (Vector3.Distance(currentTarget, currentVictim.position) < 0.1f)
+                // set target to grabbable pos
+                if (currentItem != null)
                 {
+                    currentTarget = currentItem.Position;
+                }
+                break;
+
+            /* case TentacleState.PullingSprite:
+
+                if (activeCaptureVisual == null)
+                    break;
+                // pull towards tentacle main
+                captureSprite.transform.position = Vector3.MoveTowards(
+                    captureSprite.transform.position,
+                    effectorBody.position,
+                    Time.deltaTime * reachSpeed * 2f
+                ); */
+
+            case TentacleState.PullingSprite:
+                if (activeCaptureVisual == null)
+                    break;
+
+                // KORRIGERAD: Använder nu activeCaptureVisual för att flytta spriten
+                activeCaptureVisual.transform.position = Vector3.MoveTowards(
+                    activeCaptureVisual.transform.position,
+                    effectorBody.position,
+                    Time.deltaTime * reachSpeed * 2f
+                );
+
+                // if sprite reached
+                /* if (
+                    Vector3.Distance(captureSprite.transform.position, effectorBody.position) < 0.1f
+                ) */
+
+                if (
+                    Vector3.Distance(activeCaptureVisual.transform.position, effectorBody.position)
+                    < 0.1f
+                )
+                /*   {
+                      // attach sprite to main
+                      activeCaptureVisual.transform.SetParent(effectorBody.transform);
+                      captureSprite.transform.SetParent(effectorBody.transform);
+                      currentState = TentacleState.Retracting;
+                  }
+                  break; */
+
+                {
+                    // KORRIGERAD: Fäster bara activeCaptureVisual
+                    activeCaptureVisual.transform.SetParent(effectorBody.transform);
                     currentState = TentacleState.Retracting;
-                    // Stop sprawl tentacles
-                    if (sprawlController != null)
-                        sprawlController.StopAttack();
                 }
                 break;
 
             case TentacleState.Retracting:
-                // move to mouth
-                currentTarget = Vector3.MoveTowards(
-                    currentTarget,
-                    mouthPoint.position,
-                    Time.deltaTime * retractSpeed
-                );
-                if (Vector3.Distance(currentTarget, mouthPoint.position) < 0.1f)
+                currentTarget = mouthPoint.position;
+
+                if (Vector3.Distance(effectorBody.position, mouthPoint.position) < 0.5f)
                 {
-                    ConsumeVictim();
+                    Debug.Log("Capture sprite consumed. Finalizing.");
+
+                    ConsumeItem();
                     currentState = TentacleState.ReturningToIdle;
                 }
                 break;
@@ -168,12 +221,50 @@ public class TentacleControllerIK : MonoBehaviour
         }
     }
 
-    public void StartGrab(VictimData victim, Transform mouth)
+    public void InitiateCapture(IGrabbable capturedItem)
+    {
+        if (capturedItem.Type == GrabbableType.Victim)
+        {
+            activeCaptureVisual = victimCaptureVisual;
+        }
+        else if (capturedItem.Type == GrabbableType.Fighter)
+        {
+            activeCaptureVisual = fighterCaptureVisual;
+        }
+
+        if (activeCaptureVisual != null)
+        {
+            activeCaptureVisual.SetActive(true);
+            activeCaptureVisual.transform.SetParent(null);
+            activeCaptureVisual.transform.position = capturedItem.Position;
+
+            currentState = TentacleState.PullingSprite;
+        }
+        else
+        {
+            Debug.LogError(
+                "Inget visuellt objekt kunde aktiveras för den fångade typen! Kontrollera referenserna i Inspectorn."
+            );
+        }
+    }
+
+    public void OnVictimCapturedBySprawl()
+    {
+        if (currentState == TentacleState.Reaching)
+        {
+            Debug.Log("Sprawl has captured victim, main tentacle retracting");
+            currentState = TentacleState.Retracting;
+        }
+    }
+
+    private void AttachVictim() { }
+
+    public void StartGrab(IGrabbable item, Transform mouth)
     {
         if (isBusy)
             return;
 
-        currentVictim = victim;
+        currentItem = item;
         mouthPoint = mouth;
         isBusy = true;
         currentState = TentacleState.Reaching;
@@ -181,7 +272,7 @@ public class TentacleControllerIK : MonoBehaviour
         // Activate sprawl tentacles
         if (sprawlController != null)
         {
-            sprawlController.SetNewTarget(victim.position);
+            sprawlController.SetNewTarget(item.Position, item);
         }
     }
 
@@ -190,14 +281,25 @@ public class TentacleControllerIK : MonoBehaviour
         return isBusy;
     }
 
-    private void ConsumeVictim()
+    private void ConsumeItem()
     {
-        // Eating / Biomass controll
-        if (currentVictim != null)
+        if (activeCaptureVisual != null)
         {
-            Debug.Log("Yum!");
+            activeCaptureVisual.SetActive(false);
+            activeCaptureVisual = null;
+        }
 
-            currentVictim = null;
+        if (currentItem != null)
+        {
+            Debug.Log("Giving currency for item and destroying original.");
+
+            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
+            if (manager != null)
+            {
+                manager.DestroyGrabbable(currentItem);
+            }
+
+            currentItem = null;
         }
     }
 
