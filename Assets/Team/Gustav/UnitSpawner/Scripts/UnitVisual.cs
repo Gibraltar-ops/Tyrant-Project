@@ -29,7 +29,7 @@ public class UnitVisual : MonoBehaviour
             spriteRenderer.flipX = true;
 
         // Always play walk animation (we only have one)
-        animator.Play("WalkBehind");
+        //animator.Play("ManWalking");
     }
 }
 
