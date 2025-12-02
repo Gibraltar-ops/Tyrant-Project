@@ -43,11 +43,11 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
 
         if(collector.NormalizedTime > 0.02f && closestVictim != null)
         {
-            transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime *3f);
+            transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime *4f);
             //transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime *2f);
         }
 
-        if(collector.NormalizedTime > 0.5f && !_victimDestroyed)
+        if(collector.NormalizedTime > 0.52f && !_victimDestroyed)
         { 
             
             if(closestVictim != null)
@@ -60,31 +60,6 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
         }
         
         
-    }
-
-    private VictimData FindClosestVictim(Vector2 position, float maxDistance)
-    {
-        VictimData closest = null;
-        float closestDistSqr = maxDistance * maxDistance;
-
-        foreach (var victim in victimSystem.victims)
-        {
-            if (victim.isMarkedForDeath)
-                continue;
-            if (!victim.isCenter)
-            {
-                continue;
-            }
-
-            float distSqr = (victim.position - position).sqrMagnitude;
-            if (distSqr < closestDistSqr)
-            {
-                closestDistSqr = distSqr;
-                closest = victim;
-                closest.isMarkedForDeath = true;
-            }
-        }
-        return closest;
     }
 
      private VictimData FindAnyVictim()
