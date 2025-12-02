@@ -25,6 +25,8 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
+    public CollectorData collectorData;
+
     void Start()
     {
         if (victimSystem != null)
@@ -121,6 +123,7 @@ public class TyrantTentacleManager : MonoBehaviour
         if (activeTentacleCount < tentacles.Count)
         {
             activeTentacleCount++;
+            tentacles[activeTentacleCount].gameObject.SetActive(true);
 
             // Here we can add visual feedback or stuff!! / Magnus
         }
@@ -143,5 +146,18 @@ public class TyrantTentacleManager : MonoBehaviour
                 resistanceSystem.fighters.Remove(fighter);
             }
         }
+
+        EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
+    }
+
+    public int ModifiedCollectAmount()
+    {
+        float finalCurrency = collectorData.BaseCollect;
+
+        finalCurrency += collectorData.CollectAdd;
+
+        finalCurrency *= collectorData.CollectMultiplier;
+
+        return (int)finalCurrency;
     }
 }

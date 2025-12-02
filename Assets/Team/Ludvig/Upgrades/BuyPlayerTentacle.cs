@@ -1,11 +1,15 @@
 
 public class BuyPlayerTentacle : Upgrade
 {
-    public TyrantController tyrantController;
-    
+    private TyrantTentacleManager tentacleManager;
+    void Start()
+    {
+        tentacleManager = FindAnyObjectByType<TyrantTentacleManager>();
+    }
+
     public override void ApplyUpgrade()
     {
-        tyrantController.ActivateNewTentacle();
+        tentacleManager.ActivateNextTentacle();
     }
 
     
