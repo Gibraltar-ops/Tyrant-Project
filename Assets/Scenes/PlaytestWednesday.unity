@@ -1101,6 +1101,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6100139798007335649, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: returnToIdleSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: victimSystem
       value: 
@@ -1109,6 +1113,10 @@ PrefabInstance:
       propertyPath: resistanceSystem
       value: 
       objectReference: {fileID: 1528201832}
+    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: activeTentacleCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

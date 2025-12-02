@@ -126,16 +126,11 @@ public class TentacleSprawlController : MonoBehaviour
             currentTarget
         );
 
-        // check distances
-        Debug.Log(
-            $"Checking distance: {distanceToTarget} vs Trigger distance: {currentTriggerDistance}"
-        );
-
         // use random distance
         if (distanceToTarget <= currentTriggerDistance)
         {
             // see if sprawl activate
-            Debug.Log("!!! STARTING SPRAWL ATTACK !!!");
+
             StartAttack();
         }
     }
@@ -282,8 +277,6 @@ public class TentacleSprawlController : MonoBehaviour
 
         if (isAttacking && AllLegsExtended())
         {
-            Debug.Log("!!! SWAP !!! Legs extended. Handing over to main tentacle.");
-
             if (mainController != null && itemToPull != null)
             {
                 mainController.InitiateCapture(itemToPull);

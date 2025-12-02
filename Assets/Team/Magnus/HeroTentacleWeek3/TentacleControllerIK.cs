@@ -40,6 +40,9 @@ public class TentacleControllerIK : MonoBehaviour
     public float reachSpeed = 20f;
     public float retractSpeed = 5f;
 
+    [SerializeField]
+    private float returnToIdleSpeed = 10f;
+
     [Header("Dependencies")]
     [SerializeField]
     private TentacleSprawlController sprawlController;
@@ -87,10 +90,7 @@ public class TentacleControllerIK : MonoBehaviour
                 initialBoneScales.Add(bone.localScale);
             }
         }
-        else
-        {
-            Debug.LogError("BonesToStretch är inte tilldelad i inspectorn!");
-        }
+        else { }
 
         idleAnchorPosition = effectorBody.position; // Set idle starting point
         currentTarget = idleAnchorPosition;
@@ -199,8 +199,6 @@ public class TentacleControllerIK : MonoBehaviour
 
                 if (Vector3.Distance(effectorBody.position, mouthPoint.position) < 0.5f)
                 {
-                    Debug.Log("Capture sprite consumed. Finalizing.");
-
                     ConsumeItem();
                     currentState = TentacleState.ReturningToIdle;
                 }
@@ -211,7 +209,7 @@ public class TentacleControllerIK : MonoBehaviour
                 currentTarget = Vector3.MoveTowards(
                     currentTarget,
                     idleAnchorPosition,
-                    Time.deltaTime * reachSpeed
+                    Time.deltaTime * returnToIdleSpeed
                 );
                 if (Vector3.Distance(currentTarget, idleAnchorPosition) < 0.1f)
                 {
@@ -247,19 +245,13 @@ public class TentacleControllerIK : MonoBehaviour
 
             currentState = TentacleState.PullingSprite;
         }
-        else
-        {
-            Debug.LogError(
-                "Inget visuellt objekt kunde aktiveras för den fångade typen! Kontrollera referenserna i Inspectorn."
-            );
-        }
+        else { }
     }
 
     public void OnVictimCapturedBySprawl()
     {
         if (currentState == TentacleState.Reaching)
         {
-            Debug.Log("Sprawl has captured victim, main tentacle retracting");
             currentState = TentacleState.Retracting;
         }
     }
@@ -298,8 +290,6 @@ public class TentacleControllerIK : MonoBehaviour
 
         if (currentItem != null)
         {
-            Debug.Log("Giving currency for item and destroying original.");
-
             /*  TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
              if (manager != null)
              {

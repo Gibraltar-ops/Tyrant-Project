@@ -20,7 +20,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject canvas_Credits;
 
     [Header("Game Settings")]
-    private string sceneName = "Level1"; // Set main game scene name here
+    private string sceneName = "IntroCinematic"; // Set main game scene name here
     [SerializeField] private string saveFileKey = "SaveExists";   // Used to check if a save exists
 
     private void Start()
