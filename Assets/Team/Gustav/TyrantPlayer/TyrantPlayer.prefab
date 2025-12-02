@@ -1608,7 +1608,7 @@ MonoBehaviour:
   - {fileID: 6720582378821080879}
   - {fileID: 8874209231872745708}
   - {fileID: 8823267969892019192}
-  activeTentacleCount: 21
+  activeTentacleCount: 1
   grabRadius: 2.5
   victimSystem: {fileID: 0}
   resistanceSystem: {fileID: 0}
@@ -4964,10 +4964,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip

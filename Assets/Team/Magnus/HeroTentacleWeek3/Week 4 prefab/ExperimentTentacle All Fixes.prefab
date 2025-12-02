@@ -1960,7 +1960,6 @@ MonoBehaviour:
   minGripRadius: 0.5
   maxGripRadius: 0.8
   legAnimSpeed: 5
-  capturedVictimPrefab: {fileID: 0}
   mainController: {fileID: 6279173794059977033}
 --- !u!1 &6039759338081236340
 GameObject:
@@ -2006,7 +2005,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7a3fb6958db8a4dbf8c406301af93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TentacleControllerIK
-  reachSpeed: 20
+  victimCaptureVisual: {fileID: 0}
+  fighterCaptureVisual: {fileID: 0}
+  reachSpeed: 15
   retractSpeed: 5
   sprawlController: {fileID: 0}
   effectorJoint: {fileID: 4213386833829661846}
