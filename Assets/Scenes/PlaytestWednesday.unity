@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4916252988068564913, guid: b61243c966d93b1499f885589ef45801, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.9082031
+      objectReference: {fileID: 0}
     - target: {fileID: 6123298307438522418, guid: b61243c966d93b1499f885589ef45801, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1053,6 +1057,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: legAnimSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: minGripRadius
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2631396737271249138, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Name
       value: TyrantPlayer
@@ -1096,6 +1112,30 @@ PrefabInstance:
     - target: {fileID: 2925991045777483717, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612548803774068374, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612548803774068374, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612548803774068374, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173142975884991452, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173142975884991452, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173142975884991452, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: victimSystem
