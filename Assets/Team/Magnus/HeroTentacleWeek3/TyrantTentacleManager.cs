@@ -85,7 +85,7 @@ public class TyrantTentacleManager : MonoBehaviour
         return null;
     }
 
-    private VictimData FindClosestVictim(Vector2 position, float maxDistance)
+    public VictimData FindClosestVictim(Vector2 position, float maxDistance)
     {
         VictimData closest = null;
         float closestDistSqr = maxDistance * maxDistance;
