@@ -7,20 +7,20 @@ public class TentacleSprawlController : MonoBehaviour
     public GameObject legPrefab;
     public int numberOfLegs = 8;
 
-    public float maxReach = 40f;
+    public float maxReach = 30f;
 
-    public float attackSpeed = 5f;
+    public float attackSpeed = 1f;
 
     [Header("Random Variance (Min/Max)")]
-    public float minTriggerDist = 35f;
-    public float maxTriggerDist = 40f;
+    public float minTriggerDist = 45f;
+    public float maxTriggerDist = 45f;
 
     public float minArch = 0.2f;
-    public float maxArch = 0.5f;
+    public float maxArch = 0.8f;
 
     [Tooltip("Slumpa hur mycket de sprider sig vid målet.")]
     public float minGripRadius = 0.5f;
-    public float maxGripRadius = 1.2f;
+    public float maxGripRadius = 0.8f;
 
     [Header("Leg animation")]
     [SerializeField]
@@ -30,14 +30,15 @@ public class TentacleSprawlController : MonoBehaviour
     public TentacleControllerIK mainController;
 
     private List<SprawlLeg> legs = new List<SprawlLeg>();
-    private VictimData victimToPull;
+    private IGrabbable itemToPull;
 
     private bool isAttacking = false;
 
     private bool isRetracting = false;
     private bool hasActiveTarget = false;
     private Vector3 currentTarget;
-    private CaptureSprite activeCaptureSprite;
+
+    /* private CaptureSprite activeCaptureSprite; */
 
     //Current grab values
     private float currentTriggerDistance;
@@ -95,10 +96,10 @@ public class TentacleSprawlController : MonoBehaviour
         }
     }
 
-    public void SetNewTarget(Vector3 targetPosition, VictimData victim)
+    public void SetNewTarget(Vector3 targetPosition, IGrabbable item)
     {
         currentTarget = targetPosition;
-        victimToPull = victim;
+        itemToPull = item;
         hasActiveTarget = true;
 
         currentTriggerDistance = Random.Range(minTriggerDist, maxTriggerDist);
@@ -144,6 +145,7 @@ public class TentacleSprawlController : MonoBehaviour
         isAttacking = true;
 
         isRetracting = false;
+        hasActiveTarget = false;
         foreach (var leg in legs)
         {
             leg.SetVisibility(true);
@@ -162,7 +164,7 @@ public class TentacleSprawlController : MonoBehaviour
         isAttacking = false;
         isRetracting = false;
         hasActiveTarget = false;
-        victimToPull = null;
+        itemToPull = null;
 
         foreach (var leg in legs)
         {
@@ -180,25 +182,33 @@ public class TentacleSprawlController : MonoBehaviour
         }
     }
 
-    void UpdateLegsPositions()
+    /* void UpdateLegsPositions()
     {
         Vector3 startPos = mainController.effectorBody.position;
         Vector3 targetForLegs;
 
         if (isRetracting)
+        {
             if (activeCaptureSprite != null)
             {
                 targetForLegs = activeCaptureSprite.transform.position;
+                float distanceToEffector = Vector3.Distance(targetForLegs, startPos);
+                if (distanceToEffector < 0.05f)
+                {
+                    StopAttack();
+                    return;
+                }
             }
             else
             {
                 targetForLegs = startPos;
             }
+        }
         else
         {
-            if (victimToPull != null)
+            if (itemToPull != null)
             {
-                targetForLegs = victimToPull.position;
+                targetForLegs = itemToPull.Position;
             }
             else
             {
@@ -213,23 +223,61 @@ public class TentacleSprawlController : MonoBehaviour
             legs[i].UpdateLeg(startPos, finalTarget, archOffset, legAnimSpeed);
         }
 
-        if (isRetracting && AllLegsRetracted())
-        {
-            StopAttack();
-        }
         if (isAttacking && AllLegsExtended())
         {
             Debug.Log("!!! SWAP !!! Legs extended. Handing over to main tentacle.");
 
-            if (mainController != null && victimToPull != null)
+            if (mainController != null && itemToPull != null)
             {
-                activeCaptureSprite = mainController.InitiateCapture(victimToPull.position);
+                activeCaptureSprite = mainController.InitiateCapture(itemToPull);
             }
 
-            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
-            if (manager != null && victimToPull != null)
+            isAttacking = false;
+            isRetracting = true;
+        }
+    }
+ */
+
+    void UpdateLegsPositions()
+    {
+        Vector3 startPos = mainController.effectorBody.position;
+        Vector3 targetForLegs;
+
+        if (isRetracting)
+        {
+            targetForLegs = startPos;
+            if (AllLegsRetracted())
             {
-                manager.DestroyVictim(victimToPull);
+                StopAttack();
+                return;
+            }
+        }
+        else
+        {
+            if (itemToPull != null)
+            {
+                targetForLegs = itemToPull.Position;
+            }
+            else
+            {
+                targetForLegs = currentTarget;
+            }
+        }
+
+        for (int i = 0; i < legs.Count; i++)
+        {
+            Vector3 finalTarget = targetForLegs + legTargetOffsets[i];
+            Vector3 archOffset = legArchDirections[i] * currentArchAmount;
+            legs[i].UpdateLeg(startPos, finalTarget, archOffset, legAnimSpeed);
+        }
+
+        if (isAttacking && AllLegsExtended())
+        {
+            Debug.Log("!!! SWAP !!! Legs extended. Handing over to main tentacle.");
+
+            if (mainController != null && itemToPull != null)
+            {
+                mainController.InitiateCapture(itemToPull);
             }
 
             isAttacking = false;

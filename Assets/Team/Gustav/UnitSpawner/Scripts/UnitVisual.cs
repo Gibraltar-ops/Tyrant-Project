@@ -28,8 +28,8 @@ public class UnitVisual : MonoBehaviour
         else if (movementDirection.x > 0.01f)
             spriteRenderer.flipX = true;
 
-        // Always play walk animation (we only have one)
-        animator.Play("WalkBehind");
+        //// Always play walk animation (we only have one)
+        //animator.Play("ManWalking");
     }
 }
 

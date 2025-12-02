@@ -51,15 +51,15 @@ public class TyrantTentacleManager : MonoBehaviour
 
     private void TryGrabTargetAtClick(Vector2 clickPosition)
     {
-        VictimData targetVictim = FindClosestVictim(clickPosition, grabRadius);
+        IGrabbable target = FindClosestGrabbable(clickPosition, grabRadius);
 
-        if (targetVictim != null && !targetVictim.isMarkedForDeath)
+        if (target != null && !target.IsGrabbed)
         {
             TentacleControllerIK freeTentacle = FindFreeTentacle();
             if (freeTentacle != null)
             {
-                targetVictim.isMarkedForDeath = true;
-                freeTentacle.StartGrab(targetVictim, mouthPoint);
+                target.IsGrabbed = true;
+                freeTentacle.StartGrab(target, mouthPoint);
             }
             else
             {
@@ -73,9 +73,11 @@ public class TyrantTentacleManager : MonoBehaviour
         if (tentacles == null || activeTentacleCount == 0)
             return null;
 
+        int startIndex = (lastUsedTentacleIndex + 1) % activeTentacleCount;
+
         for (int i = 0; i < activeTentacleCount; i++)
         {
-            int indexToTry = (lastUsedTentacleIndex + 1 + i) % activeTentacleCount;
+            int indexToTry = (startIndex + i) % activeTentacleCount;
             if (!tentacles[indexToTry].IsBusy())
             {
                 lastUsedTentacleIndex = indexToTry;
@@ -85,31 +87,52 @@ public class TyrantTentacleManager : MonoBehaviour
         return null;
     }
 
-    public VictimData FindClosestVictim(Vector2 position, float maxDistance)
+    private IGrabbable FindClosestGrabbable(Vector2 position, float maxDistance)
     {
-        VictimData closest = null;
+        IGrabbable closest = null;
         float closestDistSqr = maxDistance * maxDistance;
 
-        foreach (var victim in victimSystem.victims)
+        var grabbables = new List<IGrabbable>();
+
+        if (victimSystem != null)
         {
-            if (victim.isMarkedForDeath)
+            grabbables.AddRange(victimSystem.victims);
+        }
+        if (resistanceSystem != null)
+        {
+            grabbables.AddRange(resistanceSystem.fighters);
+        }
+
+        foreach (var grabbable in grabbables)
+        {
+            if (grabbable.IsGrabbed)
                 continue;
 
-            float distSqr = (victim.position - position).sqrMagnitude;
+            float distSqr = (grabbable.Position - position).sqrMagnitude;
             if (distSqr < closestDistSqr)
             {
                 closestDistSqr = distSqr;
-                closest = victim;
+                closest = grabbable;
             }
         }
         return closest;
     }
 
-    public void DestroyVictim(VictimData victim)
+    public void DestroyGrabbable(IGrabbable grabbable)
     {
-        if (victimSystem != null && victimSystem.victims.Contains(victim))
+        if (grabbable is VictimData victim)
         {
-            victimSystem.victims.Remove(victim);
+            if (victimSystem != null && victimSystem.victims.Contains(victim))
+            {
+                victimSystem.victims.Remove(victim);
+            }
+        }
+        else if (grabbable is ResistanceData fighter)
+        {
+            if (resistanceSystem != null && resistanceSystem.fighters.Contains(fighter))
+            {
+                resistanceSystem.fighters.Remove(fighter);
+            }
         }
     }
 }
