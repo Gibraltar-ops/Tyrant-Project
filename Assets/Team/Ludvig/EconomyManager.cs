@@ -10,7 +10,7 @@ public class EconomyManager : MonoBehaviour
     public long Keratin;
     public long Victims;
 
-    public long BiomassWinThreshold = 1000;
+    public long BiomassWinThreshold = 100000;
 
     public long BiomassLifetime = 12;
 
@@ -61,20 +61,28 @@ public class EconomyManager : MonoBehaviour
                 {
                     BiomassLifetime += value;
                 }
-                
+                Biomass = Biomass <= 0 ? 0 : Biomass;
                 onCurrencyChanged?.Invoke(Currency.Biomass);
                 break;
             case Currency.Brains:
                 Brains += value;
+                Biomass = Biomass <= 0 ? 0 : Biomass;
                 onCurrencyChanged?.Invoke(Currency.Brains);
                 break;
             case Currency.Keratin:
                 Keratin += value;
+                Keratin = Keratin <= 0 ? 0 : Keratin;
                 onCurrencyChanged?.Invoke(Currency.Keratin);
                 break;
             case Currency.Victims:
                 Victims += value;
+                Victims = Victims <= 0 ? 0 : Victims;
                 onCurrencyChanged?.Invoke(Currency.Victims);
+                break;
+            case Currency.BiomassLifetime:
+                BiomassLifetime += value;
+                BiomassLifetime = BiomassLifetime <= 0 ? 0 : BiomassLifetime;
+                onCurrencyChanged?.Invoke(Currency.BiomassLifetime);
                 break;
             default:
                 break;

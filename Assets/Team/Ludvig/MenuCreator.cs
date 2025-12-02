@@ -17,7 +17,7 @@ public class MenuCreator : MonoBehaviour
 
     public void CreateMenu()
     {
-        GameObject menu = Instantiate(MenuPrefab, MenuOrigin);
+        GameObject menu = Instantiate(MenuPrefab, MenuOrigin.gameObject.GetComponent<RectTransform>());
         MenuInstance = menu;
 
         UIMenuInfo menuInfo = menu.GetComponent<UIMenuInfo>();

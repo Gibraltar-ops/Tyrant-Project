@@ -23,7 +23,7 @@ public class ThresholdCurrencySlider : MonoBehaviour
 
     public void UpdateSlider(Currency currency)
     {
-        if(currency == Currency && !_thresholdMet)
+        if(!_thresholdMet)
         {
             long currentCurrency = EconomyManager.Instance.GetCurrent(Currency.BiomassLifetime);
 

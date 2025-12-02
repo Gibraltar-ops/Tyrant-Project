@@ -78,7 +78,7 @@ public class ResistanceSystem : MonoBehaviour
                 position = spawnRegion.RandomPointInside(),
                 homeRegion = gatherRegion,
                 destination = gatherRegion.RandomPointInside(),
-                attackDamage = -1, // Base damage
+                attackDamage = -25, // Base damage
                 attackTimer = attackCooldown, // offset so they don't sync with each other
                 speed = UnityEngine.Random.Range(0.4f, 1f),
                 scale = UnityEngine.Random.Range(0.15f, 0.16f),
