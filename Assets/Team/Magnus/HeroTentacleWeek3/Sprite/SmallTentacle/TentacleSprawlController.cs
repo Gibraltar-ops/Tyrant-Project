@@ -22,14 +22,22 @@ public class TentacleSprawlController : MonoBehaviour
     public float minGripRadius = 0.5f;
     public float maxGripRadius = 1.2f;
 
+    [Header("Leg animation")]
+    [SerializeField]
+    private float legAnimSpeed = 5f;
+
     [Header("References")]
     public TentacleControllerIK mainController;
 
     private List<SprawlLeg> legs = new List<SprawlLeg>();
+    private VictimData victimToPull;
 
     private bool isAttacking = false;
+
+    private bool isRetracting = false;
     private bool hasActiveTarget = false;
     private Vector3 currentTarget;
+    private CaptureSprite activeCaptureSprite;
 
     //Current grab values
     private float currentTriggerDistance;
@@ -76,34 +84,29 @@ public class TentacleSprawlController : MonoBehaviour
     void Update()
     {
         // logik
-        if (hasActiveTarget && !isAttacking)
+        if (hasActiveTarget && !isAttacking && !isRetracting)
         {
             CheckDistanceAndTrigger();
         }
 
-        if (isAttacking)
+        if (isAttacking || isRetracting)
         {
             UpdateLegsPositions();
         }
     }
 
-    public void SetNewTarget(Vector3 targetPosition)
+    public void SetNewTarget(Vector3 targetPosition, VictimData victim)
     {
         currentTarget = targetPosition;
+        victimToPull = victim;
         hasActiveTarget = true;
 
-        // randomize distance
         currentTriggerDistance = Random.Range(minTriggerDist, maxTriggerDist);
-
-        // randomize arch
         currentArchAmount = Random.Range(minArch, maxArch);
-
-        // randomize grip radius
         float currentGrip = Random.Range(minGripRadius, maxGripRadius);
         RecalculateLegOffsets(currentGrip);
 
-        // reset legs
-        StopAttack();
+        ResetLegsForNewAttack();
     }
 
     void RecalculateLegOffsets(float radius)
@@ -122,9 +125,16 @@ public class TentacleSprawlController : MonoBehaviour
             currentTarget
         );
 
+        // check distances
+        Debug.Log(
+            $"Checking distance: {distanceToTarget} vs Trigger distance: {currentTriggerDistance}"
+        );
+
         // use random distance
         if (distanceToTarget <= currentTriggerDistance)
         {
+            // see if sprawl activate
+            Debug.Log("!!! STARTING SPRAWL ATTACK !!!");
             StartAttack();
         }
     }
@@ -132,37 +142,122 @@ public class TentacleSprawlController : MonoBehaviour
     void StartAttack()
     {
         isAttacking = true;
+
+        isRetracting = false;
         foreach (var leg in legs)
         {
             leg.SetVisibility(true);
         }
     }
 
+    public void StartRetracting()
+    {
+        isRetracting = true;
+
+        isAttacking = false;
+    }
+
     public void StopAttack()
     {
         isAttacking = false;
-        hasActiveTarget = false; // Reset target
+        isRetracting = false;
+        hasActiveTarget = false;
+        victimToPull = null;
+
         foreach (var leg in legs)
         {
-            leg.SetVisibility(false);
+            leg.ResetLeg();
+        }
+    }
+
+    private void ResetLegsForNewAttack()
+    {
+        isAttacking = false;
+        isRetracting = false;
+        foreach (var leg in legs)
+        {
+            leg.ResetProgress();
         }
     }
 
     void UpdateLegsPositions()
     {
         Vector3 startPos = mainController.effectorBody.position;
+        Vector3 targetForLegs;
+
+        if (isRetracting)
+            if (activeCaptureSprite != null)
+            {
+                targetForLegs = activeCaptureSprite.transform.position;
+            }
+            else
+            {
+                targetForLegs = startPos;
+            }
+        else
+        {
+            if (victimToPull != null)
+            {
+                targetForLegs = victimToPull.position;
+            }
+            else
+            {
+                targetForLegs = currentTarget;
+            }
+        }
 
         for (int i = 0; i < legs.Count; i++)
         {
-            Vector3 finalTarget = currentTarget + legTargetOffsets[i];
-
-            Vector3 archDir = legArchDirections[i];
-            float distance = Vector3.Distance(startPos, finalTarget);
-
-            // random arch value usage
-            Vector3 finalArchOffset = archDir * (currentArchAmount * (distance / 5f));
-
-            legs[i].UpdateLeg(startPos, finalTarget, finalArchOffset, attackSpeed);
+            Vector3 finalTarget = targetForLegs + legTargetOffsets[i];
+            Vector3 archOffset = legArchDirections[i] * currentArchAmount;
+            legs[i].UpdateLeg(startPos, finalTarget, archOffset, legAnimSpeed);
         }
+
+        if (isRetracting && AllLegsRetracted())
+        {
+            StopAttack();
+        }
+        if (isAttacking && AllLegsExtended())
+        {
+            Debug.Log("!!! SWAP !!! Legs extended. Handing over to main tentacle.");
+
+            if (mainController != null && victimToPull != null)
+            {
+                activeCaptureSprite = mainController.InitiateCapture(victimToPull.position);
+            }
+
+            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
+            if (manager != null && victimToPull != null)
+            {
+                manager.DestroyVictim(victimToPull);
+            }
+
+            isAttacking = false;
+            isRetracting = true;
+        }
+    }
+
+    private bool AllLegsExtended()
+    {
+        foreach (var leg in legs)
+        {
+            if (!leg.IsFullyExtended())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool AllLegsRetracted()
+    {
+        foreach (var leg in legs)
+        {
+            if (!leg.IsRetracted())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -49,16 +49,16 @@ MonoBehaviour:
   spawnInterval: 1
   maxVictims: 10000
   spawnRegions:
-  - center: {x: -75, y: -30}
-    size: {x: 4, y: 30}
-  - center: {x: 75, y: -30}
-    size: {x: 4, y: 30}
-  - center: {x: 0, y: -60}
-    size: {x: 120, y: 4}
+  - center: {x: -25, y: -12}
+    size: {x: 1, y: 10}
+  - center: {x: 25, y: -12}
+    size: {x: 1, y: 10}
+  - center: {x: 0, y: -18}
+    size: {x: 48, y: 2}
   destinationRegions:
-  - center: {x: 0, y: -30}
-    radius: 10
-    length: 30
+  - center: {x: 0, y: -9.25}
+    radius: 2.25
+    length: 10
   spawnRateMultiplier: 1
 --- !u!114 &1359637981827827607
 MonoBehaviour:

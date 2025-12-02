@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: 79dc376ac4512844598e4235cebf5ae2
+guid: 4ae42a569ecea4642bc964e7f8380870
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7006006246532498660
-    second: Silhouette_2_0
+      213: -6722346105896921016
+    second: ManWalking_0
   - first:
-      213: -1106632624336201276
-    second: Silhouette_2_1
+      213: 3143693040775339209
+    second: ManWalking_1
+  - first:
+      213: 2872667213796104551
+    second: ManWalking_2
+  - first:
+      213: -6868207655040951983
+    second: ManWalking_3
+  - first:
+      213: -698773692251624566
+    second: ManWalking_4
+  - first:
+      213: 6538282270317142832
+    second: ManWalking_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,18 +52,18 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -78,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Silhouette_2_0
+      name: ManWalking_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 29
-        width: 418
-        height: 275
+        x: 435
+        y: 1122
+        width: 288
+        height: 926
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c1b334d207aa5ce90800000000000000
-      internalID: -7006006246532498660
+      spriteID: 84898cc45dd65b2a0800000000000000
+      internalID: -6722346105896921016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Silhouette_2_1
+      name: ManWalking_1
       rect:
         serializedVersion: 2
-        x: 429
-        y: 29
-        width: 418
-        height: 229
+        x: 1737
+        y: 1107
+        width: 287
+        height: 933
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +152,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c91599cd7374a0f0800000000000000
-      internalID: -1106632624336201276
+      spriteID: 9cc18422a24a0ab20800000000000000
+      internalID: 3143693040775339209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ManWalking_2
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 1129
+        width: 308
+        height: 942
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7695a346c93cdd720800000000000000
+      internalID: 2872667213796104551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ManWalking_3
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 86
+        width: 277
+        height: 958
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1595aade6893fa0a0800000000000000
+      internalID: -6868207655040951983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ManWalking_4
+      rect:
+        serializedVersion: 2
+        x: 1739
+        y: 82
+        width: 304
+        height: 961
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b24f677057d46f0800000000000000
+      internalID: -698773692251624566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ManWalking_5
+      rect:
+        serializedVersion: 2
+        x: 2883
+        y: 100
+        width: 421
+        height: 941
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 033ec736515acba50800000000000000
+      internalID: 6538282270317142832
       vertices: []
       indices: 
       edges: []
@@ -160,8 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Silhouette_2_0: -7006006246532498660
-      Silhouette_2_1: -1106632624336201276
+      ManWalking_0: -6722346105896921016
+      ManWalking_1: 3143693040775339209
+      ManWalking_2: 2872667213796104551
+      ManWalking_3: -6868207655040951983
+      ManWalking_4: -698773692251624566
+      ManWalking_5: 6538282270317142832
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
