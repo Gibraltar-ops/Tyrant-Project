@@ -1,10 +1,13 @@
-using UnityEngine;
-using UnityEngine.Video;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class IntroVideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
+
+    private string sceneName = "PlaytestWednesday";
 
     private void Start()
     {
@@ -27,5 +30,7 @@ public class IntroVideoController : MonoBehaviour
     {
         Debug.Log("Video finished!");
         // Do anything here: load next scene, fade out, etc.
+
+        SceneManager.LoadScene(sceneName);
     }
 }
