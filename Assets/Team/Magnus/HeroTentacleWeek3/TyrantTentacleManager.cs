@@ -73,18 +73,19 @@ public class TyrantTentacleManager : MonoBehaviour
         if (tentacles == null || activeTentacleCount == 0)
             return null;
 
-        int startIndex = (lastUsedTentacleIndex + 1) % activeTentacleCount;
-
+        List<int> freeIndices = new List<int>();
         for (int i = 0; i < activeTentacleCount; i++)
         {
-            int indexToTry = (startIndex + i) % activeTentacleCount;
-            if (!tentacles[indexToTry].IsBusy())
-            {
-                lastUsedTentacleIndex = indexToTry;
-                return tentacles[indexToTry];
-            }
+            if (!tentacles[i].IsBusy())
+                freeIndices.Add(i);
         }
-        return null;
+
+        if (freeIndices.Count == 0)
+            return null;
+
+        int randomIndex = freeIndices[Random.Range(0, freeIndices.Count)];
+        lastUsedTentacleIndex = randomIndex;
+        return tentacles[randomIndex];
     }
 
     private IGrabbable FindClosestGrabbable(Vector2 position, float maxDistance)
@@ -116,6 +117,24 @@ public class TyrantTentacleManager : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public void ActivateNextTentacle()
+    {
+        if (tentacles == null)
+            return;
+
+        if (activeTentacleCount < tentacles.Count)
+        {
+            activeTentacleCount++;
+
+            // Here we can add visual feedback or stuff!! / Magnus
+            Debug.Log($"Tentacle{activeTentacleCount} activated");
+        }
+        else
+        {
+            Debug.Log("All tentacles already active");
+        }
     }
 
     public void DestroyGrabbable(IGrabbable grabbable)
