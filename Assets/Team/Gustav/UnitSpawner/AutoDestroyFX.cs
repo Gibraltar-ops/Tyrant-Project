@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AutoDestroyExplosion : MonoBehaviour
+public class AutoDestroyFX : MonoBehaviour
 {
     Animator m_Animator;
     AnimatorClipInfo[] m_CurrentClipInfo;
