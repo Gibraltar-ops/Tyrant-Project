@@ -34,10 +34,7 @@ public class TyrantTentacleManager : MonoBehaviour
                 victimSystem.gameObject
             );
         }
-        else
-        {
-            Debug.LogError("Tyrant Manager has NO VictimSystem assigned!");
-        }
+        else { }
     }
 
     void Update()
@@ -61,10 +58,7 @@ public class TyrantTentacleManager : MonoBehaviour
                 target.IsGrabbed = true;
                 freeTentacle.StartGrab(target, mouthPoint);
             }
-            else
-            {
-                Debug.Log("All tentacles are busy or none are available.");
-            }
+            else { }
         }
     }
 
@@ -129,12 +123,8 @@ public class TyrantTentacleManager : MonoBehaviour
             activeTentacleCount++;
 
             // Here we can add visual feedback or stuff!! / Magnus
-            Debug.Log($"Tentacle{activeTentacleCount} activated");
         }
-        else
-        {
-            Debug.Log("All tentacles already active");
-        }
+        else { }
     }
 
     public void DestroyGrabbable(IGrabbable grabbable)
