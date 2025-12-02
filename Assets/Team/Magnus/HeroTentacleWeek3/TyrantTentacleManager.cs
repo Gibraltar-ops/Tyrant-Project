@@ -122,8 +122,7 @@ public class TyrantTentacleManager : MonoBehaviour
 
         if (activeTentacleCount < tentacles.Count)
         {
-            activeTentacleCount++;
-            tentacles[activeTentacleCount].gameObject.SetActive(true);
+            activeTentacleCount++;          
 
             // Here we can add visual feedback or stuff!! / Magnus
         }
