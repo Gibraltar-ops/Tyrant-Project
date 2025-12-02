@@ -38,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       propertyPath: m_LocalRotation.w
@@ -413,7 +413,7 @@ PrefabInstance:
       addedObject: {fileID: 3106418682421319415}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4004991148816806371}
+      addedObject: {fileID: 469244859940185681}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: ce627d6b18501f8449abe6d924213f03, type: 3}
 --- !u!1 &4343620184493266046 stripped
 GameObject:
@@ -442,7 +442,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4004991148816806371
+--- !u!114 &469244859940185681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -451,7 +451,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4343620184493266046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e66a8a161dca2734590bf604965ad5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 06e1d8b039f9e0541bfff79b64f3770b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectorCurveAnimation
+  m_EditorClassIdentifier: Assembly-CSharp::CollectorCurveAnimationAutoTentacle
   Multiplier: 1
+  victimSystem: {fileID: 0}
