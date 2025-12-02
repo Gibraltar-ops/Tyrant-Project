@@ -245,7 +245,16 @@ public class TentacleSprawlController : MonoBehaviour
 
         if (isRetracting)
         {
-            targetForLegs = startPos;
+            // If the visual is active, target it.
+            if (mainController.ActiveCaptureVisual != null)
+            {
+                targetForLegs = mainController.ActiveCaptureVisual.transform.position;
+            }
+            else // Otherwise, retract to base.
+            {
+                targetForLegs = startPos;
+            }
+
             if (AllLegsRetracted())
             {
                 StopAttack();

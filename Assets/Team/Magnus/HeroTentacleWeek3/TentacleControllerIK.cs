@@ -18,6 +18,7 @@ public class TentacleControllerIK : MonoBehaviour
     private GameObject fighterCaptureVisual;
 
     private GameObject activeCaptureVisual;
+    public GameObject ActiveCaptureVisual => activeCaptureVisual;
 
     private enum TentacleState
     {
@@ -238,6 +239,12 @@ public class TentacleControllerIK : MonoBehaviour
             activeCaptureVisual.transform.SetParent(null);
             activeCaptureVisual.transform.position = capturedItem.Position;
 
+            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
+            if (manager != null)
+            {
+                manager.DestroyGrabbable(capturedItem);
+            }
+
             currentState = TentacleState.PullingSprite;
         }
         else
@@ -293,11 +300,11 @@ public class TentacleControllerIK : MonoBehaviour
         {
             Debug.Log("Giving currency for item and destroying original.");
 
-            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
-            if (manager != null)
-            {
-                manager.DestroyGrabbable(currentItem);
-            }
+            /*  TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
+             if (manager != null)
+             {
+                 manager.DestroyGrabbable(currentItem);
+             } */
 
             currentItem = null;
         }
