@@ -16,6 +16,17 @@ public class SprawlLeg : MonoBehaviour
         lr.enabled = false; // invisible from start
     }
 
+    public void ResetLeg()
+    {
+        extensionProgress = 0f;
+        SetVisibility(false);
+    }
+
+    public void ResetProgress()
+    {
+        extensionProgress = 0f;
+    }
+
     public void SetVisibility(bool visible)
     {
         lr.enabled = visible;
@@ -25,11 +36,25 @@ public class SprawlLeg : MonoBehaviour
 
     public void UpdateLeg(Vector3 startPos, Vector3 targetPos, Vector3 archOffset, float speed)
     {
-        //Animate tentacle attac
-        extensionProgress = Mathf.MoveTowards(extensionProgress, 1f, Time.deltaTime * speed);
-
-        if (extensionProgress <= 0.01f)
+        bool shouldRetract = (targetPos == startPos);
+        if (shouldRetract)
+        {
+            extensionProgress = Mathf.MoveTowards(
+                extensionProgress,
+                0f,
+                Time.deltaTime * speed * 1.5f
+            );
+        }
+        else
+        {
+            //Animate tentacle attac
+            extensionProgress = Mathf.MoveTowards(extensionProgress, 1f, Time.deltaTime * speed);
+        }
+        if (extensionProgress <= 0.01f && shouldRetract)
+        {
+            SetVisibility(false);
             return;
+        }
 
         // calculate end position
         Vector3 currentEndPos = Vector3.Lerp(startPos, targetPos, extensionProgress);
@@ -48,6 +73,16 @@ public class SprawlLeg : MonoBehaviour
             Vector3 pixelPos = CalculateQuadraticBezier(t, startPos, controlPoint, currentEndPos);
             lr.SetPosition(i, pixelPos);
         }
+    }
+
+    public bool IsRetracted()
+    {
+        return extensionProgress <= 0.01f;
+    }
+
+    public bool IsFullyExtended()
+    {
+        return extensionProgress >= 1f;
     }
 
     // bezier math

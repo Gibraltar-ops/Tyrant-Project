@@ -25,6 +25,21 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
+    void Start()
+    {
+        if (victimSystem != null)
+        {
+            Debug.Log(
+                $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
+                victimSystem.gameObject
+            );
+        }
+        else
+        {
+            Debug.LogError("Tyrant Manager has NO VictimSystem assigned!");
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,15 +52,12 @@ public class TyrantTentacleManager : MonoBehaviour
     private void TryGrabTargetAtClick(Vector2 clickPosition)
     {
         VictimData targetVictim = FindClosestVictim(clickPosition, grabRadius);
-        Debug.Log("Searching for victim... Found: " + (targetVictim != null));
 
         if (targetVictim != null && !targetVictim.isMarkedForDeath)
         {
-            Debug.Log("Victim is valid. Searching for a free tentacle...");
             TentacleControllerIK freeTentacle = FindFreeTentacle();
             if (freeTentacle != null)
             {
-                Debug.Log("Found free tentacle! Commanding to grab: " + freeTentacle.name);
                 targetVictim.isMarkedForDeath = true;
                 freeTentacle.StartGrab(targetVictim, mouthPoint);
             }
@@ -91,5 +103,13 @@ public class TyrantTentacleManager : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public void DestroyVictim(VictimData victim)
+    {
+        if (victimSystem != null && victimSystem.victims.Contains(victim))
+        {
+            victimSystem.victims.Remove(victim);
+        }
     }
 }
