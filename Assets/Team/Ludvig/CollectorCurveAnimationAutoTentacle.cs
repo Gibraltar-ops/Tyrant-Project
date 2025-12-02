@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +10,7 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
     private bool _victimDestroyed = false;
     private VictimData closestVictim;
     private Vector2 originPosition;
+    public GameObject BloodSplatter;
 
     void Start()
     {   
@@ -52,8 +53,10 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
             
             if(closestVictim != null)
             {
-            DestroyVictim(closestVictim);
-            closestVictim = null;
+                Instantiate(BloodSplatter, closestVictim.position, Quaternion.identity);
+                DestroyVictim(closestVictim);
+                closestVictim = null;
+            
             }
             
             _victimDestroyed = true;

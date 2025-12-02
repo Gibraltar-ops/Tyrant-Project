@@ -27,14 +27,16 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public CollectorData collectorData;
 
+    public GameObject BloodSplatter;
+
     void Start()
     {
         if (victimSystem != null)
         {
-            Debug.Log(
-                $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
-                victimSystem.gameObject
-            );
+            // Debug.Log(
+            //     $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
+            //     victimSystem.gameObject
+            // );
         }
         else { }
     }
@@ -43,7 +45,7 @@ public class TyrantTentacleManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Click");
+            //Debug.Log("Click");
             TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
@@ -122,7 +124,10 @@ public class TyrantTentacleManager : MonoBehaviour
 
         if (activeTentacleCount < tentacles.Count)
         {
-            activeTentacleCount++;          
+            
+            tentacles[activeTentacleCount].transform.parent.gameObject.SetActive(true); 
+            activeTentacleCount++;     
+                
 
             // Here we can add visual feedback or stuff!! / Magnus
         }
@@ -131,10 +136,12 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public void DestroyGrabbable(IGrabbable grabbable)
     {
+        
         if (grabbable is VictimData victim)
         {
             if (victimSystem != null && victimSystem.victims.Contains(victim))
             {
+                Instantiate(BloodSplatter, victim.position, Quaternion.identity);
                 victimSystem.victims.Remove(victim);
             }
         }
@@ -142,6 +149,7 @@ public class TyrantTentacleManager : MonoBehaviour
         {
             if (resistanceSystem != null && resistanceSystem.fighters.Contains(fighter))
             {
+                Instantiate(BloodSplatter, fighter.position, Quaternion.identity);
                 resistanceSystem.fighters.Remove(fighter);
             }
         }

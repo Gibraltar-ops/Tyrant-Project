@@ -1187,7 +1187,7 @@ MonoBehaviour:
     NumberOwned: 0
     NextPrice: 12
   BoughtWithCurrency: 0
-  Active: 0
+  Active: 1
 --- !u!114 &735443502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3118,6 +3118,10 @@ PrefabInstance:
       propertyPath: victimSystem
       value: 
       objectReference: {fileID: 1883828915}
+    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: BloodSplatter
+      value: 
+      objectReference: {fileID: 1596016400921981985, guid: f2b91236e048fa24288b982e940c968d, type: 3}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: resistanceSystem
       value: 
