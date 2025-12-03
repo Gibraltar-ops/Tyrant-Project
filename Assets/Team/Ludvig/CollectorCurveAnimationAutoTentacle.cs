@@ -21,6 +21,7 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
         {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
+        _victimDestroyed = true;
     }
     public override void UpdateAnimation()
     {
