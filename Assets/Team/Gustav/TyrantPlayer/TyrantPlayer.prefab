@@ -118,7 +118,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &352342721023245352
@@ -603,7 +603,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1093771224420087800
@@ -724,7 +724,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1598863234790238246
@@ -966,7 +966,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1776900372234669552
@@ -1236,7 +1236,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2003737632552466744
@@ -1448,7 +1448,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2631396737271249138
@@ -1613,6 +1613,13 @@ MonoBehaviour:
   victimSystem: {fileID: 0}
   resistanceSystem: {fileID: 0}
   mouthPoint: {fileID: 9177728187336977632}
+  collectorData:
+    Types: []
+    CollectedCurrency: 0
+    BaseCollect: 10
+    CollectMultiplier: 1
+    CollectAdd: 0
+  BloodSplatter: {fileID: 0}
 --- !u!1 &2756788731811827342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1707,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2912330883858359015
@@ -1911,7 +1918,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3502658542074341725
@@ -2032,7 +2039,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3820158144238926076
@@ -2122,7 +2129,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4177899208553280727
@@ -2274,7 +2281,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4515047588644534553
@@ -2364,7 +2371,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4526817920487469410
@@ -2454,7 +2461,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4585792643690956869
@@ -2928,7 +2935,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5902404279581525830
@@ -3139,7 +3146,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6115551221843579818
@@ -3229,7 +3236,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6174584993427892546
@@ -3350,7 +3357,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6315278584814235493
@@ -3440,7 +3447,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6618677340640933479
@@ -4073,7 +4080,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7242488704416328267
@@ -4654,7 +4661,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8686393473922260626
@@ -4775,7 +4782,7 @@ SpriteRenderer:
   m_Size: {x: 5.87, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &9069924366576589809
@@ -5322,10 +5329,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 2896693192750874816}
@@ -5682,10 +5685,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -6046,10 +6045,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 6839326758658489827}
@@ -6406,10 +6401,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -6770,10 +6761,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 1672430407490867850}
@@ -7130,10 +7117,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -7495,7 +7478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: reachSpeed
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -7856,10 +7839,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 5090342170522225906}
@@ -8216,10 +8195,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -8580,10 +8555,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 5874368127528454702}
@@ -8940,10 +8911,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -9304,10 +9271,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 3799823911398884248}
@@ -9664,10 +9627,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -10028,10 +9987,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 7089807839990975881}
@@ -10388,10 +10343,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -10752,10 +10703,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 616885387414293177}
@@ -11112,10 +11059,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -11476,10 +11419,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
       value: 
       objectReference: {fileID: 6606181881765700563}
@@ -11836,10 +11775,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip
@@ -12326,10 +12261,6 @@ PrefabInstance:
     - target: {fileID: 5310271062783838072, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
-      propertyPath: reachSpeed
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6279173794059977033, guid: 4bbc26de56571d74ca8958d249ea7079, type: 3}
       propertyPath: tentacleTip

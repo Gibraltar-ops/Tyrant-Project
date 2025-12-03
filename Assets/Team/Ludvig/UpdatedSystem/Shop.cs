@@ -142,19 +142,41 @@ public class Shop : MonoBehaviour
         }
  
     }
+    public void MaxOutLabels()
+    {
+        _itemName.text = ItemName;
+        _currentCountLabel.text = "Max: " + shopSettings.MaxOwned;
+        _nextPriceLabel.text = "";//shopSettings.NextPrice.ToString();
+        _purchaseButton.gameObject.SetActive(false);
+
+    }
     private void ResetButton()
     {
         _upgradeButtonClicked = false;
     }
 
     public void PurchaseUpgrade()
-    {   
+    { 
 
-        GetComponent<Upgrade>().ApplyUpgrade();
+        Upgrade[] upgrades = GetComponents<Upgrade>();
+        foreach (Upgrade upgrade in upgrades)
+        {
+            upgrade.ApplyUpgrade();
+        } 
+
         EconomyManager.Instance.IncrementCurrency(BoughtWithCurrency, -shopSettings.NextPrice);
         shopSettings.NumberOwned++;
+
+        if(shopSettings.NumberOwned < shopSettings.MaxOwned)
+        {
         IncrementPrice();
         UpdateLabels();
+        }
+        else
+        {
+            MaxOutLabels();
+        }
+        
     }
 
     

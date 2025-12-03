@@ -10,7 +10,7 @@ public class EconomyManager : MonoBehaviour
     public long Keratin;
     public long Victims;
 
-    public long BiomassWinThreshold = 100000;
+    public long BiomassWinThreshold = 15000;
 
     public long BiomassLifetime = 12;
 

@@ -29,6 +29,9 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public GameObject BloodSplatter;
 
+    private float _autoClickInterval = 0.05f;
+    private float _currentAutoClickTime = 0f;
+
     void Start()
     {
         if (victimSystem != null)
@@ -43,11 +46,18 @@ public class TyrantTentacleManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        _currentAutoClickTime += Time.deltaTime;
+
+        if(_currentAutoClickTime >= _autoClickInterval)
         {
+            _currentAutoClickTime = 0f;
+            if (Input.GetMouseButton(0))
+            {
             //Debug.Log("Click");
             TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
+       
     }
 
     private void TryGrabTargetAtClick(Vector2 clickPosition)

@@ -1,12 +1,12 @@
 
 public class PlayerTentacleCollectUp : Upgrade
 {
-    public TyrantController tyrantController;
+    public TyrantTentacleManager tentacleManager;
     public int AddValue;
     
     public override void ApplyUpgrade()
     {
-        tyrantController.biomassPerHuman += AddValue;
+        tentacleManager.collectorData.CollectAdd += AddValue;
     }
 
     

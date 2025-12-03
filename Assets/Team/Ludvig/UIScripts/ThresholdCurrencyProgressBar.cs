@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThresholdCurrencySlider : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class ThresholdCurrencySlider : MonoBehaviour
             {
                 _thresholdMet = true;
                 onWinThresholdMet?.Invoke();
+                EndGame();
             }
 
             
@@ -57,5 +59,10 @@ public class ThresholdCurrencySlider : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void EndGame()
+    {
+        SceneManager.LoadScene("OutroCinematic");
     }
 }
