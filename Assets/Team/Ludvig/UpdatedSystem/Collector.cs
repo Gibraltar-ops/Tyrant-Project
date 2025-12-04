@@ -5,6 +5,7 @@ public class Collector
     public float CurrentTime;
     public float NormalizedTime;
     public bool CanCollect = true;
+    public Vector2 position;
 
     public Collector(float currentTime)
     {

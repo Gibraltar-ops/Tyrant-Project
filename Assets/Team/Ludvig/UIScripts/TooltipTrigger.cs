@@ -8,12 +8,22 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     //and sending the correct tooltip info.
     public Tooltip Tooltip;
     private bool _playerHasInteracted = false;
+    private TooltipData _tooltipData;
 
+    public void InitializeTooltipData(string value)
+    {
+        _tooltipData = new TooltipData(Tooltip, value);
+    }
+
+    public void UpdateTooltip(string modifierValue)
+    {
+        _tooltipData.ModifierValue = modifierValue;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<UIItemPanelInfo>().PurchaseButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.2f);
-        SendMessageUpwards("ShowTooltipPanel", Tooltip, SendMessageOptions.DontRequireReceiver);
+        SendMessageUpwards("ShowTooltipPanel", _tooltipData, SendMessageOptions.DontRequireReceiver);
 
         if (!_playerHasInteracted)
         {
@@ -30,3 +40,4 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
 }
+

@@ -10,10 +10,14 @@ public class Harvester : MonoBehaviour
     public HarvesterData Data;
     public bool SpawnObject = true;
 
+    public Vector2 PopupNumberOffset;
+
     private CollectorObjectSpawner _objectSpawner;
     private List<Collector> _collectors;
     private ValueLinker valueLinker; 
 
+    public delegate void OnCollectionPopup(PopupTextData data);
+    public static event OnCollectionPopup onCollectionPopup;
 
     void Start()
     {
@@ -53,9 +57,11 @@ public class Harvester : MonoBehaviour
         return (int)finalCurrency;
     }
 
-    private void CollectCurrency(Currency collectedCurrency, int amount)
+    private void CollectCurrency(Currency collectedCurrency, int amount, Collector collector)
     {
+        PopupTextData popupData = new PopupTextData(collector.position + PopupNumberOffset, "+" + amount.ToString(), Color.white);
         EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
+        EconomyManager.Instance.PopUp(popupData);
     }
 
     // Update is called once per frame
@@ -68,8 +74,13 @@ public class Harvester : MonoBehaviour
                 if (collector.Collect(Time.deltaTime, CurrentTicksPerSecond()))
                 {
                     foreach (var type in Data.CollectorTypes)
-                    {
-                        CollectCurrency(type.CollectedCurrency, ModifiedCollectAmount(type));
+                    {   
+                        int amount = ModifiedCollectAmount(type);
+                        if(amount != 0)
+                        {   
+                            CollectCurrency(type.CollectedCurrency, amount, collector);
+                        }
+                        
                     }
 
                 }
@@ -92,7 +103,7 @@ public class Harvester : MonoBehaviour
         switch (value)
         {
             case HarvesterBaseValue.CollectAdd:
-                type.CollectAdd += (int)amount; 
+                type.CollectAdd += (int)amount;
                 break;
             case HarvesterBaseValue.CollectMultiplier:
                 type.CollectMultiplier += amount;

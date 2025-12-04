@@ -5,7 +5,7 @@ public class EconomyManager : MonoBehaviour
 {
 
 
-    public long Biomass = 12;
+    public long Biomass = 100000;
     public long Brains;
     public long Keratin;
     public long Victims;
@@ -16,6 +16,9 @@ public class EconomyManager : MonoBehaviour
 
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
+
+    public delegate void OnTextPopup(PopupTextData data);
+    public static event OnTextPopup onTextPopup;
 
 
     private static EconomyManager _instance;
@@ -52,7 +55,18 @@ public class EconomyManager : MonoBehaviour
 
     public void IncrementCurrency(Currency currency, long value)
     {
-        switch (currency)
+      SetValue(currency, value);
+    }
+
+     public void IncrementCurrency(Currency currency, long value, PopupTextData popupTextData)
+    {
+       SetValue(currency, value);
+       PopUp(popupTextData);
+    }
+
+    private void SetValue(Currency currency, long value)
+    {
+         switch (currency)
         {
             case Currency.Biomass:
                 Biomass += value;
@@ -87,6 +101,11 @@ public class EconomyManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void PopUp(PopupTextData data)
+    {
+        onTextPopup?.Invoke(data);
     }
 
     public bool CanAfford(Currency currency, int cost)

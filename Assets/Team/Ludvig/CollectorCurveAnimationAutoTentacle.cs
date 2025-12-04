@@ -26,6 +26,7 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
     public override void UpdateAnimation()
     {
             animator.SetFloat("Time", collector.NormalizedTime);
+            collector.position = transform.position;
         
 
         if(collector.NormalizedTime < 0.02f && _victimDestroyed == true)

@@ -11,12 +11,12 @@ public class TooltipShowHide : MonoBehaviour
         TooltipPanel.SetActive(false);
     }
     //Triggered by messages from children when the mouse enters them.
-    public void ShowTooltipPanel(Tooltip tooltip)
+    public void ShowTooltipPanel(TooltipData tooltipData)
     {
         TooltipPanel.SetActive(true);
 
         var panel = TooltipPanel.GetComponent<TooltipPanel>();
-        panel.SetTooltip(tooltip);
+        panel.SetTooltip(tooltipData);
         panel.UpdateFields();
     }
     // Triggered by messages from children when the mouse leaves them.
