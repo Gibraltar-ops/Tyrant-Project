@@ -1879,6 +1879,11 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   limit: 300
   mainCamera: {fileID: 0}
+--- !u!4 &822281454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3620040787146087998, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+  m_PrefabInstance: {fileID: 1952761183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &865694768 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2904363648990828574, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
@@ -3887,10 +3892,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 136555183318070250, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 274121461810740760, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 278992472050156839, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
       value: 5.15
@@ -4002,6 +4047,10 @@ PrefabInstance:
     - target: {fileID: 453089252241068940, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 504050662974179851, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 535936756830143875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4028,8 +4077,44 @@ PrefabInstance:
       value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 742888716701341979, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 791494458436939152, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
@@ -4047,6 +4132,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1132582497750601472, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
     - target: {fileID: 1168214169743434125, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4059,9 +4148,53 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 1347022519778681408, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448686121030378705, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561076194782550945, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
       objectReference: {fileID: 0}
     - target: {fileID: 1618436968514724991, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4076,9 +4209,45 @@ PrefabInstance:
       value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645128220042167875, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1690959133127774290, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.67
@@ -4114,6 +4283,10 @@ PrefabInstance:
     - target: {fileID: 1903930345334787264, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015527374657136459, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 2090396363473233626, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
@@ -4132,8 +4305,48 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249804909497523085, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312312122837015967, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
       objectReference: {fileID: 0}
     - target: {fileID: 2346621483550028276, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
@@ -4168,12 +4381,92 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412885822697288457, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483747222990480689, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499063605455543270, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 2606191588593583603, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 2631396737271249138, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Name
@@ -4272,8 +4565,44 @@ PrefabInstance:
       value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937587160541735376, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2967320340773215035, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4288,16 +4617,128 @@ PrefabInstance:
       value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438957563364408345, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486955721609129400, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510383499895943552, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594556459801262740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3612548803774068374, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4339,13 +4780,89 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3772276166505526740, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801590832121728944, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902185416821091487, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3914998256224413331, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4358,6 +4875,10 @@ PrefabInstance:
     - target: {fileID: 3914998256224413331, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3954547139257086893, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 4001378360505026181, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4400,13 +4921,85 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166103364044888992, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190336012664050635, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4257940452397491394, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
       value: 5.15
@@ -4435,6 +5028,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 4676748947053552298, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676748947053552298, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746688646102763639, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 4910647951973317066, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4486,11 +5091,55 @@ PrefabInstance:
     - target: {fileID: 5211566489791925166, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214329934045966196, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263411232129236836, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365407018567705222, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5393144279143453404, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
       value: 5.15
@@ -4506,6 +5155,10 @@ PrefabInstance:
     - target: {fileID: 5393144279143453404, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459782890638630390, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
       objectReference: {fileID: 0}
     - target: {fileID: 5570899489400662977, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4520,13 +5173,85 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579496077206526823, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794006270599460391, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5807880942547463721, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.67
@@ -4579,6 +5304,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6100139798007335649, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 6123861082934336783, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.67
@@ -4606,6 +5335,10 @@ PrefabInstance:
     - target: {fileID: 6127124493308507576, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165580295491395644, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
       objectReference: {fileID: 0}
     - target: {fileID: 6461581159013277813, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4647,6 +5380,26 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6634417714641405759, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720582378821080879, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884351456002520509, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157489210174372028, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217375573835689333, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 7278556296918491613, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4659,6 +5412,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7347868671753497324, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354157367484490375, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454019358718702768, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: startBone
+      value: 
+      objectReference: {fileID: 822281454}
     - target: {fileID: 7461378551478039619, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
       value: 5.15
@@ -4687,6 +5452,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7631612928369701981, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636019404397614520, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704726205215695461, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718670028877854359, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
     - target: {fileID: 7847308160031873206, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.67
@@ -4711,6 +5492,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.67
       objectReference: {fileID: 0}
+    - target: {fileID: 7943683200528843699, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
     - target: {fileID: 8013033931492738881, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4722,11 +5507,55 @@ PrefabInstance:
     - target: {fileID: 8013033931492738881, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027856514271676583, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051283878541759647, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099282374332958014, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
     - target: {fileID: 8173142975884991452, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4755,6 +5584,14 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8194287497512665767, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232612663536929484, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 8336734200399627414, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -4790,6 +5627,10 @@ PrefabInstance:
     - target: {fileID: 8431958227475516122, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582638455112995063, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
       objectReference: {fileID: 0}
     - target: {fileID: 8634333203291423925, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalScale.x
@@ -4839,6 +5680,10 @@ PrefabInstance:
       propertyPath: collectorData.Types.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8823267969892019192, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 8872192002199507428, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
       value: 5.15
@@ -4854,6 +5699,10 @@ PrefabInstance:
     - target: {fileID: 8872192002199507428, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874209231872745708, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 8916176707386195879, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Size.x
@@ -4872,12 +5721,100 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039211387238245057, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054422412551871510, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058917536717897203, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125283614705715758, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 0.15744343
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174135695592890076, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: retractSpeed
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxArch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: numberOfLegs
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleHangAtTip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxGripRadius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: maxStartDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleDownOffset
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: baseAttackSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: maxReachDuration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleArchMultiplier
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207948471130072248, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: idleExtensionFraction
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

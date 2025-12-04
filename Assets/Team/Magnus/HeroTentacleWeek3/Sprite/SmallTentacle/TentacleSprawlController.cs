@@ -14,11 +14,23 @@ public class TentacleSprawlController : MonoBehaviour
     [Header("Settings")]
     public GameObject legPrefab;
     public int numberOfLegs = 8;
-    public float attackSpeed = 1f;
+
+    [Tooltip("Sprawl attack base speed")]
+    public float baseAttackSpeed = 4f;
+
+    [Header("Organic Motion Settings")]
+    [Tooltip("least delay")]
+    public float minStartDelay = 0.0f;
+
+    [Tooltip("most delay")]
+    public float maxStartDelay = 0.3f;
+
+    [Tooltip("How much the speed is allowed to vary in the sprawl")]
+    public float speedVariance = 0.3f;
 
     [Header("Failsafe")]
-    [Tooltip("Om tentakeln inte nått målet efter denna tid, attackera ändå (förhindrar låsning).")]
-    public float maxReachDuration = 1.5f;
+    [Tooltip("Attack anyways if tentacle hasnt reached target within time.")]
+    public float maxReachDuration = 0.5f;
 
     [Header("Random Variance")]
     public float minTriggerDist = 1.5f;
@@ -28,9 +40,16 @@ public class TentacleSprawlController : MonoBehaviour
     public float minGripRadius = 0.5f;
     public float maxGripRadius = 0.8f;
 
-    [Header("Animation")]
-    [SerializeField]
-    private float legAnimSpeed = 5f;
+    [Header("Idle Pose Settings")]
+    public float idleExtensionFraction = 0.25f;
+
+    [Tooltip("Downward offset")]
+    public float idleDownOffset = 0.35f;
+
+    [Tooltip("Idle arch multiplier")]
+    public float idleArchMultiplier = 0.5f;
+
+    public bool idleHangAtTip = false;
 
     [Header("References")]
     public TentacleControllerIK mainController;
@@ -92,6 +111,14 @@ public class TentacleSprawlController : MonoBehaviour
     {
         switch (currentState)
         {
+            case SprawlState.Idle:
+                if (idleHangAtTip && mainController != null)
+                {
+                    Vector3 tip = mainController.effectorBody.position;
+                    Vector3 centerTarget = tip + (Vector3.down * idleDownOffset);
+                    UpdateIdleLegsTo(centerTarget);
+                }
+                break;
             case SprawlState.Reaching:
                 HandleReachingLogic();
                 break;
@@ -147,14 +174,23 @@ public class TentacleSprawlController : MonoBehaviour
     void StartAttack()
     {
         currentState = SprawlState.Attacking;
+
         foreach (var leg in legs)
-            leg.SetVisibility(true);
+        {
+            float randomDelay = Random.Range(minStartDelay, maxStartDelay);
+
+            float speedMult = Random.Range(1.0f - speedVariance, 1.0f + speedVariance);
+            float finalSpeed = baseAttackSpeed * speedMult;
+
+            leg.InitializeAttack(randomDelay, finalSpeed);
+        }
     }
 
     void HandleAttackMotion()
     {
         Vector3 targetBase = (itemToPull != null) ? itemToPull.Position : currentTargetPos;
-        UpdateLegsTo(targetBase);
+
+        UpdateLegsTo(targetBase, false);
 
         if (AllLegsExtended())
         {
@@ -166,14 +202,26 @@ public class TentacleSprawlController : MonoBehaviour
         }
     }
 
+    void UpdateIdleLegsTo(Vector3 centerTarget)
+    {
+        Vector3 startPos = mainController.effectorBody.position;
+
+        for (int i = 0; i < legs.Count; i++)
+        {
+            Vector3 finalTarget = centerTarget + legTargetOffsets[i];
+            Vector3 arch = legArchDirections[i] * (currentArchAmount * idleArchMultiplier);
+            legs[i].SetIdlePose(startPos, finalTarget, arch, idleExtensionFraction);
+        }
+    }
+
     void HandleRetractionMotion()
     {
-        Vector3 targetBase = mainController.effectorBody.position;
+        Vector3 targetBase = (itemToPull != null) ? itemToPull.Position : currentTargetPos;
 
         if (mainController.ActiveCaptureVisual != null)
             targetBase = mainController.ActiveCaptureVisual.transform.position;
 
-        UpdateLegsTo(targetBase);
+        UpdateLegsTo(targetBase, true);
 
         if (AllLegsRetracted())
         {
@@ -181,14 +229,16 @@ public class TentacleSprawlController : MonoBehaviour
         }
     }
 
-    void UpdateLegsTo(Vector3 centerTarget)
+    void UpdateLegsTo(Vector3 centerTarget, bool isRetracting)
     {
         Vector3 startPos = mainController.effectorBody.position;
+
         for (int i = 0; i < legs.Count; i++)
         {
             Vector3 finalTarget = centerTarget + legTargetOffsets[i];
             Vector3 arch = legArchDirections[i] * currentArchAmount;
-            legs[i].UpdateLeg(startPos, finalTarget, arch, legAnimSpeed);
+
+            legs[i].UpdateLeg(startPos, finalTarget, arch, isRetracting);
         }
     }
 
@@ -196,14 +246,19 @@ public class TentacleSprawlController : MonoBehaviour
     {
         currentState = SprawlState.Idle;
         itemToPull = null;
-        foreach (var leg in legs)
-            leg.ResetLeg();
+
+        if (idleHangAtTip) { }
+        else
+        {
+            foreach (var leg in legs)
+                leg.ResetLeg();
+        }
     }
 
     private void ResetLegsVisuals()
     {
         foreach (var leg in legs)
-            leg.ResetProgress();
+            leg.ResetLeg();
     }
 
     private bool AllLegsExtended()
