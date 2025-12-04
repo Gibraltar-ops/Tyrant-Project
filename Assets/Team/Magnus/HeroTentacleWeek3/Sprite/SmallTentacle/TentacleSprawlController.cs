@@ -53,6 +53,7 @@ public class TentacleSprawlController : MonoBehaviour
 
     [Header("References")]
     public TentacleControllerIK mainController;
+    public Transform actualStartBoneReference;
 
     // State
     [SerializeField]
@@ -73,6 +74,19 @@ public class TentacleSprawlController : MonoBehaviour
     {
         if (mainController == null)
             mainController = GetComponentInParent<TentacleControllerIK>();
+
+        if (actualStartBoneReference == null)
+        {
+            Transform rootParent = transform.parent;
+
+            if (rootParent != null)
+            {
+                actualStartBoneReference = rootParent.Find("Bone_17");
+            }
+
+            if (actualStartBoneReference == null) { }
+        }
+
         InitializeLegs();
     }
 
@@ -96,6 +110,11 @@ public class TentacleSprawlController : MonoBehaviour
             );
             SprawlLeg legScript = obj.GetComponent<SprawlLeg>();
             legs.Add(legScript);
+
+            if (actualStartBoneReference != null)
+            {
+                legScript.SetStartBone(actualStartBoneReference);
+            }
 
             float angle = (360f / numberOfLegs) * i;
             Vector3 dir = new Vector3(

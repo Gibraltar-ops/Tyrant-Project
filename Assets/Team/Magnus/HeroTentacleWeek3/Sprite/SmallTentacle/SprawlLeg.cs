@@ -25,6 +25,11 @@ public class SprawlLeg : MonoBehaviour
         lr.enabled = false;
     }
 
+    public void SetStartBone(Transform boneTransform)
+    {
+        startBone = boneTransform;
+    }
+
     public void InitializeAttack(float delay, float speed)
     {
         currentStartDelay = delay;
