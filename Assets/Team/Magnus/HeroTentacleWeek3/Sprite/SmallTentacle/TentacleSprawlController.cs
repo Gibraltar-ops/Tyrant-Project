@@ -3,47 +3,50 @@ using UnityEngine;
 
 public class TentacleSprawlController : MonoBehaviour
 {
+    public enum SprawlState
+    {
+        Idle,
+        Reaching,
+        Attacking,
+        Retracting,
+    }
+
     [Header("Settings")]
     public GameObject legPrefab;
     public int numberOfLegs = 8;
-
-    public float maxReach = 30f;
-
     public float attackSpeed = 1f;
 
-    [Header("Random Variance (Min/Max)")]
-    public float minTriggerDist = 45f;
-    public float maxTriggerDist = 45f;
+    [Header("Failsafe")]
+    [Tooltip("Om tentakeln inte nått målet efter denna tid, attackera ändå (förhindrar låsning).")]
+    public float maxReachDuration = 1.5f;
 
+    [Header("Random Variance")]
+    public float minTriggerDist = 1.5f;
+    public float maxTriggerDist = 3.0f;
     public float minArch = 0.2f;
     public float maxArch = 0.8f;
-
-    [Tooltip("Slumpa hur mycket de sprider sig vid målet.")]
     public float minGripRadius = 0.5f;
     public float maxGripRadius = 0.8f;
 
-    [Header("Leg animation")]
+    [Header("Animation")]
     [SerializeField]
     private float legAnimSpeed = 5f;
 
     [Header("References")]
     public TentacleControllerIK mainController;
 
+    // State
+    [SerializeField]
+    private SprawlState currentState = SprawlState.Idle;
+
     private List<SprawlLeg> legs = new List<SprawlLeg>();
     private IGrabbable itemToPull;
+    private Vector3 currentTargetPos;
 
-    private bool isAttacking = false;
-
-    private bool isRetracting = false;
-    private bool hasActiveTarget = false;
-    private Vector3 currentTarget;
-
-    /* private CaptureSprite activeCaptureSprite; */
-
-    //Current grab values
-    private float currentTriggerDistance;
+    // Cache
+    private float currentTriggerDistSqr;
     private float currentArchAmount;
-
+    private float reachTimer; // Failsafe for reach override
     private Vector3[] legArchDirections;
     private Vector3[] legTargetOffsets;
 
@@ -51,12 +54,16 @@ public class TentacleSprawlController : MonoBehaviour
     {
         if (mainController == null)
             mainController = GetComponentInParent<TentacleControllerIK>();
-
         InitializeLegs();
     }
 
     void InitializeLegs()
     {
+        foreach (var leg in legs)
+            if (leg != null)
+                Destroy(leg.gameObject);
+        legs.Clear();
+
         legArchDirections = new Vector3[numberOfLegs];
         legTargetOffsets = new Vector3[numberOfLegs];
 
@@ -71,243 +78,147 @@ public class TentacleSprawlController : MonoBehaviour
             SprawlLeg legScript = obj.GetComponent<SprawlLeg>();
             legs.Add(legScript);
 
-            // base direction set
             float angle = (360f / numberOfLegs) * i;
-            Vector3 direction = new Vector3(
+            Vector3 dir = new Vector3(
                 Mathf.Cos(angle * Mathf.Deg2Rad),
                 Mathf.Sin(angle * Mathf.Deg2Rad),
                 0
             );
-            legArchDirections[i] = direction;
+            legArchDirections[i] = dir;
         }
     }
 
     void Update()
     {
-        // logik
-        if (hasActiveTarget && !isAttacking && !isRetracting)
+        switch (currentState)
         {
-            CheckDistanceAndTrigger();
-        }
-
-        if (isAttacking || isRetracting)
-        {
-            UpdateLegsPositions();
+            case SprawlState.Reaching:
+                HandleReachingLogic();
+                break;
+            case SprawlState.Attacking:
+                HandleAttackMotion();
+                break;
+            case SprawlState.Retracting:
+                HandleRetractionMotion();
+                break;
         }
     }
 
     public void SetNewTarget(Vector3 targetPosition, IGrabbable item)
     {
-        currentTarget = targetPosition;
+        currentTargetPos = targetPosition;
         itemToPull = item;
-        hasActiveTarget = true;
 
-        currentTriggerDistance = Random.Range(minTriggerDist, maxTriggerDist);
+        // Reset timer
+        reachTimer = 0f;
+
+        // Randomize
+        float dist = Random.Range(minTriggerDist, maxTriggerDist);
+        currentTriggerDistSqr = dist * dist;
         currentArchAmount = Random.Range(minArch, maxArch);
-        float currentGrip = Random.Range(minGripRadius, maxGripRadius);
-        RecalculateLegOffsets(currentGrip);
+        float grip = Random.Range(minGripRadius, maxGripRadius);
 
-        ResetLegsForNewAttack();
+        RecalculateOffsets(grip);
+        ResetLegsVisuals();
+
+        currentState = SprawlState.Reaching;
     }
 
-    void RecalculateLegOffsets(float radius)
+    void RecalculateOffsets(float radius)
     {
         for (int i = 0; i < numberOfLegs; i++)
-        {
-            //Grip variation randomizer
             legTargetOffsets[i] = (Vector3)Random.insideUnitCircle * radius;
-        }
     }
 
-    void CheckDistanceAndTrigger()
+    void HandleReachingLogic()
     {
-        float distanceToTarget = Vector3.Distance(
-            mainController.effectorBody.position,
-            currentTarget
-        );
+        reachTimer += Time.deltaTime;
 
-        // use random distance
-        if (distanceToTarget <= currentTriggerDistance)
+        float distSqr = (
+            (Vector3)mainController.effectorBody.position - currentTargetPos
+        ).sqrMagnitude;
+
+        if (distSqr <= currentTriggerDistSqr || reachTimer > maxReachDuration)
         {
-            // see if sprawl activate
-
             StartAttack();
         }
     }
 
     void StartAttack()
     {
-        isAttacking = true;
-
-        isRetracting = false;
-        hasActiveTarget = false;
+        currentState = SprawlState.Attacking;
         foreach (var leg in legs)
-        {
             leg.SetVisibility(true);
-        }
     }
 
-    public void StartRetracting()
+    void HandleAttackMotion()
     {
-        isRetracting = true;
+        Vector3 targetBase = (itemToPull != null) ? itemToPull.Position : currentTargetPos;
+        UpdateLegsTo(targetBase);
 
-        isAttacking = false;
-    }
-
-    public void StopAttack()
-    {
-        isAttacking = false;
-        isRetracting = false;
-        hasActiveTarget = false;
-        itemToPull = null;
-
-        foreach (var leg in legs)
-        {
-            leg.ResetLeg();
-        }
-    }
-
-    private void ResetLegsForNewAttack()
-    {
-        isAttacking = false;
-        isRetracting = false;
-        foreach (var leg in legs)
-        {
-            leg.ResetProgress();
-        }
-    }
-
-    /* void UpdateLegsPositions()
-    {
-        Vector3 startPos = mainController.effectorBody.position;
-        Vector3 targetForLegs;
-
-        if (isRetracting)
-        {
-            if (activeCaptureSprite != null)
-            {
-                targetForLegs = activeCaptureSprite.transform.position;
-                float distanceToEffector = Vector3.Distance(targetForLegs, startPos);
-                if (distanceToEffector < 0.05f)
-                {
-                    StopAttack();
-                    return;
-                }
-            }
-            else
-            {
-                targetForLegs = startPos;
-            }
-        }
-        else
-        {
-            if (itemToPull != null)
-            {
-                targetForLegs = itemToPull.Position;
-            }
-            else
-            {
-                targetForLegs = currentTarget;
-            }
-        }
-
-        for (int i = 0; i < legs.Count; i++)
-        {
-            Vector3 finalTarget = targetForLegs + legTargetOffsets[i];
-            Vector3 archOffset = legArchDirections[i] * currentArchAmount;
-            legs[i].UpdateLeg(startPos, finalTarget, archOffset, legAnimSpeed);
-        }
-
-        if (isAttacking && AllLegsExtended())
-        {
-            Debug.Log("!!! SWAP !!! Legs extended. Handing over to main tentacle.");
-
-            if (mainController != null && itemToPull != null)
-            {
-                activeCaptureSprite = mainController.InitiateCapture(itemToPull);
-            }
-
-            isAttacking = false;
-            isRetracting = true;
-        }
-    }
- */
-
-    void UpdateLegsPositions()
-    {
-        Vector3 startPos = mainController.effectorBody.position;
-        Vector3 targetForLegs;
-
-        if (isRetracting)
-        {
-            // If the visual is active, target it.
-            if (mainController.ActiveCaptureVisual != null)
-            {
-                targetForLegs = mainController.ActiveCaptureVisual.transform.position;
-            }
-            else // Otherwise, retract to base.
-            {
-                targetForLegs = startPos;
-            }
-
-            if (AllLegsRetracted())
-            {
-                StopAttack();
-                return;
-            }
-        }
-        else
-        {
-            if (itemToPull != null)
-            {
-                targetForLegs = itemToPull.Position;
-            }
-            else
-            {
-                targetForLegs = currentTarget;
-            }
-        }
-
-        for (int i = 0; i < legs.Count; i++)
-        {
-            Vector3 finalTarget = targetForLegs + legTargetOffsets[i];
-            Vector3 archOffset = legArchDirections[i] * currentArchAmount;
-            legs[i].UpdateLeg(startPos, finalTarget, archOffset, legAnimSpeed);
-        }
-
-        if (isAttacking && AllLegsExtended())
+        if (AllLegsExtended())
         {
             if (mainController != null && itemToPull != null)
             {
                 mainController.InitiateCapture(itemToPull);
             }
-
-            isAttacking = false;
-            isRetracting = true;
+            currentState = SprawlState.Retracting;
         }
+    }
+
+    void HandleRetractionMotion()
+    {
+        Vector3 targetBase = mainController.effectorBody.position;
+
+        if (mainController.ActiveCaptureVisual != null)
+            targetBase = mainController.ActiveCaptureVisual.transform.position;
+
+        UpdateLegsTo(targetBase);
+
+        if (AllLegsRetracted())
+        {
+            StopAttack();
+        }
+    }
+
+    void UpdateLegsTo(Vector3 centerTarget)
+    {
+        Vector3 startPos = mainController.effectorBody.position;
+        for (int i = 0; i < legs.Count; i++)
+        {
+            Vector3 finalTarget = centerTarget + legTargetOffsets[i];
+            Vector3 arch = legArchDirections[i] * currentArchAmount;
+            legs[i].UpdateLeg(startPos, finalTarget, arch, legAnimSpeed);
+        }
+    }
+
+    public void StopAttack()
+    {
+        currentState = SprawlState.Idle;
+        itemToPull = null;
+        foreach (var leg in legs)
+            leg.ResetLeg();
+    }
+
+    private void ResetLegsVisuals()
+    {
+        foreach (var leg in legs)
+            leg.ResetProgress();
     }
 
     private bool AllLegsExtended()
     {
         foreach (var leg in legs)
-        {
             if (!leg.IsFullyExtended())
-            {
                 return false;
-            }
-        }
         return true;
     }
 
     private bool AllLegsRetracted()
     {
         foreach (var leg in legs)
-        {
             if (!leg.IsRetracted())
-            {
                 return false;
-            }
-        }
         return true;
     }
 }

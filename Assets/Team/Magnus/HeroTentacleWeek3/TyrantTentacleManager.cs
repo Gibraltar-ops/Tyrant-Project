@@ -48,16 +48,15 @@ public class TyrantTentacleManager : MonoBehaviour
     {
         _currentAutoClickTime += Time.deltaTime;
 
-        if(_currentAutoClickTime >= _autoClickInterval)
+        if (_currentAutoClickTime >= _autoClickInterval)
         {
             _currentAutoClickTime = 0f;
             if (Input.GetMouseButton(0))
             {
-            //Debug.Log("Click");
-            TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                //Debug.Log("Click");
+                TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
         }
-       
     }
 
     private void TryGrabTargetAtClick(Vector2 clickPosition)
@@ -134,10 +133,8 @@ public class TyrantTentacleManager : MonoBehaviour
 
         if (activeTentacleCount < tentacles.Count)
         {
-            
-            tentacles[activeTentacleCount].transform.parent.gameObject.SetActive(true); 
-            activeTentacleCount++;     
-                
+            tentacles[activeTentacleCount].transform.parent.gameObject.SetActive(true);
+            activeTentacleCount++;
 
             // Here we can add visual feedback or stuff!! / Magnus
         }
@@ -146,7 +143,6 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public void DestroyGrabbable(IGrabbable grabbable)
     {
-        
         if (grabbable is VictimData victim)
         {
             if (victimSystem != null && victimSystem.victims.Contains(victim))
