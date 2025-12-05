@@ -32,9 +32,9 @@ public class VictimSystem : MonoBehaviour
     {
         spawnTimer = spawnInterval;
 
-        //// Spawn some initial crowd (optional)
-        //for (int i = 0; i < 50; i++)
-        //    SpawnVictim();
+        // spawn some initial crowd (optional)
+        for (int i = 0; i < 100; i++)
+            SpawnVictim();
     }
 
     void Update()
