@@ -144,6 +144,12 @@ public class EconomyManager : MonoBehaviour
         }
     }
 
+    public void UpdateBiomassLabel(double value)
+{
+    string labelValue = FormatNumbers.Format(value);
+    //currentBiomassLabel.text = labelValue;
+}
+
 }
 
 public enum Currency

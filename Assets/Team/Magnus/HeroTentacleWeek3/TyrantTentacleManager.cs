@@ -25,7 +25,7 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
-    public CollectorData collectorData;
+    public CollectorType collectorData;
 
     public GameObject BloodSplatter;
 
@@ -163,13 +163,42 @@ public class TyrantTentacleManager : MonoBehaviour
         EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
     }
 
-    public int ModifiedCollectAmount()
+        public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
+    {
+        
+
+        switch (value)
+        {
+            case HarvesterBaseValue.CollectAdd:
+                collectorData.CollectAdd += (int)amount;
+                break;
+            case HarvesterBaseValue.CollectMultiplier:
+                collectorData.CollectMultiplier += amount;
+                break;
+            case HarvesterBaseValue.TicksPerSecondMultiplier:
+                break;
+            case HarvesterBaseValue.CollectAdditivePercentage:
+                collectorData.CollectAdditivePercentage += amount;
+                break;
+            case HarvesterBaseValue.CollectMultiplicativePercentage:
+                collectorData.CollectMultiplicativePercentage *= 1f + amount;
+                break;
+            default: break;
+        }
+        
+    }
+
+     public int ModifiedCollectAmount()
     {
         float finalCurrency = collectorData.BaseCollect;
 
         finalCurrency += collectorData.CollectAdd;
 
         finalCurrency *= collectorData.CollectMultiplier;
+
+        finalCurrency += finalCurrency * (collectorData.CollectAdditivePercentage/100f);
+
+        finalCurrency += finalCurrency * (collectorData.CollectMultiplicativePercentage/100f);
 
         return (int)finalCurrency;
     }

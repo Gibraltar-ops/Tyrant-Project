@@ -18,7 +18,8 @@ public class CollectorType
    public int BaseCollect = 10;
    public float CollectMultiplier = 1f;
    public int CollectAdd = 0;
-   public float Upgrade_perhumanmultiplier; 
+   public float CollectAdditivePercentage = 0f;
+   public float CollectMultiplicativePercentage = 0f;
 }
 
 //OLD LEGACY

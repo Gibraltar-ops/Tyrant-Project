@@ -18,6 +18,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void UpdateTooltip(string modifierValue)
     {
         _tooltipData.ModifierValue = modifierValue;
+        SendMessageUpwards("ShowTooltipPanel", _tooltipData, SendMessageOptions.DontRequireReceiver);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

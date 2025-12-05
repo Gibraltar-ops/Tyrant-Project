@@ -52,7 +52,12 @@ public class Harvester : MonoBehaviour
 
         finalCurrency *= type.CollectMultiplier;
 
-        finalCurrency += EconomyManager.Instance.Victims * type.Upgrade_perhumanmultiplier;
+        finalCurrency += finalCurrency * (type.CollectAdditivePercentage/100f);
+
+        finalCurrency += finalCurrency * (type.CollectMultiplicativePercentage/100f);
+
+
+
 
         return (int)finalCurrency;
     }
@@ -79,8 +84,7 @@ public class Harvester : MonoBehaviour
                         if(amount != 0)
                         {   
                             CollectCurrency(type.CollectedCurrency, amount, collector);
-                        }
-                        
+                        }               
                     }
 
                 }
@@ -111,8 +115,20 @@ public class Harvester : MonoBehaviour
             case HarvesterBaseValue.TicksPerSecondMultiplier:
                 Data.TicksPerSecondMultiplier += amount;
                 break;
+            case HarvesterBaseValue.CollectAdditivePercentage:
+                type.CollectAdditivePercentage += amount;
+                break;
+            case HarvesterBaseValue.CollectMultiplicativePercentage:
+                type.CollectMultiplicativePercentage *= 1f + amount;
+                break;
             default: break;
         }
+
+        if(TryGetComponent(out Shop shop))
+        {
+            shop.UpdateTooltip(Upgrade.FormatValueString(ModifiedCollectAmount(type), UpgradeValueType.IntegerRaw));
+        }
+        
     }
 
 }
@@ -122,5 +138,7 @@ public enum HarvesterBaseValue
     CollectAdd,
     CollectMultiplier,
     TicksPerSecondMultiplier,
+    CollectAdditivePercentage,
+    CollectMultiplicativePercentage,
     PerHumanMultiplier
 }

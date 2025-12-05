@@ -219,12 +219,14 @@ MonoBehaviour:
       BaseCollect: 10
       CollectMultiplier: 1
       CollectAdd: 0
-      Upgrade_perhumanmultiplier: 0
+      CollectAdditivePercentage: 0
+      CollectMultiplicativePercentage: 0
     - CollectedCurrency: 1
       BaseCollect: 0
       CollectMultiplier: 1
       CollectAdd: 0
-      Upgrade_perhumanmultiplier: 0
+      CollectAdditivePercentage: 0
+      CollectMultiplicativePercentage: 0
   SpawnObject: 1
   PopupNumberOffset: {x: 0, y: 10}
 --- !u!114 &82621998
@@ -260,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad488d5dd9939643969289940761bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeCollectorCount
+  ValueType: 0
 --- !u!114 &82622000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e21038d3160bb04989a6b2c895db35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongChargeSpeedUp
+  ValueType: 0
   buttonSong: {fileID: 651595835}
   AddValue: 0.1
 --- !u!114 &267559255
@@ -648,6 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  ValueType: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -791,6 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325b998b22b35de4a9ea8c85200910a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongSustainUp
+  ValueType: 0
   buttonSong: {fileID: 651595835}
   MultiplyValue: 0.9
 --- !u!114 &610152359 stripped
@@ -850,6 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  ValueType: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -953,9 +960,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f35d37b8f86b8428e11ba90c3523cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeBaseValue
+  ValueType: 0
   Currency: 0
   Value: 0
   AddValue: 1
+  CurrentValue: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -1023,8 +1032,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2080cf890358342acc2d79e00e6a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTentacleCollectUp
+  ValueType: 0
   tentacleManager: {fileID: 97902318}
+  PlayerTentacleShop: {fileID: 735443501}
   AddValue: 1
+  CurrentValue: 0
 --- !u!1001 &650064241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1568,6 +1580,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4522790444512082857, guid: 6b0a241abaa8a14489d23b782700ed08, type: 3}
   m_PrefabInstance: {fileID: 681947141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &682866266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 682866267}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &682866267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682866266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &701717818 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7633081139868671172, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
@@ -1773,6 +1816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a2594fc12aad64892c7b89e309ba75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyPlayerTentacle
+  ValueType: 0
 --- !u!1 &767420895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +1957,7 @@ GameObject:
   - component: {fileID: 866438792}
   - component: {fileID: 866438794}
   m_Layer: 0
-  m_Name: AutoCollectSpeedUp
+  m_Name: TentacleSpeedSpeedUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1946,9 +1990,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f35d37b8f86b8428e11ba90c3523cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeBaseValue
+  ValueType: 0
   Currency: 0
   Value: 2
   AddValue: 0.1
+  CurrentValue: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -2098,6 +2144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  ValueType: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -2377,6 +2424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee85d6e8d652d5148b14fd3ce073c630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongBaseDrawUp
+  ValueType: 0
   buttonSong: {fileID: 651595835}
   AddValue: 0.5
 --- !u!114 &1022569050
@@ -2647,6 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  ValueType: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -2746,6 +2795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4023d5a0fcd54c440b66138c6c014eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradePurchaseNewShop
+  ValueType: 0
   OnUpgrade:
     m_PersistentCalls:
       m_Calls:
@@ -3370,6 +3420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2afd46d379f2d498534bffc6b1c0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SongStrengthUp
+  ValueType: 0
   buttonSong: {fileID: 651595835}
   AddValue: 0.5
 --- !u!114 &1588769160
@@ -6290,3 +6341,4 @@ SceneRoots:
   - {fileID: 1822086829}
   - {fileID: 1899392924}
   - {fileID: 1093694976651917532}
+  - {fileID: 682866267}
