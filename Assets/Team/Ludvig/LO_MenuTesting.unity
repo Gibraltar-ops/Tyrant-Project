@@ -1425,6 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 240074042}
   offset: {x: 0, y: 0, z: 0}
+  limit: 200
   mainCamera: {fileID: 2135538596}
 --- !u!1 &951720425
 GameObject:
@@ -2569,6 +2570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFollow
   target: {fileID: 1256624003}
   offset: {x: 0, y: 50, z: 0}
+  limit: 200
   mainCamera: {fileID: 2135538596}
 --- !u!1 &1853598232
 GameObject:
@@ -2600,11 +2602,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2091257426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89, y: 211}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -490}
+  m_SizeDelta: {x: -1820, y: 100}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1874582625
 GameObject:
   m_ObjectHideFlags: 0

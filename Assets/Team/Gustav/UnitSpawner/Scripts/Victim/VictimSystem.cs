@@ -32,9 +32,9 @@ public class VictimSystem : MonoBehaviour
     {
         spawnTimer = spawnInterval;
 
-        //// Spawn some initial crowd (optional)
-        //for (int i = 0; i < 50; i++)
-        //    SpawnVictim();
+        // spawn some initial crowd (optional)
+        for (int i = 0; i < 100; i++)
+            SpawnVictim();
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class VictimSystem : MonoBehaviour
                 homeRegion = centerRegion,
                 destination = centerRegion.RandomPointInside(),
                 speed = UnityEngine.Random.Range(0.4f, 1f),
-                scale = UnityEngine.Random.Range(0.079f, 0.081f),
+                scale = UnityEngine.Random.Range(0.15f, 0.16f),
                 wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
                 wanderTimer = UnityEngine.Random.Range(1f, 2f),
                 isCenter = false,

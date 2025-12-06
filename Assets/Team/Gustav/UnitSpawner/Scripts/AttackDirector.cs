@@ -95,7 +95,7 @@ public class AttackDirector : MonoBehaviour
                 Instantiate(explosionPrefab, projectile.position, Quaternion.identity);
 
                 // Send damage to EconomyManager
-                EconomyManager.Instance.IncrementCurrency(Currency.Biomass, projectile.damage);
+                EconomyManager.Instance.IncrementCurrency(Currency.BiomassLifetime, projectile.damage);
 
                 // Destroy projectile
                 Destroy(projectile.obj);

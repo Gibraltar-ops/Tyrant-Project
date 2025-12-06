@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThresholdCurrencySlider : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ThresholdCurrencySlider : MonoBehaviour
 
     public void UpdateSlider(Currency currency)
     {
-        if(currency == Currency && !_thresholdMet)
+        if(!_thresholdMet)
         {
             long currentCurrency = EconomyManager.Instance.GetCurrent(Currency.BiomassLifetime);
 
@@ -46,6 +47,7 @@ public class ThresholdCurrencySlider : MonoBehaviour
             {
                 _thresholdMet = true;
                 onWinThresholdMet?.Invoke();
+                EndGame();
             }
 
             
@@ -57,5 +59,10 @@ public class ThresholdCurrencySlider : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void EndGame()
+    {
+        SceneManager.LoadScene("OutroCinematic");
     }
 }

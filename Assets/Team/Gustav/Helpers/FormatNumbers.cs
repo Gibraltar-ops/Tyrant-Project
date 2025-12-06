@@ -39,3 +39,10 @@ public static class FormatNumbers
         return (Math.Floor(m * 100) / 100).ToString("0.##") + unit;
     }
 }
+
+// Use this method to update the text correctly regards towards the formating.
+//public void UpdateBiomassLabel(double value)
+//{
+//    string labelValue = FormatNumbers.Format(value);
+//    currentBiomassLabel.text = labelValue;
+//}

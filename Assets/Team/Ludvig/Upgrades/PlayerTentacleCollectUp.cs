@@ -1,12 +1,22 @@
 
 public class PlayerTentacleCollectUp : Upgrade
 {
-    public TyrantController tyrantController;
-    public int AddValue;
-    
-    public override void ApplyUpgrade()
+    public TyrantTentacleManager tentacleManager;
+    public Shop PlayerTentacleShop;
+    public float AddValue;
+    public float CurrentValue = 0;
+
+    public override void Start()
     {
-        tyrantController.biomassPerHuman += AddValue;
+        base.Start();
+        CurrentValue = tentacleManager.ModifiedCollectAmount();
+        PlayerTentacleShop.UpdateTooltip(FormatValueString(CurrentValue, ValueType));
+    }
+    public override void ApplyUpgrade()
+    {   
+        CurrentValue += AddValue;
+        tentacleManager.collectorData.CollectAdd += (int)AddValue;
+        PlayerTentacleShop.UpdateTooltip(FormatValueString((float)tentacleManager.ModifiedCollectAmount(), UpgradeValueType.IntegerRaw));
     }
 
     

@@ -77,7 +77,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.0014953613, y: 0.044312768}
-  m_ConnectedAnchor: {x: -0.0014953504, y: -0.18716869}
+  m_ConnectedAnchor: {x: -0.0014953655, y: -0.18716863}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -180,7 +180,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.001367569, y: 0.04466783}
-  m_ConnectedAnchor: {x: 0.0013675786, y: -0.18681352}
+  m_ConnectedAnchor: {x: 0.0013675635, y: -0.18681346}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -283,7 +283,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.0029907227, y: 0.041543018}
-  m_ConnectedAnchor: {x: 0.0029907008, y: -0.4243501}
+  m_ConnectedAnchor: {x: 0.002990716, y: -0.42434993}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -500,7 +500,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.0014972687, y: 0.042927682}
-  m_ConnectedAnchor: {x: 0.0014972566, y: -0.18855387}
+  m_ConnectedAnchor: {x: 0.0014972717, y: -0.18855383}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -603,7 +603,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.00030899048, y: 0.0457213}
-  m_ConnectedAnchor: {x: 0.00030897596, y: -0.18576026}
+  m_ConnectedAnchor: {x: 0.0003089911, y: -0.18576021}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -912,7 +912,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.0040950775, y: 0.04644736}
-  m_ConnectedAnchor: {x: 0.004095051, y: -0.18503416}
+  m_ConnectedAnchor: {x: 0.0040950812, y: -0.18503416}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1102,6 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef79d3521383cc4ab0a41f237eddf85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SprawlLeg
+  startBone: {fileID: 3580608497409381782}
+  pointsCount: 20
 --- !u!1 &1945170542809771193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,7 +1181,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.0029907227, y: 0.04362029}
-  m_ConnectedAnchor: {x: 0.0029907008, y: -0.1878612}
+  m_ConnectedAnchor: {x: 0.002990716, y: -0.18786122}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1932,7 +1934,7 @@ TargetJoint2D:
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_Anchor: {x: 0, y: 0}
-  m_Target: {x: 1, y: -28.84312}
+  m_Target: {x: 0.29, y: -16.245}
   m_AutoConfigureTarget: 1
   m_MaxForce: 5000
   m_DampingRatio: 1
@@ -1951,17 +1953,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TentacleSprawlController
   legPrefab: {fileID: 6403802790631896077, guid: c11a8ac67b741c24a94b14982e9c6757, type: 3}
   numberOfLegs: 8
-  maxReach: 40
-  attackSpeed: 5
+  baseAttackSpeed: 4
+  minStartDelay: 0
+  maxStartDelay: 0.3
+  speedVariance: 0.3
+  maxReachDuration: 0.5
   minTriggerDist: 35
   maxTriggerDist: 40
   minArch: 0.2
   maxArch: 0.8
   minGripRadius: 0.5
   maxGripRadius: 0.8
-  legAnimSpeed: 5
-  capturedVictimPrefab: {fileID: 0}
+  idleExtensionFraction: 0.25
+  idleDownOffset: 0.35
+  idleArchMultiplier: 0.5
+  idleHangAtTip: 0
   mainController: {fileID: 6279173794059977033}
+  currentState: 0
 --- !u!1 &6039759338081236340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,8 +2014,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7a3fb6958db8a4dbf8c406301af93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TentacleControllerIK
+  victimCaptureVisual: {fileID: 0}
+  fighterCaptureVisual: {fileID: 0}
   reachSpeed: 20
   retractSpeed: 5
+  returnToIdleSpeed: 15
   sprawlController: {fileID: 0}
   effectorJoint: {fileID: 4213386833829661846}
   effectorBody: {fileID: 0}
@@ -2306,7 +2317,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.004486084, y: 0.041543104}
-  m_ConnectedAnchor: {x: 0.0044860817, y: -0.18993834}
+  m_ConnectedAnchor: {x: 0.0044860817, y: -0.1899383}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2512,7 +2523,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.0031318665, y: 0.042106736}
-  m_ConnectedAnchor: {x: -0.003131876, y: -0.40272024}
+  m_ConnectedAnchor: {x: -0.0031318609, y: -0.40272048}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2615,7 +2626,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.000020980835, y: 0.043824606}
-  m_ConnectedAnchor: {x: 0.000020997779, y: -0.18765698}
+  m_ConnectedAnchor: {x: 0.00002098265, y: -0.18765692}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:

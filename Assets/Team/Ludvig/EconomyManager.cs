@@ -5,17 +5,20 @@ public class EconomyManager : MonoBehaviour
 {
 
 
-    public long Biomass = 12;
+    public long Biomass = 100000;
     public long Brains;
     public long Keratin;
     public long Victims;
 
-    public long BiomassWinThreshold = 1000;
+    public long BiomassWinThreshold = 20000;
 
     public long BiomassLifetime = 12;
 
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
+
+    public delegate void OnTextPopup(PopupTextData data);
+    public static event OnTextPopup onTextPopup;
 
 
     private static EconomyManager _instance;
@@ -52,7 +55,18 @@ public class EconomyManager : MonoBehaviour
 
     public void IncrementCurrency(Currency currency, long value)
     {
-        switch (currency)
+      SetValue(currency, value);
+    }
+
+     public void IncrementCurrency(Currency currency, long value, PopupTextData popupTextData)
+    {
+       SetValue(currency, value);
+       PopUp(popupTextData);
+    }
+
+    private void SetValue(Currency currency, long value)
+    {
+         switch (currency)
         {
             case Currency.Biomass:
                 Biomass += value;
@@ -61,24 +75,37 @@ public class EconomyManager : MonoBehaviour
                 {
                     BiomassLifetime += value;
                 }
-                
+                Biomass = Biomass <= 0 ? 0 : Biomass;
                 onCurrencyChanged?.Invoke(Currency.Biomass);
                 break;
             case Currency.Brains:
                 Brains += value;
+                Biomass = Biomass <= 0 ? 0 : Biomass;
                 onCurrencyChanged?.Invoke(Currency.Brains);
                 break;
             case Currency.Keratin:
                 Keratin += value;
+                Keratin = Keratin <= 0 ? 0 : Keratin;
                 onCurrencyChanged?.Invoke(Currency.Keratin);
                 break;
             case Currency.Victims:
                 Victims += value;
+                Victims = Victims <= 0 ? 0 : Victims;
                 onCurrencyChanged?.Invoke(Currency.Victims);
+                break;
+            case Currency.BiomassLifetime:
+                BiomassLifetime += value;
+                BiomassLifetime = BiomassLifetime <= 0 ? 0 : BiomassLifetime;
+                onCurrencyChanged?.Invoke(Currency.BiomassLifetime);
                 break;
             default:
                 break;
         }
+    }
+
+    public void PopUp(PopupTextData data)
+    {
+        onTextPopup?.Invoke(data);
     }
 
     public bool CanAfford(Currency currency, int cost)
@@ -116,6 +143,12 @@ public class EconomyManager : MonoBehaviour
                 return 0;
         }
     }
+
+    public void UpdateBiomassLabel(double value)
+{
+    string labelValue = FormatNumbers.Format(value);
+    //currentBiomassLabel.text = labelValue;
+}
 
 }
 

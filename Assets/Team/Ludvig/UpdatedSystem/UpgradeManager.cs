@@ -27,6 +27,9 @@ public class UpgradeManager : MonoBehaviour
         State = UIState.Null;
         ActiveMenu = null;
         OrganButtons = GameObject.FindGameObjectsWithTag("UI_OrganButton");
+        EconomyManager.Instance.Biomass = 0;
+        EconomyManager.Instance.Brains = 0;
+        EconomyManager.Instance.BiomassLifetime = 0;
 
     }
     public void AddOrgan(UIMenuInfo organ)

@@ -20,19 +20,19 @@ public class CurrencyDisplay : MonoBehaviour
     {
         switch (Currency)
         {
-            case Currency.Biomass:
-                label.text = EconomyManager.Instance.Biomass.ToString();
-                break;
-            case Currency.Brains:
-                label.text = EconomyManager.Instance.Brains.ToString();
-                break;
-            case Currency.Keratin:
-                label.text = EconomyManager.Instance.Keratin.ToString();
-                break;
-            case Currency.Victims:
-                label.text = EconomyManager.Instance.Victims.ToString();
-                break;
-            default: break;
+           case Currency.Biomass:
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Biomass);
+                    break;
+                case Currency.Brains:              
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Brains);
+                    break;
+                case Currency.Keratin:
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Keratin);
+                    break;
+                case Currency.Victims:
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Victims);
+                    break;
+                default: break;
         }
     }
 
@@ -43,16 +43,16 @@ public class CurrencyDisplay : MonoBehaviour
             switch (currency)
             {
                 case Currency.Biomass:
-                    label.text = EconomyManager.Instance.Biomass.ToString();
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Biomass);
                     break;
-                case Currency.Brains:
-                    label.text = EconomyManager.Instance.Brains.ToString();
+                case Currency.Brains:              
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Brains);
                     break;
                 case Currency.Keratin:
-                    label.text = EconomyManager.Instance.Keratin.ToString();
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Keratin);
                     break;
                 case Currency.Victims:
-                    label.text = EconomyManager.Instance.Victims.ToString();
+                    label.text = FormatNumbers.Format(EconomyManager.Instance.Victims);
                     break;
                 default: break;
             }

@@ -25,27 +25,37 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
+    public CollectorType collectorData;
+
+    public GameObject BloodSplatter;
+
+    private float _autoClickInterval = 0.05f;
+    private float _currentAutoClickTime = 0f;
+
     void Start()
     {
         if (victimSystem != null)
         {
-            Debug.Log(
-                $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
-                victimSystem.gameObject
-            );
+            // Debug.Log(
+            //     $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
+            //     victimSystem.gameObject
+            // );
         }
-        else
-        {
-            Debug.LogError("Tyrant Manager has NO VictimSystem assigned!");
-        }
+        else { }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        _currentAutoClickTime += Time.deltaTime;
+
+        if (_currentAutoClickTime >= _autoClickInterval)
         {
-            Debug.Log("Click");
-            TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            _currentAutoClickTime = 0f;
+            if (Input.GetMouseButton(0))
+            {
+                //Debug.Log("Click");
+                TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
     }
 
@@ -61,10 +71,7 @@ public class TyrantTentacleManager : MonoBehaviour
                 target.IsGrabbed = true;
                 freeTentacle.StartGrab(target, mouthPoint);
             }
-            else
-            {
-                Debug.Log("All tentacles are busy or none are available.");
-            }
+            else { }
         }
     }
 
@@ -73,18 +80,19 @@ public class TyrantTentacleManager : MonoBehaviour
         if (tentacles == null || activeTentacleCount == 0)
             return null;
 
-        int startIndex = (lastUsedTentacleIndex + 1) % activeTentacleCount;
-
+        List<int> freeIndices = new List<int>();
         for (int i = 0; i < activeTentacleCount; i++)
         {
-            int indexToTry = (startIndex + i) % activeTentacleCount;
-            if (!tentacles[indexToTry].IsBusy())
-            {
-                lastUsedTentacleIndex = indexToTry;
-                return tentacles[indexToTry];
-            }
+            if (!tentacles[i].IsBusy())
+                freeIndices.Add(i);
         }
-        return null;
+
+        if (freeIndices.Count == 0)
+            return null;
+
+        int randomIndex = freeIndices[Random.Range(0, freeIndices.Count)];
+        lastUsedTentacleIndex = randomIndex;
+        return tentacles[randomIndex];
     }
 
     private IGrabbable FindClosestGrabbable(Vector2 position, float maxDistance)
@@ -118,12 +126,28 @@ public class TyrantTentacleManager : MonoBehaviour
         return closest;
     }
 
+    public void ActivateNextTentacle()
+    {
+        if (tentacles == null)
+            return;
+
+        if (activeTentacleCount < tentacles.Count)
+        {
+            tentacles[activeTentacleCount].transform.parent.gameObject.SetActive(true);
+            activeTentacleCount++;
+
+            // Here we can add visual feedback or stuff!! / Magnus
+        }
+        else { }
+    }
+
     public void DestroyGrabbable(IGrabbable grabbable)
     {
         if (grabbable is VictimData victim)
         {
             if (victimSystem != null && victimSystem.victims.Contains(victim))
             {
+                Instantiate(BloodSplatter, victim.position, Quaternion.identity);
                 victimSystem.victims.Remove(victim);
             }
         }
@@ -131,8 +155,51 @@ public class TyrantTentacleManager : MonoBehaviour
         {
             if (resistanceSystem != null && resistanceSystem.fighters.Contains(fighter))
             {
+                Instantiate(BloodSplatter, fighter.position, Quaternion.identity);
                 resistanceSystem.fighters.Remove(fighter);
             }
         }
+
+        EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
+    }
+
+        public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
+    {
+        
+
+        switch (value)
+        {
+            case HarvesterBaseValue.CollectAdd:
+                collectorData.CollectAdd += (int)amount;
+                break;
+            case HarvesterBaseValue.CollectMultiplier:
+                collectorData.CollectMultiplier += amount;
+                break;
+            case HarvesterBaseValue.TicksPerSecondMultiplier:
+                break;
+            case HarvesterBaseValue.CollectAdditivePercentage:
+                collectorData.CollectAdditivePercentage += amount;
+                break;
+            case HarvesterBaseValue.CollectMultiplicativePercentage:
+                collectorData.CollectMultiplicativePercentage *= 1f + amount;
+                break;
+            default: break;
+        }
+        
+    }
+
+     public int ModifiedCollectAmount()
+    {
+        float finalCurrency = collectorData.BaseCollect;
+
+        finalCurrency += collectorData.CollectAdd;
+
+        finalCurrency *= collectorData.CollectMultiplier;
+
+        finalCurrency += finalCurrency * (collectorData.CollectAdditivePercentage/100f);
+
+        finalCurrency += finalCurrency * (collectorData.CollectMultiplicativePercentage/100f);
+
+        return (int)finalCurrency;
     }
 }
