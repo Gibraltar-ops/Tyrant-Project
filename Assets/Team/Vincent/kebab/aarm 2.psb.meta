@@ -2407,10 +2407,20 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
+  - name: Group 1
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 3bac844f94fe91646a79aee87f510e7e
+    layerID: 40
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
   - name: fram
     spriteName: fram
     isGroup: 0
-    parentIndex: -1
+    parentIndex: 0
     spriteID: 66ce563b529f973478c1c07115864480
     layerID: 16
     mosaicPosition: {x: 4, y: 4}
@@ -2420,7 +2430,7 @@ ScriptedImporter:
   - name: melan
     spriteName: melan
     isGroup: 0
-    parentIndex: -1
+    parentIndex: 0
     spriteID: 80956ff4766042741b205fc570dcca9e
     layerID: 15
     mosaicPosition: {x: 158, y: 4}
@@ -2430,7 +2440,7 @@ ScriptedImporter:
   - name: bak
     spriteName: bak
     isGroup: 0
-    parentIndex: -1
+    parentIndex: 0
     spriteID: 6229736e25ca5474098bef463336f6d5
     layerID: 14
     mosaicPosition: {x: 158, y: 387}
