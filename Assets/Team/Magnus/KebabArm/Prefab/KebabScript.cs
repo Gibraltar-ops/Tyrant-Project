@@ -5,7 +5,7 @@ public class CrabLegIK : MonoBehaviour
 {
     [Header("Setup")]
     public Transform target;
-    public int chainLength = 5; // Kom ihåg att du ökade denna till 5
+    public int chainLength = 5;
     public int iterations = 10;
     public float delta = 0.001f;
 
@@ -118,17 +118,14 @@ public class CrabLegIK : MonoBehaviour
                         parentDir = (positions[i - 1] - positions[i - 2]).normalized;
                     }
 
-                    // Beräkna vinkel med tecken (Positiv = Vänster/Upp, Negativ = Höger/Ner i 2D)
                     float angle = Vector3.SignedAngle(parentDir, direction, Vector3.forward);
 
-                    // Kläm vinkeln mellan dina inställda gränser
                     float clampedAngle = Mathf.Clamp(
                         angle,
                         boneConstraints[i - 1].minAngle,
                         boneConstraints[i - 1].maxAngle
                     );
 
-                    // Om vi slog i taket/golvet på vinkeln, rotera vektorn
                     if (Mathf.Abs(angle - clampedAngle) > 0.01f)
                     {
                         Quaternion rot = Quaternion.AngleAxis(clampedAngle, Vector3.forward);
@@ -139,24 +136,18 @@ public class CrabLegIK : MonoBehaviour
                 positions[i] = positions[i - 1] + direction * boneLengths[i - 1];
             }
 
-            // Avbryt om nära nog
             if ((positions[positions.Length - 1] - target.position).sqrMagnitude < delta * delta)
                 break;
         }
 
-        // 3. Applicera på transforms
         for (int i = 0; i < bones.Length - 1; i++)
         {
             Vector3 dir = positions[i + 1] - positions[i];
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-            // Beroende på din sprite-rotation kan du behöva justera offset här (t.ex. -90)
             bones[i].rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             bones[i].position = positions[i];
         }
-
-        // (Valfritt) Rotera sista tippen mot target för "stöt"
-        // bones[bones.Length-1].rotation = Quaternion.LookRotation(Vector3.forward, target.position - bones[bones.Length-1].position);
     }
 
     void OnDrawGizmos()
