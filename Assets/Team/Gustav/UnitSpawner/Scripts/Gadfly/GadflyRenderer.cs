@@ -50,7 +50,7 @@ public class GadflyRenderer : MonoBehaviour
     // -------------------------------------------------------
     void SyncActiveCount()
     {
-        int simCount = gadflySystem.gadflys.Count;
+        int simCount = gadflySystem.gadflies.Count;
 
         // Need more visuals?
         while (activeVisuals.Count < simCount)
@@ -72,22 +72,22 @@ public class GadflyRenderer : MonoBehaviour
     // -------------------------------------------------------
     void UpdateVisuals()
     {
-        var gadflys = gadflySystem.gadflys;
+        var gadflys = gadflySystem.gadflies;
 
-        for (int i = 0; i < gadflys.Count; i++)
-        {
-            var data = gadflys[i];
-            var visual = activeVisuals[i];
+        //for (int i = 0; i < gadflys.Count; i++)
+        //{
+        //    var data = gadflys[i];
+        //    var visual = activeVisuals[i];
 
-            // Movement direction
-            Vector2 dir = data.isCenter ? data.wanderDirection :
-                        (data.destination - data.position).normalized;
+        //    // Movement direction
+        //    Vector2 dir = data.isCenter ? data.wanderDirection :
+        //                (data.destination - data.position).normalized;
 
-            // Update animator + flip + position
-            visual.GetComponent<UnitVisual>().UpdateVisual(data.position, dir);
+        //    // Update animator + flip + position
+        //    visual.GetComponent<UnitVisual>().UpdateVisual(data.position, dir);
 
-            // Scale
-            visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
-        }
+        //    // Scale
+        //    visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
+        //}
     }
 }

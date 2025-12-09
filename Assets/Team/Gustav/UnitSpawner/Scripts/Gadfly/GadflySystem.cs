@@ -33,7 +33,7 @@ public class GadflySystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SimulateGatflys();
+        //SimulateGatflys();
     }
 
     // --------------------------------------------
@@ -63,59 +63,59 @@ public class GadflySystem : MonoBehaviour
     // --------------------------------------------
     // MOVEMENT
     // --------------------------------------------
-    private void SimulateGatflys()
-    {
-        foreach (var gadflies in gadflies)
-        {
-            if (!gadflies.isHome) // Moving to center
-            {
-                Vector2 dir = (gadflies.destination - gadflies.position).normalized;
-                gadflies.position += dir * gadflies.harvestSpeed * Time.deltaTime;
+    //private void SimulateGatflys()
+    //{
+    //    foreach (var gadflies in gadflies)
+    //    {
+    //        if (!gadflies.isHome) // Moving to center
+    //        {
+    //            Vector2 dir = (gadflies.destination - gadflies.position).normalized;
+    //            gadflies.position += dir * gadflies.harvestSpeed * Time.deltaTime;
 
-                if (Vector2.Distance(gadflies.position, gadflies.destination) < 0.1f)
-                {
-                    gadflies.isHome = true;
-                    gadflies.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
-                    gadflies.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
-                }
-            }
-            else // Wandering
-            {
-                gadflies.wanderTimer -= Time.deltaTime;
+    //            if (Vector2.Distance(gadflies.position, gadflies.destination) < 0.1f)
+    //            {
+    //                gadflies.isHome = true;
+    //                gadflies.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
+    //                gadflies.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+    //            }
+    //        }
+    //        else // Wandering
+    //        {
+    //            gadflies.wanderTimer -= Time.deltaTime;
 
-                if (gadflies.wanderTimer <= 0f)
-                {
-                    gadflies.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
-                    gadflies.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
-                }
+    //            if (gadflies.wanderTimer <= 0f)
+    //            {
+    //                gadflies.wanderDirection = UnityEngine.Random.insideUnitCircle.normalized;
+    //                gadflies.wanderTimer = UnityEngine.Random.Range(0.7f, 1.7f);
+    //            }
 
-                // Apply wandering movement
-                gadflies.position +=
-                    gadflies.wanderDirection * (gadflies.speed * 0.4f) * Time.deltaTime;
+    //            // Apply wandering movement
+    //            gadflies.position +=
+    //                gadflies.wanderDirection * (gadflies.speed * 0.4f) * Time.deltaTime;
 
-                // If victim has wandered outside the capsule walk back inside
-                if (!gadflies.homeRegion.Contains(gadflies.position))
-                {
-                    Vector2 target = gadflies.homeRegion.RandomPointInside();
-                    Vector2 dir = (target - gadflies.position).normalized;
+    //            // If victim has wandered outside the capsule walk back inside
+    //            if (!gadflies.homeRegion.Contains(gadflies.position))
+    //            {
+    //                Vector2 target = gadflies.homeRegion.RandomPointInside();
+    //                Vector2 dir = (target - gadflies.position).normalized;
 
-                    gadflies.position += dir * gadflies.speed * Time.deltaTime;
-                }
-            }
-            // --------------------------------
-            // Harvest LOGIC
-            // --------------------------------
-            gadflies.attackTimer -= Time.deltaTime;
+    //                gadflies.position += dir * gadflies.speed * Time.deltaTime;
+    //            }
+    //        }
+    //        // --------------------------------
+    //        // Harvest LOGIC
+    //        // --------------------------------
+    //        gadflies.attackTimer -= Time.deltaTime;
 
-            if (gadflies.isHome && gadflies.attackTimer <= 0f)
-            {
-                // FIRE!
-                AttackDirector.Instance.SpawnProjectile(gadflies.position, gadflies.attackDamage);
+    //        if (gadflies.isHome && gadflies.attackTimer <= 0f)
+    //        {
+    //            // FIRE!
+    //            AttackDirector.Instance.SpawnProjectile(gadflies.position, gadflies.attackDamage);
 
-                gadflies.attackTimer = attackCooldown;
-            }
-        }
-    }
+    //            gadflies.attackTimer = attackCooldown;
+    //        }
+    //    }
+    //}
 
     // --------------------------------------------
     // Editor Gizmos
