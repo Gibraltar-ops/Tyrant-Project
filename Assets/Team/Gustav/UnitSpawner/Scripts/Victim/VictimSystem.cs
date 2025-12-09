@@ -59,9 +59,7 @@ public class VictimSystem : MonoBehaviour
             return;
 
         var spawnRegion = spawnRegions[UnityEngine.Random.Range(0, spawnRegions.Count)];
-        var centerRegion = destinationRegions[
-            UnityEngine.Random.Range(0, destinationRegions.Count)
-        ];
+        var centerRegion = destinationRegions[UnityEngine.Random.Range(0, destinationRegions.Count)];
 
         victims.Add(
             new VictimData
