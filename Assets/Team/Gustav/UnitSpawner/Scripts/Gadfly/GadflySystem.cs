@@ -66,7 +66,7 @@ public class GadflySystem : MonoBehaviour
 
                 wanderSpeed = Random.Range(2f, 2.1f),
                 harvestSpeed = Random.Range(4.5f, 4.6f),
-                scale = Random.Range(1f, 1.1f),
+                scale = Random.Range(0.2f, 0.21f),
 
                 wanderDirection = Random.insideUnitCircle.normalized,
                 wanderTimer = Random.Range(1f, 2f),
