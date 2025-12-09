@@ -3,18 +3,16 @@ using UnityEngine;
 public class GadflyData
 {
     // Gameobject Attributes
-    public GameObject gadflyGameObject;
     public Vector2 position;
     public Vector2 destination;
     public Vector2 wanderDirection;
 
     // Destination Regions
     public DestinationRegion homeRegion;
-    public DestinationRegion offScreenRegion;
+    public DestinationRegion harvestRegion;
 
     // Timers
     public float wanderTimer;
-    public float harvestTimer;
 
     // Currency Amounts and Multipliers
     public float biomassAmount;
@@ -30,6 +28,12 @@ public class GadflyData
     // Bool States
     public bool isHome = false;
     public bool isHarvesting = false;
+    public bool hasReachedHarvest = false;
     public bool isLeftSide;
     public bool isCarryingVictim = false;
+
+    // Other attributes
+    public Vector2 velocity;
+    public float arcStrength;
+    public float jitterStrength;
 }

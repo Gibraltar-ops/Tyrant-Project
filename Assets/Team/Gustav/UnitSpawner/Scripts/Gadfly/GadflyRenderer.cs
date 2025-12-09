@@ -8,22 +8,16 @@ public class GadflyRenderer : MonoBehaviour
     public GameObject gadflyPrefab;
 
     private IObjectPool<GameObject> pool;
-
-    public int preloadAmount = 100;
-
-    // All currently active visual objects
-    private readonly List<GameObject> activeVisuals = new();
+    private readonly List<GameObject> activeVisuals = new(); // All currently active visual objects
 
     void Awake()
     {
         pool = new ObjectPool<GameObject>(
             CreateVisual,
-            OnTakeFromPool,
-            OnReturnedToPool,
-            OnDestroyVisual,
-            collectionCheck: false,
-            defaultCapacity: 100,
-            maxSize: 500
+            obj => obj.SetActive(true),
+            obj => obj.SetActive(false),
+            obj => Destroy(obj),
+            false, 100, 500
         );
     }
 
@@ -42,11 +36,9 @@ public class GadflyRenderer : MonoBehaviour
         obj.SetActive(false);
         return obj;
     }
-    void OnTakeFromPool(GameObject obj) => obj.SetActive(true);
-    void OnReturnedToPool(GameObject obj) => obj.SetActive(false);
-    void OnDestroyVisual(GameObject obj) => Destroy(obj);
+
     // -------------------------------------------------------
-    // Make sure active visuals match gadfly count // REMOVE THIS METHOD?!?!?!
+    // Make sure active visuals match gadfly count
     // -------------------------------------------------------
     void SyncActiveCount()
     {
@@ -72,22 +64,20 @@ public class GadflyRenderer : MonoBehaviour
     // -------------------------------------------------------
     void UpdateVisuals()
     {
-        var gadflys = gadflySystem.gadflies;
+        var gadflies = gadflySystem.gadflies;
 
-        //for (int i = 0; i < gadflys.Count; i++)
-        //{
-        //    var data = gadflys[i];
-        //    var visual = activeVisuals[i];
+        for (int i = 0; i < gadflies.Count; i++)
+        {
+            var data = gadflies[i];
+            var visual = activeVisuals[i];
 
-        //    // Movement direction
-        //    Vector2 dir = data.isCenter ? data.wanderDirection :
-        //                (data.destination - data.position).normalized;
+            Vector2 dir = (data.destination - data.position).normalized;
 
-        //    // Update animator + flip + position
-        //    visual.GetComponent<UnitVisual>().UpdateVisual(data.position, dir);
+            // Update animator + flip + position
+            visual.GetComponent<UnitVisual>().UpdateVisual(data.position, dir);
 
-        //    // Scale
-        //    visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
-        //}
+            // Scale
+            visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
+        }
     }
 }
