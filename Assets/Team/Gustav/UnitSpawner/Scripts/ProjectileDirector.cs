@@ -37,15 +37,22 @@ public class ProjectileDirector : MonoBehaviour
     // ============================================================
     // HUMAN PROJECTILE
     // ============================================================
-    public void SpawnHumanProjectile(Vector2 startPos, Vector2 targetPos, int biomassValue)
+    public void SpawnHumanProjectile(Vector2 startPos, int biomassValue)
     {
+        if (tyrantImpactRegions.Count == 0) return;
+
+        DestinationRegion region =
+            tyrantImpactRegions[UnityEngine.Random.Range(0, tyrantImpactRegions.Count)];
+
+        Vector2 target = region.RandomPointInside();
+
         SpawnProjectileInternal(
             humanProjectilePrefab,
             startPos,
-            targetPos,
+            target,
             defaultProjectileSpeed,
             biomassValue,
-            null,
+            humanImpactFXPrefab,
             () =>
             {
                 EconomyManager.Instance.IncrementCurrency(
@@ -63,8 +70,8 @@ public class ProjectileDirector : MonoBehaviour
     {
         if (tyrantImpactRegions.Count == 0) return;
 
-        DestinationRegion region = tyrantImpactRegions[
-            UnityEngine.Random.Range(0, tyrantImpactRegions.Count)];
+        DestinationRegion region =
+            tyrantImpactRegions[UnityEngine.Random.Range(0, tyrantImpactRegions.Count)];
 
         Vector2 target = region.RandomPointInside();
 
@@ -88,12 +95,19 @@ public class ProjectileDirector : MonoBehaviour
     // ============================================================
     // ROCKET PROJECTILE (Enemy)
     // ============================================================
-    public void SpawnRocket(Vector2 startPos, Vector2 targetPos, int damage)
+    public void SpawnRocket(Vector2 startPos, int damage)
     {
+        if (tyrantImpactRegions.Count == 0) return;
+
+        DestinationRegion region =
+            tyrantImpactRegions[UnityEngine.Random.Range(0, tyrantImpactRegions.Count)];
+
+        Vector2 target = region.RandomPointInside();
+
         SpawnProjectileInternal(
             rocketProjectilePrefab,
             startPos,
-            targetPos,
+            target,
             defaultProjectileSpeed * 1.25f,
             damage,
             explosionFXPrefab,

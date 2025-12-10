@@ -119,12 +119,15 @@ public class GadflySystem : MonoBehaviour
 
             for (int i = 0; i < total; i++)
             {
-                var g = gadflies[i];
+                var gadfly = gadflies[i];
 
-                g.isHarvesting = true;
-                g.isHome = false;
-                g.hasReachedHarvest = false;
-                g.destination = g.harvestRegion.RandomPointInside();
+                gadfly.isHarvesting = true;
+                gadfly.isHome = false;
+                gadfly.hasReachedHarvest = false;
+                gadfly.destination = gadfly.harvestRegion.RandomPointInside();
+
+                gadfly.hasPayload = false;
+                gadfly.hasThrownPayload = false;
             }
         }
         // ------------------------------------------------
@@ -151,6 +154,9 @@ public class GadflySystem : MonoBehaviour
                 gadfly.isHome = false;
                 gadfly.hasReachedHarvest = false;
                 gadfly.destination = gadfly.homeRegion.RandomPointInside();
+
+                gadfly.hasPayload = true;      // They are now carrying a human
+                gadfly.hasThrownPayload = false;
             }
         }
     }
@@ -202,6 +208,18 @@ public class GadflySystem : MonoBehaviour
                     gadfly.isHome = true;
                     gadfly.wanderTimer = Random.Range(1f, 2f);
                     gadfly.wanderDirection = Random.insideUnitCircle.normalized;
+
+                    // THROW ONLY ONCE PER RETURN
+                    if (gadfly.hasPayload && !gadfly.hasThrownPayload)
+                    {
+                        gadfly.hasThrownPayload = true;
+                        gadfly.hasPayload = false;
+
+                        ProjectileDirector.Instance.SpawnHumanProjectile(
+                            gadfly.position,
+                            Mathf.RoundToInt(gadfly.biomassAmount * gadfly.biomassMultiplier)
+                        );
+                    }
                 }
             }
 
@@ -223,56 +241,6 @@ public class GadflySystem : MonoBehaviour
                 if (!gadfly.homeRegion.Contains(gadfly.destination))
                     gadfly.destination = gadfly.homeRegion.RandomPointInside();
             }
-
-
-
-            //// --------------------------------
-            //// MOVING TO DESTINATION
-            //// --------------------------------
-            //Vector2 dir = (gadfly.destination - gadfly.position).normalized;
-            //float speed = gadfly.isHarvesting ? gadfly.harvestSpeed : gadfly.wanderSpeed;
-
-            //gadfly.position += dir * speed * Time.deltaTime;
-
-            //// --------------------------------
-            //// DESTINATION REACHED
-            //// --------------------------------
-            //if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.1f)
-            //{
-            //    if (gadfly.isHarvesting)
-            //    {
-            //        gadfly.hasReachedHarvest = true;
-            //    }
-            //    else
-            //    {
-            //        // ARRIVED HOME
-            //        gadfly.isHome = true;
-            //        gadfly.wanderTimer = Random.Range(1f, 2f);
-            //        gadfly.wanderDirection = Random.insideUnitCircle.normalized;
-            //    }
-            //}
-
-            //// --------------------------------
-            //// WANDERING WHILE HOME
-            //// --------------------------------
-            //if (gadfly.isHome && !gadfly.isHarvesting)
-            //{
-            //    gadfly.wanderTimer -= Time.deltaTime;
-
-            //    if (gadfly.wanderTimer <= 0f)
-            //    {
-            //        gadfly.wanderDirection = Random.insideUnitCircle.normalized;
-            //        gadfly.wanderTimer = Random.Range(1f, 2f);
-            //    }
-
-            //    gadfly.position += gadfly.wanderDirection * (gadfly.wanderSpeed * 0.4f) * Time.deltaTime;
-
-            //    if (!gadfly.homeRegion.Contains(gadfly.position))
-            //    {
-            //        gadfly.destination = gadfly.homeRegion.RandomPointInside();
-            //        gadfly.isHome = false;
-            //    }
-            //}
         }
     }
 

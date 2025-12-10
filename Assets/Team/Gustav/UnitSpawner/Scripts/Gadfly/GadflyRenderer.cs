@@ -78,6 +78,20 @@ public class GadflyRenderer : MonoBehaviour
 
             // Scale
             visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
+
+            
+            
+            
+            var unitVisual = visual.GetComponent<UnitVisual>();
+
+            unitVisual.UpdateVisual(data.position, dir);
+            unitVisual.ApplyScale(data.scale);
+
+            // PAYLOAD DUMMY VISIBILITY
+            if (unitVisual.dummyVisual)
+            {
+                unitVisual.dummyVisual.SetActive(data.hasPayload);
+            }
         }
     }
 }
