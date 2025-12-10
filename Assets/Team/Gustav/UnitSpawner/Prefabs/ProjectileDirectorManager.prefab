@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1687286051890522438}
   - component: {fileID: 6354706823185014410}
   m_Layer: 0
-  m_Name: AttackDirectorManager
+  m_Name: ProjectileDirectorManager
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3e56c4a1779714ebd4cd1e50c3d3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackDirector
-  projectilePrefab: {fileID: 2023335759495716118, guid: 1138244fe25b9944a86b1cd3f9b15947, type: 3}
-  explosionPrefab: {fileID: 823177533608343208, guid: b987069b9eb52574cbc6935bd7160dfb, type: 3}
-  targetPosition: {x: 0, y: 20}
-  projectileSpeed: 22
-  grenadeImpactRegions:
-  - center: {x: 0, y: 5}
-    radius: 4
-    length: 6
+  humanProjectilePrefab: {fileID: 0}
+  grenadeProjectilePrefab: {fileID: 7557740418460931513, guid: 62da53fc7d9730849aaf12076b1e383a, type: 3}
+  rocketProjectilePrefab: {fileID: 0}
+  explosionFXPrefab: {fileID: 823177533608343208, guid: b987069b9eb52574cbc6935bd7160dfb, type: 3}
+  humanImpactFXPrefab: {fileID: 0}
+  defaultProjectileSpeed: 20
+  tyrantImpactRegions: []
