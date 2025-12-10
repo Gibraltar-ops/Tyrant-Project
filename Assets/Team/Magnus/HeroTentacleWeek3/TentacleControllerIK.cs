@@ -203,10 +203,6 @@ public class TentacleControllerIK : MonoBehaviour
         {
             activeCaptureVisual = victimCaptureVisual;
         }
-        else if (capturedItem.Type == GrabbableType.Fighter)
-        {
-            activeCaptureVisual = fighterCaptureVisual;
-        }
 
         if (activeCaptureVisual != null)
         {
@@ -214,7 +210,7 @@ public class TentacleControllerIK : MonoBehaviour
             activeCaptureVisual.transform.SetParent(null);
             activeCaptureVisual.transform.position = capturedItem.Position;
 
-            TyrantTentacleManager manager = FindObjectOfType<TyrantTentacleManager>();
+            TyrantTentacleManager manager = FindFirstObjectByType<TyrantTentacleManager>();
             if (manager != null)
             {
                 manager.DestroyGrabbable(capturedItem);

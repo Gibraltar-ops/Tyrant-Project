@@ -23,18 +23,8 @@ public class KebabThrust : MonoBehaviour
         _allArms = new List<Transform> { leftMostArm, leftCenterArm, rightCenterArm, rightMostArm };
     }
 
-    void Update()
+    public void AttackAtPosition(Vector3 targetPosition)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            AttemptAttack();
-        }
-    }
-
-    void AttemptAttack()
-    {
-        Vector3 targetPosition = GetMouseWorldPosition();
-
         Transform bestArm = null;
         float shortestDistance = Mathf.Infinity;
 
@@ -81,13 +71,6 @@ public class KebabThrust : MonoBehaviour
         }
         // Inner arm check
         return innerRange;
-    }
-
-    Vector3 GetMouseWorldPosition()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -Camera.main.transform.position.z;
-        return Camera.main.ScreenToWorldPoint(mousePos);
     }
 
     // Arm range gizmo

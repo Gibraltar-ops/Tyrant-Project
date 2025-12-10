@@ -1,7 +1,7 @@
-
 public class BuyPlayerTentacle : Upgrade
 {
     private TyrantTentacleManager tentacleManager;
+
     void Start()
     {
         tentacleManager = FindAnyObjectByType<TyrantTentacleManager>();
@@ -11,6 +11,4 @@ public class BuyPlayerTentacle : Upgrade
     {
         tentacleManager.ActivateNextTentacle();
     }
-
-    
 }

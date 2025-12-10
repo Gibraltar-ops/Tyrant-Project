@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ResistanceData : IGrabbable
+public class ResistanceData
 {
     public GameObject resistanceGameObject;
     public Vector2 position;
@@ -27,7 +27,7 @@ public class ResistanceData : IGrabbable
         get => isMarkedForDeath;
         set => isMarkedForDeath = value;
     }
-    public GrabbableType Type => GrabbableType.Fighter;
+
     public GameObject gameObject => resistanceGameObject;
 
     public void DestroySelf()
