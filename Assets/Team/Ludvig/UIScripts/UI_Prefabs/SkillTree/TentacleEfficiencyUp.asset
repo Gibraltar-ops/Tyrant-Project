@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
+  m_Name: TentacleEfficiencyUp
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
+  Tag: 1
+  Shop:
+    Name: Lorem
+    Description: Ipsum
+    EffectString: Dolor
+    Lore: Sit
+    CurrentModifierString: Amet
+    IsActive: 1
+    BoughtWithCurrency: 0
+    CollectsCurrency: 0
+    CurrentOwned: 0
+    MaxOwned: 25
+    StartingPrice: 25
+    NextPrice: 25
+    PriceIncrease: 1.2
+    CanAfford: 0
+    MaxedOut: 0
+  UpgradeEffects:
+  - UpgradeableObjectTag: 1
+    StatCategory: 0
+    CurrencyToAffect: 0
+    CollectType: 3
+    UpgradeStat: 0
+  CurrentModifier: 0
+  AddValue: 2

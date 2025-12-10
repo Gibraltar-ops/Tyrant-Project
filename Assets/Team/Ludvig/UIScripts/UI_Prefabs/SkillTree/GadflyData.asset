@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c1211a4d5cf44eabe2991114ea104, type: 3}
+  m_Name: GadflyData
+  m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
+  Tag: 2
+  BoughtWithCurrency: 0
+  CollectsCurrency: 0
+  CurrentOwned: 0
+  StartingPrice: 10
+  NextPrice: 10
+  PriceIncrease: 1.2
+  TicksPerSecond: 0.1
+  BaseCollect: 0
+  Multiplier: 1
+  Add: 0
+  AdditivePercentage: 0
+  MultiplicativePercentage: 0

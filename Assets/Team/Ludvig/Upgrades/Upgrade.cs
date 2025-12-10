@@ -43,16 +43,3 @@ public class Upgrade : MonoBehaviour
     }
  
 }
-
-public enum UpgradeValueType
-{
-    FloatRaw,
-    IntegerRaw,
-    IntegerAdditive,
-    IntegerPerSecond,
-    FloatAdditive,
-    FloatPerSecond,
-    PercentageAdditive,
-    PercentageMultiplicative,
-    SinglePurchase
-}

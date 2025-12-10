@@ -38,6 +38,59 @@ public static class FormatNumbers
 
         return (Math.Floor(m * 100) / 100).ToString("0.##") + unit;
     }
+
+    public static string FormatValueString(float value, ValueFormatType valueType)
+    {
+        switch (valueType)
+        {
+             case ValueFormatType.FloatRaw:
+                return value.ToString("0.0");
+            case ValueFormatType.IntegerRaw:
+                return value.ToString("0");
+            case ValueFormatType.FloatAdditive:
+                return "+" + value.ToString("0.0");
+            case ValueFormatType.IntegerAdditive:
+                return "+" + value.ToString("0");
+            case ValueFormatType.IntegerPerSecond:
+                return "+" + value.ToString("0") + " /s";
+            case ValueFormatType.FloatPerSecond:
+                return "+" + value.ToString("0.0") + " /s";
+            case ValueFormatType.PercentageAdditive:
+                return "+" + value.ToString("0") + "%";
+            case ValueFormatType.PercentageMultiplicative:
+                return "x" + value.ToString("0") + "%";
+            case ValueFormatType.SinglePurchase:
+                return "";
+            default: return "";
+        }
+    }
+}
+
+public enum ValueFormatType
+{
+    FloatRaw,
+    IntegerRaw,
+    FloatAdditive,
+    IntegerAdditive,
+    IntegerPerSecond,
+    FloatPerSecond,
+    PercentageAdditive,
+    PercentageMultiplicative,
+    SinglePurchase
+}
+
+//Deprecated
+public enum UpgradeValueType
+{
+    FloatRaw,
+    IntegerRaw,
+    IntegerAdditive,
+    IntegerPerSecond,
+    FloatAdditive,
+    FloatPerSecond,
+    PercentageAdditive,
+    PercentageMultiplicative,
+    SinglePurchase
 }
 
 // Use this method to update the text correctly regards towards the formating.

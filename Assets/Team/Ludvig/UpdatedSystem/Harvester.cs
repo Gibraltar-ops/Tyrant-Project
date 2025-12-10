@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CollectorObjectSpawner))]
-[RequireComponent(typeof(BuyCollector))]
+// [RequireComponent(typeof(CollectorObjectSpawner))]
+// [RequireComponent(typeof(BuyCollector))]
 public class Harvester : MonoBehaviour
 {
     public float TicksPerSecondBase = 1f;
@@ -44,7 +44,7 @@ public class Harvester : MonoBehaviour
         return _ticksPerSecondCurrent;
     }
     
-    public int ModifiedCollectAmount(CollectorType type)
+    public int ModifiedCollectAmount(CollectionType type)
     {
         float finalCurrency = type.BaseCollect;
 
@@ -95,8 +95,8 @@ public class Harvester : MonoBehaviour
 
     public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
     {
-        CollectorType type = new CollectorType();
-        foreach (CollectorType item in Data.CollectorTypes)
+        CollectionType type = new CollectionType();
+        foreach (CollectionType item in Data.CollectorTypes)
         {
             if (item.CollectedCurrency == currency)
             {

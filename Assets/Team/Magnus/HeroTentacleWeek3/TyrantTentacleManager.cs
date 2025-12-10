@@ -25,7 +25,7 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
-    public CollectorType collectorData;
+    public CollectionType collectorData;
 
     public GameObject BloodSplatter;
 

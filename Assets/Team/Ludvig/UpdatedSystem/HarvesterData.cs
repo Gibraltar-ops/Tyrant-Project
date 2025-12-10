@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 
 [Serializable]
 public class HarvesterData
@@ -8,11 +7,11 @@ public class HarvesterData
    public bool Active;
    
    public float TicksPerSecondMultiplier = 1f;
-   public List<CollectorType> CollectorTypes;
+   public List<CollectionType> CollectorTypes;
 }
 
 [Serializable]
-public class CollectorType
+public class CollectionType
 {
    public Currency CollectedCurrency;
    public int BaseCollect = 10;
@@ -26,7 +25,7 @@ public class CollectorType
 [Serializable]
 public class CollectorData
 {
-   public List<CollectorType> Types;
+   public List<CollectionType> Types;
    public Currency CollectedCurrency;
    public int BaseCollect = 10;
    public float CollectMultiplier = 1f;

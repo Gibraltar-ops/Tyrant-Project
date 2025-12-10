@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,14 +6,21 @@ public class EconomyManager : MonoBehaviour
 {
 
 
-    public long Biomass = 100000;
+    public long Biomass = 100;
+    private bool _biomassActive = false;
     public long Brains;
+    private bool _brainsActive = false;
     public long Keratin;
+    private bool _keratinActive = false;
     public long Victims;
 
     public long BiomassWinThreshold = 20000;
 
     public long BiomassLifetime = 12;
+
+    public CurrencyPerSecond BiomassPerSecond = new CurrencyPerSecond();
+    public CurrencyPerSecond BrainsPerSecond = new CurrencyPerSecond();
+    public CurrencyPerSecond KeratinPerSecond = new CurrencyPerSecond();
 
     public delegate void OnCurrencyChanged(Currency currency);
     public static event OnCurrencyChanged onCurrencyChanged;
@@ -53,6 +61,19 @@ public class EconomyManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(_biomassActive)
+        BiomassPerSecond.UpdateValue();
+
+        if(_brainsActive)
+        BrainsPerSecond.UpdateValue();
+
+        if(_keratinActive)
+        KeratinPerSecond.UpdateValue();
+
+    }
+
     public void IncrementCurrency(Currency currency, long value)
     {
       SetValue(currency, value);
@@ -70,6 +91,8 @@ public class EconomyManager : MonoBehaviour
         {
             case Currency.Biomass:
                 Biomass += value;
+                if(!_biomassActive) _biomassActive = true;
+                BiomassPerSecond.AddCurrency((float)value);
 
                 if(Mathf.Sign(value) == 1)
                 {
@@ -80,11 +103,17 @@ public class EconomyManager : MonoBehaviour
                 break;
             case Currency.Brains:
                 Brains += value;
-                Biomass = Biomass <= 0 ? 0 : Biomass;
+                if(!_brainsActive) _brainsActive = true;
+                BrainsPerSecond.AddCurrency((float)value);
+
+                Brains = Brains <= 0 ? 0 : Brains;
                 onCurrencyChanged?.Invoke(Currency.Brains);
                 break;
             case Currency.Keratin:
                 Keratin += value;
+                if(!_keratinActive) _keratinActive = true;
+                KeratinPerSecond.AddCurrency((float)value);
+
                 Keratin = Keratin <= 0 ? 0 : Keratin;
                 onCurrencyChanged?.Invoke(Currency.Keratin);
                 break;
@@ -158,7 +187,8 @@ public enum Currency
     Brains,
     Keratin,
     Victims,
-    BiomassLifetime
+    BiomassLifetime,
+    None
 }
 
 public enum ShopTag
@@ -166,4 +196,43 @@ public enum ShopTag
     BiomassCollect,
     BrainsCollect,
 
+}
+
+//(AI Generated) Class for calculating currency per second.
+public class CurrencyPerSecond
+{
+    public float windowSize = 5f;         // Rolling window in seconds
+    public float smoothingFactor = 1.5f;  // EMA responsiveness
+
+    private Queue<(float time, float amount)> events = new Queue<(float, float)>();
+    public float PerSecond = 0f;
+   
+
+    public void UpdateValue()
+    {
+        float now = Time.time;
+
+        // Remove old events outside the window
+        while (events.Count > 0 && now - events.Peek().time > windowSize)
+        {
+            events.Dequeue();
+        }
+
+        // Calculate rolling window CPS
+        float total = 0f;
+        foreach (var e in events)
+        {
+            total += e.amount;
+        }
+        float windowCPS = total / windowSize;
+
+        // Blend with EMA for smoothness
+        PerSecond += smoothingFactor * (windowCPS - PerSecond);
+        
+    }
+
+    public void AddCurrency(float amount)
+    {   if(Mathf.Sign(amount) == 1)
+        events.Enqueue((Time.time, amount));
+    }
 }
