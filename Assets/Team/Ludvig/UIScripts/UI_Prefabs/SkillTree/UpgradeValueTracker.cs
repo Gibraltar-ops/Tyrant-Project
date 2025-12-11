@@ -45,7 +45,7 @@ public class UpgradeValueTracker : MonoBehaviour
             case UpgradeTrackValue.Count:
                  if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
                     {   
-                label.text = "MAX: " + FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.CurrentOwned, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.CurrentOwned, FormatAs);
                     break;
                     }
                 label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.CurrentOwned, FormatAs);

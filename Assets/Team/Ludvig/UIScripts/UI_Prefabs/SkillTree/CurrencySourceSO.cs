@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UpgradeableObjectDataSO", menuName = "Scriptable Objects/UpgradeableObjectDataSO")]
-public class UpgradeableObjectDataSO : ScriptableObject
+[CreateAssetMenu(fileName = "CurrencySourceSO", menuName = "Scriptable Objects/CurrencySourceSO")]
+public class CurrencySourceSO : ScriptableObject
 {
-    public UpgradeableObjectTag Tag;
+    public CurrencySourceTag Tag;
     public ShopStats Shop;
 
     [Header("Source Stats")]

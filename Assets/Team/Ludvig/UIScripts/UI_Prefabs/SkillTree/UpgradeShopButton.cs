@@ -6,6 +6,7 @@ public class UpgradeShopButton: MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public UpgradeTag upgradeTag;
+     public bool _maxedOut = false;
 
     public delegate void OnUpgradePurchased(UpgradeTag tag);
     public static event OnUpgradePurchased onUpgradePurchased;
@@ -23,17 +24,28 @@ public class UpgradeShopButton: MonoBehaviour
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(Buy);
+        GetComponentInChildren<UpgradeShopButton>().upgradeTag = upgradeTag;
         Invoke("Initialize", 0.01f);
         
     }
 
     private void Initialize()
         {
+        
         CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.BoughtWithCurrency);
         }
     
     private void CheckInteractable(Currency currency)
     {
+        if(_maxedOut) return;
+
+        if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
+        {   
+            GetComponent<Button>().interactable = false;
+            _maxedOut = true;
+            return;
+        }
+
         if(currency != Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.BoughtWithCurrency)
         {
             return;

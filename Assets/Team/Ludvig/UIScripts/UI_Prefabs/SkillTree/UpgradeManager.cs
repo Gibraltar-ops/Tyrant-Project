@@ -1,7 +1,39 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
+
+// The upgrade system works with "Currency Sources" which hold collection values and stats 
+//and "Upgrades" which hold upgrade values.
+
+//A currency source can be anything that needs to be upgraded: e.g a source of healing for the hp system,
+//a source of damage for enemies etc. It's just a universal object that can hold different values.
+//The upgrade manager makes these values globally
+//accessible through a tag system.
+//___________________________________
+//TO ADD A NEW Currency Source MAIN STAT (EG. "SPEED", "AGRESSION" AND SO ON):
+//LOOK FOR "01." IN THE COMMENTS BELOW, AND FOLLOW THE STEPS.
+
+//TO ADD A NEW Currency Source COLLECT STAT (EG. "MULTIPLERS" AND SO ON):
+//LOOK FOR "001." IN THE COMMENTS BELOW, AND FOLLOW THE STEPS.
+//
+//_____________v___v___v_____________
+
+//TO ADD A NEW CURRENCY SOURCE OBJECT.
+//Create a new "CurrencySourceSO" in the editor and tweak the values.
+//Make sure the scriptable object's "Tag" field reflects what you're building. 
+//This tag must be unique per CurrencySourceSO.
+//LOOK FOR "1." IN THE COMMENTS BELOW AND ADD A NEW TAG THERE.
+
+//If your new object needs any new stats - follow the checklist below (from 01. to 04.) to add this value.
+
+//Create an empty game object and add an "UpgradeableObjectShop.cs" to it.
+//The shop takes care of things like incrementing count and price, max count.
+//Assign your new CurrencySourceSO to the field in the shop script.
+//Create your upgrader script and put it on the same object. Make sure it inherits from "Upgrader.cs".
+//Use BuyCollectorUpgrader.cs as a reference.
+//Override the ApplyUpgrade method. Make sure to run "base.ApplyUpgrade(maxedOut)" at the end of your custom code;
+//This should be enough.
 
 namespace Lood
 {
@@ -44,15 +76,15 @@ namespace Lood
         onUpgradeManagerInitialized?.Invoke();
     }
 
-    public Dictionary<UpgradeableObjectTag, UpgradeableStatBlock> UpgradeableObjects = new();
+    public Dictionary<CurrencySourceTag, CurrencySourceStatBlock> CurrencySources = new();
 
     public Dictionary<UpgradeTag, UpgradeStatBlock> Upgrades = new();
 
-    public void AddUpgradeableObject(UpgradeableObjectDataSO data)
+    public void AddUpgradeableObject(CurrencySourceSO data)
     {
-        if (!UpgradeableObjects.ContainsKey(data.Tag))
+        if (!CurrencySources.ContainsKey(data.Tag))
             {
-                UpgradeableObjects.Add(data.Tag, new UpgradeableStatBlock(data));
+                CurrencySources.Add(data.Tag, new CurrencySourceStatBlock(data));
                 Debug.Log("Upgrade manager added upgradeable object with key: " + data.Tag);
             }
     }
@@ -66,45 +98,45 @@ namespace Lood
             }
     }
 
-    public void IncreaseUpgradeableStat(UpgradeableObjectTag tag, MainStat stat, float value)
+    public void IncreaseUpgradeableStat(CurrencySourceTag tag, MainStat stat, float value)
     {
-        if (!UpgradeableObjects.ContainsKey(tag))
+        if (!CurrencySources.ContainsKey(tag))
         {
             Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
             return;
         }
 
-        UpgradeableObjects[tag].MainStats[stat] += value;
+        CurrencySources[tag].MainStats[stat] += value;
     }
 
-    public float GetUpgradeableStat(UpgradeableObjectTag tag, MainStat stat)
+    public float GetCurrencySourceStat(CurrencySourceTag tag, MainStat stat)
     {
-         if (!UpgradeableObjects.ContainsKey(tag))
+         if (!CurrencySources.ContainsKey(tag))
         {
             Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
             return 0f;
         }
-        return UpgradeableObjects[tag].MainStats[stat];
+        return CurrencySources[tag].MainStats[stat];
     }
 
-     public void IncrementUpgradeableCount(UpgradeableObjectTag tag)
+     public void IncrementCurrencySourceCount(CurrencySourceTag tag)
     {
-         if (!UpgradeableObjects.ContainsKey(tag))
+         if (!CurrencySources.ContainsKey(tag))
         {
             Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
             return;
         }
-        UpgradeableObjects[tag].Shop.CurrentOwned ++;
+        CurrencySources[tag].Shop.CurrentOwned ++;
     }
 
-    public int GetUpgradeableCount(UpgradeableObjectTag tag)
+    public int GetCurrencySourceCount(CurrencySourceTag tag)
     {
-         if (!UpgradeableObjects.ContainsKey(tag))
+         if (!CurrencySources.ContainsKey(tag))
         {
             Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
             return 0;
         }
-        return UpgradeableObjects[tag].Shop.CurrentOwned;
+        return CurrencySources[tag].Shop.CurrentOwned;
     }
 
      public void IncrementUpgradeCount(UpgradeTag tag)
@@ -131,7 +163,11 @@ namespace Lood
 }
 
 
-public enum UpgradeableObjectTag
+//1.___________________________________
+//WHEN CREATING A NEW SOURCE OF CURRENCY (AN "UPGRADEABLE OBJECT" IN THE LANGUAGE OF THIS CODE)
+//ADD NEW VARIABLE TO THIS ENUM!!!
+//_____________v___v___v_____________
+public enum CurrencySourceTag
 {
     PlayerTentacle,
     AutoTentacle,
@@ -139,6 +175,10 @@ public enum UpgradeableObjectTag
     Suicider
 }
 
+//2.___________________________________
+//WHEN CREATING A NEW VALUE UPGRADE (AN "UPGRADE" IN THE LANGUAGE OF THIS CODE)
+//ADD NEW VARIABLE TO THIS ENUM!!!
+//_____________v___v___v_____________
 public enum UpgradeTag
 {
     AutoTentacleSpeedUp,
@@ -147,6 +187,11 @@ public enum UpgradeTag
 
 }
 
+//01.
+//WHEN ADDING A NEW UPGRADEABLE STAT
+//___________________________________
+//ADD NEW VARIABLE TO THIS ENUM!!!
+//_____________v___v___v_____________
 public enum MainStat
 {
     None,
@@ -161,7 +206,7 @@ public enum MainStat
 }
 
 
-public class UpgradeableStatBlock
+public class CurrencySourceStatBlock
 {  
     //This stat block contains all variables related to the shop (prices, count etc.)
     public ShopStats Shop = new();
@@ -175,7 +220,10 @@ public class UpgradeableStatBlock
         {Currency.Brains, new CollectTypeStatBlock()},
         {Currency.Keratin, new CollectTypeStatBlock()}
     };
-    
+
+//02.___________________________________
+//ADD NEW ENTRY TO THIS DICTIONARY!!!
+//_____________v___v___v_____________
     public Dictionary<MainStat, float> MainStats = new()
     {   
         //Auto Tentacle Stats
@@ -184,10 +232,14 @@ public class UpgradeableStatBlock
         {MainStat.SpeedMultiply, 1f},
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
+        {MainStat.GadflyAggression, 0f},
         
     };
-
-    public UpgradeableStatBlock(UpgradeableObjectDataSO data)
+//03._________________________________________________________________
+//The constructor needs an "UpgradeableObjectDataSO" scriptable object as input.
+//ADD YOUR NEW VARIABLE TO THE "UpgradeableObjectDataSO.cs" script. 
+//________________________________________________________
+    public CurrencySourceStatBlock(CurrencySourceSO data)
     {   
         //Shop
         Shop.IsActive = data.Shop.IsActive;
@@ -206,7 +258,10 @@ public class UpgradeableStatBlock
         CollectStats[Currency.Biomass] = new CollectTypeStatBlock(data.BiomassCollect);
         CollectStats[Currency.Brains] = new CollectTypeStatBlock(data.BrainsCollect);
         CollectStats[Currency.Keratin] = new CollectTypeStatBlock(data.KeratinCollect);
-       
+
+//04._________________________________________________
+//ASSIGN THE VALUE FROM THE INPUT SCRIPTABLE OBJECT THAT YOU ADDED IN STEP 03.!!!
+//_____________v___v___v_____________
         //Source stats
         MainStats[MainStat.BaseSpeed] = data.BaseSpeed;
         MainStats[MainStat.SpeedAdd] = data.SpeedAdd;
@@ -218,6 +273,37 @@ public class UpgradeableStatBlock
     }
 }
 
+//_________________________________________________
+//HOW TO ADD COLLECT STATS.!!!
+//DON'T ADD NEW COLLECT STATS UNLESS YOU NEED A COMPLETELY NEW BEHAVIOR FOR COLLECTION,
+//TRY USING THE EXISTING VALUES:
+
+//HERE IS AN EXAMPLE OF USE FROM THE HARVESTER SCRIPT:
+//
+// public int GetCurrentCollectAmount(Currency currency, UpgradeableObjectTag tag)
+    // {   
+    //     //
+    //     UpgradeableStatBlock data = UpgradeManager.Instance.UpgradeableObjects[tag];
+    //     //Apply base speed (in ticks per second)
+    //     float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
+    //     //Apply simple add
+    //     finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
+    //     //Apply simple multiply
+    //     finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
+    //     //Apply additive percentage
+    //     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+    //     //Apply multiplicative percentage
+    //     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
+        
+    //     return (int)finalCollectAmount;
+
+    // }
+//_____________v___v___v_____________
+
+//001.________________________________
+//::::TO ADD NEW COLLECT VARIABLE::::
+//ADD NEW VARIABLE TO THIS ENUM.!!!
+//_____________v___v___v_____________
 # region Collect Stats
 public enum CollectStat
 {   None,
@@ -229,6 +315,10 @@ public enum CollectStat
 }
 public class CollectTypeStatBlock
 {   
+    //002.________________________________
+    //TO ADD NEW COLLECT VARIABLE
+    //ADD NEW ENTRY TO THIS DICTIONARY.!!!
+    //_____________v___v___v_____________
     public Dictionary<CollectStat, float> Stats = new()
     {   
         //Auto Tentacle Stats
@@ -243,6 +333,10 @@ public class CollectTypeStatBlock
     {
         
     }
+     //003.________________________________
+    //TO ADD NEW COLLECT VARIABLE
+    //ADD NEW ASSIGNMENT TO THIS CONSTRUCTOR.!!!
+    //_____________v___v___v_____________
     public CollectTypeStatBlock(CollectType stats)
     {
         Stats[CollectStat.BaseCollect] = stats.BaseCollect;
@@ -253,6 +347,11 @@ public class CollectTypeStatBlock
     }
 }
 
+//004.________________________________
+//FINAL STEP
+//TO ADD NEW COLLECT VARIABLE
+//ADD NEW VARIABLE TO THIS CLASS!!!
+//_____________v___v___v_____________
 [Serializable]
 public class CollectType
 {
@@ -299,7 +398,7 @@ public class UpgradeStatBlock
 [Serializable]
 public class UpgradeEffect
 {
-    public UpgradeableObjectTag UpgradeableObjectTag;
+    public CurrencySourceTag UpgradeableObjectTag;
     public UpgradeStatCategory StatCategory;
 
     [Header("Collection Upgrade")]

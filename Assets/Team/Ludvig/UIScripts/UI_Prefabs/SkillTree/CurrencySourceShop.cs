@@ -1,35 +1,32 @@
 using UnityEngine;
 using Lood;
 
-[RequireComponent(typeof(Lood.Harvester))]
-[RequireComponent(typeof(CollectorObjectSpawner))]
-[RequireComponent(typeof(BuyCollectorUpgrader))]
-public class UpgradeableObjectShop : MonoBehaviour
+public class CurrencySourceShop : MonoBehaviour
 {
     [HideInInspector]
-    public UpgradeableObjectTag UpgradeableObjectTag;
-    public UpgradeableObjectDataSO objectDataSO;
+    public CurrencySourceTag CurrencySource;
+    public CurrencySourceSO objectDataSO;
     public bool Active = false;
     void OnEnable()
     {   
-        UpgradeableObjectShopButton.onCollectorPurchased += TryPurchase;
+        CurrencySourceShopButton.onCollectorPurchased += TryPurchase;
         EconomyManager.onCurrencyChanged += CheckAffordability;
     }
     void OnDisable()
     {
-        UpgradeableObjectShopButton.onCollectorPurchased -= TryPurchase;
+        CurrencySourceShopButton.onCollectorPurchased -= TryPurchase;
         EconomyManager.onCurrencyChanged -= CheckAffordability;
     }
 
     void Start()
     {
         Lood.UpgradeManager.Instance.AddUpgradeableObject(objectDataSO);
-        UpgradeableObjectTag = objectDataSO.Tag;
+        CurrencySource = objectDataSO.Tag;
     } 
 
-    private void TryPurchase(UpgradeableObjectTag tag)
+    private void TryPurchase(CurrencySourceTag tag)
     {
-        if(tag != UpgradeableObjectTag)
+        if(tag != CurrencySource)
         {
             return;
         }
@@ -38,13 +35,13 @@ public class UpgradeableObjectShop : MonoBehaviour
 
     public void IncrementPrice()
     {
-        UpgradeableStatBlock stats = Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableObjectTag];
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
         stats.Shop.NextPrice = (int)(stats.Shop.StartingPrice * Mathf.Pow(stats.Shop.PriceIncrease, stats.Shop.CurrentOwned));
     }
 
     public void CheckAffordability(Currency currency)
     { 
-            UpgradeableStatBlock stats = Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableObjectTag];
+            CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
             if (EconomyManager.Instance.CanAfford(stats.Shop.BoughtWithCurrency, (int)stats.Shop.NextPrice))
             {
                stats.Shop.CanAfford = true;
@@ -57,7 +54,7 @@ public class UpgradeableObjectShop : MonoBehaviour
 
     public void PurchaseUpgrade()
     { 
-        UpgradeableStatBlock stats = Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableObjectTag];
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
         
         if(stats.Shop.CurrentOwned < stats.Shop.MaxOwned)
         {

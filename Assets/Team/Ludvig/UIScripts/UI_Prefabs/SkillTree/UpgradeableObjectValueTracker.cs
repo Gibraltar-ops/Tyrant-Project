@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class UpgradeableObjectValueTracker : MonoBehaviour
+public class CurrencySourceValueTracker : MonoBehaviour
 {
-    public UpgradeableObjectTag UpgradeableTag;
+    public CurrencySourceTag CurrencySourceTag;
 
     public TrackableStat TrackedStat;
 
@@ -42,42 +42,42 @@ public class UpgradeableObjectValueTracker : MonoBehaviour
 
     public void UpdateLabel()
     {    
-        if (!Lood.UpgradeManager.Instance.UpgradeableObjects.ContainsKey(UpgradeableTag))
+        if (!Lood.UpgradeManager.Instance.CurrencySources.ContainsKey(CurrencySourceTag))
         {
-            Debug.LogWarning("No such Upgradeable Object key in Upgrade Manager: " + UpgradeableTag.ToString());
+            Debug.LogWarning("No such Upgradeable Object key in Upgrade Manager: " + CurrencySourceTag.ToString());
             return;
         }
         
         if(TrackedStat == TrackableStat.MainStat)
         {
-            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.GetUpgradeableStat(UpgradeableTag, MainStat), FormatAs);
+            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.GetCurrencySourceStat(CurrencySourceTag, MainStat), FormatAs);
             return;
         }
         if(TrackedStat == TrackableStat.Collection)
         {
-            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].CollectStats[CollectedCurrency].Stats[CollectStat], FormatAs);
+            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].CollectStats[CollectedCurrency].Stats[CollectStat], FormatAs);
             return;
         }
         
          if(TrackedStat == TrackableStat.Count)
         {
-             if (Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].Shop.MaxedOut)
+             if (Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].Shop.MaxedOut)
             {   
-                label.text = "MAX: " + FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].Shop.CurrentOwned, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].Shop.CurrentOwned, FormatAs);
                 return;
             }
 
-            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].Shop.CurrentOwned, FormatAs);
+            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].Shop.CurrentOwned, FormatAs);
             return;
         }
            if(TrackedStat == TrackableStat.NextPrice)
         {
-            if (Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].Shop.MaxedOut)
+            if (Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].Shop.MaxedOut)
             {   
                 label.text = "";
                 return;
             }
-            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.UpgradeableObjects[UpgradeableTag].Shop.NextPrice, FormatAs);
+            label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceTag].Shop.NextPrice, FormatAs);
             return;
         }
             

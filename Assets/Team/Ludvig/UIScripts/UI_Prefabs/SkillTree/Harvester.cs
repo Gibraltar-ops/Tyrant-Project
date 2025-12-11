@@ -9,7 +9,7 @@ public class Harvester : MonoBehaviour
     public bool SpawnObject;
     public bool IsActive = true;
 
-    private UpgradeableObjectTag _tag;
+    private CurrencySourceTag _tag;
 
     private CollectorObjectSpawner _objectSpawner;
     private List<Collector> _collectors;
@@ -21,7 +21,7 @@ public class Harvester : MonoBehaviour
     { 
         _objectSpawner = GetComponent<CollectorObjectSpawner>();
         _collectors = new List<Collector>();
-        _tag = GetComponent<UpgradeableObjectShop>().UpgradeableObjectTag;
+        _tag = GetComponent<CurrencySourceShop>().CurrencySource;
         
     }
 
@@ -39,7 +39,7 @@ public class Harvester : MonoBehaviour
 
     public float GetCurrentTicksPerSecond()
     {   
-        UpgradeableStatBlock data = UpgradeManager.Instance.UpgradeableObjects[_tag];
+        CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[_tag];
 
         //Apply base speed (in ticks per second)
         float _ticksPerSecondCurrent = data.MainStats[MainStat.BaseSpeed];
@@ -55,10 +55,10 @@ public class Harvester : MonoBehaviour
         return _ticksPerSecondCurrent;
     }
     
-    public int GetCurrentCollectAmount(Currency currency, UpgradeableObjectTag tag)
+    public int GetCurrentCollectAmount(Currency currency, CurrencySourceTag tag)
     {   
         //
-        UpgradeableStatBlock data = UpgradeManager.Instance.UpgradeableObjects[tag];
+        CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[tag];
         //Apply base speed (in ticks per second)
         float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
         //Apply simple add
@@ -88,7 +88,7 @@ public class Harvester : MonoBehaviour
             {
                 if (collector.Collect(Time.deltaTime, GetCurrentTicksPerSecond()))
                 {
-                    var collectStats = UpgradeManager.Instance.UpgradeableObjects[_tag].CollectStats;
+                    var collectStats = UpgradeManager.Instance.CurrencySources[_tag].CollectStats;
 
                     //The currencies collected are held in a dictionary "CollectStats". 
                     //Key: Currency, Value: CollectTypeStatBlock (Holds stuff like BaseCollect and multipliers.)

@@ -38,12 +38,12 @@ public class GenericUpgrader : Upgrader
             if(item.StatCategory == UpgradeStatCategory.Collection)
             {
                 //Upgrade the collection of a specific currency.
-                Lood.UpgradeManager.Instance.UpgradeableObjects[item.UpgradeableObjectTag].CollectStats[item.CurrencyToAffect].Stats[item.CollectType] += stats.AddValue;
+                Lood.UpgradeManager.Instance.CurrencySources[item.UpgradeableObjectTag].CollectStats[item.CurrencyToAffect].Stats[item.CollectType] += stats.AddValue;
             }
             if(item.StatCategory == UpgradeStatCategory.MainStat)
             {
                 //Upgrade the collection of a specific "main stat" (e.g. "Speed" or "Aggression").
-                Lood.UpgradeManager.Instance.UpgradeableObjects[item.UpgradeableObjectTag].MainStats[item.UpgradeStat] += stats.AddValue;
+                Lood.UpgradeManager.Instance.CurrencySources[item.UpgradeableObjectTag].MainStats[item.UpgradeStat] += stats.AddValue;
             }
         }
 
