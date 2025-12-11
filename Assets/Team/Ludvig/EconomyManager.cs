@@ -188,6 +188,7 @@ public enum Currency
     Keratin,
     Victims,
     BiomassLifetime,
+    HealthPoints,
     None
 }
 

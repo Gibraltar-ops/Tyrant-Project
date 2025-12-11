@@ -218,7 +218,8 @@ public class CurrencySourceStatBlock
     {
         {Currency.Biomass, new CollectTypeStatBlock()},
         {Currency.Brains, new CollectTypeStatBlock()},
-        {Currency.Keratin, new CollectTypeStatBlock()}
+        {Currency.Keratin, new CollectTypeStatBlock()},
+        {Currency.HealthPoints, new CollectTypeStatBlock()}
     };
 
 //02.___________________________________
@@ -258,10 +259,11 @@ public class CurrencySourceStatBlock
         CollectStats[Currency.Biomass] = new CollectTypeStatBlock(data.BiomassCollect);
         CollectStats[Currency.Brains] = new CollectTypeStatBlock(data.BrainsCollect);
         CollectStats[Currency.Keratin] = new CollectTypeStatBlock(data.KeratinCollect);
+        CollectStats[Currency.HealthPoints] = new CollectTypeStatBlock(data.HealthPointsCollect);
 
-//04._________________________________________________
-//ASSIGN THE VALUE FROM THE INPUT SCRIPTABLE OBJECT THAT YOU ADDED IN STEP 03.!!!
-//_____________v___v___v_____________
+        //04._________________________________________________
+        //ASSIGN THE VALUE FROM THE INPUT SCRIPTABLE OBJECT THAT YOU ADDED IN STEP 03.!!!
+        //_____________v___v___v_____________
         //Source stats
         MainStats[MainStat.BaseSpeed] = data.BaseSpeed;
         MainStats[MainStat.SpeedAdd] = data.SpeedAdd;

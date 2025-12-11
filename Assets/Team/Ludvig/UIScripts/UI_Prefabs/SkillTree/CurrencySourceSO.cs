@@ -22,5 +22,6 @@ public class CurrencySourceSO : ScriptableObject
     public CollectType BiomassCollect;
     public CollectType BrainsCollect;
     public CollectType KeratinCollect;
+    public CollectType HealthPointsCollect;
 
 }
