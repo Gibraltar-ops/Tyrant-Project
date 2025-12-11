@@ -46,9 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GadflySystem
   maxGadflyUnits: 500
+  biomassAmount: 10
+  biomassMultiplier: 1
+  brainmassAmount: 1
+  brainmassMultiplier: 1
+  harvestMovementSpeed: 4.5
   harvestCooldown: 10
+  harvestDuration: 6
   spawnArea:
-  - center: {x: -5, y: 8}
+  - center: {x: -6, y: 8}
     size: {x: 2, y: 2}
   gatherArea:
   - center: {x: -14, y: 7}

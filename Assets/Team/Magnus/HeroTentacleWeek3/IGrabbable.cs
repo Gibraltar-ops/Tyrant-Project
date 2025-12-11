@@ -3,7 +3,6 @@ using UnityEngine;
 public enum GrabbableType
 {
     Victim,
-    Fighter,
 }
 
 public interface IGrabbable

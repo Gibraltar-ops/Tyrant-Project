@@ -31,7 +31,7 @@ public class ResistanceSystem : MonoBehaviour
 
     public event Action<int> OnFighterCountChanged;
 
-    public event System.Action<int> OnEnemyAttack;
+    //public event System.Action<int> OnEnemyAttack; // Keep this? Nah probably not... Right Gustav?!
 
     void Start()
     {
@@ -142,7 +142,7 @@ public class ResistanceSystem : MonoBehaviour
             if (fighter.isCenter && fighter.attackTimer <= 0f)
             {
                 // FIRE!
-                AttackDirector.Instance.SpawnProjectile(fighter.position, fighter.attackDamage);
+                ProjectileDirector.Instance.SpawnGrenade(fighter.position, fighter.attackDamage);
 
                 fighter.attackTimer = attackCooldown;
             }

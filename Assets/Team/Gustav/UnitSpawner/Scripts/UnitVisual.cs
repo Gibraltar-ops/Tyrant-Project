@@ -5,6 +5,7 @@ public class UnitVisual : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public Transform gfx;
+    public GameObject dummyVisual;
 
     void Awake()
     {

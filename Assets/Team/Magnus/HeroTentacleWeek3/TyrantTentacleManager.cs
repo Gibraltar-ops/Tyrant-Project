@@ -25,6 +25,9 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private Transform mouthPoint; // all tentacles need this variable
 
+    [SerializeField]
+    private KebabThrust kebabManager;
+
     public CollectionType collectorData;
 
     public GameObject BloodSplatter;
@@ -32,17 +35,7 @@ public class TyrantTentacleManager : MonoBehaviour
     private float _autoClickInterval = 0.05f;
     private float _currentAutoClickTime = 0f;
 
-    void Start()
-    {
-        if (victimSystem != null)
-        {
-            // Debug.Log(
-            //     $"TYRANT MANAGER START. Using VictimSystem with ID: {victimSystem.GetInstanceID()}",
-            //     victimSystem.gameObject
-            // );
-        }
-        else { }
-    }
+    void Start() { }
 
     void Update()
     {
@@ -53,25 +46,52 @@ public class TyrantTentacleManager : MonoBehaviour
             _currentAutoClickTime = 0f;
             if (Input.GetMouseButton(0))
             {
-                //Debug.Log("Click");
-                TryGrabTargetAtClick(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                HandleInteraction(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
         }
     }
 
-    private void TryGrabTargetAtClick(Vector2 clickPosition)
+    private void HandleInteraction(Vector2 clickPosition)
     {
-        IGrabbable target = FindClosestGrabbable(clickPosition, grabRadius);
+        IGrabbable closestVictim = FindClosestGrabbable(clickPosition, grabRadius);
+        float distToVictim = float.MaxValue;
+        float distToFighter = float.MaxValue;
 
-        if (target != null && !target.IsGrabbed)
+        if (closestVictim != null)
         {
-            TentacleControllerIK freeTentacle = FindFreeTentacle();
-            if (freeTentacle != null)
+            distToVictim = Vector2.Distance(clickPosition, closestVictim.Position);
+        }
+
+        ResistanceData closestFighter = FindClosestFighter(clickPosition, grabRadius);
+
+        if (closestFighter != null)
+        {
+            distToFighter = Vector2.Distance(clickPosition, closestFighter.Position);
+        }
+
+        if (closestVictim == null && closestFighter == null)
+        {
+            return;
+        }
+
+        if (distToFighter < distToVictim)
+        {
+            if (kebabManager != null)
             {
-                target.IsGrabbed = true;
-                freeTentacle.StartGrab(target, mouthPoint);
+                kebabManager.AttackAtPosition(closestFighter.position);
             }
-            else { }
+        }
+        else
+        {
+            if (!closestVictim.IsGrabbed)
+            {
+                TentacleControllerIK freeTentacle = FindFreeTentacle();
+                if (freeTentacle != null)
+                {
+                    closestVictim.IsGrabbed = true;
+                    freeTentacle.StartGrab(closestVictim, mouthPoint);
+                }
+            }
         }
     }
 
@@ -106,10 +126,6 @@ public class TyrantTentacleManager : MonoBehaviour
         {
             grabbables.AddRange(victimSystem.victims);
         }
-        if (resistanceSystem != null)
-        {
-            grabbables.AddRange(resistanceSystem.fighters);
-        }
 
         foreach (var grabbable in grabbables)
         {
@@ -121,6 +137,30 @@ public class TyrantTentacleManager : MonoBehaviour
             {
                 closestDistSqr = distSqr;
                 closest = grabbable;
+            }
+        }
+        return closest;
+    }
+
+    private ResistanceData FindClosestFighter(Vector2 position, float maxDistance)
+    {
+        ResistanceData closest = null;
+        float closestDistSqr = maxDistance * maxDistance;
+
+        if (resistanceSystem == null || resistanceSystem.fighters == null)
+            return null;
+
+        foreach (var fighter in resistanceSystem.fighters)
+        {
+            if (fighter == null)
+                continue;
+
+            float distSqr = (fighter.position - position).sqrMagnitude;
+
+            if (distSqr < closestDistSqr)
+            {
+                closestDistSqr = distSqr;
+                closest = fighter;
             }
         }
         return closest;
@@ -163,10 +203,8 @@ public class TyrantTentacleManager : MonoBehaviour
         EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
     }
 
-        public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
+    public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
     {
-        
-
         switch (value)
         {
             case HarvesterBaseValue.CollectAdd:
@@ -183,12 +221,12 @@ public class TyrantTentacleManager : MonoBehaviour
             case HarvesterBaseValue.CollectMultiplicativePercentage:
                 collectorData.CollectMultiplicativePercentage *= 1f + amount;
                 break;
-            default: break;
+            default:
+                break;
         }
-        
     }
 
-     public int ModifiedCollectAmount()
+    public int ModifiedCollectAmount()
     {
         float finalCurrency = collectorData.BaseCollect;
 
@@ -196,9 +234,9 @@ public class TyrantTentacleManager : MonoBehaviour
 
         finalCurrency *= collectorData.CollectMultiplier;
 
-        finalCurrency += finalCurrency * (collectorData.CollectAdditivePercentage/100f);
+        finalCurrency += finalCurrency * (collectorData.CollectAdditivePercentage / 100f);
 
-        finalCurrency += finalCurrency * (collectorData.CollectMultiplicativePercentage/100f);
+        finalCurrency += finalCurrency * (collectorData.CollectMultiplicativePercentage / 100f);
 
         return (int)finalCurrency;
     }

@@ -31,6 +31,8 @@ public class GadflyData
     public bool hasReachedHarvest = false;
     public bool isLeftSide;
     public bool isCarryingVictim = false;
+    public bool hasPayload;
+    public bool hasThrownPayload;
 
     // Other attributes
     public Vector2 velocity;
