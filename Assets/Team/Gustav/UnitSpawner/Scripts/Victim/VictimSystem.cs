@@ -6,53 +6,101 @@ public class VictimSystem : MonoBehaviour
 {
     [Header("Spawning")]
     public bool enableSpawning = true;
-    public float spawnInterval = 1.0f;
+    [Tooltip("Base interval between individual spawns.")]
+    public float spawnInterval = 1f;
+    [Tooltip("How many victims can exist at once.")]
     public int maxVictims = 10000;
+
+    [Header("Wave Settings & Upgradeable Stats")]
+    [Tooltip("How many victims spawn instantly each wave.")]
+    public int smallWaveVictimAmount = 1;
+    [Tooltip("The multiplier for the SMALL wave amount per wave.")]
+    public float smallWaveAmountMultiplier = 1f;
+    [Tooltip("The multiplier for the SMALL wave timer.")]
+    public float smallWaveTimerMultiplier = 1f;
+    [Tooltip("Time between waves.")]
+    public float LargeWaveTimer = 10f;
+    [Tooltip("How many victims spawn instantly each LARGE wave.")]
+    public int largeWaveVictimAmount = 10;
+    [Tooltip("The multiplier for the LARGE wave amount per wave.")]
+    public float largeWaveAmountMultiplier = 1f;
+    [Tooltip("The multiplier for the LARGE wave timer.")]
+    public float largeWaveTimerMultiplier = 1f;
 
     public List<SpawnRegion> spawnRegions = new List<SpawnRegion>();
     public List<DestinationRegion> destinationRegions = new List<DestinationRegion>();
 
+    // Timers
     private float spawnTimer;
-    public List<VictimData> victims = new List<VictimData>();
+    private float waveTimer;
 
+    public List<VictimData> victims = new List<VictimData>();
     public event Action<int> OnVictimCountChanged;
 
-    [HideInInspector]
-    public float spawnRateMultiplier = 1f; // Adjust spawn rate with UI Btn/Slider.
-
-    void Awake() // Använd Awake för att logga tidigt
-    {
-        Debug.Log(
-            $"VICTIMSYSTEM AWAKE! Instance ID: {this.GetInstanceID()}, Name: {this.gameObject.name}",
-            this.gameObject
-        );
-    } // Magnus kommentera bort det här sedan
+    //void Awake() // Använd Awake för att logga tidigt
+    //{
+    //    Debug.Log(
+    //        $"VICTIMSYSTEM AWAKE! Instance ID: {this.GetInstanceID()}, Name: {this.gameObject.name}",
+    //        this.gameObject
+    //    );
+    //} // Magnus kommentera bort det här sedan
 
     void Start()
     {
         spawnTimer = spawnInterval;
+        waveTimer = LargeWaveTimer;
 
-        // spawn some initial crowd (optional)
-        for (int i = 0; i < 100; i++)
+        // Optional: spawn initial population
+        for (int i = 0; i < 10; i++)
             SpawnVictim();
     }
 
     void Update()
     {
-        spawnTimer -= Time.deltaTime * spawnRateMultiplier;
+        if (!enableSpawning) return;
 
-        if (enableSpawning && victims.Count < maxVictims && spawnTimer <= 0f)
+        // -------------------------
+        // INDIVIDUAL SPAWNING
+        // -------------------------
+        spawnTimer -= Time.deltaTime * smallWaveTimerMultiplier;
+
+        if (spawnTimer <= 0f && victims.Count < maxVictims)
         {
-            SpawnVictim();
+            int smallWaveAmount = Mathf.RoundToInt(smallWaveVictimAmount * smallWaveAmountMultiplier);
+            for (int i = 0; i < smallWaveAmount; i++)
+            {
+                if (victims.Count < maxVictims)
+                    SpawnVictim();
+            }
             spawnTimer = spawnInterval;
         }
 
+        // -------------------------
+        // WAVE SPAWNING 
+        // Every X seconds spawn Y victims instantly
+        // -------------------------
+        waveTimer -= Time.deltaTime * largeWaveTimerMultiplier;
+
+        if (waveTimer <= 0f)
+        {
+            int largeWaveAmount = Mathf.RoundToInt(largeWaveVictimAmount * largeWaveAmountMultiplier);
+
+            for (int i = 0; i < largeWaveAmount; i++)
+            {
+                if (victims.Count < maxVictims)
+                    SpawnVictim();
+            }
+
+            waveTimer = LargeWaveTimer;
+        }
+
+        // Simulate victim units
         SimulateVictims();
     }
 
-    // --------------------------------------------
-    // SPAWNING
-    // --------------------------------------------
+    // ----------------------------------------------------
+    // SPAWNING LOGIC
+    // ----------------------------------------------------
     private void SpawnVictim()
     {
         if (spawnRegions.Count == 0 || destinationRegions.Count == 0)
@@ -61,21 +109,19 @@ public class VictimSystem : MonoBehaviour
         var spawnRegion = spawnRegions[UnityEngine.Random.Range(0, spawnRegions.Count)];
         var centerRegion = destinationRegions[UnityEngine.Random.Range(0, destinationRegions.Count)];
 
-        victims.Add(
-            new VictimData
-            {
-                position = spawnRegion.RandomPointInside(),
-                homeRegion = centerRegion,
-                destination = centerRegion.RandomPointInside(),
-                speed = UnityEngine.Random.Range(0.4f, 1f),
-                scale = UnityEngine.Random.Range(0.15f, 0.16f),
-                wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
-                wanderTimer = UnityEngine.Random.Range(1f, 2f),
-                isCenter = false,
-            }
-        );
+        victims.Add(new VictimData
+        {
+            position = spawnRegion.RandomPointInside(),
+            homeRegion = centerRegion,
+            destination = centerRegion.RandomPointInside(),
+            speed = UnityEngine.Random.Range(1f, 1.1f),
+            scale = UnityEngine.Random.Range(0.15f, 0.16f),
+            wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
+            wanderTimer = UnityEngine.Random.Range(1f, 2f),
+            isCenter = false
+        });
 
-        OnVictimCountChanged?.Invoke(victims.Count); // Update UI count.
+        OnVictimCountChanged?.Invoke(victims.Count);
     }
 
     // --------------------------------------------
@@ -134,11 +180,11 @@ public class VictimSystem : MonoBehaviour
         if (spawnRegions == null)
             return;
 
-        foreach (var r in spawnRegions)
-            r.DrawGizmo(Color.yellow);
+        foreach (var s in spawnRegions)
+            s.DrawGizmo(Color.yellow);
 
         if (destinationRegions != null)
-            foreach (var c in destinationRegions)
-                c.DrawGizmo(Color.green);
+            foreach (var d in destinationRegions)
+                d.DrawGizmo(Color.green);
     }
 }

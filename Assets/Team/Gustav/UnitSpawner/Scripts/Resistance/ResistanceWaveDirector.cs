@@ -9,16 +9,16 @@ public class ResistanceWaveDirector : MonoBehaviour
     private float waveTimer;
 
     [Header("Budget Logic")]
-    public int baseBudget = 10;   // starting per-wave income
+    public int baseBudget = 0;   // starting per-wave income (Starts zero as to have no spawn early)
     public int perWaveIncrease = 1; // baseBudget += this every wave
     public int upgradeBonus = 2;  // added whenever external upgrades call AddUpgrade()
 
     private int currentBudget = 0;  // stored points that carry over
     private int waveIndex = 0;  // If I want to track wave number
-    private bool secondWaveFlag = false; // Flag to track every other wave
+    private bool altWaveFlag = false; // Flag to track every other wave
 
     [Header("Enemy Costs")]
-    public int basicEnemyCost = 5;
+    public int basicEnemyCost = 10;
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class ResistanceWaveDirector : MonoBehaviour
     }
 
     // ---------------------------------------------
-    // Called every 30 seconds
+    // Called every time waveIntervall == 0 (30 seconds)
     // ---------------------------------------------
     private void RunWave()
     {
@@ -47,11 +47,10 @@ public class ResistanceWaveDirector : MonoBehaviour
         currentBudget += baseBudget;
 
         // Increase base income for future waves (every other wave)
-        if (secondWaveFlag)
-        {
+        if (altWaveFlag)
             baseBudget += perWaveIncrease;
-        }
-        secondWaveFlag = !secondWaveFlag;
+
+        altWaveFlag = !altWaveFlag;
 
         SpawnEnemiesFromBudget();
     }
@@ -72,6 +71,7 @@ public class ResistanceWaveDirector : MonoBehaviour
             spawned++;
         }
 
+        //// Optional debug log
         // Debug.Log($"Wave {waveIndex}: spawned {spawned} fighters. Remaining budget: {currentBudget}");
     }
 
@@ -81,6 +81,8 @@ public class ResistanceWaveDirector : MonoBehaviour
     public void AddUpgrade()
     {
         baseBudget += upgradeBonus;
+
+        //// Optional debug log
         // Debug.Log("Upgrade purchased — future wave budget increased!");
     }
 }
