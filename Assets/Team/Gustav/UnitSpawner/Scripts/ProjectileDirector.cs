@@ -37,7 +37,7 @@ public class ProjectileDirector : MonoBehaviour
     // ============================================================
     // HUMAN PROJECTILE
     // ============================================================
-    public void SpawnHumanProjectile(Vector2 startPos, int biomassValue)
+    public void SpawnHumanProjectile(Vector2 startPos, int biomassAmount, int brainmassAmount)
     {
         if (tyrantImpactRegions.Count == 0) return;
 
@@ -51,13 +51,17 @@ public class ProjectileDirector : MonoBehaviour
             startPos,
             target,
             defaultProjectileSpeed,
-            biomassValue,
+            biomassAmount,
             humanImpactFXPrefab,
             () =>
             {
                 EconomyManager.Instance.IncrementCurrency(
-                    Currency.BiomassLifetime,
-                    biomassValue
+                    Currency.Biomass,
+                    biomassAmount
+                );
+                EconomyManager.Instance.IncrementCurrency(
+                    Currency.Brains,
+                    brainmassAmount
                 );
             }
         );

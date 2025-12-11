@@ -2978,6 +2978,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResistanceManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7887457422423889654, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4832,6 +4836,10 @@ PrefabInstance:
       value: AttackDirectorManager
       objectReference: {fileID: 0}
     - target: {fileID: 6354706823185014410, guid: c3532ebcc7c7230468147d18a82c6a30, type: 3}
+      propertyPath: humanImpactFXPrefab
+      value: 
+      objectReference: {fileID: 1596016400921981985, guid: f2b91236e048fa24288b982e940c968d, type: 3}
+    - target: {fileID: 6354706823185014410, guid: c3532ebcc7c7230468147d18a82c6a30, type: 3}
       propertyPath: humanProjectilePrefab
       value: 
       objectReference: {fileID: 3266842524508258771, guid: be56f192e3856bf4fa2c1dc4eb5f7cf7, type: 3}
@@ -5200,12 +5208,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5859612084907863759, guid: db6a259e7222f0c4a96dc3e3e0b3d307, type: 3}
-      propertyPath: harvestCooldown
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5859612084907863759, guid: db6a259e7222f0c4a96dc3e3e0b3d307, type: 3}
-      propertyPath: harvestDuration
-      value: 3
+      propertyPath: spawnArea.Array.data[0].center.x
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8632815341299158124, guid: db6a259e7222f0c4a96dc3e3e0b3d307, type: 3}
       propertyPath: m_Name

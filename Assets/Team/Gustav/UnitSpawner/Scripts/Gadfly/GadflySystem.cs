@@ -5,13 +5,17 @@ public class GadflySystem : MonoBehaviour
 {
     [Header("General Settings")]
     public int maxGadflyUnits = 500;
+    public float biomassAmount = 10;
+    public float biomassMultiplier = 1.0f;
+    public float brainmassAmount = 1;
+    public float brainmassMultiplier = 1.0f;
+    public float harvestMovementSpeed = 4.5f;
 
     [Header("Harvest Timers")]
-    public float harvestCooldown = 10f;   // Time between waves
-    public float harvestDuration = 5f;    // Time spent away harvesting
-
-    private float harvestTimer;
-    private float harvestDurationTimer;
+    public float harvestCooldown = 10f;         // Time between waves
+    public float harvestDuration = 5f;          // Time spent away harvesting
+    private float harvestCooldownTimer;         // The codes cooldown countdown timer
+    private float harvestDurationTimer;         // The codes harvest duration timer
 
     private bool harvestActive = false;
 
@@ -29,10 +33,10 @@ public class GadflySystem : MonoBehaviour
     // --------------------------------------------
     void Start()
     {
-        harvestTimer = harvestCooldown;
+        harvestCooldownTimer = harvestCooldown;
 
         // Spawn some initial crowd (optional)
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 1; i++)
             SpawnGatfly();
     }
 
@@ -65,7 +69,7 @@ public class GadflySystem : MonoBehaviour
                 destination = gatherRegion.RandomPointInside(),
 
                 wanderSpeed = Random.Range(2f, 2.1f),
-                harvestSpeed = Random.Range(4.5f, 4.6f),
+                harvestSpeed = harvestMovementSpeed,
                 scale = Random.Range(0.2f, 0.21f),
 
                 wanderDirection = Random.insideUnitCircle.normalized,
@@ -107,12 +111,12 @@ public class GadflySystem : MonoBehaviour
         // ------------------------------------------------
         if (!harvestActive && atHomeCount >= total * 0.5f)
         {
-            harvestTimer -= Time.deltaTime;
+            harvestCooldownTimer -= Time.deltaTime;
         }
         // ------------------------------------------------
         // 2. WHEN TIMER HITS ZERO -> FORCE ALL TO HARVEST
         // ------------------------------------------------
-        if (!harvestActive && harvestTimer <= 0f)
+        if (!harvestActive && harvestCooldownTimer <= 0f)
         {
             harvestActive = true;
             harvestDurationTimer = harvestDuration;
@@ -144,7 +148,7 @@ public class GadflySystem : MonoBehaviour
         if (harvestActive && harvestDurationTimer <= 0f)
         {
             harvestActive = false;
-            harvestTimer = harvestCooldown;
+            harvestCooldownTimer = harvestCooldown;
 
             for (int i = 0; i < total; i++)
             {
@@ -155,7 +159,7 @@ public class GadflySystem : MonoBehaviour
                 gadfly.hasReachedHarvest = false;
                 gadfly.destination = gadfly.homeRegion.RandomPointInside();
 
-                gadfly.hasPayload = true;      // They are now carrying a human
+                gadfly.hasPayload = true;
                 gadfly.hasThrownPayload = false;
             }
         }
@@ -169,7 +173,7 @@ public class GadflySystem : MonoBehaviour
         foreach (var gadfly in gadflies)
         {
             // Selection of movement speed
-            float targetSpeed = gadfly.isHarvesting ? gadfly.harvestSpeed : gadfly.wanderSpeed;
+            float targetSpeed = gadfly.isHarvesting ? harvestMovementSpeed : gadfly.wanderSpeed;
 
             // Target direction
             Vector2 toTarget = (gadfly.destination - gadfly.position);
@@ -197,7 +201,7 @@ public class GadflySystem : MonoBehaviour
             gadfly.position += gadfly.velocity * Time.deltaTime;
 
             // Destination Reached Check
-            if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.15f)
+            if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.45f)
             {
                 if (gadfly.isHarvesting)
                 {
@@ -217,7 +221,8 @@ public class GadflySystem : MonoBehaviour
 
                         ProjectileDirector.Instance.SpawnHumanProjectile(
                             gadfly.position,
-                            Mathf.RoundToInt(gadfly.biomassAmount * gadfly.biomassMultiplier)
+                            Mathf.RoundToInt(biomassAmount * biomassMultiplier),
+                            Mathf.RoundToInt(brainmassAmount * brainmassMultiplier)
                         );
                     }
                 }
