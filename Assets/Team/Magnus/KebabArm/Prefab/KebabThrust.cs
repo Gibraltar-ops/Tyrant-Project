@@ -23,7 +23,7 @@ public class KebabThrust : MonoBehaviour
         _allArms = new List<Transform> { leftMostArm, leftCenterArm, rightCenterArm, rightMostArm };
     }
 
-    public void AttackAtPosition(Vector3 targetPosition)
+    public void AttackAtPosition(Vector3 targetPosition, System.Action onHit = null)
     {
         Transform bestArm = null;
         float shortestDistance = Mathf.Infinity;
@@ -56,7 +56,7 @@ public class KebabThrust : MonoBehaviour
         if (bestArm != null)
         {
             var muscle = bestArm.GetComponent<KebabMuscleMemory>();
-            muscle.Thrust(targetPosition);
+            muscle.Thrust(targetPosition, onHit);
         }
         else { }
     }

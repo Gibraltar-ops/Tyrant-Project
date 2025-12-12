@@ -655,6 +655,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: shakeManager
+      value: 
+      objectReference: {fileID: 1711787985}
+    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: victimSystem
       value: 
       objectReference: {fileID: 2011384934}
@@ -932,7 +936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: leftGatherRegions.Array.data[0].length
-      value: 7
+      value: 12.49
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: leftGatherRegions.Array.data[0].radius
@@ -956,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: rightGatherRegions.Array.data[0].length
-      value: 7
+      value: 12.49
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: rightGatherRegions.Array.data[0].radius
@@ -964,7 +968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: leftGatherRegions.Array.data[0].center.x
-      value: -17
+      value: -14.6
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: leftGatherRegions.Array.data[0].center.y
@@ -980,7 +984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: rightGatherRegions.Array.data[0].center.x
-      value: 17
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 3286441314551350293, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
       propertyPath: rightGatherRegions.Array.data[0].center.y
@@ -1411,7 +1415,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1488530234487721510, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1711787985}
   m_SourcePrefab: {fileID: 100100000, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
 --- !u!114 &899817710 stripped
 MonoBehaviour:
@@ -2277,7 +2284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTentacleCollectUp
   ValueType: 0
-  tentacleManager: {fileID: 0}
   PlayerTentacleShop: {fileID: 1388437822}
   AddValue: 1
   CurrentValue: 0
@@ -3108,6 +3114,27 @@ MonoBehaviour:
     MaxOwned: 25
   BoughtWithCurrency: 0
   Active: 0
+--- !u!1 &1711787984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1488530234487721510, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
+  m_PrefabInstance: {fileID: 872806092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1711787985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711787984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fdb666f327ebe48ad25dabbe1d3ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShakeRequestManagerCinemachine
+  m_Axis: {x: 1, y: 1, z: 1}
+  m_DampingCurve:
+    m_Type: 11
+    m_Hash: 0
 --- !u!1 &1740565424
 GameObject:
   m_ObjectHideFlags: 0

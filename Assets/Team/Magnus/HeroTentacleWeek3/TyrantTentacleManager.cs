@@ -30,7 +30,25 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public CollectionType collectorData;
 
+    [Header("VFX")]
     public GameObject BloodSplatter;
+
+    public GameObject Explosion;
+
+    [SerializeField]
+    private int explosionCount = 5;
+
+    [SerializeField]
+    private float explosionSpread = 1f;
+
+    [SerializeField]
+    private ShakeRequestManagerCinemachine shakeManager;
+
+    [SerializeField]
+    private float explosionShakeAmplitude = 1.0f;
+
+    [SerializeField]
+    private float explosionShakeDuration = 0.5f;
 
     private float _autoClickInterval = 0.05f;
     private float _currentAutoClickTime = 0f;
@@ -78,7 +96,13 @@ public class TyrantTentacleManager : MonoBehaviour
         {
             if (kebabManager != null)
             {
-                kebabManager.AttackAtPosition(closestFighter.position);
+                kebabManager.AttackAtPosition(
+                    closestFighter.position,
+                    () =>
+                    {
+                        DestroyFighter(closestFighter);
+                    }
+                );
             }
         }
         else
@@ -92,6 +116,35 @@ public class TyrantTentacleManager : MonoBehaviour
                     freeTentacle.StartGrab(closestVictim, mouthPoint);
                 }
             }
+        }
+    }
+
+    public void DestroyFighter(ResistanceData fighter)
+    {
+        if (resistanceSystem != null && resistanceSystem.fighters.Contains(fighter))
+        {
+            SpawnExplosion(fighter.position);
+            resistanceSystem.fighters.Remove(fighter);
+        }
+    }
+
+    private void SpawnExplosion(Vector2 centerPos)
+    {
+        if (shakeManager != null)
+        {
+            shakeManager.Request(explosionShakeAmplitude, explosionShakeDuration, centerPos);
+        }
+        for (int i = 0; i < explosionCount; i++)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * explosionSpread;
+            Vector3 spawnPos = centerPos + randomOffset;
+
+            GameObject vfx = Instantiate(Explosion, spawnPos, Quaternion.identity);
+
+            float randomScale = Random.Range(0.8f, 1.5f);
+            vfx.transform.localScale *= randomScale;
+
+            vfx.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
         }
     }
 
@@ -189,14 +242,6 @@ public class TyrantTentacleManager : MonoBehaviour
             {
                 Instantiate(BloodSplatter, victim.position, Quaternion.identity);
                 victimSystem.victims.Remove(victim);
-            }
-        }
-        else if (grabbable is ResistanceData fighter)
-        {
-            if (resistanceSystem != null && resistanceSystem.fighters.Contains(fighter))
-            {
-                Instantiate(BloodSplatter, fighter.position, Quaternion.identity);
-                resistanceSystem.fighters.Remove(fighter);
             }
         }
 

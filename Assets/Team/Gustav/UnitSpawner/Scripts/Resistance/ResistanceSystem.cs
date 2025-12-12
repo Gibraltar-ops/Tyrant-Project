@@ -22,9 +22,9 @@ public class ResistanceSystem : MonoBehaviour
 
     void Start()
     {
-        //// Optional: Spawn some initial crowd
-        //for (int i = 0; i < 10; i++)
-        //    SpawnVictim();
+        ///Optional: Spawn some initial crowd
+        for (int i = 0; i < 50; i++)
+            SpawnResistance();
     }
 
     void Update()
@@ -48,22 +48,24 @@ public class ResistanceSystem : MonoBehaviour
         var spawnRegion = spawnList[UnityEngine.Random.Range(0, spawnList.Count)];
         var gatherRegion = gatherList[UnityEngine.Random.Range(0, gatherList.Count)];
 
-        fighters.Add(new ResistanceData
-        {
-            position = spawnRegion.RandomPointInside(),
-            homeRegion = gatherRegion,
-            destination = gatherRegion.RandomPointInside(),
+        fighters.Add(
+            new ResistanceData
+            {
+                position = spawnRegion.RandomPointInside(),
+                homeRegion = gatherRegion,
+                destination = gatherRegion.RandomPointInside(),
 
-            speed = UnityEngine.Random.Range(0.4f, 1f),
-            scale = UnityEngine.Random.Range(1f, 1.01f),
+                speed = UnityEngine.Random.Range(0.4f, 1f),
+                scale = UnityEngine.Random.Range(1f, 1.01f),
 
-            attackDamage = -25,
-            attackTimer = UnityEngine.Random.Range(0f, attackCooldown), // desync
+                attackDamage = -25,
+                attackTimer = UnityEngine.Random.Range(0f, attackCooldown), // desync
 
-            isCenter = false,
-            isMarkedForDeath = false,
-            isLeftSide = spawnLeft
-        });
+                isCenter = false,
+                isMarkedForDeath = false,
+                isLeftSide = spawnLeft,
+            }
+        );
 
         OnFighterCountChanged?.Invoke(fighters.Count);
     }

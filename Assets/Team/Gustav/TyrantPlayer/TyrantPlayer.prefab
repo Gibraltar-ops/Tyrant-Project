@@ -1623,6 +1623,12 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
   BloodSplatter: {fileID: 1596016400921981985, guid: f2b91236e048fa24288b982e940c968d, type: 3}
+  Explosion: {fileID: 823177533608343208, guid: b987069b9eb52574cbc6935bd7160dfb, type: 3}
+  explosionCount: 5
+  explosionSpread: 1.5
+  shakeManager: {fileID: 0}
+  explosionShakeAmplitude: 0.8
+  explosionShakeDuration: 0.2
 --- !u!1 &2756788731811827342
 GameObject:
   m_ObjectHideFlags: 0

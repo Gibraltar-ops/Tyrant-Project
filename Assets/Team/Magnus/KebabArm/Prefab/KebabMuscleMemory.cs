@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,14 +41,14 @@ public class KebabMuscleMemory : MonoBehaviour
         SetIKWeight(0f);
     }
 
-    public void Thrust(Vector3 targetPos)
+    public void Thrust(Vector3 targetPos, Action onHit = null)
     {
         if (_isAttacking)
             return;
-        StartCoroutine(PerformKebabStrike(targetPos));
+        StartCoroutine(PerformKebabStrike(targetPos, onHit));
     }
 
-    IEnumerator PerformKebabStrike(Vector3 targetPos)
+    IEnumerator PerformKebabStrike(Vector3 targetPos, Action onHit)
     {
         _isAttacking = true;
 
@@ -109,6 +110,8 @@ public class KebabMuscleMemory : MonoBehaviour
 
             yield return null;
         }
+
+        onHit?.Invoke();
 
         yield return new WaitForSeconds(0.05f); // Impact pause
 
