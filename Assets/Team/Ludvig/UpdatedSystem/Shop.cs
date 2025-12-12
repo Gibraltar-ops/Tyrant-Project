@@ -147,7 +147,7 @@ public class Shop : MonoBehaviour
 
     public void UpdateTooltip(string value)
     {
-        InstancedUIPanel.GetComponent<TooltipTrigger>().UpdateTooltip(value);
+        //InstancedUIPanel.GetComponent<TooltipTrigger>().UpdateTooltip(value);
     }
 
     public void MaxOutLabels()

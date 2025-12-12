@@ -1,12 +1,13 @@
 public class PlayerTentacleCollectUp : Upgrade
 {
-    public TyrantTentacleManager tentacleManager;
+    private TyrantTentacleManager tentacleManager;
     public Shop PlayerTentacleShop;
     public float AddValue;
     public float CurrentValue = 0;
 
     public override void Start()
     {
+        tentacleManager = FindAnyObjectByType<TyrantTentacleManager>();
         base.Start();
         CurrentValue = tentacleManager.ModifiedCollectAmount();
         PlayerTentacleShop.UpdateTooltip(FormatValueString(CurrentValue, ValueType));
