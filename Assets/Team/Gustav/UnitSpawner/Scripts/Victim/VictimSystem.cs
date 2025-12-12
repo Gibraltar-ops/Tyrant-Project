@@ -27,6 +27,10 @@ public class VictimSystem : MonoBehaviour
     [Tooltip("The multiplier for the LARGE wave timer.")]
     public float largeWaveTimerMultiplier = 1f;
 
+    [Header("Internal Stats")]
+    public float minScale = 0.15f;
+    public float maxScale = 0.16f;
+
     public List<SpawnRegion> spawnRegions = new List<SpawnRegion>();
     public List<DestinationRegion> destinationRegions = new List<DestinationRegion>();
 
@@ -115,7 +119,7 @@ public class VictimSystem : MonoBehaviour
             homeRegion = centerRegion,
             destination = centerRegion.RandomPointInside(),
             speed = UnityEngine.Random.Range(1f, 1.1f),
-            scale = UnityEngine.Random.Range(0.15f, 0.16f),
+            scale = UnityEngine.Random.Range(minScale, maxScale),
             wanderDirection = UnityEngine.Random.insideUnitCircle.normalized,
             wanderTimer = UnityEngine.Random.Range(1f, 2f),
             isCenter = false
