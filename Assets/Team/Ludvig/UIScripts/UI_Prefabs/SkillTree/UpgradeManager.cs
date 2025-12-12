@@ -76,9 +76,9 @@ namespace Lood
         onUpgradeManagerInitialized?.Invoke();
     }
 
-    public Dictionary<CurrencySourceTag, CurrencySourceStatBlock> CurrencySources = new();
+    public Dictionary<string, CurrencySourceStatBlock> CurrencySources = new();
 
-    public Dictionary<UpgradeTag, UpgradeStatBlock> Upgrades = new();
+    public Dictionary<string, UpgradeStatBlock> Upgrades = new();
 
     public void AddUpgradeableObject(CurrencySourceSO data)
     {
@@ -98,7 +98,7 @@ namespace Lood
             }
     }
 
-    public void IncreaseUpgradeableStat(CurrencySourceTag tag, MainStat stat, float value)
+    public void IncreaseUpgradeableStat(string tag, MainStat stat, float value)
     {
         if (!CurrencySources.ContainsKey(tag))
         {
@@ -109,7 +109,7 @@ namespace Lood
         CurrencySources[tag].MainStats[stat] += value;
     }
 
-    public float GetCurrencySourceStat(CurrencySourceTag tag, MainStat stat)
+    public float GetCurrencySourceStat(string tag, MainStat stat)
     {
          if (!CurrencySources.ContainsKey(tag))
         {
@@ -119,7 +119,7 @@ namespace Lood
         return CurrencySources[tag].MainStats[stat];
     }
 
-     public void IncrementCurrencySourceCount(CurrencySourceTag tag)
+     public void IncrementCurrencySourceCount(string tag)
     {
          if (!CurrencySources.ContainsKey(tag))
         {
@@ -129,7 +129,7 @@ namespace Lood
         CurrencySources[tag].Shop.CurrentOwned ++;
     }
 
-    public int GetCurrencySourceCount(CurrencySourceTag tag)
+    public int GetCurrencySourceCount(string tag)
     {
          if (!CurrencySources.ContainsKey(tag))
         {
@@ -139,7 +139,7 @@ namespace Lood
         return CurrencySources[tag].Shop.CurrentOwned;
     }
 
-     public void IncrementUpgradeCount(UpgradeTag tag)
+     public void IncrementUpgradeCount(string tag)
     {
          if (!Upgrades.ContainsKey(tag))
         {
@@ -149,7 +149,7 @@ namespace Lood
         Upgrades[tag].Shop.CurrentOwned ++;
     }
 
-    public int GetUpgradeCount(UpgradeTag tag)
+    public int GetUpgradeCount(string tag)
     {
          if (!Upgrades.ContainsKey(tag))
         {
@@ -399,7 +399,7 @@ public class UpgradeStatBlock
 [Serializable]
 public class UpgradeEffect
 {
-    public CurrencySourceTag UpgradeableObjectTag;
+    public CurrencySourceSO CurrencySource;
     public UpgradeStatCategory StatCategory;
 
     [Header("Collection Upgrade")]

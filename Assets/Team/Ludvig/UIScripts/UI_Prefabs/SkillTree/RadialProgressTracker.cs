@@ -7,13 +7,15 @@ public class RadialProgressTracker : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Button upgradeButton;
-    private CurrencySourceTag _currencySourceTag;
-    private UpgradeTag _upgradeTag;
+    public PurchaseableSO trackedPurchaseable;
+
     private UpgradeType _upgradeType;
     private bool _maxedOut;
     private Currency _boughtWith;
     private float _lastValue = 0f;
     private Image image;
+
+   
 
     private enum UpgradeType
     {
@@ -35,19 +37,19 @@ public class RadialProgressTracker : MonoBehaviour
     }
     private void Initialize()
     {
-          if(upgradeButton.TryGetComponent(out CurrencySourceShopButton upgradeableObjectShopButton))
+          if(upgradeButton.GetComponent<CurrencySourceShopButton>() != null)
         {
-            _currencySourceTag = upgradeableObjectShopButton.currencySourceTag;
             _upgradeType = UpgradeType.currencySource;
-            _boughtWith = Lood.UpgradeManager.Instance.CurrencySources[_currencySourceTag].Shop.BoughtWithCurrency;
+            trackedPurchaseable = upgradeButton.GetComponent<CurrencySourceShopButton>().CurrencySourceData;
         }
 
-        if(upgradeButton.TryGetComponent(out UpgradeShopButton upgradeShopButton))
+        if(upgradeButton.GetComponent<UpgradeShopButton>() != null)
         {
-            _upgradeTag = upgradeShopButton.upgradeTag;
             _upgradeType = UpgradeType.upgrade;
-            _boughtWith = Lood.UpgradeManager.Instance.Upgrades[_upgradeTag].Shop.BoughtWithCurrency;
+            trackedPurchaseable = upgradeButton.GetComponent<UpgradeShopButton>().upgradeData;
         }
+
+        _boughtWith = trackedPurchaseable.Shop.BoughtWithCurrency;
 
         image = GetComponent<Image>();
         UpdateProgressBar(_boughtWith);
@@ -70,12 +72,12 @@ public class RadialProgressTracker : MonoBehaviour
                 return;
             }
 
-            if(currency != Lood.UpgradeManager.Instance.CurrencySources[_currencySourceTag].Shop.BoughtWithCurrency)
+            if(currency != Lood.UpgradeManager.Instance.CurrencySources[trackedPurchaseable.Tag].Shop.BoughtWithCurrency)
             {
                 return;
             }
 
-            nextPrice = Lood.UpgradeManager.Instance.CurrencySources[_currencySourceTag].Shop.NextPrice;
+            nextPrice = Lood.UpgradeManager.Instance.CurrencySources[trackedPurchaseable.Tag].Shop.NextPrice;
         }
 
         if(_upgradeType == UpgradeType.upgrade)
@@ -86,12 +88,12 @@ public class RadialProgressTracker : MonoBehaviour
                 _maxedOut = true;
                 return;
             }
-            if(currency != Lood.UpgradeManager.Instance.Upgrades[_upgradeTag].Shop.BoughtWithCurrency)
+            if(currency != Lood.UpgradeManager.Instance.Upgrades[trackedPurchaseable.Tag].Shop.BoughtWithCurrency)
             {
                 return;
             }
 
-            nextPrice = Lood.UpgradeManager.Instance.Upgrades[_upgradeTag].Shop.NextPrice;
+            nextPrice = Lood.UpgradeManager.Instance.Upgrades[trackedPurchaseable.Tag].Shop.NextPrice;
         }
 
         StopAllCoroutines();
@@ -120,7 +122,7 @@ public class RadialProgressTracker : MonoBehaviour
 		while(t < 1)
 		{
 			image.fillAmount = Mathf.Lerp(start,end,t);
-			t = t + Time.deltaTime / timeToMove;
+			t += Time.deltaTime / timeToMove;
 			yield return null;//Stops here until right after the next update loop, then continues
 		}
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UpgradeValueTracker : MonoBehaviour
 {
-    public UpgradeTag upgradeTag;
+    public UpgradeDataSO upgradeData;
     public UpgradeTrackValue trackValue;
 
     public ValueFormatType FormatAs;
@@ -34,33 +34,33 @@ public class UpgradeValueTracker : MonoBehaviour
     // Update is called once per frame
     public void UpdateLabel()
     {
-        if (!Lood.UpgradeManager.Instance.Upgrades.ContainsKey(upgradeTag))
+        if (!Lood.UpgradeManager.Instance.Upgrades.ContainsKey(upgradeData.Tag))
         {
-            Debug.LogWarning("No such Upgrade key.");
+            Debug.LogWarning("Upgrade Key" + upgradeData.Tag + " does not exist in upgrade manager.");
             return;
         }
         
         switch (trackValue)
         {
             case UpgradeTrackValue.Count:
-                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
+                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
                     {   
-                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.CurrentOwned, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned, FormatAs);
                     break;
                     }
-                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.CurrentOwned, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned, FormatAs);
                 break;
             case UpgradeTrackValue.CurrentModifier:
-                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].CurrentModifier, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].CurrentModifier, FormatAs);
                 break;
             case UpgradeTrackValue.NextPrice:
                  
-                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
+                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
                     {   
                     label.text = "";
                     break;
                     }
-                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.NextPrice, FormatAs);
+                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice, FormatAs);
                 break;
             default: break;
         }

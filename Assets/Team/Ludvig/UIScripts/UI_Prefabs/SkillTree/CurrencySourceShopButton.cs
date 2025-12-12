@@ -7,14 +7,14 @@ namespace Lood
 {
     public class CurrencySourceShopButton: MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public CurrencySourceTag currencySourceTag;
+  
+    public CurrencySourceSO CurrencySourceData;
     public bool _maxedOut = false;
     public bool Active = false;
     public List<GameObject> ProgressBars;
 
     //Event is received on the shop objects in the scene.
-    public delegate void OnCollectorPurchased(CurrencySourceTag tag);
+    public delegate void OnCollectorPurchased(string tag);
     public static event OnCollectorPurchased onCollectorPurchased;
 
     void OnEnable()
@@ -30,7 +30,7 @@ namespace Lood
      void Start()
     {
         GetComponent<Button>().onClick.AddListener(Buy);
-        GetComponentInChildren<CurrencySourceShopButton>().currencySourceTag = currencySourceTag;
+        GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
         Invoke("Initialize", 0.01f);
         
     }
@@ -48,7 +48,7 @@ namespace Lood
     private void Initialize()
         {
             
-            CheckInteractable(UpgradeManager.Instance.CurrencySources[currencySourceTag].Shop.BoughtWithCurrency);
+            CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
             if (!Active)
             {
                 foreach(GameObject bar in ProgressBars)
@@ -69,24 +69,24 @@ namespace Lood
 
         if(_maxedOut) return;
 
-        if (UpgradeManager.Instance.CurrencySources[currencySourceTag].Shop.MaxedOut)
+        if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
         {   
             GetComponent<Button>().interactable = false;
             _maxedOut = true;
             return;
         }
 
-        if(currency != UpgradeManager.Instance.CurrencySources[currencySourceTag].Shop.BoughtWithCurrency)
+        if(currency != UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency)
         {
             return;
         }
 
-        if (UpgradeManager.Instance.CurrencySources[currencySourceTag].Shop.MaxedOut)
+        if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
         {
             return;
         }
 
-        if(EconomyManager.Instance.CanAfford(currency, (int)UpgradeManager.Instance.CurrencySources[currencySourceTag].Shop.NextPrice))
+        if(EconomyManager.Instance.CanAfford(currency, (int)UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.NextPrice))
         {
             GetComponent<Button>().interactable = true;
         }
@@ -98,7 +98,7 @@ namespace Lood
 
     private void Buy()
     {
-        onCollectorPurchased?.Invoke(currencySourceTag);
+        onCollectorPurchased?.Invoke(CurrencySourceData.Tag);
     }
 }
 }

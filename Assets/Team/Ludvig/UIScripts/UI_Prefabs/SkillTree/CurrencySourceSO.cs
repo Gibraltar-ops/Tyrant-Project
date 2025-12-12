@@ -1,11 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CurrencySourceSO", menuName = "Scriptable Objects/CurrencySourceSO")]
-public class CurrencySourceSO : ScriptableObject
+public class CurrencySourceSO : PurchaseableSO
 {
-    public CurrencySourceTag Tag;
-    public ShopStats Shop;
-
     [Header("Source Stats")]
 
     //Speed stats

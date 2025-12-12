@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class CurrencySourceShop : MonoBehaviour
 {
     [HideInInspector]
-    public CurrencySourceTag CurrencySource;
-    public CurrencySourceSO objectDataSO;
+    public CurrencySourceSO CurrencySourceData;
     
     public bool Active = false;
     void OnEnable()
@@ -22,13 +21,12 @@ public class CurrencySourceShop : MonoBehaviour
 
     void Start()
     {
-        Lood.UpgradeManager.Instance.AddUpgradeableObject(objectDataSO);
-        CurrencySource = objectDataSO.Tag;
+        Lood.UpgradeManager.Instance.AddUpgradeableObject(CurrencySourceData);
     } 
     
-    private void TryPurchase(CurrencySourceTag tag)
+    private void TryPurchase(string tag)
     {
-        if(tag != CurrencySource)
+        if(tag != CurrencySourceData.Tag)
         {
             return;
         }
@@ -37,13 +35,13 @@ public class CurrencySourceShop : MonoBehaviour
 
     public void IncrementPrice()
     {
-        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag];
         stats.Shop.NextPrice = (int)(stats.Shop.StartingPrice * Mathf.Pow(stats.Shop.PriceIncrease, stats.Shop.CurrentOwned));
     }
 
     public void CheckAffordability(Currency currency)
     { 
-            CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
+            CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag];
             if (EconomyManager.Instance.CanAfford(stats.Shop.BoughtWithCurrency, (int)stats.Shop.NextPrice))
             {
                stats.Shop.CanAfford = true;
@@ -56,7 +54,7 @@ public class CurrencySourceShop : MonoBehaviour
 
     public void PurchaseUpgrade()
     { 
-        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySource];
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag];
         
         if(stats.Shop.CurrentOwned < stats.Shop.MaxOwned)
         {

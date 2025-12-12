@@ -6,8 +6,9 @@ using Lood;
 public class UpgradeShop : MonoBehaviour
 {
 
-    public UpgradeTag UpgradeTag;
-    public UpgradeDataSO upgradeDataSO;
+    [HideInInspector]
+    public string UpgradeTag;
+    public UpgradeDataSO upgradeData;
     public bool Active = false;
     void OnEnable()
     {   
@@ -21,13 +22,13 @@ public class UpgradeShop : MonoBehaviour
     }
     void Start()
     {
-        Lood.UpgradeManager.Instance.AddUpgrade(upgradeDataSO);
-        UpgradeTag = upgradeDataSO.Tag;
+        Lood.UpgradeManager.Instance.AddUpgrade(upgradeData);
+        UpgradeTag = upgradeData.Tag;
     }
 
-    private void TryPurchase(UpgradeTag tag)
+    private void TryPurchase(string tag)
     {
-        if(tag != UpgradeTag)
+        if(tag != upgradeData.Tag)
         {
             return;
         }
@@ -36,13 +37,13 @@ public class UpgradeShop : MonoBehaviour
 
     public void IncrementPrice()
     {
-        UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[UpgradeTag];
+        UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag];
         stats.Shop.NextPrice = (int)(stats.Shop.StartingPrice * Mathf.Pow(stats.Shop.PriceIncrease, stats.Shop.CurrentOwned));
     }
 
     public void CheckAffordability(Currency currency)
     { 
-            UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[UpgradeTag];
+            UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag];
             if (EconomyManager.Instance.CanAfford(stats.Shop.BoughtWithCurrency, (int)stats.Shop.NextPrice))
             {
                stats.Shop.CanAfford = true;
@@ -55,7 +56,7 @@ public class UpgradeShop : MonoBehaviour
 
     public void PurchaseUpgrade()
     { 
-        UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[UpgradeTag];
+        UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag];
       
         if(stats.Shop.CurrentOwned < stats.Shop.MaxOwned)
         {

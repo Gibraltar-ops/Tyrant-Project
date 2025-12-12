@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RadialProgressTracker
   upgradeButton: {fileID: 1058092352}
+  trackedPurchaseable: {fileID: 0}
 --- !u!1 &126469228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  upgradeTag: 1
+  upgradeData: {fileID: 0}
   trackValue: 0
   FormatAs: 1
 --- !u!1 &401147752
@@ -1134,7 +1135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1211bd76eb7d54dae57ff268c05182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeShopButton
-  upgradeTag: 1
+  upgradeData: {fileID: 0}
   _maxedOut: 0
   Active: 0
   ProgressBars:
@@ -1252,8 +1253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485a5ed02174c60428ba38d27e6cf6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeShop2
-  UpgradeTag: 1
-  upgradeDataSO: {fileID: 11400000, guid: a18b8fac53ae3f1458f499199c0a7426, type: 2}
+  UpgradeTag: 
+  upgradeData: {fileID: 0}
   Active: 1
 --- !u!4 &520882772
 Transform:
@@ -1766,9 +1767,9 @@ RectTransform:
   - {fileID: 1494903566}
   m_Father: {fileID: 996003396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.925, y: -33.446}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 165.85, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &610063287
@@ -1847,7 +1848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectorValueTracker
-  CurrencySourceTag: 0
+  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
   TrackedStat: 3
   CollectedCurrency: 0
   CollectStat: 2
@@ -2329,7 +2330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  upgradeTag: 0
+  upgradeData: {fileID: 0}
   trackValue: 0
   FormatAs: 1
 --- !u!114 &949249786
@@ -2465,10 +2466,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1666044120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -25}
-  m_SizeDelta: {x: 125.850006, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &994865048
 MonoBehaviour:
@@ -2841,9 +2842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d3d6ca7e08e86419a41f48a93565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HarvesterBuyer
-  currencySourceTag: 0
+  CurrencySourceData: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
   _maxedOut: 0
-  Active: 0
+  Active: 1
   ProgressBars:
   - {fileID: 581020705}
   - {fileID: 100958350}
@@ -2962,7 +2963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1211bd76eb7d54dae57ff268c05182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeShopButton
-  upgradeTag: 0
+  upgradeData: {fileID: 0}
   _maxedOut: 0
   Active: 0
   ProgressBars:
@@ -3101,6 +3102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RadialProgressTracker
   upgradeButton: {fileID: 468733739}
+  trackedPurchaseable: {fileID: 0}
 --- !u!114 &1099946682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3181,8 +3183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485a5ed02174c60428ba38d27e6cf6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeShop2
-  UpgradeTag: 0
-  upgradeDataSO: {fileID: 11400000, guid: 95d0441874e4cae4b8623d1cfed82295, type: 2}
+  UpgradeTag: 
+  upgradeData: {fileID: 0}
   Active: 1
 --- !u!4 &1106563934
 Transform:
@@ -3231,10 +3233,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1763361136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -25}
-  m_SizeDelta: {x: 125.850006, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1129274918
 MonoBehaviour:
@@ -3714,6 +3716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RadialProgressTracker
   upgradeButton: {fileID: 1084569757}
+  trackedPurchaseable: {fileID: 0}
 --- !u!114 &1196495043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4296,10 +4299,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 610063286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -25}
-  m_SizeDelta: {x: 125.850006, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1494903567
 MonoBehaviour:
@@ -4447,8 +4450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8412c97f9d498459687b25267307b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectShop
-  CurrencySource: 0
-  objectDataSO: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
+  CurrencySourceData: {fileID: 0}
   Active: 1
 --- !u!114 &1545076118
 MonoBehaviour:
@@ -4643,7 +4645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  upgradeTag: 1
+  upgradeData: {fileID: 0}
   trackValue: 0
   FormatAs: 1
 --- !u!114 &1606506888
@@ -4795,7 +4797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  upgradeTag: 1
+  upgradeData: {fileID: 0}
   trackValue: 1
   FormatAs: 2
 --- !u!114 &1653626670
@@ -4929,9 +4931,9 @@ RectTransform:
   - {fileID: 994865047}
   m_Father: {fileID: 204750055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.925, y: -33.446}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 165.85, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666044121
@@ -5208,9 +5210,9 @@ RectTransform:
   - {fileID: 1129274917}
   m_Father: {fileID: 2086262303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.925, y: -33.446}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 165.85, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763361137
@@ -5668,9 +5670,9 @@ RectTransform:
   - {fileID: 2054203827}
   m_Father: {fileID: 1890992214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 82.925, y: -33.446}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 165.85, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001234058
@@ -5731,10 +5733,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2001234057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -25}
-  m_SizeDelta: {x: 125.850006, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2054203828
 MonoBehaviour:
@@ -5986,7 +5988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectValueTracker
-  CurrencySourceTag: 0
+  currencySource: {fileID: 0}
   TrackedStat: 2
   CollectedCurrency: 0
   CollectStat: 0

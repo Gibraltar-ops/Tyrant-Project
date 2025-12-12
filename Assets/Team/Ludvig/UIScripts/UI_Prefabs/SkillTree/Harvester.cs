@@ -10,6 +10,7 @@ public class Harvester : MonoBehaviour
     public bool IsActive = true;
 
     private CurrencySourceTag _tag;
+    private CurrencySourceSO currencySourceData;
 
     private CollectorObjectSpawner _objectSpawner;
     private List<Collector> _collectors;
@@ -21,7 +22,7 @@ public class Harvester : MonoBehaviour
     { 
         _objectSpawner = GetComponent<CollectorObjectSpawner>();
         _collectors = new List<Collector>();
-        _tag = GetComponent<CurrencySourceShop>().CurrencySource;
+        currencySourceData = GetComponent<CurrencySourceShop>().CurrencySourceData;
         
     }
 
@@ -39,7 +40,7 @@ public class Harvester : MonoBehaviour
 
     public float GetCurrentTicksPerSecond()
     {   
-        CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[_tag];
+        CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[currencySourceData.Tag];
 
         //Apply base speed (in ticks per second)
         float _ticksPerSecondCurrent = data.MainStats[MainStat.BaseSpeed];
@@ -55,7 +56,7 @@ public class Harvester : MonoBehaviour
         return _ticksPerSecondCurrent;
     }
     
-    public int GetCurrentCollectAmount(Currency currency, CurrencySourceTag tag)
+    public int GetCurrentCollectAmount(Currency currency, string tag)
     {   
         //
         CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[tag];
@@ -88,13 +89,13 @@ public class Harvester : MonoBehaviour
             {
                 if (collector.Collect(Time.deltaTime, GetCurrentTicksPerSecond()))
                 {
-                    var collectStats = UpgradeManager.Instance.CurrencySources[_tag].CollectStats;
+                    var collectStats = UpgradeManager.Instance.CurrencySources[currencySourceData.Tag].CollectStats;
 
                     //The currencies collected are held in a dictionary "CollectStats". 
                     //Key: Currency, Value: CollectTypeStatBlock (Holds stuff like BaseCollect and multipliers.)
                      foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
                      {
-                        int collectAmount = GetCurrentCollectAmount(item.Key, _tag);
+                        int collectAmount = GetCurrentCollectAmount(item.Key, currencySourceData.Tag);
                         if(collectAmount != 0)
                             {
                                 CollectCurrency(item.Key, collectAmount);

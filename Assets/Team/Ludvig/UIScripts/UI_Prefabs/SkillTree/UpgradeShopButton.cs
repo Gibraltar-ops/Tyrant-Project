@@ -6,12 +6,12 @@ using System.Collections.Generic;
 public class UpgradeShopButton: MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public UpgradeTag upgradeTag;
-     public bool _maxedOut = false;
-     public bool Active = false;
-     public List<GameObject> ProgressBars;
+    public UpgradeDataSO upgradeData;
+    public bool _maxedOut = false;
+    public bool Active = false;
+    public List<GameObject> ProgressBars;
 
-    public delegate void OnUpgradePurchased(UpgradeTag tag);
+    public delegate void OnUpgradePurchased(string tag);
     public static event OnUpgradePurchased onUpgradePurchased;
 
     void OnEnable()
@@ -27,7 +27,7 @@ public class UpgradeShopButton: MonoBehaviour
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(Buy);
-        GetComponentInChildren<UpgradeShopButton>().upgradeTag = upgradeTag;
+        GetComponentInChildren<UpgradeShopButton>().upgradeData = upgradeData;
         Invoke("Initialize", 0.01f);
         
     }
@@ -45,7 +45,7 @@ public class UpgradeShopButton: MonoBehaviour
     private void Initialize()
     {
         
-        CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.BoughtWithCurrency);
+        CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency);
 
         if (!Active)
         {
@@ -66,23 +66,23 @@ public class UpgradeShopButton: MonoBehaviour
         }
         if(_maxedOut) return;
 
-        if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
+        if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
         {   
             GetComponent<Button>().interactable = false;
             _maxedOut = true;
             return;
         }
 
-        if(currency != Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.BoughtWithCurrency)
+        if(currency != Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency)
         {
             return;
         }
-        if (Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.MaxedOut)
+        if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
         {
             return;
         }
         
-        if(EconomyManager.Instance.CanAfford(currency, (int)Lood.UpgradeManager.Instance.Upgrades[upgradeTag].Shop.NextPrice))
+        if(EconomyManager.Instance.CanAfford(currency, (int)Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice))
         {
             GetComponent<Button>().interactable = true;
         }
@@ -94,6 +94,6 @@ public class UpgradeShopButton: MonoBehaviour
 
     private void Buy()
     {
-        onUpgradePurchased?.Invoke(upgradeTag);
+        onUpgradePurchased?.Invoke(upgradeData.Tag);
     }
 }

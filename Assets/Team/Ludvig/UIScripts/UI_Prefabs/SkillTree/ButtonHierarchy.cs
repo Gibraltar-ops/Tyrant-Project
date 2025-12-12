@@ -55,12 +55,12 @@ public class ButtonHierarchy : MonoBehaviour
             if(parent.GetComponentInChildren<CurrencySourceShopButton>() != null)
             {   
                 var currencySource = parent.GetComponentInChildren<CurrencySourceShopButton>();
-                _parentCount += Lood.UpgradeManager.Instance.GetCurrencySourceCount(currencySource.currencySourceTag);
+                _parentCount += Lood.UpgradeManager.Instance.GetCurrencySourceCount(currencySource.CurrencySourceData.Tag);
             }
             if(parent.GetComponentInChildren<UpgradeShopButton>() != null)
             {   
                 var upgrade = parent.GetComponentInChildren<UpgradeShopButton>();
-                _parentCount += Lood.UpgradeManager.Instance.GetUpgradeCount(upgrade.upgradeTag);
+                _parentCount += Lood.UpgradeManager.Instance.GetUpgradeCount(upgrade.upgradeData.Tag);
             }
         }
         if(_parentCount == 0)
