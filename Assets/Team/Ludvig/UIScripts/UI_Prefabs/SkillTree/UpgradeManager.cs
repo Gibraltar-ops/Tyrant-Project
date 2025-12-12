@@ -169,7 +169,6 @@ namespace Lood
 //_____________v___v___v_____________
 public enum CurrencySourceTag
 {
-    PlayerTentacle,
     AutoTentacle,
     Gadfly,
     Suicider

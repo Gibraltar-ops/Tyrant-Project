@@ -1,11 +1,13 @@
 using UnityEngine;
 using Lood;
+using System.Collections.Generic;
 
 public class CurrencySourceShop : MonoBehaviour
 {
     [HideInInspector]
     public CurrencySourceTag CurrencySource;
     public CurrencySourceSO objectDataSO;
+    
     public bool Active = false;
     void OnEnable()
     {   
@@ -23,7 +25,7 @@ public class CurrencySourceShop : MonoBehaviour
         Lood.UpgradeManager.Instance.AddUpgradeableObject(objectDataSO);
         CurrencySource = objectDataSO.Tag;
     } 
-
+    
     private void TryPurchase(CurrencySourceTag tag)
     {
         if(tag != CurrencySource)
