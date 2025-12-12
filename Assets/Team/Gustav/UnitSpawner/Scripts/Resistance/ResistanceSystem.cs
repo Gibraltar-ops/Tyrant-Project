@@ -22,9 +22,9 @@ public class ResistanceSystem : MonoBehaviour
 
     void Start()
     {
-        ///Optional: Spawn some initial crowd
+        /* ///Optional: Spawn some initial crowd
         for (int i = 0; i < 50; i++)
-            SpawnResistance();
+            SpawnResistance(); */
     }
 
     void Update()

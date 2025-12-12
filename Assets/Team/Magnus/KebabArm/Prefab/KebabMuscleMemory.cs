@@ -28,6 +28,11 @@ public class KebabMuscleMemory : MonoBehaviour
 
     public float impactRotationOffset = 0f;
 
+    [Header("Idle Settings")]
+    public float idleSpeed = 1.0f;
+    public float idleRadius = 0.5f;
+    private float _noiseSeed;
+
     private List<Quaternion> _defaultRotations = new List<Quaternion>();
     private Vector3 _defaultTargetPosLocal;
     private bool _isAttacking = false;
@@ -38,7 +43,25 @@ public class KebabMuscleMemory : MonoBehaviour
         _defaultTargetPosLocal = ikTarget.localPosition;
         foreach (var bone in allBones)
             _defaultRotations.Add(bone.localRotation);
-        SetIKWeight(0f);
+
+        _noiseSeed = UnityEngine.Random.Range(0f, 100f);
+        SetIKWeight(1f);
+    }
+
+    void Update()
+    {
+        if (_isAttacking)
+            return;
+
+        float time = Time.time * idleSpeed + _noiseSeed;
+        float noiseX = Mathf.PerlinNoise(time, 0f) - 0.5f;
+        float noiseY = Mathf.PerlinNoise(0f, time) - 0.5f;
+
+        Vector3 offset = new Vector3(noiseX, noiseY, 0f) * idleRadius;
+
+        ikTarget.localPosition = _defaultTargetPosLocal + offset;
+
+        SetIKWeight(1f);
     }
 
     public void Thrust(Vector3 targetPos, Action onHit = null)
@@ -78,7 +101,7 @@ public class KebabMuscleMemory : MonoBehaviour
 
             float smoothT = t * t;
 
-            SetIKWeight(Mathf.Lerp(0f, 1f, smoothT));
+            SetIKWeight(Mathf.Lerp(1f, 1f, smoothT));
 
             // Move IK Target upwards and backwards (from click pos)
             ikTarget.position = Vector3.Lerp(startIkPos, windUpPos, smoothT);
@@ -116,22 +139,16 @@ public class KebabMuscleMemory : MonoBehaviour
         yield return new WaitForSeconds(0.05f); // Impact pause
 
         timer = 0f;
+        Vector3 startReturnLocalPos = ikTarget.localPosition;
         while (timer < returnSpeed)
         {
             timer += Time.deltaTime;
+
             float t = timer / returnSpeed;
 
-            SetIKWeight(Mathf.Lerp(1f, 0f, t));
+            SetIKWeight(1f);
 
-            // reset legs
-            for (int i = 0; i < allBones.Count; i++)
-            {
-                allBones[i].localRotation = Quaternion.Slerp(
-                    allBones[i].localRotation,
-                    _defaultRotations[i],
-                    t
-                );
-            }
+            ikTarget.localPosition = Vector3.Lerp(startReturnLocalPos, _defaultTargetPosLocal, t);
             yield return null;
         }
 
