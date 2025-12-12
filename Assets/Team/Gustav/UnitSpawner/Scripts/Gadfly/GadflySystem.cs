@@ -36,7 +36,7 @@ public class GadflySystem : MonoBehaviour
         harvestCooldownTimer = harvestCooldown;
 
         // Spawn some initial crowd (optional)
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 1; i++)
             SpawnGatfly();
     }
 
