@@ -48,18 +48,24 @@ MonoBehaviour:
   enableSpawning: 1
   spawnInterval: 1
   maxVictims: 10000
+  smallWaveVictimAmount: 1
+  smallWaveAmountMultiplier: 1
+  smallWaveTimerMultiplier: 1
+  LargeWaveTimer: 10
+  largeWaveVictimAmount: 10
+  largeWaveAmountMultiplier: 1
+  largeWaveTimerMultiplier: 1
   spawnRegions:
   - center: {x: -25, y: -12}
     size: {x: 1, y: 10}
   - center: {x: 25, y: -12}
     size: {x: 1, y: 10}
   - center: {x: 0, y: -18}
-    size: {x: 48, y: 2}
+    size: {x: 48, y: 1}
   destinationRegions:
   - center: {x: 0, y: -9.25}
-    radius: 2.25
+    radius: 2.5
     length: 10
-  spawnRateMultiplier: 1
 --- !u!114 &1359637981827827607
 MonoBehaviour:
   m_ObjectHideFlags: 0
