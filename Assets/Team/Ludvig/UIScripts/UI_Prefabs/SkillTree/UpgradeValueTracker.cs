@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UpgradeValueTracker : MonoBehaviour
 {
+    public bool GetDataFromParent = false;
     public UpgradeDataSO upgradeData;
     public UpgradeTrackValue trackValue;
 
@@ -19,10 +20,15 @@ public class UpgradeValueTracker : MonoBehaviour
     {
         Upgrader.onUpgradeApplied -= UpdateLabel;
     }
+    void Awake()
+    {
+        
+       label = GetComponent<TMP_Text>();
+       
+    }
     void Start()
     {
-       label = GetComponent<TMP_Text>();
-       Invoke("Initialize", 0.01f);
+        Initialize();
     }
     private void Initialize()
     {

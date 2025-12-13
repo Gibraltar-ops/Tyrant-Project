@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RadialProgressTracker : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Button upgradeButton;
+    public GameObject upgradeButton;
     public PurchaseableSO trackedPurchaseable;
 
     private UpgradeType _upgradeType;
@@ -38,17 +38,18 @@ public class RadialProgressTracker : MonoBehaviour
     private void Initialize()
     {
           if(upgradeButton.GetComponent<CurrencySourceShopButton>() != null)
-        {
-            _upgradeType = UpgradeType.currencySource;
+        {   
             trackedPurchaseable = upgradeButton.GetComponent<CurrencySourceShopButton>().CurrencySourceData;
+            _upgradeType = UpgradeType.currencySource;
         }
 
         if(upgradeButton.GetComponent<UpgradeShopButton>() != null)
         {
-            _upgradeType = UpgradeType.upgrade;
             trackedPurchaseable = upgradeButton.GetComponent<UpgradeShopButton>().upgradeData;
+            _upgradeType = UpgradeType.upgrade;
         }
 
+        
         _boughtWith = trackedPurchaseable.Shop.BoughtWithCurrency;
 
         image = GetComponent<Image>();

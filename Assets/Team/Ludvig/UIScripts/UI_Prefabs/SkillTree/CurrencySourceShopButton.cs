@@ -9,6 +9,10 @@ namespace Lood
 {
   
     public CurrencySourceSO CurrencySourceData;
+
+    public CurrencySourceValueTracker Counter;
+
+    public Button _button;
     public bool _maxedOut = false;
     public bool Active = false;
     public List<GameObject> ProgressBars;
@@ -26,14 +30,19 @@ namespace Lood
     {
         EconomyManager.onCurrencyChanged -= CheckInteractable;
     }
+    void Awake()
+        {     
+            Counter.currencySource = CurrencySourceData;
+        }
 
-     void Start()
-    {
-        GetComponent<Button>().onClick.AddListener(Buy);
-        GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
+    void Start()
+        {
+        _button = GetComponentInChildren<Button>();
+        _button.onClick.AddListener(Buy);
+        //GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
         Invoke("Initialize", 0.01f);
         
-    }
+        }
 
     public void Activate()
         {
@@ -88,11 +97,11 @@ namespace Lood
 
         if(EconomyManager.Instance.CanAfford(currency, (int)UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.NextPrice))
         {
-            GetComponent<Button>().interactable = true;
+            _button.interactable = true;
         }
         else
         {
-            GetComponent<Button>().interactable = false;
+            _button.interactable = false;
         }
     }
 

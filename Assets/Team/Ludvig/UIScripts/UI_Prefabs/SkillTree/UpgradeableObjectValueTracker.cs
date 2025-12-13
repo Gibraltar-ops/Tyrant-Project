@@ -29,6 +29,7 @@ public class CurrencySourceValueTracker : MonoBehaviour
         Upgrader.onUpgradeApplied -= UpdateLabel;
         
     }
+   
     void Start()
     { 
         label = GetComponent<TMP_Text>();

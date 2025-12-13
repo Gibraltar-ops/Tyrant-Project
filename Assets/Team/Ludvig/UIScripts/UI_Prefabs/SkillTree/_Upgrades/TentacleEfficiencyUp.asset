@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
   m_Name: TentacleEfficiencyUp
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
-  Tag: 1
+  Tag: AutoTentacleEfficiencyUp
   Shop:
     Name: Lorem
     Description: Ipsum
@@ -30,7 +30,7 @@ MonoBehaviour:
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
-  - UpgradeableObjectTag: 0
+  - CurrencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
     StatCategory: 0
     CurrencyToAffect: 0
     CollectType: 3

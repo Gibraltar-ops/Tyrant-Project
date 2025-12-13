@@ -33,9 +33,17 @@ public class ButtonHierarchy : MonoBehaviour
     void Start()
     {
         Remainder = ActiveThreshold;
-        CheckActive();
+        Invoke("CheckActive", 0.1f);
     }
 
+    void Update()
+    {
+        foreach (var parent in ButtonParents)
+        {
+            Debug.DrawLine(parent.transform.position, transform.position, Color.red);
+        }
+       
+    }
 
     public void CheckActive()
     {
@@ -68,10 +76,10 @@ public class ButtonHierarchy : MonoBehaviour
             countLabel.text = "-";
         }
         if(_parentCount < ActiveThreshold)
-        {
-            countLabel.text = Remainder.ToString();
+        {    
             Active = false;
             Remainder = ActiveThreshold - _parentCount;
+            countLabel.text = Remainder.ToString();
             _parentCount = 0;
             return;
         }

@@ -7,6 +7,8 @@ public class UpgradeShopButton: MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public UpgradeDataSO upgradeData;
+    public UpgradeValueTracker Counter;
+    public Button _button;
     public bool _maxedOut = false;
     public bool Active = false;
     public List<GameObject> ProgressBars;
@@ -24,10 +26,15 @@ public class UpgradeShopButton: MonoBehaviour
         EconomyManager.onCurrencyChanged -= CheckInteractable;
     }
 
-    void Start()
+    void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(Buy);
-        GetComponentInChildren<UpgradeShopButton>().upgradeData = upgradeData;
+        Counter.upgradeData = upgradeData;
+        //GetComponentInChildren<UpgradeValueTracker>().upgradeData = upgradeData;
+    }
+    void Start()
+    {   
+        _button = GetComponentInChildren<Button>();
+        _button.onClick.AddListener(Buy);
         Invoke("Initialize", 0.01f);
         
     }
@@ -61,14 +68,14 @@ public class UpgradeShopButton: MonoBehaviour
     {
         if (!Active)
         {
-            GetComponent<Button>().interactable = false;
+            _button.interactable = false;
             return;
         }
         if(_maxedOut) return;
 
         if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
         {   
-            GetComponent<Button>().interactable = false;
+            _button.interactable = false;
             _maxedOut = true;
             return;
         }
@@ -84,11 +91,11 @@ public class UpgradeShopButton: MonoBehaviour
         
         if(EconomyManager.Instance.CanAfford(currency, (int)Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice))
         {
-            GetComponent<Button>().interactable = true;
+            _button.interactable = true;
         }
         else
         {
-            GetComponent<Button>().interactable = false;
+            _button.interactable = false;
         }
     }
 

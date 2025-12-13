@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CurrencySourceShop : MonoBehaviour
 {
-    [HideInInspector]
+  
     public CurrencySourceSO CurrencySourceData;
     
     public bool Active = false;
@@ -19,7 +19,7 @@ public class CurrencySourceShop : MonoBehaviour
         EconomyManager.onCurrencyChanged -= CheckAffordability;
     }
 
-    void Start()
+    void Awake()
     {
         Lood.UpgradeManager.Instance.AddUpgradeableObject(CurrencySourceData);
     } 
@@ -58,9 +58,10 @@ public class CurrencySourceShop : MonoBehaviour
         
         if(stats.Shop.CurrentOwned < stats.Shop.MaxOwned)
         {
+        stats.Shop.CurrentOwned++;
         EconomyManager.Instance.IncrementCurrency(stats.Shop.BoughtWithCurrency, -stats.Shop.NextPrice);
         IncrementPrice();
-        stats.Shop.CurrentOwned++;
+        
         }
 
         if(stats.Shop.CurrentOwned == stats.Shop.MaxOwned)

@@ -20,7 +20,7 @@ public class UpgradeShop : MonoBehaviour
         UpgradeShopButton.onUpgradePurchased -= TryPurchase;
         EconomyManager.onCurrencyChanged -= CheckAffordability;
     }
-    void Start()
+    void Awake()
     {
         Lood.UpgradeManager.Instance.AddUpgrade(upgradeData);
         UpgradeTag = upgradeData.Tag;
