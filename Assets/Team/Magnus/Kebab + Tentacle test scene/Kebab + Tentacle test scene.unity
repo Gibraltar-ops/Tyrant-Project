@@ -2760,17 +2760,17 @@ MonoBehaviour:
   MenuInstance: {fileID: 0}
   Headline: The Maw
   Description: A collection of organs that collects and processes Biomass.
---- !u!114 &1509893503 stripped
+--- !u!114 &1410113544 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4902576978420507927, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
-  m_PrefabInstance: {fileID: 2343416704359964769}
+  m_CorrespondingSourceObject: {fileID: 3309787161601608208, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
+  m_PrefabInstance: {fileID: 568832425441099417}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97eae89006b475d4692ae389c171d536, type: 3}
+  m_Script: {fileID: 11500000, guid: 77fdb666f327ebe48ad25dabbe1d3ff9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParallaxLayerNew
+  m_EditorClassIdentifier: Assembly-CSharp::ShakeRequestManagerCinemachine
 --- !u!1001 &1528201828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3768,6 +3768,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: shakeManager
+      value: 
+      objectReference: {fileID: 1410113544}
+    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: victimSystem
       value: 
       objectReference: {fileID: 1883828915}
@@ -3859,28 +3863,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6616779377118958538, guid: b61243c966d93b1499f885589ef45801, type: 3}
   m_PrefabInstance: {fileID: 651595834}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2129917298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1341351610328569328, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
-  m_PrefabInstance: {fileID: 2343416704359964769}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97eae89006b475d4692ae389c171d536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParallaxLayerNew
---- !u!114 &2133301885 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2890226780162872920, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
-  m_PrefabInstance: {fileID: 2343416704359964769}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97eae89006b475d4692ae389c171d536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParallaxLayerNew
 --- !u!1001 &568832425441099417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3890,113 +3872,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: layers.Array.size
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2129917298}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[1]'
       value: 
       objectReference: {fileID: 701717818}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[3]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[4]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[5]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[6]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[7]'
-      value: 
-      objectReference: {fileID: 1509893503}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[8]'
-      value: 
-      objectReference: {fileID: 2133301885}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[9]'
-      value: 
-      objectReference: {fileID: 1509893503}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[10]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[11]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[12]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[13]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[14]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[15]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[16]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[17]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[18]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[19]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[20]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[21]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[22]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[23]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[24]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: 'layers.Array.data[25]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6183674489170503738, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4040,10 +3918,6 @@ PrefabInstance:
     - target: {fileID: 7681485155435046886, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: m_Name
       value: Camera_Rig
-      objectReference: {fileID: 0}
-    - target: {fileID: 8114540303115965862, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -24.601437
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -89,7 +89,7 @@ public class ProjectileDirector : MonoBehaviour
             () =>
             {
                 EconomyManager.Instance.IncrementCurrency(
-                    Currency.Biomass,
+                    Currency.BiomassLifetime,
                     -damage
                 );
             }
