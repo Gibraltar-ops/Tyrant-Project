@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Lood;
 using System.Collections.Generic;
 
-public class UpgradeShopButton: MonoBehaviour
+public class UpgradeShopButton : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public UpgradeDataSO upgradeData;
@@ -19,7 +19,7 @@ public class UpgradeShopButton: MonoBehaviour
     void OnEnable()
     {
         EconomyManager.onCurrencyChanged += CheckInteractable;
-        
+
     }
     void OnDisable()
     {
@@ -32,26 +32,27 @@ public class UpgradeShopButton: MonoBehaviour
         //GetComponentInChildren<UpgradeValueTracker>().upgradeData = upgradeData;
     }
     void Start()
-    {   
+    {
         _button = GetComponentInChildren<Button>();
         _button.onClick.AddListener(Buy);
         Invoke("Initialize", 0.01f);
-        
+
     }
     public void Activate()
     {
         Active = true;
+        CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency);
         foreach (GameObject bar in ProgressBars)
         {
             Image image = bar.GetComponent<Image>();
             bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 1f);
         }
     }
-    
+
 
     private void Initialize()
     {
-        
+
         CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency);
 
         if (!Active)
@@ -63,7 +64,7 @@ public class UpgradeShopButton: MonoBehaviour
             }
         }
     }
-    
+
     private void CheckInteractable(Currency currency)
     {
         if (!Active)
@@ -71,16 +72,16 @@ public class UpgradeShopButton: MonoBehaviour
             _button.interactable = false;
             return;
         }
-        if(_maxedOut) return;
+        if (_maxedOut) return;
 
         if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
-        {   
+        {
             _button.interactable = false;
             _maxedOut = true;
             return;
         }
 
-        if(currency != Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency)
+        if (currency != Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency)
         {
             return;
         }
@@ -88,8 +89,8 @@ public class UpgradeShopButton: MonoBehaviour
         {
             return;
         }
-        
-        if(EconomyManager.Instance.CanAfford(currency, (int)Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice))
+
+        if (EconomyManager.Instance.CanAfford(currency, (int)Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice))
         {
             _button.interactable = true;
         }

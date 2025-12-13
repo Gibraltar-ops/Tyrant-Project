@@ -38,128 +38,128 @@ using UnityEngine;
 namespace Lood
 {
     public class UpgradeManager : MonoBehaviour
-{
-    
-    public delegate void OnUpgradeManagerInitialized();
-    public static event OnUpgradeManagerInitialized onUpgradeManagerInitialized;
-    private static Lood.UpgradeManager _instance;
-    public static Lood.UpgradeManager Instance
     {
-        get
+
+        public delegate void OnUpgradeManagerInitialized();
+        public static event OnUpgradeManagerInitialized onUpgradeManagerInitialized;
+        private static Lood.UpgradeManager _instance;
+        public static Lood.UpgradeManager Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindFirstObjectByType<Lood.UpgradeManager>();
                 if (_instance == null)
                 {
-                    GameObject singleton = new GameObject(typeof(Lood.UpgradeManager).ToString());
-                    _instance = singleton.AddComponent<Lood.UpgradeManager>();
-                    DontDestroyOnLoad(singleton);
+                    _instance = FindFirstObjectByType<Lood.UpgradeManager>();
+                    if (_instance == null)
+                    {
+                        GameObject singleton = new GameObject(typeof(Lood.UpgradeManager).ToString());
+                        _instance = singleton.AddComponent<Lood.UpgradeManager>();
+                        DontDestroyOnLoad(singleton);
+                    }
                 }
+                return _instance;
             }
-            return _instance;
         }
-    }
 
-    void Awake()
-    {
-        if (_instance != null && _instance != this)
+        void Awake()
         {
-            Destroy(gameObject);
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+
+            onUpgradeManagerInitialized?.Invoke();
         }
-        else
+
+        public Dictionary<string, CurrencySourceStatBlock> CurrencySources = new();
+
+        public Dictionary<string, UpgradeStatBlock> Upgrades = new();
+
+        public void AddUpgradeableObject(CurrencySourceSO data)
         {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        onUpgradeManagerInitialized?.Invoke();
-    }
-
-    public Dictionary<string, CurrencySourceStatBlock> CurrencySources = new();
-
-    public Dictionary<string, UpgradeStatBlock> Upgrades = new();
-
-    public void AddUpgradeableObject(CurrencySourceSO data)
-    {
-        if (!CurrencySources.ContainsKey(data.Tag))
+            if (!CurrencySources.ContainsKey(data.Tag))
             {
                 CurrencySources.Add(data.Tag, new CurrencySourceStatBlock(data));
                 Debug.Log("Upgrade manager added upgradeable object with key: " + data.Tag);
             }
-    }
+        }
 
-    public void AddUpgrade(UpgradeDataSO data)
-    {
-        if (!Upgrades.ContainsKey(data.Tag))
+        public void AddUpgrade(UpgradeDataSO data)
+        {
+            if (!Upgrades.ContainsKey(data.Tag))
             {
                 Upgrades.Add(data.Tag, new UpgradeStatBlock(data));
                 Debug.Log("Upgrade manager added upgrade with key: " + data.Tag);
             }
-    }
-
-    public void IncreaseUpgradeableStat(string tag, MainStat stat, float value)
-    {
-        if (!CurrencySources.ContainsKey(tag))
-        {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return;
         }
 
-        CurrencySources[tag].MainStats[stat] += value;
-    }
-
-    public float GetCurrencySourceStat(string tag, MainStat stat)
-    {
-         if (!CurrencySources.ContainsKey(tag))
+        public void IncreaseUpgradeableStat(string tag, MainStat stat, float value)
         {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return 0f;
-        }
-        return CurrencySources[tag].MainStats[stat];
-    }
+            if (!CurrencySources.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return;
+            }
 
-     public void IncrementCurrencySourceCount(string tag)
-    {
-         if (!CurrencySources.ContainsKey(tag))
+            CurrencySources[tag].MainStats[stat] += value;
+        }
+
+        public float GetCurrencySourceStat(string tag, MainStat stat)
         {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return;
+            if (!CurrencySources.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return 0f;
+            }
+            return CurrencySources[tag].MainStats[stat];
         }
-        CurrencySources[tag].Shop.CurrentOwned ++;
-    }
 
-    public int GetCurrencySourceCount(string tag)
-    {
-         if (!CurrencySources.ContainsKey(tag))
+        public void IncrementCurrencySourceCount(string tag)
         {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return 0;
+            if (!CurrencySources.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return;
+            }
+            CurrencySources[tag].Shop.CurrentOwned++;
         }
-        return CurrencySources[tag].Shop.CurrentOwned;
-    }
 
-     public void IncrementUpgradeCount(string tag)
-    {
-         if (!Upgrades.ContainsKey(tag))
+        public int GetCurrencySourceCount(string tag)
         {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return;
+            if (!CurrencySources.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return 0;
+            }
+            return CurrencySources[tag].Shop.CurrentOwned;
         }
-        Upgrades[tag].Shop.CurrentOwned ++;
-    }
 
-    public int GetUpgradeCount(string tag)
-    {
-         if (!Upgrades.ContainsKey(tag))
+        public void IncrementUpgradeCount(string tag)
         {
-            Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
-            return 0;
+            if (!Upgrades.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return;
+            }
+            Upgrades[tag].Shop.CurrentOwned++;
         }
-        return Upgrades[tag].Shop.CurrentOwned;
-    }
 
-}
+        public int GetUpgradeCount(string tag)
+        {
+            if (!Upgrades.ContainsKey(tag))
+            {
+                Debug.LogWarning("Key " + tag.ToString() + " does not exist in upgrade manager.");
+                return 0;
+            }
+            return Upgrades[tag].Shop.CurrentOwned;
+        }
+
+    }
 }
 
 
@@ -206,7 +206,7 @@ public enum MainStat
 
 
 public class CurrencySourceStatBlock
-{  
+{
     //This stat block contains all variables related to the shop (prices, count etc.)
     public ShopStats Shop = new();
 
@@ -221,9 +221,9 @@ public class CurrencySourceStatBlock
         {Currency.HealthPoints, new CollectTypeStatBlock()}
     };
 
-//02.___________________________________
-//ADD NEW ENTRY TO THIS DICTIONARY!!!
-//_____________v___v___v_____________
+    //02.___________________________________
+    //ADD NEW ENTRY TO THIS DICTIONARY!!!
+    //_____________v___v___v_____________
     public Dictionary<MainStat, float> MainStats = new()
     {   
         //Auto Tentacle Stats
@@ -233,14 +233,14 @@ public class CurrencySourceStatBlock
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
         {MainStat.GadflyAggression, 0f},
-        
+
     };
-//03._________________________________________________________________
-//The constructor needs an "UpgradeableObjectDataSO" scriptable object as input.
-//ADD YOUR NEW VARIABLE TO THE "UpgradeableObjectDataSO.cs" script. 
-//________________________________________________________
+    //03._________________________________________________________________
+    //The constructor needs an "UpgradeableObjectDataSO" scriptable object as input.
+    //ADD YOUR NEW VARIABLE TO THE "UpgradeableObjectDataSO.cs" script. 
+    //________________________________________________________
     public CurrencySourceStatBlock(CurrencySourceSO data)
-    {   
+    {
         //Shop
         Shop.IsActive = data.Shop.IsActive;
         Shop.BoughtWithCurrency = data.Shop.BoughtWithCurrency;
@@ -270,7 +270,7 @@ public class CurrencySourceStatBlock
         MainStats[MainStat.SpeedAdditivePercentage] = data.SpeedAdditivePercentage;
         MainStats[MainStat.SpeedMultiplicativePercentage] = data.SpeedMultiplicativePercentage;
         MainStats[MainStat.GadflyAggression] = data.GadflyAggression;
-        
+
     }
 }
 
@@ -282,32 +282,33 @@ public class CurrencySourceStatBlock
 //HERE IS AN EXAMPLE OF USE FROM THE HARVESTER SCRIPT:
 //
 // public int GetCurrentCollectAmount(Currency currency, UpgradeableObjectTag tag)
-    // {   
-    //     //
-    //     UpgradeableStatBlock data = UpgradeManager.Instance.UpgradeableObjects[tag];
-    //     //Apply base speed (in ticks per second)
-    //     float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
-    //     //Apply simple add
-    //     finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
-    //     //Apply simple multiply
-    //     finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
-    //     //Apply additive percentage
-    //     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
-    //     //Apply multiplicative percentage
-    //     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
-        
-    //     return (int)finalCollectAmount;
+// {   
+//     //
+//     UpgradeableStatBlock data = UpgradeManager.Instance.UpgradeableObjects[tag];
+//     //Apply base speed (in ticks per second)
+//     float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
+//     //Apply simple add
+//     finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
+//     //Apply simple multiply
+//     finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
+//     //Apply additive percentage
+//     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+//     //Apply multiplicative percentage
+//     finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
 
-    // }
+//     return (int)finalCollectAmount;
+
+// }
 //_____________v___v___v_____________
 
 //001.________________________________
 //::::TO ADD NEW COLLECT VARIABLE::::
 //ADD NEW VARIABLE TO THIS ENUM.!!!
 //_____________v___v___v_____________
-# region Collect Stats
+#region Collect Stats
 public enum CollectStat
-{   None,
+{
+    None,
     BaseCollect,
     CollectMultiplier,
     CollectAdd,
@@ -315,7 +316,7 @@ public enum CollectStat
     CollectMultiplicativePercentage,
 }
 public class CollectTypeStatBlock
-{   
+{
     //002.________________________________
     //TO ADD NEW COLLECT VARIABLE
     //ADD NEW ENTRY TO THIS DICTIONARY.!!!
@@ -332,9 +333,9 @@ public class CollectTypeStatBlock
     };
     public CollectTypeStatBlock()
     {
-        
+
     }
-     //003.________________________________
+    //003.________________________________
     //TO ADD NEW COLLECT VARIABLE
     //ADD NEW ASSIGNMENT TO THIS CONSTRUCTOR.!!!
     //_____________v___v___v_____________
@@ -365,7 +366,7 @@ public class CollectType
 #endregion
 
 public class UpgradeStatBlock
-{  
+{
     public ShopStats Shop = new();
 
     public List<UpgradeEffect> UpgradeEffects;
@@ -391,7 +392,7 @@ public class UpgradeStatBlock
         UpgradeEffects = data.UpgradeEffects;
         AddValue = data.AddValue;
         CurrentModifier = data.CurrentModifier;
-       
+
     }
 
 }
@@ -418,7 +419,7 @@ public enum UpgradeStatCategory
 
 [Serializable]
 public class ShopStats
-{   
+{
     [Header("Tooltips")]
     public string Name;
     [TextArea(3, 10)]
@@ -440,5 +441,5 @@ public class ShopStats
     public float PriceIncrease = 1.2f;
     public bool CanAfford = false;
     public bool MaxedOut = false;
-  
+
 }

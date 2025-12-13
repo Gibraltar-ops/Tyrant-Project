@@ -1,14 +1,21 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Lood;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(RectTransform))]
 public class ButtonHierarchy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Button button;
+    public Color ActiveParentLineColor = Color.white;
+    public Color InactiveParentLineColor = Color.black;
+    public GameObject Lock;
+    private UILineRenderer lineRenderer;
 
     public List<GameObject> ButtonParents;
     public TMP_Text countLabel;
@@ -20,7 +27,20 @@ public class ButtonHierarchy : MonoBehaviour
 
     public bool Active = false;
     public UnityEvent onActivate;
+    private List<UILineRendererLine> _lines = new();
 
+    void Awake()
+    {
+        lineRenderer = FindAnyObjectByType<UILineRenderer>();
+        Remainder = ActiveThreshold;
+        foreach (var parent in ButtonParents)
+        {
+            UILineRendererLine line = new UILineRendererLine(GetComponent<RectTransform>(), parent.GetComponent<RectTransform>(), InactiveParentLineColor, false);
+            lineRenderer.AddLine(line);
+            _lines.Add(line);
+            Debug.DrawLine(parent.transform.position, transform.position, Color.red);
+        }
+    }
 
     void OnEnable()
     {
@@ -32,9 +52,10 @@ public class ButtonHierarchy : MonoBehaviour
     }
     void Start()
     {
-        Remainder = ActiveThreshold;
+
         Invoke("CheckActive", 0.1f);
     }
+
 
     void Update()
     {
@@ -42,7 +63,7 @@ public class ButtonHierarchy : MonoBehaviour
         {
             Debug.DrawLine(parent.transform.position, transform.position, Color.red);
         }
-       
+
     }
 
     public void CheckActive()
@@ -51,7 +72,7 @@ public class ButtonHierarchy : MonoBehaviour
         {
             return;
         }
-        if(ButtonParents == null)
+        if (ButtonParents == null)
         {
             Active = true;
             onActivate.Invoke();
@@ -60,56 +81,47 @@ public class ButtonHierarchy : MonoBehaviour
 
         foreach (GameObject parent in ButtonParents)
         {
-            if(parent.GetComponentInChildren<CurrencySourceShopButton>() != null)
-            {   
+            if (parent.GetComponent<CurrencySourceShopButton>() != null)
+            {
                 var currencySource = parent.GetComponentInChildren<CurrencySourceShopButton>();
                 _parentCount += Lood.UpgradeManager.Instance.GetCurrencySourceCount(currencySource.CurrencySourceData.Tag);
             }
-            if(parent.GetComponentInChildren<UpgradeShopButton>() != null)
-            {   
-                var upgrade = parent.GetComponentInChildren<UpgradeShopButton>();
+            if (parent.GetComponent<UpgradeShopButton>() != null)
+            {
+                var upgrade = parent.GetComponent<UpgradeShopButton>();
                 _parentCount += Lood.UpgradeManager.Instance.GetUpgradeCount(upgrade.upgradeData.Tag);
             }
         }
-        if(_parentCount == 0)
+        if (_parentCount == 0)
         {
-            countLabel.text = "-";
+            Lock.SetActive(true);
+            //countLabel.text = "-";
         }
-        if(_parentCount < ActiveThreshold)
-        {    
+        if (_parentCount < ActiveThreshold)
+        {
+            Lock.SetActive(true);
             Active = false;
             Remainder = ActiveThreshold - _parentCount;
-            countLabel.text = Remainder.ToString();
+            //countLabel.text = Remainder.ToString();
             _parentCount = 0;
             return;
         }
         else
         {
+            Lock.SetActive(false);
             Active = true;
             onActivate.Invoke();
+            transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.2f);
+
+            foreach (var line in _lines)
+            {
+                line.animated = true;
+                line.color = ActiveParentLineColor;
+            }
             return;
         }
 
-        
+
     }
 
-    // public void CreateLine(Vector2 start, Vector2 end)
-    // {
-    // GameObject line = new GameObject("UILine", typeof(Image));
-    // line.transform.SetParent(container, false);
-
-    // Image image = line.GetComponent<Image>();
-    // image.color = lineColor;
-
-    // Vector2 direction = end - start;
-    // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    // float length = direction.magnitude;
-
-    // RectTransform rectTransform = line.GetComponent<RectTransform>();
-    // rectTransform.sizeDelta = new Vector2(length, 5); // Adjust thickness here
-    // rectTransform.pivot = new Vector2(0, 0.5f);
-    // rectTransform.anchoredPosition = start;
-    // rectTransform.rotation = Quaternion.Euler(0, 0, angle);
-    // }
-    
 }

@@ -5,110 +5,111 @@ using UnityEngine.UI;
 
 namespace Lood
 {
-    public class CurrencySourceShopButton: MonoBehaviour
-{
-  
-    public CurrencySourceSO CurrencySourceData;
-
-    public CurrencySourceValueTracker Counter;
-
-    public Button _button;
-    public bool _maxedOut = false;
-    public bool Active = false;
-    public List<GameObject> ProgressBars;
-
-    //Event is received on the shop objects in the scene.
-    public delegate void OnCollectorPurchased(string tag);
-    public static event OnCollectorPurchased onCollectorPurchased;
-
-    void OnEnable()
+    public class CurrencySourceShopButton : MonoBehaviour
     {
-        EconomyManager.onCurrencyChanged += CheckInteractable;
-        
-    }
-    void OnDisable()
-    {
-        EconomyManager.onCurrencyChanged -= CheckInteractable;
-    }
-    void Awake()
-        {     
+
+        public CurrencySourceSO CurrencySourceData;
+
+        public CurrencySourceValueTracker Counter;
+
+        private Button _button;
+        public bool _maxedOut = false;
+        public bool Active = false;
+        public List<GameObject> ProgressBars;
+
+        //Event is received on the shop objects in the scene.
+        public delegate void OnCollectorPurchased(string tag);
+        public static event OnCollectorPurchased onCollectorPurchased;
+
+        void OnEnable()
+        {
+            EconomyManager.onCurrencyChanged += CheckInteractable;
+
+        }
+        void OnDisable()
+        {
+            EconomyManager.onCurrencyChanged -= CheckInteractable;
+        }
+        void Awake()
+        {
             Counter.currencySource = CurrencySourceData;
         }
 
-    void Start()
+        void Start()
         {
-        _button = GetComponentInChildren<Button>();
-        _button.onClick.AddListener(Buy);
-        //GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
-        Invoke("Initialize", 0.01f);
-        
+            _button = GetComponentInChildren<Button>();
+            _button.onClick.AddListener(Buy);
+            //GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
+            Invoke("Initialize", 0.01f);
+
         }
 
-    public void Activate()
+        public void Activate()
         {
             Active = true;
+            CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
             foreach (GameObject bar in ProgressBars)
             {
                 Image image = bar.GetComponent<Image>();
                 bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 1f);
             }
         }
-    
-    private void Initialize()
+
+        private void Initialize()
         {
-            
+
             CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
             if (!Active)
             {
-                foreach(GameObject bar in ProgressBars)
+                foreach (GameObject bar in ProgressBars)
                 {
                     Image image = bar.GetComponent<Image>();
-                bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+                    bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
                 }
             }
         }
-    
-    private void CheckInteractable(Currency currency)
-    {
-        if (!Active)
+
+        private void CheckInteractable(Currency currency)
         {
-            GetComponent<Button>().interactable = false;
-            return; 
+            if (!Active)
+            {
+                _button.interactable = false;
+                return;
+            }
+
+            if (_maxedOut) return;
+
+            if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
+            {
+                _button.interactable = false;
+                _maxedOut = true;
+                return;
+            }
+
+            if (currency != UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency)
+            {
+                return;
+            }
+
+            if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
+            {
+                return;
+            }
+
+            if (EconomyManager.Instance.CanAfford(currency, (int)UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.NextPrice))
+            {
+                _button.interactable = true;
+            }
+            else
+            {
+                _button.interactable = false;
+            }
         }
 
-        if(_maxedOut) return;
-
-        if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
-        {   
-            GetComponent<Button>().interactable = false;
-            _maxedOut = true;
-            return;
-        }
-
-        if(currency != UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency)
+        private void Buy()
         {
-            return;
-        }
-
-        if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
-        {
-            return;
-        }
-
-        if(EconomyManager.Instance.CanAfford(currency, (int)UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.NextPrice))
-        {
-            _button.interactable = true;
-        }
-        else
-        {
-            _button.interactable = false;
+            onCollectorPurchased?.Invoke(CurrencySourceData.Tag);
         }
     }
-
-    private void Buy()
-    {
-        onCollectorPurchased?.Invoke(CurrencySourceData.Tag);
-    }
-}
 }
 

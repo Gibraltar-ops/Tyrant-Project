@@ -4,6 +4,7 @@ using UnityEngine;
 public class UpgradeValueTracker : MonoBehaviour
 {
     public bool GetDataFromParent = false;
+    public bool HideZeroCount = false;
     public UpgradeDataSO upgradeData;
     public UpgradeTrackValue trackValue;
 
@@ -12,8 +13,8 @@ public class UpgradeValueTracker : MonoBehaviour
     private bool _initialized = false;
 
     void OnEnable()
-    {   
-        if(_initialized) UpdateLabel();
+    {
+        if (_initialized) UpdateLabel();
         Upgrader.onUpgradeApplied += UpdateLabel;
     }
     void OnDisable()
@@ -22,9 +23,9 @@ public class UpgradeValueTracker : MonoBehaviour
     }
     void Awake()
     {
-        
-       label = GetComponent<TMP_Text>();
-       
+
+        label = GetComponent<TMP_Text>();
+
     }
     void Start()
     {
@@ -32,7 +33,7 @@ public class UpgradeValueTracker : MonoBehaviour
     }
     private void Initialize()
     {
-         
+
         UpdateLabel();
         _initialized = true;
     }
@@ -45,32 +46,37 @@ public class UpgradeValueTracker : MonoBehaviour
             Debug.LogWarning("Upgrade Key" + upgradeData.Tag + " does not exist in upgrade manager.");
             return;
         }
-        
+
         switch (trackValue)
         {
             case UpgradeTrackValue.Count:
-                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
-                    {   
-                label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned, FormatAs);
+                if (HideZeroCount && Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned == 0)
+                {
+                    label.text = "";
                     break;
-                    }
+                }
+                if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
+                {
+                    label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned, FormatAs);
+                    break;
+                }
                 label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.CurrentOwned, FormatAs);
                 break;
             case UpgradeTrackValue.CurrentModifier:
                 label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].CurrentModifier, FormatAs);
                 break;
             case UpgradeTrackValue.NextPrice:
-                 
-                 if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
-                    {   
+
+                if (Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.MaxedOut)
+                {
                     label.text = "";
                     break;
-                    }
+                }
                 label.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.NextPrice, FormatAs);
                 break;
             default: break;
         }
-        
+
     }
 }
 
