@@ -9,21 +9,19 @@ public class ScreenFader : MonoBehaviour
     private Coroutine currentFadeRoutine;
     private void Awake()
     {
-        image = GetComponent<Image>();
+        GetImageComponent();
         if (image != null)
         {
             image.raycastTarget = false;
             Color c = image.color;
             image.color = new Color(c.r, c.g, c.b, 0f);
         }
-
-
     }
 
     private void GetImageComponent()
     {
         if (image == null)
-            image.GetComponent<Image>();
+            image = GetComponent<Image>();
     }
 
     public IEnumerator FadeOut()
@@ -33,7 +31,7 @@ public class ScreenFader : MonoBehaviour
 
         if (currentFadeRoutine != null) StopCoroutine(currentFadeRoutine);
 
-        currentFadeRoutine = StartCoroutine(Fade(0f, 1f));
+        currentFadeRoutine = StartCoroutine(Fade(1f));
         yield return currentFadeRoutine;
     }
 
@@ -43,28 +41,28 @@ public class ScreenFader : MonoBehaviour
 
         if (currentFadeRoutine != null) StopCoroutine(currentFadeRoutine);
 
-        currentFadeRoutine = StartCoroutine(Fade(1f, 0f));
+        currentFadeRoutine = StartCoroutine(Fade(0f));
         yield return currentFadeRoutine;
 
         image.raycastTarget = false;
     }
 
-    private IEnumerator Fade(float start, float end)
+    private IEnumerator Fade(float targetAlpha)
     {
-
         GetImageComponent();
 
         float t = 0f;
         Color c = image.color;
+        float startAlpha = c.a;
 
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            float a = Mathf.Lerp(start, end, t / fadeDuration);
-            image.color = new Color(c.r, c.g, c.b, a);
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, t / fadeDuration);
+
+            image.color = new Color(c.r, c.g, c.b, newAlpha);
             yield return null;
         }
-
-        image.color = new Color(c.r, c.g, c.b, end);
+        image.color = new Color(c.r, c.g, c.b, targetAlpha);
     }
 }
