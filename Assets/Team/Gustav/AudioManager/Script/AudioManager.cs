@@ -1,20 +1,20 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Audio;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
     [Header("Database")]
-    public SoundDatabase database;
+    public AudioDatabase database;
 
     [Header("Mixer Routing")]
-    public AudioMixerGroup sfxGroup;
     public AudioMixerGroup musicGroup;
     public AudioMixerGroup ambienceGroup;
     public AudioMixerGroup uiGroup;
+    public AudioMixerGroup sfxGroup;
 
     [Header("Pooling")]
     public int poolSize = 32;
@@ -53,7 +53,13 @@ public class AudioManager : MonoBehaviour
     {
         if (!soundLookup.TryGetValue(id, out var s))
         {
-            Debug.LogWarning("Missing sound: " + id);
+            Debug.LogWarning($"[Audio] Sound ID not found: {id}");
+            return;
+        }
+
+        if (s.clips == null || s.clips.Length == 0)
+        {
+            Debug.LogWarning($"[Audio] Sound '{id}' has no clips assigned");
             return;
         }
 
@@ -64,14 +70,19 @@ public class AudioManager : MonoBehaviour
             return;
 
         var src = GetFreeSource();
-        if (src == null) return;
+        if (src == null)
+        {
+            // OPTIONAL: log only in editor
+#if UNITY_EDITOR
+            Debug.Log($"[Audio] Pool exhausted, skipping '{id}'");
+#endif
+            return;
+        }
 
-        var clip = s.clips[Random.Range(0, s.clips.Length)];
-
-        src.clip = clip;
-        src.loop = s.looping;
+        src.clip = s.clips[Random.Range(0, s.clips.Length)];
         src.volume = s.volume;
         src.pitch = Random.Range(s.pitchRange.x, s.pitchRange.y);
+        src.loop = s.looping;
         src.outputAudioMixerGroup = GetMixerGroup(s.category);
 
         src.Play();
@@ -80,30 +91,30 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string id)
     {
-        if (!soundLookup.TryGetValue(id, out var s)) return;
+        if (!soundLookup.TryGetValue(id, out var sound)) return;
 
-        foreach (var src in pool)
-            if (src.isPlaying && src.clip != null && s.clips.Contains(src.clip))
-                src.Stop();
+        foreach (var soundSource in pool)
+            if (soundSource.isPlaying && soundSource.clip != null && sound.clips.Contains(soundSource.clip))
+                soundSource.Stop();
     }
 
     // ---------------- Helper Methods ---------------- //
 
     private AudioSource GetFreeSource()
     {
-        foreach (var src in pool)
-            if (!src.isPlaying)
-                return src;
+        foreach (var soundSource in pool)
+            if (!soundSource.isPlaying)
+                return soundSource;
         return null;
     }
 
     private int CountActiveInstances(Sound s)
     {
         int count = 0;
-        foreach (var src in pool)
+        foreach (var soundSource in pool)
         {
-            if (!src.isPlaying || src.clip == null) continue;
-            if (System.Array.Exists(s.clips, c => c == src.clip))
+            if (!soundSource.isPlaying || soundSource.clip == null) continue;
+            if (System.Array.Exists(s.clips, c => c == soundSource.clip))
                 count++;
         }
         return count;

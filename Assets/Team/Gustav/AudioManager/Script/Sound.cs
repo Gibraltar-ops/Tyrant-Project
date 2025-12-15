@@ -19,7 +19,7 @@ public class Sound
     public bool limitInstances = false;
     public int maxInstances = 3;
 
-    [Tooltip("Minimum time between plays (prevents spam)")]
+    [Tooltip("Minimum time between plays")]
     public float minDelay = 0.05f;
 
     [HideInInspector] public float lastPlayed;

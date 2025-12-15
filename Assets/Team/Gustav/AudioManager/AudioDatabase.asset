@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6cdb818fd896274fbe40f25028ae0f8, type: 3}
+  m_Name: AudioDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
+  sounds:
+  - id: HumanScream
+    clips:
+    - {fileID: 8300000, guid: 80bd5c1b54ade484288e6720df85a353, type: 3}
+    - {fileID: 8300000, guid: 21765cd575879bf47864cf70e7ca2b75, type: 3}
+    - {fileID: 8300000, guid: c58a9fe33fc285e46a35a60a2304e024, type: 3}
+    - {fileID: 8300000, guid: 0cb73bca75198534182168a59d233b2c, type: 3}
+    - {fileID: 8300000, guid: 0fbfdd163a03bd74cb55569d1956644c, type: 3}
+    - {fileID: 8300000, guid: ee6d954fff12b8f4cb985cb3d6440456, type: 3}
+    volume: 1
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 5
+    minDelay: 0.05
+    lastPlayed: 47.632008
+    category: 4
+  - id: TyrantEating
+    clips:
+    - {fileID: 8300000, guid: cd4168c180b7ec246a765ebc86ceeae2, type: 3}
+    volume: 1
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 2
+    minDelay: 0.05
+    lastPlayed: 40.262222
+    category: 5
+  - id: ProjectileExplosion
+    clips:
+    - {fileID: 8300000, guid: e998552c511e4f94b82dd0f2b41b0145, type: 3}
+    - {fileID: 8300000, guid: 10bfc5e372b39bd4fa3abe8389271cd8, type: 3}
+    - {fileID: 8300000, guid: 8aacba5108f0c2e439c159426fd7d831, type: 3}
+    - {fileID: 8300000, guid: 3a99f8daf1e85604fa3df003fa7ee48b, type: 3}
+    volume: 1
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 5
+    minDelay: 0.05
+    lastPlayed: 79.92856
+    category: 4

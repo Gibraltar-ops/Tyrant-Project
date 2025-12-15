@@ -173,7 +173,7 @@ public class ProjectileDirector : MonoBehaviour
                     Instantiate(p.impactFX, p.position, Quaternion.identity);
 
                 p.onArrive?.Invoke();
-
+                AudioManager.Instance.Play("ProjectileExplosion");
                 Destroy(p.obj);
                 activeProjectiles.RemoveAt(i);
             }
