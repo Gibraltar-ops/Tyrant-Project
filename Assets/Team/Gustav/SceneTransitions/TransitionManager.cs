@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class TransitionManager : MonoBehaviour
 {
     public static TransitionManager Instance;
-    public ScreenFader screenFader;
 
     [Header("Fade Settings")]
     public ScreenFader fader; // assigned in inspector
@@ -18,9 +17,12 @@ public class TransitionManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
+        {
             Destroy(gameObject);
+            return;
+        }
 
-        screenFader.FadeOut();
+        if (fader != null) StartCoroutine(fader.FadeIn());
     }
 
     // Public call for transitions
@@ -34,6 +36,10 @@ public class TransitionManager : MonoBehaviour
         if (fader != null)
             yield return fader.FadeOut();
 
+
+        // KOlla på att sy ihop med det här - hur ser vi vilken scen vi skall ladda härnäst? (Använda Async för att ladda från intro till main menu, använd async för att ladda från MM till stages)
+        //  Se om vi kan sy ihop med Introvideocontroller (onvideofinished) 
+        //Behöver även en fade out från stage complete till blackout 
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         loadOp.allowSceneActivation = false;
 

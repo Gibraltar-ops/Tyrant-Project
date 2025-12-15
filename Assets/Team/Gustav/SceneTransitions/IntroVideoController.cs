@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class IntroVideoController : MonoBehaviour
@@ -30,7 +29,17 @@ public class IntroVideoController : MonoBehaviour
     {
         Debug.Log("Video finished!");
         // Do anything here: load next scene, fade out, etc.
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo(sceneName);
+        }
+        else
 
-        SceneManager.LoadScene(sceneName);
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        }
+
+
+        videoPlayer.loopPointReached -= OnVideoFinished;
     }
 }

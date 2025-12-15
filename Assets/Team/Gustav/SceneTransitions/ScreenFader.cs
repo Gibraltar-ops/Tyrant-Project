@@ -6,27 +6,54 @@ public class ScreenFader : MonoBehaviour
 {
     public float fadeDuration = 0.5f;
     private Image image;
-
+    private Coroutine currentFadeRoutine;
     private void Awake()
     {
         image = GetComponent<Image>();
-        image.raycastTarget = false;
-        FadeIn();
-        //FadeOut();
+        if (image != null)
+        {
+            image.raycastTarget = false;
+            Color c = image.color;
+            image.color = new Color(c.r, c.g, c.b, 0f);
+        }
+
+
+    }
+
+    private void GetImageComponent()
+    {
+        if (image == null)
+            image.GetComponent<Image>();
     }
 
     public IEnumerator FadeOut()
     {
-        yield return Fade(0f, 1f);
+        GetImageComponent();
+        image.raycastTarget = true;
+
+        if (currentFadeRoutine != null) StopCoroutine(currentFadeRoutine);
+
+        currentFadeRoutine = StartCoroutine(Fade(0f, 1f));
+        yield return currentFadeRoutine;
     }
 
     public IEnumerator FadeIn()
     {
-        yield return Fade(1f, 0f);
+        GetImageComponent();
+
+        if (currentFadeRoutine != null) StopCoroutine(currentFadeRoutine);
+
+        currentFadeRoutine = StartCoroutine(Fade(1f, 0f));
+        yield return currentFadeRoutine;
+
+        image.raycastTarget = false;
     }
 
     private IEnumerator Fade(float start, float end)
     {
+
+        GetImageComponent();
+
         float t = 0f;
         Color c = image.color;
 
