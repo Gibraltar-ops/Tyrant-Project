@@ -1,9 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
+/* using UnityEngine.SceneManagement;
+ */
 public class ThresholdCurrencySlider : MonoBehaviour
 {
     public Currency Currency;
+
+    public string winSceneName = "OutroCinematic";
     private bool _thresholdMet = false;
 
     public delegate void OnWinThresholdMet();
@@ -24,17 +26,17 @@ public class ThresholdCurrencySlider : MonoBehaviour
 
     public void UpdateSlider(Currency currency)
     {
-        if(!_thresholdMet)
+        if (!_thresholdMet)
         {
             long currentCurrency = EconomyManager.Instance.GetCurrent(Currency.BiomassLifetime);
 
-            
+
 
             float normalizedProgressBarScale;
 
-            if(currentCurrency >= 1)
+            if (currentCurrency >= 1)
             {
-                normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency/EconomyManager.Instance.BiomassWinThreshold, 0f, 1f);
+                normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency / EconomyManager.Instance.BiomassWinThreshold, 0f, 1f);
             }
             else
             {
@@ -43,26 +45,33 @@ public class ThresholdCurrencySlider : MonoBehaviour
 
             transform.localScale = new Vector3(normalizedProgressBarScale, 1f, 1f);
 
-            if(currentCurrency >= EconomyManager.Instance.BiomassWinThreshold)
+            if (currentCurrency >= EconomyManager.Instance.BiomassWinThreshold)
             {
                 _thresholdMet = true;
                 onWinThresholdMet?.Invoke();
                 EndGame();
             }
 
-            
+
         }
-         
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     public void EndGame()
     {
-        SceneManager.LoadScene("OutroCinematic");
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo(winSceneName);
+        }
+        else ///FALLBACK
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(winSceneName);
+        }
     }
 }
