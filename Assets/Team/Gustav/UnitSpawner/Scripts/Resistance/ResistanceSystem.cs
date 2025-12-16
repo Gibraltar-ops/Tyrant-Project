@@ -103,7 +103,7 @@ public class ResistanceSystem : MonoBehaviour
             if (fighter.isCenter && fighter.attackTimer <= 0f)
             {
                 ProjectileDirector.Instance.SpawnGrenade(fighter.position, fighter.attackDamage);
-                AudioManager.Instance.Play("ProjectileExplosion");
+                AudioManager.Instance.Play("ProjectileLaunch");
                 fighter.attackTimer = attackCooldown;
             }
         }

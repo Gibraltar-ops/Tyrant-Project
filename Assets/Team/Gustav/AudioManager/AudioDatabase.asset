@@ -29,6 +29,33 @@ MonoBehaviour:
     minDelay: 0.05
     lastPlayed: 47.632008
     category: 4
+  - id: ProjectileLaunch
+    clips:
+    - {fileID: 8300000, guid: abab50d877ff4574d9fbf15eb526b18a, type: 3}
+    - {fileID: 8300000, guid: 21d1446807bcd1749a7fc561b17fb45e, type: 3}
+    - {fileID: 8300000, guid: 5ce2b4837bd13d34589eb071284c69e1, type: 3}
+    volume: 0.2
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 4
+    minDelay: 0.05
+    lastPlayed: 79.92856
+    category: 6
+  - id: ProjectileExplosion
+    clips:
+    - {fileID: 8300000, guid: e998552c511e4f94b82dd0f2b41b0145, type: 3}
+    - {fileID: 8300000, guid: 10bfc5e372b39bd4fa3abe8389271cd8, type: 3}
+    - {fileID: 8300000, guid: 8aacba5108f0c2e439c159426fd7d831, type: 3}
+    - {fileID: 8300000, guid: 3a99f8daf1e85604fa3df003fa7ee48b, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 5
+    minDelay: 0.05
+    lastPlayed: 79.92856
+    category: 4
   - id: TyrantEating
     clips:
     - {fileID: 8300000, guid: cd4168c180b7ec246a765ebc86ceeae2, type: 3}
@@ -39,13 +66,10 @@ MonoBehaviour:
     maxInstances: 2
     minDelay: 0.05
     lastPlayed: 40.262222
-    category: 5
-  - id: ProjectileExplosion
+    category: 6
+  - id: TyrantStrike
     clips:
-    - {fileID: 8300000, guid: e998552c511e4f94b82dd0f2b41b0145, type: 3}
-    - {fileID: 8300000, guid: 10bfc5e372b39bd4fa3abe8389271cd8, type: 3}
-    - {fileID: 8300000, guid: 8aacba5108f0c2e439c159426fd7d831, type: 3}
-    - {fileID: 8300000, guid: 3a99f8daf1e85604fa3df003fa7ee48b, type: 3}
+    - {fileID: 8300000, guid: 811014be9749c3240a5912369661045d, type: 3}
     volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0

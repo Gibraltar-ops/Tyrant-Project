@@ -100,6 +100,8 @@ public class TyrantTentacleManager : MonoBehaviour
                     closestFighter.position,
                     () =>
                     {
+                        AudioManager.Instance.Play("TyrantStrike");
+                        AudioManager.Instance.Play("ProjectileExplosion");
                         DestroyFighter(closestFighter);
                     }
                 );
@@ -245,6 +247,7 @@ public class TyrantTentacleManager : MonoBehaviour
             }
         }
 
+        AudioManager.Instance.Play("TyrantEating");
         EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
     }
 

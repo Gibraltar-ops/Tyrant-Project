@@ -22,6 +22,8 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<string, Sound> soundLookup;
 
+    private Dictionary<Sound, float> lastPlayTime = new Dictionary<Sound, float>();
+
     void Awake()
     {
         if (Instance != null)
@@ -45,6 +47,13 @@ public class AudioManager : MonoBehaviour
             src.playOnAwake = false;
             pool.Add(src);
         }
+        
+        if (database == null)
+        {
+            Debug.LogError("[Audio] No AudioDatabase assigned!");
+            enabled = false;
+            return;
+        }
     }
 
     // ------------------- API -------------------- //
@@ -63,8 +72,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (Time.time - s.lastPlayed < s.minDelay)
-            return;
+        if (lastPlayTime.TryGetValue(s, out float lastTime))
+        {
+            if (Time.time - lastTime < s.minDelay)
+                return;
+        }
 
         if (s.limitInstances && CountActiveInstances(s) >= s.maxInstances)
             return;
@@ -72,11 +84,8 @@ public class AudioManager : MonoBehaviour
         var src = GetFreeSource();
         if (src == null)
         {
-            // OPTIONAL: log only in editor
-#if UNITY_EDITOR
-            Debug.Log($"[Audio] Pool exhausted, skipping '{id}'");
-#endif
-            return;
+          Debug.Log($"[Audio] Pool exhausted, skipping '{id}'");
+          return;
         }
 
         src.clip = s.clips[Random.Range(0, s.clips.Length)];
@@ -86,7 +95,7 @@ public class AudioManager : MonoBehaviour
         src.outputAudioMixerGroup = GetMixerGroup(s.category);
 
         src.Play();
-        s.lastPlayed = Time.time;
+        lastPlayTime[s] = Time.time;
     }
 
     public void Stop(string id)
