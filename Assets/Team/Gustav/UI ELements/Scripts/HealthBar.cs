@@ -21,6 +21,7 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Image fillImage2;
     public Color damageFlash = Color.white;
     public float flashDuration = 0.1f; //Flash duration
+    public float shakeMagnitude = 2f;
 
     [Header("Variables & Settings")]
     public float maxHealth = 10000;                     // The maximum health value
@@ -35,11 +36,14 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Color originalColor1;
     private Color originalColor2;
     private Coroutine activeHealthBarCoroutine;
+    private Vector3 initialPosition;
 
     void Start()
     {
         // Initialize current health
         currentHealth = maxHealth;
+
+        initialPosition = transform.localPosition;
 
         // Initialize sliders
         if (slider1 != null) { slider1.maxValue = maxHealth; slider1.value = currentHealth; }
@@ -158,7 +162,21 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (fillImage1 != null) fillImage1.color = damageFlash;
         if (fillImage2 != null) fillImage2.color = damageFlash;
 
-        yield return new WaitForSeconds(flashDuration);
+        float elapsed = 0f;
+        Vector3 startPos = transform.localPosition;
+        while (elapsed < flashDuration)
+        {
+            float offsetX = UnityEngine.Random.Range(-1f, 1f) * shakeMagnitude;
+            float offsetY = UnityEngine.Random.Range(-1f, 1f) * shakeMagnitude;
+
+            transform.localPosition = startPos + new Vector3(offsetX, offsetY, 0);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localPosition = startPos;
+
+        /*  yield return new WaitForSeconds(flashDuration); */
 
         // Återställ till originalfärgerna
         if (fillImage1 != null) fillImage1.color = originalColor1;

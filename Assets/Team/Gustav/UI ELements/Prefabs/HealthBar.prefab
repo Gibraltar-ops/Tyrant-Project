@@ -545,7 +545,13 @@ MonoBehaviour:
   percentageText: {fileID: 3325652616516880654}
   currentHealthText: {fileID: 7113123599181550324}
   hoverHideImage: {fileID: 1235124184642058482}
-  maxHealth: 100
+  smoothness: 5
+  fillImage1: {fileID: 3516284970590757511}
+  fillImage2: {fileID: 1373907290675909737}
+  damageFlash: {r: 0.972549, g: 0.6, b: 0.6, a: 1}
+  flashDuration: 0.1
+  shakeMagnitude: 3
+  maxHealth: 1000
   minHealth: 0
   regenValue: 0
   regenMultiplier: 1
