@@ -844,14 +844,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2315981828126818342, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_SortingLayer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 2315981828126818342, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1010560049
-      objectReference: {fileID: 0}
     - target: {fileID: 2631396737271249138, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Name
       value: TyrantPlayer
@@ -896,74 +888,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4933424480139267161, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.19199239
-      objectReference: {fileID: 0}
-    - target: {fileID: 4933424480139267161, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.9813965
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071186040745384963, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 5071186040745384963, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5138836819855630409, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5370092851067651509, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99585176
-      objectReference: {fileID: 0}
-    - target: {fileID: 5370092851067651509, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.090991214
-      objectReference: {fileID: 0}
-    - target: {fileID: 5853853072076220537, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_SortingLayer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5853853072076220537, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1010560049
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133157374874894415, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9996732
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133157374874894415, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.025564538
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203428720233971310, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.55446345
-      objectReference: {fileID: 0}
-    - target: {fileID: 7203428720233971310, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.8322081
-      objectReference: {fileID: 0}
-    - target: {fileID: 7663468160728056776, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9627782
-      objectReference: {fileID: 0}
-    - target: {fileID: 7663468160728056776, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.27029285
-      objectReference: {fileID: 0}
-    - target: {fileID: 7682340803289812736, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 2024823713}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: shakeManager
       value: 
@@ -4007,14 +3931,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1640461539}
     m_Modifications:
-    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
-      propertyPath: shakeMagnitude
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2101983402798403875, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_Name
       value: HealthBar
