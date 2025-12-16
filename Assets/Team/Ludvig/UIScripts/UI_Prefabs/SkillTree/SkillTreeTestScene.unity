@@ -617,6 +617,7 @@ MonoBehaviour:
   GetDataFromParent: 0
   HideZeroCount: 1
   upgradeData: {fileID: 11400000, guid: d08535af22d4f12459578d4a31111e0b, type: 2}
+  label: {fileID: 203554998}
   trackValue: 0
   FormatAs: 1
 --- !u!114 &203554998
@@ -822,10 +823,7 @@ RectTransform:
   - {fileID: 977315481}
   - {fileID: 1227931285}
   - {fileID: 907423192}
-  - {fileID: 1606506886}
-  - {fileID: 1653626668}
   - {fileID: 2072692578}
-  - {fileID: 718926925}
   - {fileID: 1870113544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1252,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8412c97f9d498459687b25267307b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectShop
-  CurrencySourceData: {fileID: 11400000, guid: 376eb01dfc9b57145aed749db2802b6d, type: 2}
+  CurrencySourceData: {fileID: 11400000, guid: 45c71cc69deff894db577cf01cfa93b2, type: 2}
   Active: 1
 --- !u!114 &320444412
 MonoBehaviour:
@@ -1545,6 +1543,7 @@ MonoBehaviour:
   GetDataFromParent: 0
   HideZeroCount: 1
   upgradeData: {fileID: 0}
+  label: {fileID: 368752734}
   trackValue: 0
   FormatAs: 1
 --- !u!1 &386210718
@@ -1937,9 +1936,8 @@ GameObject:
   - component: {fileID: 525240188}
   - component: {fileID: 525240190}
   - component: {fileID: 525240189}
-  - component: {fileID: 525240191}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: KeratinCollectLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2063,25 +2061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525240187}
   m_CullTransparentMesh: 1
---- !u!114 &525240191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525240187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
-  HideZeroCount: 0
-  TrackedStat: 0
-  CollectedCurrency: 2
-  CollectStat: 6
-  MainStat: 0
-  FormatAs: 3
 --- !u!1 &576219488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,162 +2649,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718091257}
   m_CullTransparentMesh: 1
---- !u!1 &718926924
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 718926925}
-  - component: {fileID: 718926928}
-  - component: {fileID: 718926927}
-  - component: {fileID: 718926926}
-  m_Layer: 5
-  m_Name: ValueTracker (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &718926925
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718926924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 253401038}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 607.42, y: 439}
-  m_SizeDelta: {x: 160, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &718926926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718926924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollectorValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
-  HideZeroCount: 0
-  TrackedStat: 3
-  CollectedCurrency: 0
-  CollectStat: 2
-  MainStat: 0
-  FormatAs: 0
---- !u!114 &718926927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718926924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &718926928
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718926924}
-  m_CullTransparentMesh: 1
 --- !u!1 &742240881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,9 +2781,8 @@ GameObject:
   - component: {fileID: 763936427}
   - component: {fileID: 763936430}
   - component: {fileID: 763936429}
-  - component: {fileID: 763936428}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: HPCollectLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2985,25 +2807,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &763936428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763936426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
-  HideZeroCount: 0
-  TrackedStat: 0
-  CollectedCurrency: 2
-  CollectStat: 6
-  MainStat: 0
-  FormatAs: 3
 --- !u!114 &763936429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4765,13 +4568,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectValueTracker
-  currencySource: {fileID: 11400000, guid: 376eb01dfc9b57145aed749db2802b6d, type: 2}
+  currencySource: {fileID: 11400000, guid: 45c71cc69deff894db577cf01cfa93b2, type: 2}
   HideZeroCount: 1
   TrackedStat: 2
   CollectedCurrency: 0
   CollectStat: 0
   MainStat: 0
   FormatAs: 1
+  label: {fileID: 1178021504}
 --- !u!114 &1178021504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,8 +5003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d3d6ca7e08e86419a41f48a93565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HarvesterBuyer
-  CurrencySourceData: {fileID: 11400000, guid: 376eb01dfc9b57145aed749db2802b6d, type: 2}
+  CurrencySourceData: {fileID: 11400000, guid: 45c71cc69deff894db577cf01cfa93b2, type: 2}
   Counter: {fileID: 1178021503}
+  _button: {fileID: 0}
   _maxedOut: 0
   Active: 0
   ProgressBars:
@@ -5642,6 +5447,7 @@ GameObject:
   - component: {fileID: 1308742012}
   - component: {fileID: 1308742013}
   - component: {fileID: 1308742014}
+  - component: {fileID: 1308742015}
   m_Layer: 5
   m_Name: PurchaseTentacleButton
   m_TagString: Untagged
@@ -5720,13 +5526,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d3d6ca7e08e86419a41f48a93565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HarvesterBuyer
-  CurrencySourceData: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
+  CurrencySourceData: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
   Counter: {fileID: 2071810494}
+  _button: {fileID: 0}
   _maxedOut: 0
   Active: 1
   ProgressBars:
   - {fileID: 581020705}
   - {fileID: 100958350}
+--- !u!114 &1308742015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308742011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8083f23efacff14b867311fa126c020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShowUpgradeTooltip
+  tooltipPanel: {fileID: 8930547614912962655}
 --- !u!1 &1332980343
 GameObject:
   m_ObjectHideFlags: 0
@@ -6601,7 +6421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8412c97f9d498459687b25267307b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectShop
-  CurrencySourceData: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
+  CurrencySourceData: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
   Active: 1
 --- !u!114 &1545076118
 MonoBehaviour:
@@ -6956,314 +6776,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596029994}
-  m_CullTransparentMesh: 1
---- !u!1 &1606506885
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1606506886}
-  - component: {fileID: 1606506889}
-  - component: {fileID: 1606506888}
-  - component: {fileID: 1606506887}
-  m_Layer: 5
-  m_Name: ValueTracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1606506886
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606506885}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 253401038}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 581, y: 337}
-  m_SizeDelta: {x: 160, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1606506887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606506885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  GetDataFromParent: 0
-  HideZeroCount: 0
-  upgradeData: {fileID: 11400000, guid: a18b8fac53ae3f1458f499199c0a7426, type: 2}
-  trackValue: 0
-  FormatAs: 1
---- !u!114 &1606506888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606506885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1606506889
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606506885}
-  m_CullTransparentMesh: 1
---- !u!1 &1653626667
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1653626668}
-  - component: {fileID: 1653626671}
-  - component: {fileID: 1653626670}
-  - component: {fileID: 1653626669}
-  m_Layer: 5
-  m_Name: ValueTracker (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1653626668
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653626667}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 253401038}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 797, y: 371}
-  m_SizeDelta: {x: 160, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1653626669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653626667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc74eab22dea3e4b8d0f1812a95664c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeValueTracker
-  GetDataFromParent: 0
-  HideZeroCount: 0
-  upgradeData: {fileID: 11400000, guid: a18b8fac53ae3f1458f499199c0a7426, type: 2}
-  trackValue: 1
-  FormatAs: 2
---- !u!114 &1653626670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653626667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1653626671
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653626667}
   m_CullTransparentMesh: 1
 --- !u!1 &1686525831
 GameObject:
@@ -8392,9 +7904,8 @@ GameObject:
   - component: {fileID: 1949153053}
   - component: {fileID: 1949153055}
   - component: {fileID: 1949153054}
-  - component: {fileID: 1949153056}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: BrainsCollectLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8518,25 +8029,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949153052}
   m_CullTransparentMesh: 1
---- !u!114 &1949153056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949153052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
-  HideZeroCount: 0
-  TrackedStat: 0
-  CollectedCurrency: 1
-  CollectStat: 6
-  MainStat: 0
-  FormatAs: 3
 --- !u!1 &1976438931
 GameObject:
   m_ObjectHideFlags: 0
@@ -8680,6 +8172,7 @@ MonoBehaviour:
   GetDataFromParent: 0
   HideZeroCount: 1
   upgradeData: {fileID: 11400000, guid: 95d0441874e4cae4b8623d1cfed82295, type: 2}
+  label: {fileID: 2051677670}
   trackValue: 0
   FormatAs: 1
 --- !u!114 &2051677670
@@ -8934,13 +8427,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
+  currencySource: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
   HideZeroCount: 1
   TrackedStat: 2
   CollectedCurrency: 0
   CollectStat: 0
   MainStat: 0
   FormatAs: 1
+  label: {fileID: 2071810492}
 --- !u!1 &2072692577
 GameObject:
   m_ObjectHideFlags: 0
@@ -9167,9 +8661,8 @@ GameObject:
   - component: {fileID: 2131589664}
   - component: {fileID: 2131589666}
   - component: {fileID: 2131589665}
-  - component: {fileID: 2131589667}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: BiomassCollectLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9293,25 +8786,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131589663}
   m_CullTransparentMesh: 1
---- !u!114 &2131589667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131589663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f09c32a4c12bf63429a620b14a6e2e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceValueTracker
-  currencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
-  HideZeroCount: 0
-  TrackedStat: 0
-  CollectedCurrency: 0
-  CollectStat: 6
-  MainStat: 0
-  FormatAs: 3
 --- !u!224 &41653394679636816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11568,7 +11042,7 @@ GameObject:
   - component: {fileID: 7819962640260739128}
   - component: {fileID: 3446859332157134154}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LoreLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14225,7 +13699,7 @@ GameObject:
   - component: {fileID: 7467796342484369532}
   - component: {fileID: 8427317156913683004}
   m_Layer: 5
-  m_Name: UpgradeTooltipPanel (6)
+  m_Name: LorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14278,16 +13752,18 @@ MonoBehaviour:
   HideOnMaxedOut: []
   ShowOnMaxedOut: []
   NextPriceLabel: {fileID: 2528586619076613578}
-  LevelLabel: {fileID: 0}
-  BoughtWithCurrencyIcon: {fileID: 0}
-  NameLabel: {fileID: 0}
-  DescriptionLabel: {fileID: 0}
-  EffectHeaderLabel: {fileID: 0}
-  CurrentEffectLabel: {fileID: 0}
-  NextEffectLabel: {fileID: 0}
-  LoreLabel: {fileID: 0}
-  ProgressSlider: {fileID: 0}
-  UpgradeButton: {fileID: 0}
+  LevelLabel: {fileID: 2954482827278371269}
+  BoughtWithCurrencyIcon: {fileID: 281994859856805685}
+  NameLabel: {fileID: 951988396785969684}
+  DescriptionLabel: {fileID: 4648715621658261768}
+  EffectHeaderLabel: {fileID: 3942089792433769483}
+  LoreLabel: {fileID: 7819962640260739128}
+  ProgressSlider: {fileID: 4054372996010405180}
+  UpgradeButton: {fileID: 911221711498043456}
+  BiomassCollectLabel: {fileID: 2131589665}
+  BrainsCollectLabel: {fileID: 1949153054}
+  KeratinCollectLabel: {fileID: 525240189}
+  HPCollectLabel: {fileID: 763936429}
 --- !u!114 &8930547614912962657
 MonoBehaviour:
   m_ObjectHideFlags: 0

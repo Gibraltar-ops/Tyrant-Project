@@ -6,10 +6,10 @@ public class UpgradeValueTracker : MonoBehaviour
     public bool GetDataFromParent = false;
     public bool HideZeroCount = false;
     public UpgradeDataSO upgradeData;
+    public TMP_Text label;
     public UpgradeTrackValue trackValue;
 
     public ValueFormatType FormatAs;
-    private TMP_Text label;
     private bool _initialized = false;
 
     void OnEnable()
@@ -24,7 +24,7 @@ public class UpgradeValueTracker : MonoBehaviour
     void Awake()
     {
 
-        label = GetComponent<TMP_Text>();
+
 
     }
     void Start()

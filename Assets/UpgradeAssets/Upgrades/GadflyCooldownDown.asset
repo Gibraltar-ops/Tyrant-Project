@@ -23,12 +23,17 @@ MonoBehaviour:
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 25
+    MaxOwned: 19
     StartingPrice: 25
     NextPrice: 25
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
-  UpgradeEffects: []
+  UpgradeEffects:
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 1
+    CurrencyToAffect: 0
+    CollectType: 0
+    UpgradeStat: 6
   CurrentModifier: 0
-  AddValue: 0
+  AddValue: -0.5

@@ -234,7 +234,7 @@ public class CurrencySourceStatBlock
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
         {MainStat.GadflyCooldown, 10f},
-        {MainStat.GadflyCooldown, 6f},
+        {MainStat.GadflyHarvestDuration, 6f},
 
 
     };

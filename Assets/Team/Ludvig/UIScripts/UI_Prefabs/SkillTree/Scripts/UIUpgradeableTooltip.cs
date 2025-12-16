@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Lood;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,64 +11,73 @@ public class UIUpgradeableTooltip : MonoBehaviour
     public PurchaseableSO Data;
 
     [HideInInspector]
-    public UpgradeShopButton shopButton;
+    public CurrencySourceShopButton shopButton;
 
     [HideInInspector]
     public ButtonHierarchy buttonHierarchy;
 
-    public List<GameObject> HideOnMaxedOut;
-    public List<GameObject> ShowOnMaxedOut;
+    public List<GameObject> HideOnMaxedOut = new();
+    public List<GameObject> ShowOnMaxedOut = new();
 
     public TMP_Text NextPriceLabel;
     public TMP_Text LevelLabel;
-    public UnityEngine.UI.Image BoughtWithCurrencyIcon;
+    public Image BoughtWithCurrencyIcon;
     public TMP_Text NameLabel;
     public TMP_Text DescriptionLabel;
 
     public TMP_Text EffectHeaderLabel;
-    public TMP_Text CurrentEffectLabel;
-    public TMP_Text NextEffectLabel;
     public TMP_Text LoreLabel;
     public RectTransform ProgressSlider;
     public Button UpgradeButton;
 
+    [Header("Currency Trackers")]
+    public TMP_Text BiomassCollectLabel;
+    public TMP_Text BrainsCollectLabel;
+    public TMP_Text KeratinCollectLabel;
+
+    public TMP_Text HPCollectLabel;
+
+
+
     void Awake()
     {
-        //UpgradeButton.onClick.AddListener(Buy);
+        UpgradeButton.onClick.AddListener(Buy);
         gameObject.SetActive(false);
+
     }
     void OnEnable()
     {
 
-        // UpdateFields();
+        UpdateFields();
 
-        // Upgrader.onUpgradeApplied += UpdateFields;
-        // EconomyManager.onCurrencyChanged += UpdateOnCurrencyChange;
+        Upgrader.onUpgradeApplied += UpdateFields;
+        EconomyManager.onCurrencyChanged += UpdateOnCurrencyChange;
 
 
     }
     void OnDisable()
     {
-        // Upgrader.onUpgradeApplied -= UpdateFields;
-        // EconomyManager.onCurrencyChanged -= UpdateOnCurrencyChange;
+        Upgrader.onUpgradeApplied -= UpdateFields;
+        EconomyManager.onCurrencyChanged -= UpdateOnCurrencyChange;
     }
 
     public void UpdateOnCurrencyChange(Currency currency)
     {
-        if (currency != Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.BoughtWithCurrency) return;
+        if (currency != Lood.UpgradeManager.Instance.CurrencySources[Data.Tag].Shop.BoughtWithCurrency) return;
 
         UpgradeButton.interactable = shopButton._button.interactable;
 
+        UpdateCollectLabels();
         StopAllCoroutines();
         float previousNormalizedScale = ProgressSlider.localScale.x;
 
-        long currentCurrency = EconomyManager.Instance.GetCurrent(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.BoughtWithCurrency);
+        long currentCurrency = EconomyManager.Instance.GetCurrent(Lood.UpgradeManager.Instance.CurrencySources[Data.Tag].Shop.BoughtWithCurrency);
 
         float normalizedProgressBarScale;
 
         if (currentCurrency >= 1)
         {
-            normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency / Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.NextPrice, 0f, 1f);
+            normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency / Lood.UpgradeManager.Instance.CurrencySources[Data.Tag].Shop.NextPrice, 0f, 1f);
         }
         else
         {
@@ -79,7 +89,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
 
     public void UpdateFields()
     {
-        if (Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.MaxedOut)
+        if (Lood.UpgradeManager.Instance.CurrencySources[Data.Tag].Shop.MaxedOut)
         {
             foreach (GameObject item in HideOnMaxedOut)
             {
@@ -103,18 +113,26 @@ public class UIUpgradeableTooltip : MonoBehaviour
             }
         }
         UpgradeButton.interactable = shopButton._button.interactable;
+
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[Data.Tag];
         NameLabel.text = Data.Shop.Name;
         DescriptionLabel.text = Data.Shop.Description;
         EffectHeaderLabel.text = Data.Shop.EffectString;
         LoreLabel.text = Data.Shop.Lore;
-        LevelLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.CurrentOwned, ValueFormatType.IntegerRaw);
+        LevelLabel.text = FormatNumbers.FormatValueString(stats.Shop.CurrentOwned, ValueFormatType.IntegerRaw);
+        NextPriceLabel.text = FormatNumbers.Format(stats.Shop.NextPrice);
+        UpdateCollectLabels();
 
-        CurrentEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier, ValueFormatType.PercentageAdditive);
-        NextEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier + Lood.UpgradeManager.Instance.Upgrades[Data.Tag].AddValue, ValueFormatType.PercentageAdditive);
-        NextPriceLabel.text = FormatNumbers.Format(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.NextPrice);
 
     }
-
+    private void UpdateCollectLabels()
+    {
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[Data.Tag];
+        BiomassCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Biomass].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+        BrainsCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Brains].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+        KeratinCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Keratin].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+        HPCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.HealthPoints].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+    }
     private void RebuildLayout()
     {
 

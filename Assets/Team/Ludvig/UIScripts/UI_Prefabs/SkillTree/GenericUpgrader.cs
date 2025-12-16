@@ -30,29 +30,29 @@ public class GenericUpgrader : Upgrader
             return;
         }
 
-        
+
         UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[_upgradeData.Tag];
 
         Lood.UpgradeManager.Instance.Upgrades[_upgradeData.Tag].CurrentModifier += stats.AddValue;
         foreach (var item in stats.UpgradeEffects)
         {
-            if(item.StatCategory == UpgradeStatCategory.Collection)
+            if (item.StatCategory == UpgradeStatCategory.Collection)
             {
                 //Upgrade the collection of a specific currency.
                 Lood.UpgradeManager.Instance.CurrencySources[item.CurrencySource.Tag].CollectStats[item.CurrencyToAffect].Stats[item.CollectType] += stats.AddValue;
             }
-            if(item.StatCategory == UpgradeStatCategory.MainStat)
+            if (item.StatCategory == UpgradeStatCategory.MainStat)
             {
                 //Upgrade the collection of a specific "main stat" (e.g. "Speed" or "Aggression").
                 Lood.UpgradeManager.Instance.CurrencySources[item.CurrencySource.Tag].MainStats[item.UpgradeStat] += stats.AddValue;
             }
         }
 
-        
+
         //Once everything is finished, calls the onUpgradeApplied event from the base class.
         base.ApplyUpgrade(maxedOut);
     }
-    
+
 
 }
 

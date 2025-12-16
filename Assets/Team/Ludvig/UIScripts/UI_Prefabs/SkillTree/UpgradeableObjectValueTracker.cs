@@ -17,7 +17,7 @@ public class CurrencySourceValueTracker : MonoBehaviour
     public MainStat MainStat;
 
     public ValueFormatType FormatAs;
-    private TMP_Text label;
+    public TMP_Text label;
     private bool _initialized = false;
 
     void OnEnable()
@@ -35,7 +35,6 @@ public class CurrencySourceValueTracker : MonoBehaviour
 
     void Start()
     {
-        label = GetComponent<TMP_Text>();
         Invoke("Initialize", 0.01f);
     }
 

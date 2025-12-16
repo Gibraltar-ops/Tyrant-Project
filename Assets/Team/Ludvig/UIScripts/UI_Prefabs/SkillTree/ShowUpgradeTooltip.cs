@@ -41,7 +41,7 @@ public class ShowUpgradeTooltip : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (upgradeCategory == UpgradeCategory.Collector)
         {
             tooltipPanel.GetComponent<UIUpgradeableTooltip>().Data = upgradeData;
-            tooltipPanel.GetComponent<UIUpgradeableTooltip>().shopButton = GetComponent<UpgradeShopButton>();
+            tooltipPanel.GetComponent<UIUpgradeableTooltip>().shopButton = GetComponent<CurrencySourceShopButton>();
             tooltipPanel.GetComponent<UIUpgradeableTooltip>().buttonHierarchy = GetComponent<ButtonHierarchy>();
         }
 

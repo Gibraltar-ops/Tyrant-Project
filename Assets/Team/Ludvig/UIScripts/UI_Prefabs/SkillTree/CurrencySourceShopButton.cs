@@ -12,7 +12,8 @@ namespace Lood
 
         public CurrencySourceValueTracker Counter;
 
-        private Button _button;
+        [HideInInspector]
+        public Button _button;
         public bool _maxedOut = false;
         public bool Active = false;
         public List<GameObject> ProgressBars;
@@ -33,6 +34,14 @@ namespace Lood
         void Awake()
         {
             Counter.currencySource = CurrencySourceData;
+
+            foreach (GameObject bar in ProgressBars)
+            {
+                if (bar.TryGetComponent(out RadialProgressTracker tracker))
+                {
+                    tracker.trackedPurchaseable = CurrencySourceData;
+                }
+            }
         }
 
         void Start()
@@ -106,7 +115,7 @@ namespace Lood
             }
         }
 
-        private void Buy()
+        public void Buy()
         {
             onCollectorPurchased?.Invoke(CurrencySourceData.Tag);
         }
