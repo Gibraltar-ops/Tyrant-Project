@@ -46,29 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fdfa78ec511534ca22ec07f948eb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResistanceSystem
-  enableSpawning: 1
-  spawnInterval: 2
   maxResistanceUnits: 500
   attackCooldown: 7
-  spawnRateMultiplier: 1
   leftSpawnRegions:
-  - center: {x: -28, y: -12}
-    size: {x: 2, y: 10}
-  - center: {x: -20, y: -20}
-    size: {x: 15, y: 2}
+  - center: {x: -24, y: -8.75}
+    size: {x: 1, y: 1}
   leftGatherRegions:
-  - center: {x: -15, y: -9.25}
-    radius: 2
-    length: 5
+  - center: {x: -12.96, y: -9.79}
+    radius: 1.14
+    length: 12.49
   rightSpawnRegions:
-  - center: {x: 28, y: -12}
-    size: {x: 2, y: 10}
-  - center: {x: 20, y: -20}
-    size: {x: 15, y: 2}
+  - center: {x: 24, y: -8.75}
+    size: {x: 1, y: 1}
   rightGatherRegions:
-  - center: {x: 15, y: -9.25}
-    radius: 2
-    length: 5
+  - center: {x: 13.8, y: -9.79}
+    radius: 1.14
+    length: 12.49
 --- !u!114 &5986743156173139134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResistanceWaveDirector
   resistanceSystem: {fileID: 3286441314551350293}
-  waveInterval: 30
-  baseBudget: 0
+  waveInterval: 5
+  baseBudget: 10
   perWaveIncrease: 1
   upgradeBonus: 2
   basicEnemyCost: 10

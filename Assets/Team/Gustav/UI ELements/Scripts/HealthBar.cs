@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("References")]
     public Slider slider1;
     public Slider slider2;
 
-    public TextMeshProUGUI percentageText;              // Shows 0–100% health
+    public TextMeshProUGUI percentageText;              // Shows 0ï¿½100% health
     public TextMeshProUGUI currentHealthText;           // Shows raw current health value
     public Image hoverHideImage;                        // Image to hide when mouse hovers
 
@@ -47,13 +47,17 @@ public class HealthBar : MonoBehaviour
         }
 
         // Update the sliders and text each frame
-        UpdateUI();
+
     }
 
     private void Regenerate()
     {
+        if (currentHealth >= maxHealth) return;
+
         currentHealth += regenValue * regenMultiplier;
         currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
+
+        UpdateUI();
     }
 
     private void UpdateUI()
@@ -83,8 +87,10 @@ public class HealthBar : MonoBehaviour
             currentHealth -= amount;
 
         currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
+
+        UpdateUI();
     }
-    
+
     // Mouse hover logic
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -93,7 +99,7 @@ public class HealthBar : MonoBehaviour
 
         if (currentHealthText != null)
             currentHealthText.enabled = true;
-        Debug.Log("ENTER");
+        /*  Debug.Log("ENTER"); */
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -102,6 +108,6 @@ public class HealthBar : MonoBehaviour
 
         if (currentHealthText != null)
             currentHealthText.enabled = false;
-        Debug.Log("EXIT");
+        /* Debug.Log("EXIT"); */
     }
 }

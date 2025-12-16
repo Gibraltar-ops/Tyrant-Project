@@ -6,6 +6,9 @@ public class ProjectileDirector : MonoBehaviour
 {
     public static ProjectileDirector Instance;
 
+    [Header("Health bar reference")]
+    public HealthBar healthBar;
+
     [Header("Projectile Prefabs")]
     public GameObject humanProjectilePrefab;
     public GameObject grenadeProjectilePrefab;
@@ -22,7 +25,7 @@ public class ProjectileDirector : MonoBehaviour
     public List<DestinationRegion> tyrantImpactRegions = new();
 
     private readonly List<ProjectileData> activeProjectiles = new();
-    
+
     void Awake()
     {
         Instance = this;
@@ -55,6 +58,7 @@ public class ProjectileDirector : MonoBehaviour
             humanImpactFXPrefab,
             () =>
             {
+                /// Här yeetar gadflies
                 EconomyManager.Instance.IncrementCurrency(
                     Currency.Biomass,
                     biomassAmount
@@ -88,10 +92,10 @@ public class ProjectileDirector : MonoBehaviour
             explosionFXPrefab,
             () =>
             {
-                EconomyManager.Instance.IncrementCurrency(
-                    Currency.BiomassLifetime,
-                    -damage
-                );
+                if (healthBar != null)
+                {
+                    healthBar.ModifyHealth(damage, false);
+                }
             }
         );
     }
@@ -117,10 +121,10 @@ public class ProjectileDirector : MonoBehaviour
             explosionFXPrefab,
             () =>
             {
-                EconomyManager.Instance.IncrementCurrency(
-                    Currency.Biomass,
-                    -damage
-                );
+                if (healthBar != null)
+                {
+                    healthBar.ModifyHealth(damage, false);
+                }
             }
         );
     }

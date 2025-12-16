@@ -58,7 +58,7 @@ public class ResistanceSystem : MonoBehaviour
                 speed = UnityEngine.Random.Range(0.4f, 1f),
                 scale = UnityEngine.Random.Range(1f, 1.01f),
 
-                attackDamage = -25,
+                attackDamage = 10,
                 attackTimer = UnityEngine.Random.Range(0f, attackCooldown), // desync
 
                 isCenter = false,
