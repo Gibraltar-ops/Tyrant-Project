@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
-  m_Name: GadfliesUpgradeSpeed
+  m_Name: GadflyCooldownDown
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
   Tag: 
   Shop:
@@ -29,11 +29,6 @@ MonoBehaviour:
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
-  UpgradeEffects:
-  - CurrencySource: {fileID: 11400000, guid: dfc9649008665e548af61b670aec5059, type: 2}
-    StatCategory: 1
-    CurrencyToAffect: 0
-    CollectType: 0
-    UpgradeStat: 2
+  UpgradeEffects: []
   CurrentModifier: 0
-  AddValue: 0.1
+  AddValue: 0

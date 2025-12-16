@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 901c1211a4d5cf44eabe2991114ea104, type: 3}
-  m_Name: GadflyStats
+  m_Name: GadfliesData
   m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceSO
   Tag: Gadflies
   Shop:
-    Name: 
-    Description: 
-    EffectString: 
-    Lore: 
+    Name: Gadflies
+    Description: Lorem
+    EffectString: Ipsum
+    Lore: Dolor
     CurrentModifierString: 
     IsActive: 1
     BoughtWithCurrency: 0
@@ -29,33 +29,37 @@ MonoBehaviour:
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
-  BaseSpeed: 0.2
+  BaseSpeed: 4.5
   SpeedAdd: 0
   SpeedMultiply: 1
   SpeedAdditivePercentage: 0
   SpeedMultiplicativePercentage: 0
-  GadflyAggression: 1
+  GadflyCooldown: 10
   BiomassCollect:
-    BaseCollect: 5
+    BaseCollect: 10
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 10
   BrainsCollect:
-    BaseCollect: 0
+    BaseCollect: 2
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 2
   KeratinCollect:
     BaseCollect: 0
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
   HealthPointsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0

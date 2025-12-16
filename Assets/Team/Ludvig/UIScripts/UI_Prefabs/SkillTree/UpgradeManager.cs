@@ -194,14 +194,15 @@ public enum UpgradeTag
 public enum MainStat
 {
     None,
-    //AutoTentacle variables
+    //Speed variables
     BaseSpeed,
     SpeedAdd,
     SpeedMultiply,
     SpeedAdditivePercentage,
     SpeedMultiplicativePercentage,
     //Gadfly variables
-    GadflyCooldown
+    GadflyCooldown,
+    GadflyHarvestDuration
 }
 
 
@@ -233,6 +234,7 @@ public class CurrencySourceStatBlock
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
         {MainStat.GadflyCooldown, 10f},
+        {MainStat.GadflyCooldown, 6f},
 
 
     };
@@ -271,6 +273,7 @@ public class CurrencySourceStatBlock
         MainStats[MainStat.SpeedAdditivePercentage] = data.SpeedAdditivePercentage;
         MainStats[MainStat.SpeedMultiplicativePercentage] = data.SpeedMultiplicativePercentage;
         MainStats[MainStat.GadflyCooldown] = data.GadflyCooldown;
+        MainStats[MainStat.GadflyHarvestDuration] = data.GadflyHarvestDuration;
 
     }
 }

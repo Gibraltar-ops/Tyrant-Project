@@ -43,47 +43,47 @@ public class DebugController : MonoBehaviour
     [ContextMenu("Upgrade Gadfly Biomass")]
     public void UpgradeGadflyBiomass()
     {
-        if (gadflySystem != null)
-        {
-            gadflySystem.biomassMultiplier += 0.5f;
-            Debug.Log(
-                $"Debug: Gadfly Biomass Multiplier increased to {gadflySystem.biomassMultiplier}"
-            );
-        }
+        // if (gadflySystem != null)
+        // {
+        //     //gadflySystem.biomassMultiplier += 0.5f;
+        //     Debug.Log(
+        //         $"Debug: Gadfly Biomass Multiplier increased to {gadflySystem.biomassMultiplier}"
+        //     );
+        // }
     }
 
     [ContextMenu("Upgrade Gadfly Brainmass")]
     public void UpgradeGadflyBrainmass()
     {
-        if (gadflySystem != null)
-        {
-            gadflySystem.brainmassMultiplier += 0.5f;
-            Debug.Log(
-                $"Debug: Gadfly Brainmass Multiplier increased to {gadflySystem.brainmassMultiplier}"
-            );
-        }
+        // if (gadflySystem != null)
+        // {
+        //     gadflySystem.brainmassMultiplier += 0.5f;
+        //     Debug.Log(
+        //         $"Debug: Gadfly Brainmass Multiplier increased to {gadflySystem.brainmassMultiplier}"
+        //     );
+        // }
     }
 
     [ContextMenu("Upgrade Gadfly Speed")]
     public void UpgradeGadflySpeed()
     {
-        if (gadflySystem != null)
-        {
-            gadflySystem.harvestMovementSpeed += 1.0f;
-            Debug.Log(
-                $"Debug: Gadfly Harvest Speed increased to {gadflySystem.harvestMovementSpeed}"
-            );
-        }
+        // if (gadflySystem != null)
+        // {
+        //     gadflySystem.harvestMovementSpeed += 1.0f;
+        //     Debug.Log(
+        //         $"Debug: Gadfly Harvest Speed increased to {gadflySystem.harvestMovementSpeed}"
+        //     );
+        // }
     }
 
     [ContextMenu("Decrease Harvest Cooldown")]
     public void DecreaseHarvestCooldown()
     {
-        if (gadflySystem != null)
-        {
-            gadflySystem.harvestCooldown = Mathf.Max(1f, gadflySystem.harvestCooldown - 2f);
-            Debug.Log($"Debug: Harvest Cooldown decreased to {gadflySystem.harvestCooldown}");
-        }
+        // if (gadflySystem != null)
+        // {
+        //     gadflySystem.harvestCooldown = Mathf.Max(1f, gadflySystem.harvestCooldown - 2f);
+        //     Debug.Log($"Debug: Harvest Cooldown decreased to {gadflySystem.harvestCooldown}");
+        // }
     }
 
     // ---------------------------------------------------------

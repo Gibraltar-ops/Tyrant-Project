@@ -6,12 +6,6 @@ public class GadflySystem : MonoBehaviour
     [Header("General Settings")]
     public CurrencySourceSO gadflyData;
     public int maxGadflyUnits = 500;
-
-    public float harvestMovementSpeed = 4.5f;
-
-    [Header("Harvest Timers")]
-    public float harvestCooldown = 10f;         // Time between waves
-    public float harvestDuration = 5f;          // Time spent away harvesting
     private float harvestCooldownTimer;         // The codes cooldown countdown timer
     private float harvestDurationTimer;         // The codes harvest duration timer
 
@@ -121,7 +115,7 @@ public class GadflySystem : MonoBehaviour
         if (!harvestActive && harvestCooldownTimer <= 0f)
         {
             harvestActive = true;
-            harvestDurationTimer = harvestDuration;
+            harvestDurationTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyHarvestDuration];
 
             for (int i = 0; i < total; i++)
             {
