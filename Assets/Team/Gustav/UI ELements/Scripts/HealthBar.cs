@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using System;
 
 public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -13,6 +15,13 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public TextMeshProUGUI currentHealthText;           // Shows raw current health value
     public Image hoverHideImage;                        // Image to hide when mouse hovers
 
+    [Header("Smoothing")]
+    public float smoothness = 5f;
+    public Image fillImage1;
+    public Image fillImage2;
+    public Color damageFlash = Color.white;
+    public float flashDuration = 0.1f; //Flash duration
+
     [Header("Variables & Settings")]
     public float maxHealth = 10000;                     // The maximum health value
     public float minHealth = 0;                         // The minimum health value
@@ -23,6 +32,9 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private float currentHealth;
     private float regenTimer;
+    private Color originalColor1;
+    private Color originalColor2;
+    private Coroutine activeHealthBarCoroutine;
 
     void Start()
     {
@@ -30,10 +42,13 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         currentHealth = maxHealth;
 
         // Initialize sliders
-        if (slider1 != null) slider1.maxValue = maxHealth;
-        if (slider2 != null) slider2.maxValue = maxHealth;
+        if (slider1 != null) { slider1.maxValue = maxHealth; slider1.value = currentHealth; }
+        if (slider2 != null) { slider2.maxValue = maxHealth; slider2.value = currentHealth; }
 
-        UpdateUI();
+        if (fillImage1 != null) originalColor1 = fillImage1.color;
+        if (fillImage2 != null) originalColor2 = fillImage2.color;
+
+        UpdateText();
     }
 
     void Update()
@@ -45,9 +60,6 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             regenTimer = 0f;
             Regenerate();
         }
-
-        // Update the sliders and text each frame
-
     }
 
     private void Regenerate()
@@ -81,6 +93,8 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     /// </summary>
     public void ModifyHealth(float amount, bool isHealing)
     {
+        float previousHealth = currentHealth;
+
         if (isHealing)
             currentHealth += amount;
         else
@@ -88,7 +102,67 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
 
-        UpdateUI();
+        UpdateText();
+        UpdateHealthBarVisuals(previousHealth);
+
+        if (!isHealing)
+        {
+            StopCoroutine("FlashDamageEffect");
+            StartCoroutine(FlashDamageEffect());
+        }
+    }
+
+    private void UpdateText()
+    {
+        if (percentageText != null)
+            percentageText.text = Mathf.RoundToInt((currentHealth / maxHealth) * 100f) + "%";
+
+        if (currentHealthText != null)
+            currentHealthText.text = Mathf.RoundToInt(currentHealth).ToString();
+    }
+
+    private void UpdateHealthBarVisuals(float oldHealth)
+    {
+        if (activeHealthBarCoroutine != null)
+            StopCoroutine(activeHealthBarCoroutine);
+
+        activeHealthBarCoroutine = StartCoroutine(AnimateHealthBar());
+    }
+
+    private IEnumerator AnimateHealthBar()
+    {
+        float currentSliderValue = (slider1 != null) ? slider1.value : currentHealth;
+
+        while (Mathf.Abs(currentSliderValue - currentHealth) > 1f)
+        {
+            currentSliderValue = Mathf.Lerp(
+                currentSliderValue,
+             currentHealth,
+              Time.deltaTime *
+              smoothness
+              );
+
+            if (slider1 != null) slider1.value = currentSliderValue;
+            if (slider2 != null) slider2.value = currentSliderValue;
+
+            yield return null;
+        }
+        if (slider1 != null) slider1.value = currentHealth;
+        if (slider2 != null) slider2.value = currentHealth;
+
+        activeHealthBarCoroutine = null;
+    }
+
+    private IEnumerator FlashDamageEffect()
+    {
+        if (fillImage1 != null) fillImage1.color = damageFlash;
+        if (fillImage2 != null) fillImage2.color = damageFlash;
+
+        yield return new WaitForSeconds(flashDuration);
+
+        // Återställ till originalfärgerna
+        if (fillImage1 != null) fillImage1.color = originalColor1;
+        if (fillImage2 != null) fillImage2.color = originalColor2;
     }
 
     // Mouse hover logic

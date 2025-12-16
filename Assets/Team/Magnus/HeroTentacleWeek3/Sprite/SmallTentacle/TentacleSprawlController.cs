@@ -145,6 +145,7 @@ public class TentacleSprawlController : MonoBehaviour
                 HandleAttackMotion();
                 break;
             case SprawlState.Retracting:
+                AudioManager.Instance.Play("HumanScream");
                 HandleRetractionMotion();
                 break;
         }

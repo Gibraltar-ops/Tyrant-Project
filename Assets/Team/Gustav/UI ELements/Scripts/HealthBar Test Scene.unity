@@ -1718,6 +1718,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836058212}
   m_CullTransparentMesh: 1
+--- !u!114 &842506250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1373907290675909737, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+  m_PrefabInstance: {fileID: 1671775445}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &872806092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2168,6 +2179,17 @@ MonoBehaviour:
     MaxOwned: 10
   BoughtWithCurrency: 0
   Active: 0
+--- !u!114 &989737082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3516284970590757511, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+  m_PrefabInstance: {fileID: 1671775445}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1029711230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,6 +4025,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1640461539}
     m_Modifications:
+    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: fillImage
+      value: 
+      objectReference: {fileID: 989737082}
+    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: fillImage1
+      value: 
+      objectReference: {fileID: 989737082}
+    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: fillImage2
+      value: 
+      objectReference: {fileID: 842506250}
+    - target: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: flashDuration
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2101983402798403875, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_Name
       value: HealthBar
@@ -4054,6 +4096,18 @@ PrefabInstance:
     - target: {fileID: 4277920398407515817, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082667750252159827, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082667750252159827, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082667750252159827, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6123298307438522418, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_AnchorMax.x
