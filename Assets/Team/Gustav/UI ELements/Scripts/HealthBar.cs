@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -113,6 +114,11 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             StopCoroutine("FlashDamageEffect");
             StartCoroutine(FlashDamageEffect());
+
+            if (currentHealth <= 0)
+            {
+                Death();
+            }
         }
     }
 
@@ -200,5 +206,24 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (currentHealthText != null)
             currentHealthText.enabled = false;
         /* Debug.Log("EXIT"); */
+    }
+
+    private bool isDead = false;
+    public void Death()
+    {
+        if (isDead || currentHealth > 0) return;
+
+        isDead = true;
+
+        string sceneToLoad = "GameOverScene";
+
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo(sceneToLoad);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
