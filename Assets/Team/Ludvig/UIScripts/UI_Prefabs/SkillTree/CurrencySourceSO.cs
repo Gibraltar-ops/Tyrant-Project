@@ -11,10 +11,8 @@ public class CurrencySourceSO : PurchaseableSO
     public float SpeedMultiply = 1;
     public float SpeedAdditivePercentage = 0f;
     public float SpeedMultiplicativePercentage = 0f;
-
-
     //Gadfly stats. Make sure to add everything to the 
-    public float GadflyAggression = 1f;
+    public float GadflyCooldown = 10f;
 
     [Header("Collection Stats")]
     public CollectType BiomassCollect;

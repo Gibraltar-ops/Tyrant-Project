@@ -201,7 +201,7 @@ public enum MainStat
     SpeedAdditivePercentage,
     SpeedMultiplicativePercentage,
     //Gadfly variables
-    GadflyAggression
+    GadflyCooldown
 }
 
 
@@ -232,7 +232,8 @@ public class CurrencySourceStatBlock
         {MainStat.SpeedMultiply, 1f},
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
-        {MainStat.GadflyAggression, 0f},
+        {MainStat.GadflyCooldown, 10f},
+
 
     };
     //03._________________________________________________________________
@@ -269,7 +270,7 @@ public class CurrencySourceStatBlock
         MainStats[MainStat.SpeedMultiply] = data.SpeedMultiply;
         MainStats[MainStat.SpeedAdditivePercentage] = data.SpeedAdditivePercentage;
         MainStats[MainStat.SpeedMultiplicativePercentage] = data.SpeedMultiplicativePercentage;
-        MainStats[MainStat.GadflyAggression] = data.GadflyAggression;
+        MainStats[MainStat.GadflyCooldown] = data.GadflyCooldown;
 
     }
 }

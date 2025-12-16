@@ -4,11 +4,9 @@ using UnityEngine;
 public class GadflySystem : MonoBehaviour
 {
     [Header("General Settings")]
+    public CurrencySourceSO gadflyData;
     public int maxGadflyUnits = 500;
-    public float biomassAmount = 10;
-    public float biomassMultiplier = 1.0f;
-    public float brainmassAmount = 1;
-    public float brainmassMultiplier = 1.0f;
+
     public float harvestMovementSpeed = 4.5f;
 
     [Header("Harvest Timers")]
@@ -28,12 +26,16 @@ public class GadflySystem : MonoBehaviour
     // Holds all active resistance fighters
     public List<GadflyData> gadflies = new();
 
+    void Awake()
+    {
+        Lood.UpgradeManager.Instance.AddUpgradeableObject(gadflyData);
+    }
     // --------------------------------------------
     // START Set up starting variables & behaviors
     // --------------------------------------------
     void Start()
     {
-        harvestCooldownTimer = harvestCooldown;
+        harvestCooldownTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
 
         // Spawn some initial crowd (optional)
         for (int i = 0; i < 1; i++)
@@ -69,7 +71,7 @@ public class GadflySystem : MonoBehaviour
                 destination = gatherRegion.RandomPointInside(),
 
                 wanderSpeed = Random.Range(2f, 2.1f),
-                harvestSpeed = harvestMovementSpeed,
+                harvestSpeed = GetCurrentSpeed(),
                 scale = Random.Range(0.2f, 0.21f),
 
                 wanderDirection = Random.insideUnitCircle.normalized,
@@ -148,7 +150,7 @@ public class GadflySystem : MonoBehaviour
         if (harvestActive && harvestDurationTimer <= 0f)
         {
             harvestActive = false;
-            harvestCooldownTimer = harvestCooldown;
+            harvestCooldownTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
 
             for (int i = 0; i < total; i++)
             {
@@ -173,7 +175,7 @@ public class GadflySystem : MonoBehaviour
         foreach (var gadfly in gadflies)
         {
             // Selection of movement speed
-            float targetSpeed = gadfly.isHarvesting ? harvestMovementSpeed : gadfly.wanderSpeed;
+            float targetSpeed = gadfly.isHarvesting ? GetCurrentSpeed() : gadfly.wanderSpeed;
 
             // Target direction
             Vector2 toTarget = (gadfly.destination - gadfly.position);
@@ -219,10 +221,22 @@ public class GadflySystem : MonoBehaviour
                         gadfly.hasThrownPayload = true;
                         gadfly.hasPayload = false;
 
+
+
+                        var collectStats = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].CollectStats;
+                        Dictionary<Currency, int> collectAmounts = new();
+
+                        foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
+                        {
+                            int collectAmount = GetCurrentCollectAmount(item.Key, gadflyData.Tag);
+                            if (collectAmount != 0)
+                            {
+                                collectAmounts.Add(item.Key, collectAmount);
+                            }
+                        }
+
                         ProjectileDirector.Instance.SpawnHumanProjectile(
-                            gadfly.position,
-                            Mathf.RoundToInt(biomassAmount * biomassMultiplier),
-                            Mathf.RoundToInt(brainmassAmount * brainmassMultiplier)
+                            gadfly.position, collectAmounts
                         );
                     }
                 }
@@ -260,5 +274,44 @@ public class GadflySystem : MonoBehaviour
             g.DrawGizmo(Color.orange);
         foreach (var h in harvestArea)
             h.DrawGizmo(Color.brown);
+    }
+
+
+    public float GetCurrentSpeed()
+    {
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag];
+        //Apply base speed (in ticks per second)
+        float _speed = data.MainStats[MainStat.BaseSpeed];
+        //Apply simple add
+        _speed += data.MainStats[MainStat.SpeedAdd];
+        //Apply simple multiply
+        _speed *= data.MainStats[MainStat.SpeedMultiply];
+        //Apply additive percentage
+        _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
+        //Apply multiplicative percentage
+        _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
+
+        return _speed;
+    }
+
+    public int GetCurrentCollectAmount(Currency currency, string tag)
+    {
+        //
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[tag];
+        //Apply base speed (in ticks per second)
+        float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
+        //Apply simple add
+        finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
+        //Apply simple multiply
+        finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
+        //Apply additive percentage
+        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+        //Apply multiplicative percentage
+        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
+
+        //Set current total collect amount for this currency.
+        data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;
+        return (int)finalCollectAmount;
+
     }
 }

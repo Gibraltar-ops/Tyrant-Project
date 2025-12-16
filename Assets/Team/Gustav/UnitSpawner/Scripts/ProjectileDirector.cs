@@ -40,7 +40,7 @@ public class ProjectileDirector : MonoBehaviour
     // ============================================================
     // HUMAN PROJECTILE
     // ============================================================
-    public void SpawnHumanProjectile(Vector2 startPos, int biomassAmount, int brainmassAmount)
+    public void SpawnHumanProjectile(Vector2 startPos, Dictionary<Currency, int> collectAmounts)
     {
         if (tyrantImpactRegions.Count == 0) return;
 
@@ -54,19 +54,16 @@ public class ProjectileDirector : MonoBehaviour
             startPos,
             target,
             defaultProjectileSpeed,
-            biomassAmount,
+            0,
             humanImpactFXPrefab,
             () =>
             {
                 /// Här yeetar gadflies
-                EconomyManager.Instance.IncrementCurrency(
-                    Currency.Biomass,
-                    biomassAmount
-                );
-                EconomyManager.Instance.IncrementCurrency(
-                    Currency.Brains,
-                    brainmassAmount
-                );
+                foreach (KeyValuePair<Currency, int> item in collectAmounts)
+                {
+                    EconomyManager.Instance.IncrementCurrency(item.Key, item.Value);
+                }
+                /// Här yeetar gadflies
             }
         );
     }

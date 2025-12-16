@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901c1211a4d5cf44eabe2991114ea104, type: 3}
+  m_Name: AutoTentacleData
+  m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
+  Tag: AutoTentacle
+  Shop:
+    Name: Harvester Arm
+    Description: Automatically harvest victims
+    EffectString: Per victim
+    Lore: Lorem ipsum dolor sit amet.
+    CurrentModifierString: 
+    IsActive: 1
+    BoughtWithCurrency: 0
+    CollectsCurrency: 0
+    CurrentOwned: 0
+    MaxOwned: 25
+    StartingPrice: 25
+    NextPrice: 25
+    PriceIncrease: 1.2
+    CanAfford: 0
+    MaxedOut: 0
+  BaseSpeed: 0.5
+  SpeedAdd: 0
+  SpeedMultiply: 1
+  SpeedAdditivePercentage: 0
+  SpeedMultiplicativePercentage: 0
+  GadflyAggression: 1
+  BiomassCollect:
+    BaseCollect: 10
+    CollectMultiplier: 1
+    CollectAdd: 0
+    CollectAdditivePercentage: 0
+    CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
+  BrainsCollect:
+    BaseCollect: 0
+    CollectMultiplier: 1
+    CollectAdd: 0
+    CollectAdditivePercentage: 0
+    CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
+  KeratinCollect:
+    BaseCollect: 0
+    CollectMultiplier: 1
+    CollectAdd: 0
+    CollectAdditivePercentage: 0
+    CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
+  HealthPointsCollect:
+    BaseCollect: 0
+    CollectMultiplier: 1
+    CollectAdd: 0
+    CollectAdditivePercentage: 0
+    CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
