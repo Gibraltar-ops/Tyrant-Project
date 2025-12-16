@@ -380,6 +380,7 @@ public class UpgradeStatBlock
     public List<UpgradeEffect> UpgradeEffects;
     public float AddValue = 0.1f;
     public float CurrentModifier = 0;
+    public ValueFormatType FormatAs;
 
     public UpgradeStatBlock(UpgradeDataSO data)
     {
@@ -400,6 +401,7 @@ public class UpgradeStatBlock
         UpgradeEffects = data.UpgradeEffects;
         AddValue = data.AddValue;
         CurrentModifier = data.CurrentModifier;
+        FormatAs = data.FormatAs;
 
     }
 

@@ -29,12 +29,14 @@ MonoBehaviour:
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
+  ColorStyle: {fileID: 11400000, guid: cd068c4f898846844952070fa5b1455d, type: 2}
   BaseSpeed: 0.5
   SpeedAdd: 0
   SpeedMultiply: 1
   SpeedAdditivePercentage: 0
   SpeedMultiplicativePercentage: 0
-  GadflyAggression: 1
+  GadflyCooldown: 10
+  GadflyHarvestDuration: 6
   BiomassCollect:
     BaseCollect: 10
     CollectMultiplier: 1

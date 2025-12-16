@@ -31,15 +31,19 @@ public class UIUpgradeTooltip : MonoBehaviour
     public RectTransform ProgressSlider;
     public Button UpgradeButton;
 
+    private Image[] _colorizableImages;
+
     void Awake()
     {
         UpgradeButton.onClick.AddListener(Buy);
+        CollectColorizableImages();
         gameObject.SetActive(false);
     }
     void OnEnable()
     {
 
         UpdateFields();
+        SetTheme();
         //RebuildLayout();
         Upgrader.onUpgradeApplied += UpdateFields;
         EconomyManager.onCurrencyChanged += UpdateOnCurrencyChange;
@@ -50,6 +54,43 @@ public class UIUpgradeTooltip : MonoBehaviour
     {
         Upgrader.onUpgradeApplied -= UpdateFields;
         EconomyManager.onCurrencyChanged -= UpdateOnCurrencyChange;
+    }
+
+    private void CollectColorizableImages()
+    {
+        _colorizableImages = GetComponentsInChildren<Image>(true);
+        List<Image> filteredImageList = new List<Image>();
+        foreach (var item in _colorizableImages)
+        {
+            if (item.TryGetComponent(out Button button))
+            {
+                continue;
+            }
+            filteredImageList.Add(item);
+        }
+        _colorizableImages = filteredImageList.ToArray();
+    }
+
+    private void SetTheme()
+    {
+        UpgradeDataSO upgrade = Data as UpgradeDataSO;
+        foreach (Image image in _colorizableImages)
+        {
+
+            image.color = upgrade.ColorStyle.MainColor;
+        }
+
+        Button _button = GetComponentInChildren<Button>(true);
+
+        //Assign Button sprites
+        _button.GetComponent<Image>().sprite = upgrade.ColorStyle.SpriteSet.TooltipButtonDefaultSprite;
+
+        SpriteState state = _button.spriteState;
+        state.disabledSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonInactiveSprite;
+        state.highlightedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonHoverSprite;
+        state.pressedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonPressedSprite;
+        _button.spriteState = state;
+
     }
 
     public void UpdateOnCurrencyChange(Currency currency)
@@ -107,10 +148,11 @@ public class UIUpgradeTooltip : MonoBehaviour
         DescriptionLabel.text = Data.Shop.Description;
         EffectHeaderLabel.text = Data.Shop.EffectString;
         LoreLabel.text = Data.Shop.Lore;
+        ValueFormatType formatAs = Lood.UpgradeManager.Instance.Upgrades[Data.Tag].FormatAs;
         LevelLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.CurrentOwned, ValueFormatType.IntegerRaw);
 
-        CurrentEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier, ValueFormatType.PercentageAdditive);
-        NextEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier + Lood.UpgradeManager.Instance.Upgrades[Data.Tag].AddValue, ValueFormatType.PercentageAdditive);
+        CurrentEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier, formatAs);
+        NextEffectLabel.text = FormatNumbers.FormatValueString(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].CurrentModifier + Lood.UpgradeManager.Instance.Upgrades[Data.Tag].AddValue, formatAs);
         NextPriceLabel.text = FormatNumbers.Format(Lood.UpgradeManager.Instance.Upgrades[Data.Tag].Shop.NextPrice);
 
     }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +32,22 @@ namespace Lood
         }
         void Awake()
         {
-            Counter.currencySource = CurrencySourceData;
+            Counter.SetSource(CurrencySourceData);
+            Debug.Log(Counter.currencySource);
+            _button = GetComponentInChildren<Button>();
+
+            //Assign Button sprites
+            _button.GetComponent<Image>().sprite = CurrencySourceData.ColorStyle.SpriteSet.TreeButtonDefaultSprite;
+
+            SpriteState state = _button.spriteState;
+            state.disabledSprite = CurrencySourceData.ColorStyle.SpriteSet.TreeButtonInactiveSprite;
+            state.highlightedSprite = CurrencySourceData.ColorStyle.SpriteSet.TreeButtonHoverSprite;
+            state.pressedSprite = CurrencySourceData.ColorStyle.SpriteSet.TreeButtonPressedSprite;
+            _button.spriteState = state;
+
+            var buttonHierarchy = GetComponent<ButtonHierarchy>();
+            buttonHierarchy.ActiveParentLineColor = CurrencySourceData.ColorStyle.MainColor;
+            buttonHierarchy.Lock.GetComponent<Image>().color = CurrencySourceData.ColorStyle.MainColor;
 
             foreach (GameObject bar in ProgressBars)
             {
@@ -46,7 +60,6 @@ namespace Lood
 
         void Start()
         {
-            _button = GetComponentInChildren<Button>();
             _button.onClick.AddListener(Buy);
             //GetComponentInChildren<CurrencySourceShopButton>().CurrencySourceData = CurrencySourceData;
             Invoke("Initialize", 0.01f);
@@ -60,7 +73,14 @@ namespace Lood
             foreach (GameObject bar in ProgressBars)
             {
                 Image image = bar.GetComponent<Image>();
-                bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 1f);
+                if (bar.TryGetComponent(out RadialProgressTracker tracker))
+                {
+                    bar.GetComponent<Image>().color = new Color(CurrencySourceData.ColorStyle.MainColor.r, CurrencySourceData.ColorStyle.MainColor.g, CurrencySourceData.ColorStyle.MainColor.b, 1f);
+                }
+                else
+                {
+                    bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 1f);
+                }
             }
         }
 
@@ -73,7 +93,14 @@ namespace Lood
                 foreach (GameObject bar in ProgressBars)
                 {
                     Image image = bar.GetComponent<Image>();
-                    bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+                    if (bar.TryGetComponent(out RadialProgressTracker tracker))
+                    {
+                        bar.GetComponent<Image>().color = new Color(CurrencySourceData.ColorStyle.MainColor.r, CurrencySourceData.ColorStyle.MainColor.g, CurrencySourceData.ColorStyle.MainColor.b, 0f);
+                    }
+                    else
+                    {
+                        bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+                    }
                 }
             }
         }

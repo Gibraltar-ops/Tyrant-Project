@@ -32,16 +32,24 @@ public class UIUpgradeableTooltip : MonoBehaviour
 
     [Header("Currency Trackers")]
     public TMP_Text BiomassCollectLabel;
+    public GameObject BiomassLabelParent;
     public TMP_Text BrainsCollectLabel;
+    public GameObject BrainsLabelParent;
     public TMP_Text KeratinCollectLabel;
 
+    public GameObject KeratinLabelParent;
+
     public TMP_Text HPCollectLabel;
+    public GameObject HPLabelParent;
+
+    private Image[] _colorizableImages;
 
 
 
     void Awake()
     {
         UpgradeButton.onClick.AddListener(Buy);
+        CollectColorizableImages();
         gameObject.SetActive(false);
 
     }
@@ -49,6 +57,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
     {
 
         UpdateFields();
+        SetTheme();
 
         Upgrader.onUpgradeApplied += UpdateFields;
         EconomyManager.onCurrencyChanged += UpdateOnCurrencyChange;
@@ -59,6 +68,47 @@ public class UIUpgradeableTooltip : MonoBehaviour
     {
         Upgrader.onUpgradeApplied -= UpdateFields;
         EconomyManager.onCurrencyChanged -= UpdateOnCurrencyChange;
+    }
+
+    private void CollectColorizableImages()
+    {
+        _colorizableImages = GetComponentsInChildren<Image>(true);
+        List<Image> filteredImageList = new List<Image>();
+        foreach (var item in _colorizableImages)
+        {
+            if (item.TryGetComponent(out Button button))
+            {
+                continue;
+            }
+            if (item.gameObject.CompareTag("UI_IgnoreTheming"))
+            {
+                continue;
+            }
+
+            filteredImageList.Add(item);
+        }
+        _colorizableImages = filteredImageList.ToArray();
+    }
+
+    private void SetTheme()
+    {
+        CurrencySourceSO upgrade = Data as CurrencySourceSO;
+        foreach (Image image in _colorizableImages)
+        {
+
+            image.color = upgrade.ColorStyle.MainColor;
+        }
+        Button _button = GetComponentInChildren<Button>(true);
+
+        //Assign Button sprites
+        _button.GetComponent<Image>().sprite = upgrade.ColorStyle.SpriteSet.TooltipButtonDefaultSprite;
+
+        SpriteState state = _button.spriteState;
+        state.disabledSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonInactiveSprite;
+        state.highlightedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonHoverSprite;
+        state.pressedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonPressedSprite;
+        _button.spriteState = state;
+
     }
 
     public void UpdateOnCurrencyChange(Currency currency)
@@ -128,10 +178,47 @@ public class UIUpgradeableTooltip : MonoBehaviour
     private void UpdateCollectLabels()
     {
         CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[Data.Tag];
-        BiomassCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Biomass].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
-        BrainsCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Brains].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
-        KeratinCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Keratin].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
-        HPCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.HealthPoints].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+
+        if (stats.CollectStats[Currency.Biomass].Stats[CollectStat.CollectTotalCurrent] != 0)
+        {
+            BiomassCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Biomass].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+            BiomassLabelParent.SetActive(true);
+        }
+        else
+        {
+            BiomassLabelParent.SetActive(false);
+        }
+
+        if (stats.CollectStats[Currency.Brains].Stats[CollectStat.CollectTotalCurrent] != 0)
+        {
+            BrainsCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Brains].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+            BrainsLabelParent.SetActive(true);
+        }
+        else
+        {
+            BrainsLabelParent.SetActive(false);
+        }
+
+        if (stats.CollectStats[Currency.Keratin].Stats[CollectStat.CollectTotalCurrent] != 0)
+        {
+            KeratinCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.Keratin].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+            KeratinLabelParent.SetActive(true);
+        }
+        else
+        {
+            KeratinLabelParent.SetActive(false);
+        }
+
+        if (stats.CollectStats[Currency.HealthPoints].Stats[CollectStat.CollectTotalCurrent] != 0)
+        {
+            HPCollectLabel.text = FormatNumbers.FormatValueString(stats.CollectStats[Currency.HealthPoints].Stats[CollectStat.CollectTotalCurrent], ValueFormatType.IntegerAdditive);
+            HPLabelParent.SetActive(true);
+        }
+        else
+        {
+            HPLabelParent.SetActive(false);
+        }
+
     }
     private void RebuildLayout()
     {

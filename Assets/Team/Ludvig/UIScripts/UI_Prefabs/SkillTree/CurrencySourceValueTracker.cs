@@ -33,6 +33,10 @@ public class CurrencySourceValueTracker : MonoBehaviour
 
     }
 
+    public void SetSource(CurrencySourceSO source)
+    {
+        currencySource = source;
+    }
     void Start()
     {
         Invoke("Initialize", 0.01f);
@@ -46,7 +50,11 @@ public class CurrencySourceValueTracker : MonoBehaviour
 
     public void UpdateOnCurrency(Currency currency)
     {
-        UpdateLabel();
+        if (_initialized)
+        {
+            UpdateLabel();
+        }
+
     }
     public void UpdateLabel()
     {

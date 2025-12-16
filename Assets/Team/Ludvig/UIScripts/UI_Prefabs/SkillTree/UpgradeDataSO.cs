@@ -8,5 +8,7 @@ public class UpgradeDataSO : PurchaseableSO
     public List<UpgradeEffect> UpgradeEffects;
     public float CurrentModifier = 0f;
     public float AddValue = 0f;
+    public ValueFormatType FormatAs;
+    public UIColorStyleSO ColorStyle;
 
 }

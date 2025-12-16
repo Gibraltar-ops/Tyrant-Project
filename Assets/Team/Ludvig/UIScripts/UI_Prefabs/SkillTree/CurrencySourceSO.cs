@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CurrencySourceSO", menuName = "Scriptable Objects/CurrencySourceSO")]
 public class CurrencySourceSO : PurchaseableSO
 {
+    public UIColorStyleSO ColorStyle;
     [Header("Speed Stats")]
 
     //Speed stats
