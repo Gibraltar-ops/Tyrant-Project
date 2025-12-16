@@ -95,6 +95,7 @@ public class VictimSystem : MonoBehaviour
                     SpawnVictim();
             }
 
+            AudioManager.Instance.Play("TyrantLarynx");
             waveTimer = LargeWaveTimer;
         }
 

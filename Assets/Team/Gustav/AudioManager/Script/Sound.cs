@@ -22,7 +22,7 @@ public class Sound
     [Tooltip("Minimum time between plays")]
     public float minDelay = 0.05f;
 
-    [HideInInspector] public float lastPlayed;
+    
 
     [Header("Routing")]
     public AudioCategory category;
