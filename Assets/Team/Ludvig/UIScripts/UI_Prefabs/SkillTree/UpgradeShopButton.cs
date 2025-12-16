@@ -100,7 +100,7 @@ public class UpgradeShopButton : MonoBehaviour
         }
     }
 
-    private void Buy()
+    public void Buy()
     {
         onUpgradePurchased?.Invoke(upgradeData.Tag);
     }

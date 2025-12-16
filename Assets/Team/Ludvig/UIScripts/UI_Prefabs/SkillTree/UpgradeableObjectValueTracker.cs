@@ -24,10 +24,12 @@ public class CurrencySourceValueTracker : MonoBehaviour
     {
         if (_initialized) UpdateLabel();
         Upgrader.onUpgradeApplied += UpdateLabel;
+        EconomyManager.onCurrencyChanged += UpdateOnCurrency;
     }
     void OnDisable()
     {
         Upgrader.onUpgradeApplied -= UpdateLabel;
+        EconomyManager.onCurrencyChanged -= UpdateOnCurrency;
 
     }
 
@@ -43,6 +45,10 @@ public class CurrencySourceValueTracker : MonoBehaviour
         _initialized = true;
     }
 
+    public void UpdateOnCurrency(Currency currency)
+    {
+        UpdateLabel();
+    }
     public void UpdateLabel()
     {
         if (!Lood.UpgradeManager.Instance.CurrencySources.ContainsKey(currencySource.Tag))

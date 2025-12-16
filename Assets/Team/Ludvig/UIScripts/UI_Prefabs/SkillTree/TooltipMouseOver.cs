@@ -29,10 +29,4 @@ public class TooltipMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExi
             SetInactive();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

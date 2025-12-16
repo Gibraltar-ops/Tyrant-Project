@@ -14,18 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
   Tag: AutoTentacleEfficiencyUp
   Shop:
-    Name: Lorem
-    Description: Ipsum
-    EffectString: Dolor
-    Lore: Sit
+    Name: Efficient Digestion
+    Description: Extract more Biomass from each victim.
+    EffectString: Biomass per victim
+    Lore: ' Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor
+      sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum
+      dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem
+      ipsum dolor sit amet.'
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 25
+    MaxOwned: 5
     StartingPrice: 25
-    NextPrice: 25
+    NextPrice: 0
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -33,7 +36,7 @@ MonoBehaviour:
   - CurrencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
     StatCategory: 0
     CurrencyToAffect: 0
-    CollectType: 3
+    CollectType: 4
     UpgradeStat: 0
   CurrentModifier: 0
-  AddValue: 2
+  AddValue: 20

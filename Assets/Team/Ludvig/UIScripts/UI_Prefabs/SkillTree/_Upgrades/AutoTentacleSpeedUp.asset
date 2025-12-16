@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
   Tag: AutoTentacleSpeedUp
   Shop:
-    Name: Lorem
-    Description: Ipsum
-    EffectString: Dolor
-    Lore: Sit
+    Name: Fibrous Tissue
+    Description: Increases the speed of Harvester Tentacles
+    EffectString: Tentacle speed
+    Lore: 'Sit dolor '
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 25
+    MaxOwned: 5
     StartingPrice: 25
     NextPrice: 25
     PriceIncrease: 1.2
@@ -33,7 +33,7 @@ MonoBehaviour:
   - CurrencySource: {fileID: 11400000, guid: 4f1d110fdef9d174fb546ed522ebafc1, type: 2}
     StatCategory: 1
     CurrencyToAffect: 0
-    CollectType: 3
-    UpgradeStat: 2
+    CollectType: 4
+    UpgradeStat: 4
   CurrentModifier: 0
-  AddValue: 0.03
+  AddValue: 15

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
   Tag: AutoTentacle
   Shop:
-    Name: 
-    Description: 
-    EffectString: 
-    Lore: 
+    Name: Harvester Arm
+    Description: Automatically harvest victims
+    EffectString: Per victim
+    Lore: Lorem ipsum dolor sit amet.
     CurrentModifierString: 
     IsActive: 1
     BoughtWithCurrency: 0
@@ -41,21 +41,25 @@ MonoBehaviour:
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
   BrainsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
   KeratinCollect:
     BaseCollect: 0
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0
   HealthPointsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
     CollectAdd: 0
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
+    CollectTotalCurrent: 0

@@ -314,6 +314,7 @@ public enum CollectStat
     CollectAdd,
     CollectAdditivePercentage,
     CollectMultiplicativePercentage,
+    CollectTotalCurrent
 }
 public class CollectTypeStatBlock
 {
@@ -329,6 +330,7 @@ public class CollectTypeStatBlock
         {CollectStat.CollectAdd, 0f },
         {CollectStat.CollectAdditivePercentage, 0f},
         {CollectStat.CollectMultiplicativePercentage, 0f},
+        {CollectStat.CollectTotalCurrent, 0f},
 
     };
     public CollectTypeStatBlock()
@@ -346,6 +348,7 @@ public class CollectTypeStatBlock
         Stats[CollectStat.CollectAdd] = stats.CollectAdd;
         Stats[CollectStat.CollectAdditivePercentage] = stats.CollectAdditivePercentage;
         Stats[CollectStat.CollectMultiplicativePercentage] = stats.CollectMultiplicativePercentage;
+        Stats[CollectStat.CollectTotalCurrent] = stats.BaseCollect;
     }
 }
 
@@ -362,6 +365,7 @@ public class CollectType
     public float CollectAdd = 0f;
     public float CollectAdditivePercentage = 0f;
     public float CollectMultiplicativePercentage = 0f;
+    public float CollectTotalCurrent = 0f;
 }
 #endregion
 
