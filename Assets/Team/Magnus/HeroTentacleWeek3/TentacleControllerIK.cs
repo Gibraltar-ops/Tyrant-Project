@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TentacleControllerIK : MonoBehaviour
 {
+
+    private HealthBar healthBar;
     [Header("Capture Visuals")]
     [Tooltip("Dra hit ditt 'VictimVisuals' GameObject")]
     [SerializeField]
@@ -84,6 +86,7 @@ public class TentacleControllerIK : MonoBehaviour
 
     void Start()
     {
+        healthBar = FindFirstObjectByType<HealthBar>();
         if (bonesToStretch != null)
         {
             foreach (Transform bone in bonesToStretch)
@@ -258,6 +261,10 @@ public class TentacleControllerIK : MonoBehaviour
         if (activeCaptureVisual != null)
         {
             activeCaptureVisual.SetActive(false);
+            if (healthBar != null)
+            {
+                healthBar.ModifyHealth(healthBar.eatValue, true);
+            }
             activeCaptureVisual = null;
         }
 

@@ -142,8 +142,7 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             currentSliderValue = Mathf.Lerp(
                 currentSliderValue,
              currentHealth,
-              Time.deltaTime *
-              smoothness
+            Time.deltaTime * smoothness
               );
 
             if (slider1 != null) slider1.value = currentSliderValue;
@@ -202,6 +201,4 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             currentHealthText.enabled = false;
         /* Debug.Log("EXIT"); */
     }
-
-
 }

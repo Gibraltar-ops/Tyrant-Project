@@ -961,6 +961,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 2024823713}
+    - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: shakeManager
       value: 
       objectReference: {fileID: 1711787985}
@@ -4081,7 +4085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616779377118958538, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -752
+      value: -709.5
       objectReference: {fileID: 0}
     - target: {fileID: 6616779377118958538, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
       propertyPath: m_AnchoredPosition.y
