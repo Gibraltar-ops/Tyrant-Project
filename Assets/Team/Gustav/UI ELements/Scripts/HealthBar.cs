@@ -163,18 +163,18 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (fillImage2 != null) fillImage2.color = damageFlash;
 
         float elapsed = 0f;
-        Vector3 startPos = transform.localPosition;
+
         while (elapsed < flashDuration)
         {
             float offsetX = UnityEngine.Random.Range(-1f, 1f) * shakeMagnitude;
             float offsetY = UnityEngine.Random.Range(-1f, 1f) * shakeMagnitude;
 
-            transform.localPosition = startPos + new Vector3(offsetX, offsetY, 0);
+            transform.localPosition = initialPosition + new Vector3(offsetX, offsetY, 0);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localPosition = startPos;
+        transform.localPosition = initialPosition;
 
         /*  yield return new WaitForSeconds(flashDuration); */
 
@@ -202,4 +202,6 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             currentHealthText.enabled = false;
         /* Debug.Log("EXIT"); */
     }
+
+
 }
