@@ -11,6 +11,12 @@ public class UIDrawer : MonoBehaviour
     [SerializeField] private float duration = 0.25f;
     [SerializeField] private AnimationCurve easing = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+    [Header("Time Control")]
+    [SerializeField] private float menuTimeScale = 0.2f;
+    [SerializeField] private float restoreSpeed = 5f;
+
+    private Coroutine timeRoutine;
+
     public bool IsOpen => isOpen;
 
     private RectTransform rect;
@@ -40,15 +46,42 @@ public class UIDrawer : MonoBehaviour
     public void Open()
     {
         if (isOpen) return;
+
         isOpen = true;
         Animate(openPosition);
+        SetTimeScale(menuTimeScale);
     }
 
     public void Close()
     {
         if (!isOpen) return;
+
         isOpen = false;
         Animate(closedPosition);
+        SetTimeScale(1f);
+    }
+
+    private void SetTimeScale(float target)
+    {
+        if (timeRoutine != null)
+            StopCoroutine(timeRoutine);
+
+        timeRoutine = StartCoroutine(LerpTimeScale(target));
+    }
+
+    private IEnumerator LerpTimeScale(float target)
+    {
+        float start = Time.timeScale;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime * restoreSpeed;
+            Time.timeScale = Mathf.Lerp(start, target, time / duration);
+            yield return null;
+        }
+
+        Time.timeScale = target;
     }
 
     private void Animate(Vector2 target)

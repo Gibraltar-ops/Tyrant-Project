@@ -83,3 +83,55 @@ MonoBehaviour:
     maxInstances: 2
     minDelay: 0.5
     category: 5
+  - id: TyrantTentacle
+    clips:
+    - {fileID: 8300000, guid: 71466b305a59686488c73766ab159325, type: 3}
+    - {fileID: 8300000, guid: 692048860a0ddb54e873e73ba8d6b916, type: 3}
+    - {fileID: 8300000, guid: 02f6bb93877841e4cad77a77fb24867a, type: 3}
+    volume: 0.15
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 5
+    minDelay: 0.05
+    category: 5
+  - id: UIClick
+    clips:
+    - {fileID: 8300000, guid: f061e1871d446984493ba88e2b2c1d9d, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 10
+    minDelay: 0.05
+    category: 2
+  - id: UIUpgrade1
+    clips:
+    - {fileID: 8300000, guid: efc66cae375523c4d870c7522bcef7ec, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 1
+    minDelay: 0.5
+    category: 2
+  - id: UIUpgrade2
+    clips:
+    - {fileID: 8300000, guid: 50ec3bdbd615e7e48b3bbd856f856fbd, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 1
+    minDelay: 0.5
+    category: 2
+  - id: UIUpgrade3
+    clips:
+    - {fileID: 8300000, guid: 36cdebdd6204d5947b0b5212a7bfbf1d, type: 3}
+    volume: 0.3
+    pitchRange: {x: 0.9, y: 1.1}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 1
+    minDelay: 0.5
+    category: 2
