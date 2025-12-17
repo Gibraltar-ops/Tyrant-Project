@@ -14,6 +14,8 @@ public class EconomyManager : MonoBehaviour
     private bool _keratinActive = false;
     public long Victims;
 
+    public CurrencySprites CurrencySprites;
+
     public long BiomassWinThreshold = 20000;
 
     public long BiomassLifetime = 12;
@@ -59,42 +61,44 @@ public class EconomyManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        CurrencySprites = Resources.Load<CurrencySprites>("CurrencySprites");
     }
 
     void Update()
     {
-        if(_biomassActive)
-        BiomassPerSecond.UpdateValue();
+        if (_biomassActive)
+            BiomassPerSecond.UpdateValue();
 
-        if(_brainsActive)
-        BrainsPerSecond.UpdateValue();
+        if (_brainsActive)
+            BrainsPerSecond.UpdateValue();
 
-        if(_keratinActive)
-        KeratinPerSecond.UpdateValue();
+        if (_keratinActive)
+            KeratinPerSecond.UpdateValue();
 
     }
 
     public void IncrementCurrency(Currency currency, long value)
     {
-      SetValue(currency, value);
+        SetValue(currency, value);
     }
 
-     public void IncrementCurrency(Currency currency, long value, PopupTextData popupTextData)
+    public void IncrementCurrency(Currency currency, long value, PopupTextData popupTextData)
     {
-       SetValue(currency, value);
-       PopUp(popupTextData);
+        SetValue(currency, value);
+        PopUp(popupTextData);
     }
 
     private void SetValue(Currency currency, long value)
     {
-         switch (currency)
+        switch (currency)
         {
             case Currency.Biomass:
                 Biomass += value;
-                if(!_biomassActive) _biomassActive = true;
+                if (!_biomassActive) _biomassActive = true;
                 BiomassPerSecond.AddCurrency((float)value);
 
-                if(Mathf.Sign(value) == 1)
+                if (Mathf.Sign(value) == 1)
                 {
                     BiomassLifetime += value;
                 }
@@ -103,7 +107,7 @@ public class EconomyManager : MonoBehaviour
                 break;
             case Currency.Brains:
                 Brains += value;
-                if(!_brainsActive) _brainsActive = true;
+                if (!_brainsActive) _brainsActive = true;
                 BrainsPerSecond.AddCurrency((float)value);
 
                 Brains = Brains <= 0 ? 0 : Brains;
@@ -111,7 +115,7 @@ public class EconomyManager : MonoBehaviour
                 break;
             case Currency.Keratin:
                 Keratin += value;
-                if(!_keratinActive) _keratinActive = true;
+                if (!_keratinActive) _keratinActive = true;
                 KeratinPerSecond.AddCurrency((float)value);
 
                 Keratin = Keratin <= 0 ? 0 : Keratin;
@@ -174,10 +178,27 @@ public class EconomyManager : MonoBehaviour
     }
 
     public void UpdateBiomassLabel(double value)
-{
-    string labelValue = FormatNumbers.Format(value);
-    //currentBiomassLabel.text = labelValue;
-}
+    {
+        string labelValue = FormatNumbers.Format(value);
+        //currentBiomassLabel.text = labelValue;
+    }
+
+    public CurrencySpriteData GetCurrencySpriteData(Currency currency)
+    {
+        switch (currency)
+        {
+            case Currency.Biomass:
+                return new CurrencySpriteData(currency, CurrencySprites.BiomassSprite, CurrencySprites.BiomassOverlayColor);
+            case Currency.Brains:
+                return new CurrencySpriteData(currency, CurrencySprites.BrainsSprite, CurrencySprites.BrainOverlayColor);
+            case Currency.Keratin:
+                return new CurrencySpriteData(currency, CurrencySprites.KeratinSprite, CurrencySprites.KeratinOverlayColor);
+            case Currency.HealthPoints:
+                return new CurrencySpriteData(currency, CurrencySprites.HealthPointsSprite, CurrencySprites.HealthPointsOverlayColor);
+            default:
+                return new CurrencySpriteData(currency, CurrencySprites.BiomassSprite, CurrencySprites.BiomassOverlayColor);
+        }
+    }
 
 }
 
@@ -199,6 +220,20 @@ public enum ShopTag
 
 }
 
+public class CurrencySpriteData
+{
+    public Currency Currency;
+    public Sprite Sprite;
+    public Color OverlayColor;
+
+    public CurrencySpriteData(Currency currency, Sprite sprite, Color overlayColor)
+    {
+        Currency = currency;
+        Sprite = sprite;
+        OverlayColor = overlayColor;
+    }
+}
+
 //(AI Generated) Class for calculating currency per second.
 public class CurrencyPerSecond
 {
@@ -207,7 +242,7 @@ public class CurrencyPerSecond
 
     private Queue<(float time, float amount)> events = new Queue<(float, float)>();
     public float PerSecond = 0f;
-   
+
 
     public void UpdateValue()
     {
@@ -229,11 +264,12 @@ public class CurrencyPerSecond
 
         // Blend with EMA for smoothness
         PerSecond += smoothingFactor * (windowCPS - PerSecond);
-        
+
     }
 
     public void AddCurrency(float amount)
-    {   if(Mathf.Sign(amount) == 1)
-        events.Enqueue((Time.time, amount));
+    {
+        if (Mathf.Sign(amount) == 1)
+            events.Enqueue((Time.time, amount));
     }
 }

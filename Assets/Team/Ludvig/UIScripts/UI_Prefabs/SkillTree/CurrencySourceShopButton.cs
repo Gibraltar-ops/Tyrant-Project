@@ -70,12 +70,13 @@ namespace Lood
         {
             Active = true;
             CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
+            Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency).OverlayColor;
             foreach (GameObject bar in ProgressBars)
             {
                 Image image = bar.GetComponent<Image>();
                 if (bar.TryGetComponent(out RadialProgressTracker tracker))
                 {
-                    bar.GetComponent<Image>().color = new Color(CurrencySourceData.ColorStyle.MainColor.r, CurrencySourceData.ColorStyle.MainColor.g, CurrencySourceData.ColorStyle.MainColor.b, 1f);
+                    bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 1f);
                 }
                 else
                 {
@@ -88,6 +89,7 @@ namespace Lood
         {
 
             CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
+            Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency).OverlayColor;
             if (!Active)
             {
                 foreach (GameObject bar in ProgressBars)
@@ -95,7 +97,7 @@ namespace Lood
                     Image image = bar.GetComponent<Image>();
                     if (bar.TryGetComponent(out RadialProgressTracker tracker))
                     {
-                        bar.GetComponent<Image>().color = new Color(CurrencySourceData.ColorStyle.MainColor.r, CurrencySourceData.ColorStyle.MainColor.g, CurrencySourceData.ColorStyle.MainColor.b, 0f);
+                        bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 0f);
                     }
                     else
                     {

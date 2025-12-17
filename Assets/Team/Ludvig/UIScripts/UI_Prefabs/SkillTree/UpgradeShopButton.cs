@@ -14,6 +14,8 @@ public class UpgradeShopButton : MonoBehaviour
     public bool Active = false;
     public List<GameObject> ProgressBars;
 
+
+
     public delegate void OnUpgradePurchased(string tag);
     public static event OnUpgradePurchased onUpgradePurchased;
 
@@ -43,6 +45,8 @@ public class UpgradeShopButton : MonoBehaviour
         var buttonHierarchy = GetComponent<ButtonHierarchy>();
         buttonHierarchy.ActiveParentLineColor = upgradeData.ColorStyle.MainColor;
         buttonHierarchy.Lock.GetComponent<Image>().color = upgradeData.ColorStyle.MainColor;
+
+
         //GetComponentInChildren<UpgradeValueTracker>().upgradeData = upgradeData;
     }
     void Start()
@@ -56,12 +60,14 @@ public class UpgradeShopButton : MonoBehaviour
     {
         Active = true;
         CheckInteractable(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency);
+        Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency).OverlayColor;
         foreach (GameObject bar in ProgressBars)
         {
+
             Image image = bar.GetComponent<Image>();
             if (bar.TryGetComponent(out RadialProgressTracker tracker))
             {
-                bar.GetComponent<Image>().color = new Color(upgradeData.ColorStyle.MainColor.r, upgradeData.ColorStyle.MainColor.g, upgradeData.ColorStyle.MainColor.b, 1f);
+                bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 1f);
             }
             else
             {
@@ -79,12 +85,13 @@ public class UpgradeShopButton : MonoBehaviour
 
         if (!Active)
         {
+            Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.Upgrades[upgradeData.Tag].Shop.BoughtWithCurrency).OverlayColor;
             foreach (GameObject bar in ProgressBars)
             {
                 Image image = bar.GetComponent<Image>();
                 if (bar.TryGetComponent(out RadialProgressTracker tracker))
                 {
-                    bar.GetComponent<Image>().color = new Color(upgradeData.ColorStyle.MainColor.r, upgradeData.ColorStyle.MainColor.g, upgradeData.ColorStyle.MainColor.b, 0f);
+                    bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 0f);
                 }
                 else
                 {

@@ -62,6 +62,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
 
         Upgrader.onUpgradeApplied += UpdateFields;
         EconomyManager.onCurrencyChanged += UpdateOnCurrencyChange;
+        Lood.UpgradeManager.Instance.UpgradeableTooltipPanel = gameObject;
 
 
     }
@@ -109,6 +110,13 @@ public class UIUpgradeableTooltip : MonoBehaviour
         state.highlightedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonHoverSprite;
         state.pressedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonPressedSprite;
         _button.spriteState = state;
+
+        //Set shop tracker colors and sprite.
+        CurrencySourceStatBlock stats = Lood.UpgradeManager.Instance.CurrencySources[Data.Tag];
+        CurrencySpriteData spriteData = EconomyManager.Instance.GetCurrencySpriteData(stats.Shop.BoughtWithCurrency);
+        BoughtWithCurrencyIcon.sprite = spriteData.Sprite;
+        BoughtWithCurrencyIcon.color = spriteData.OverlayColor;
+        ProgressSlider.GetComponent<Image>().color = spriteData.OverlayColor;
 
     }
 
@@ -172,6 +180,9 @@ public class UIUpgradeableTooltip : MonoBehaviour
         LoreLabel.text = Data.Shop.Lore;
         LevelLabel.text = FormatNumbers.FormatValueString(stats.Shop.CurrentOwned, ValueFormatType.IntegerRaw);
         NextPriceLabel.text = FormatNumbers.Format(stats.Shop.NextPrice);
+
+
+
         UpdateCollectLabels();
 
 
@@ -258,6 +269,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
 
 
     }
+
     private void Buy()
     {
         shopButton.Buy();

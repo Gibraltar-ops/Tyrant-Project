@@ -92,6 +92,12 @@ public class UIUpgradeTooltip : MonoBehaviour
         state.pressedSprite = upgrade.ColorStyle.SpriteSet.TooltipButtonPressedSprite;
         _button.spriteState = state;
 
+        UpgradeStatBlock stats = Lood.UpgradeManager.Instance.Upgrades[Data.Tag];
+        CurrencySpriteData spriteData = EconomyManager.Instance.GetCurrencySpriteData(stats.Shop.BoughtWithCurrency);
+        BoughtWithCurrencyIcon.sprite = spriteData.Sprite;
+        BoughtWithCurrencyIcon.color = spriteData.OverlayColor;
+        ProgressSlider.GetComponent<Image>().color = spriteData.OverlayColor;
+
     }
 
     public void UpdateOnCurrencyChange(Currency currency)
