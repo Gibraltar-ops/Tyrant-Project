@@ -80,6 +80,9 @@ namespace Lood
 
         public Dictionary<string, UpgradeStatBlock> Upgrades = new();
 
+        public GameObject UpgradeableTooltipPanel;
+        public GameObject UpgradeTooltipPanel;
+
         public void AddUpgradeableObject(CurrencySourceSO data)
         {
             if (!CurrencySources.ContainsKey(data.Tag))

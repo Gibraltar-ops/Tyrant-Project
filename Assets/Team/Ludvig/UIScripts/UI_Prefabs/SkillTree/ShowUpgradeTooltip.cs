@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ShowUpgradeTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [HideInInspector]
     public GameObject tooltipPanel;
     private PurchaseableSO upgradeData;
     private UpgradeCategory upgradeCategory = UpgradeCategory.Upgrade;
@@ -23,6 +24,21 @@ public class ShowUpgradeTooltip : MonoBehaviour, IPointerEnterHandler, IPointerE
             upgradeCategory = UpgradeCategory.Collector;
         }
 
+
+
+    }
+    void OnEnable()
+    {
+        if (upgradeCategory == UpgradeCategory.Upgrade) tooltipPanel = Lood.UpgradeManager.Instance.UpgradeTooltipPanel;
+
+        if (upgradeCategory == UpgradeCategory.Collector) tooltipPanel = Lood.UpgradeManager.Instance.UpgradeableTooltipPanel;
+    }
+
+    void Start()
+    {
+        if (upgradeCategory == UpgradeCategory.Upgrade) tooltipPanel = Lood.UpgradeManager.Instance.UpgradeTooltipPanel;
+
+        if (upgradeCategory == UpgradeCategory.Collector) tooltipPanel = Lood.UpgradeManager.Instance.UpgradeableTooltipPanel;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

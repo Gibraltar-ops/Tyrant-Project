@@ -51,6 +51,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
         UpgradeButton.onClick.AddListener(Buy);
         CollectColorizableImages();
         gameObject.SetActive(false);
+        Lood.UpgradeManager.Instance.UpgradeableTooltipPanel = gameObject;
 
     }
     void OnEnable()
