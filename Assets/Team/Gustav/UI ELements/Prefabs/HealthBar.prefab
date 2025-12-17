@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
   slider1: {fileID: 7045670458157342463}
   slider2: {fileID: 4832437872934189398}
+  HealthData: {fileID: 11400000, guid: 1b53043660b186d49b42913969d0b963, type: 2}
   percentageText: {fileID: 3325652616516880654}
   currentHealthText: {fileID: 7113123599181550324}
   hoverHideImage: {fileID: 1235124184642058482}
@@ -551,7 +552,7 @@ MonoBehaviour:
   damageFlash: {r: 0.972549, g: 0.6, b: 0.6, a: 1}
   flashDuration: 0.1
   shakeMagnitude: 10
-  maxHealth: 100
+  maxHealth: 1000
   minHealth: 0
   regenValue: 0
   regenMultiplier: 1

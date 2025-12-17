@@ -29,6 +29,12 @@ public class CurrencySourceSO : PurchaseableSO
     public float SongPulseFrequencyAdditivePercentage = 0f;
     public float SongPulsePerTentacleBonus = 0f;
 
+    [Header("Health Stats")]
+    public float HealthMaxBase = 1000f;
+    public float HealthMaxMultiplier = 1f;
+    public float HealthMaxAdditivePercentage = 0f;
+    public float HealthMaxCurrentTotal;
+
     [Header("Collection Stats")]
     public CollectType BiomassCollect;
     public CollectType BrainsCollect;

@@ -216,7 +216,12 @@ public enum MainStat
     SongPulseStrengthAdditivePercentage,
     SongPulseFrequencyBase,
     SongPulseFrequencyAdditivePercentage,
-    SongPulsePerTentacleBonus
+    SongPulsePerTentacleBonus,
+    //Health Variables
+    HealthMaxBase,
+    HealthMaxMultiplier,
+    HealthMaxAdditivePercentage,
+    HealthMaxCurrentTotal
 }
 
 
@@ -260,7 +265,13 @@ public class CurrencySourceStatBlock
         {MainStat.SongPulseStrengthAdditivePercentage, 0f},
         {MainStat.SongPulseFrequencyBase, 10f},
         {MainStat.SongPulseFrequencyAdditivePercentage, 0f},
-        {MainStat.SongPulsePerTentacleBonus, 0f}
+        {MainStat.SongPulsePerTentacleBonus, 0f},
+        //Health stats
+        {MainStat.HealthMaxBase, 1000f},
+        {MainStat.HealthMaxMultiplier, 1f},
+        {MainStat.HealthMaxAdditivePercentage, 0f},
+        {MainStat.HealthMaxCurrentTotal, 1000f}
+
     };
     //03._________________________________________________________________
     //The constructor needs an "UpgradeableObjectDataSO" scriptable object as input.
@@ -311,6 +322,11 @@ public class CurrencySourceStatBlock
         MainStats[MainStat.SongPulseFrequencyBase] = data.SongPulseFrequencyBase;
         MainStats[MainStat.SongPulseFrequencyAdditivePercentage] = data.SongPulseFrequencyAdditivePercentage;
         MainStats[MainStat.SongPulsePerTentacleBonus] = data.SongPulsePerTentacleBonus;
+        //Health stats
+        MainStats[MainStat.HealthMaxBase] = data.HealthMaxBase;
+        MainStats[MainStat.HealthMaxMultiplier] = data.HealthMaxMultiplier;
+        MainStats[MainStat.HealthMaxAdditivePercentage] = data.HealthMaxAdditivePercentage;
+        MainStats[MainStat.HealthMaxCurrentTotal] = data.HealthMaxCurrentTotal;
 
     }
 }

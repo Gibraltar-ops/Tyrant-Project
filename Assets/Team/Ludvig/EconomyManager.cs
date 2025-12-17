@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EconomyManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class EconomyManager : MonoBehaviour
     public long Keratin;
     private bool _keratinActive = false;
     public long Victims;
+
+    public long HealthPoints;
+    public long MaxHealth;
 
     public CurrencySprites CurrencySprites;
 
@@ -29,6 +33,7 @@ public class EconomyManager : MonoBehaviour
 
     public delegate void OnTextPopup(PopupTextData data);
     public static event OnTextPopup onTextPopup;
+
 
 
     private static EconomyManager _instance;
@@ -131,6 +136,13 @@ public class EconomyManager : MonoBehaviour
                 BiomassLifetime = BiomassLifetime <= 0 ? 0 : BiomassLifetime;
                 onCurrencyChanged?.Invoke(Currency.BiomassLifetime);
                 break;
+            case Currency.HealthPoints:
+                HealthPoints += value;
+                HealthPoints = HealthPoints <= 0 ? 0 : HealthPoints;
+                HealthPoints = HealthPoints >= MaxHealth ? MaxHealth : HealthPoints;
+                onCurrencyChanged?.Invoke(Currency.HealthPoints);
+                CheckDead();
+                break;
             default:
                 break;
         }
@@ -172,6 +184,8 @@ public class EconomyManager : MonoBehaviour
                 return Victims;
             case Currency.BiomassLifetime:
                 return BiomassLifetime;
+            case Currency.HealthPoints:
+                return HealthPoints;
             default:
                 return 0;
         }
@@ -197,6 +211,28 @@ public class EconomyManager : MonoBehaviour
                 return new CurrencySpriteData(currency, CurrencySprites.HealthPointsSprite, CurrencySprites.HealthPointsOverlayColor);
             default:
                 return new CurrencySpriteData(currency, CurrencySprites.BiomassSprite, CurrencySprites.BiomassOverlayColor);
+        }
+    }
+
+    public void CheckDead()
+    {
+        if (HealthPoints <= 0)
+        {
+            Death();
+        }
+    }
+    public void Death()
+    {
+
+        string sceneToLoad = "GameOverScene";
+
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo(sceneToLoad);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 
@@ -272,4 +308,6 @@ public class CurrencyPerSecond
         if (Mathf.Sign(amount) == 1)
             events.Enqueue((Time.time, amount));
     }
+
+
 }

@@ -89,10 +89,12 @@ public class ProjectileDirector : MonoBehaviour
             explosionFXPrefab,
             () =>
             {
-                if (healthBar != null)
-                {
-                    healthBar.ModifyHealth(damage, false);
-                }
+                EconomyManager.Instance.IncrementCurrency(Currency.HealthPoints, -damage);
+                // if (healthBar != null)
+                // {
+
+                //     healthBar.ModifyHealth(damage, false);
+                // }
             }
         );
     }
@@ -118,10 +120,12 @@ public class ProjectileDirector : MonoBehaviour
             explosionFXPrefab,
             () =>
             {
-                if (healthBar != null)
-                {
-                    healthBar.ModifyHealth(damage, false);
-                }
+                EconomyManager.Instance.IncrementCurrency(Currency.HealthPoints, -damage);
+                // if (healthBar != null)
+                // {
+
+                //     healthBar.ModifyHealth(damage, false);
+                // }
             }
         );
     }

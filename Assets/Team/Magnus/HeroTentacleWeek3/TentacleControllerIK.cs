@@ -261,9 +261,11 @@ public class TentacleControllerIK : MonoBehaviour
         if (activeCaptureVisual != null)
         {
             activeCaptureVisual.SetActive(false);
+
+            //EconomyManager.Instance.IncrementCurrency(Currency.HealthPoints, -damage);
             if (healthBar != null)
             {
-                healthBar.ModifyHealth(healthBar.eatValue, true);
+                //healthBar.ModifyHealth(healthBar.eatValue, true);
             }
             activeCaptureVisual = null;
         }
