@@ -6,7 +6,7 @@ public class IntroVideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
 
-    private string sceneName = "PlaytestFIVE"; /// INFÖR PLAYTEST - Skriv in rätt scen
+    private string sceneName = "MainMenuPlayTest"; /// INFÖR PLAYTEST - Skriv in rätt scen
 
     private void Start()
     {

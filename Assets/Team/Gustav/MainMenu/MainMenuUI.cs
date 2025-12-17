@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 
@@ -20,7 +19,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject canvas_Credits;
 
     [Header("Game Settings")]
-    private string sceneName = "IntroCinematic"; // Set main game scene name here
+
     [SerializeField] private string saveFileKey = "SaveExists";   // Used to check if a save exists
 
     private void Start()
@@ -45,7 +44,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnContinueClicked()
     {
-        SceneManager.LoadScene("Level1");
+
         // Debug.Log("Continue Game");
         // // Example: Load saved game
         // if (PlayerPrefs.HasKey(saveFileKey))
@@ -70,8 +69,13 @@ public class MainMenuUI : MonoBehaviour
         Debug.Log("New Game Started");
         // Clear save data if necessary
         PlayerPrefs.DeleteKey(saveFileKey);
+
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo("NewGameIntro");
+        }
         // Load the first level or starting scene
-        SceneManager.LoadScene(sceneName);
+
     }
 
     private void OnSettingsClicked()
