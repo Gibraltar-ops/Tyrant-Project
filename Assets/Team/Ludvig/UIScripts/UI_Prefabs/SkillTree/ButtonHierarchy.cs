@@ -33,13 +33,18 @@ public class ButtonHierarchy : MonoBehaviour
     {
         lineRenderer = FindAnyObjectByType<UILineRenderer>();
         Remainder = ActiveThreshold;
-        foreach (var parent in ButtonParents)
+
+        if (ButtonParents.Count != 0)
         {
-            UILineRendererLine line = new UILineRendererLine(GetComponent<RectTransform>(), parent.GetComponent<RectTransform>(), InactiveParentLineColor, false);
-            lineRenderer.AddLine(line);
-            _lines.Add(line);
-            Debug.DrawLine(parent.transform.position, transform.position, Color.red);
+            foreach (var parent in ButtonParents)
+            {
+                UILineRendererLine line = new UILineRendererLine(GetComponent<RectTransform>(), parent.GetComponent<RectTransform>(), InactiveParentLineColor, false);
+                lineRenderer.AddLine(line);
+                _lines.Add(line);
+                Debug.DrawLine(parent.transform.position, transform.position, Color.red);
+            }
         }
+
     }
 
     void OnEnable()

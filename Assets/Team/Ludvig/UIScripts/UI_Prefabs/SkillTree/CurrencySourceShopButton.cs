@@ -47,6 +47,7 @@ namespace Lood
 
             var buttonHierarchy = GetComponent<ButtonHierarchy>();
             buttonHierarchy.ActiveParentLineColor = CurrencySourceData.ColorStyle.MainColor;
+            buttonHierarchy.InactiveParentLineColor = CurrencySourceData.ColorStyle.SecondaryColor;
             buttonHierarchy.Lock.GetComponent<Image>().color = CurrencySourceData.ColorStyle.MainColor;
 
             foreach (GameObject bar in ProgressBars)

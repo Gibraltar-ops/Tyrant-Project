@@ -44,6 +44,7 @@ public class UpgradeShopButton : MonoBehaviour
 
         var buttonHierarchy = GetComponent<ButtonHierarchy>();
         buttonHierarchy.ActiveParentLineColor = upgradeData.ColorStyle.MainColor;
+        buttonHierarchy.InactiveParentLineColor = upgradeData.ColorStyle.SecondaryColor;
         buttonHierarchy.Lock.GetComponent<Image>().color = upgradeData.ColorStyle.MainColor;
 
 

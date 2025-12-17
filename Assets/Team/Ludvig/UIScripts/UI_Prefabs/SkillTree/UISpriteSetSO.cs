@@ -4,10 +4,8 @@ using UnityEngine;
 public class UIColorStyleSO : ScriptableObject
 {
     public string Tag;
-    public Sprite CurrencyIcon;
     public Color MainColor;
     public Color SecondaryColor;
-
     public UISpriteSetSO SpriteSet;
 
 
