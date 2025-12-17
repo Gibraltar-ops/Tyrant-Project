@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ScreenFader : MonoBehaviour
 {
-    public float fadeDuration = 0.5f;
+    public float fadeDuration = 2f;
     private Image image;
     private Coroutine currentFadeRoutine;
     private void Awake()
@@ -12,7 +12,7 @@ public class ScreenFader : MonoBehaviour
         GetImageComponent();
         if (image != null)
         {
-            image.raycastTarget = false;
+            image.raycastTarget = true;
             Color c = image.color;
             image.color = new Color(c.r, c.g, c.b, 0f);
         }
@@ -57,7 +57,7 @@ public class ScreenFader : MonoBehaviour
 
         while (t < fadeDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, t / fadeDuration);
 
             image.color = new Color(c.r, c.g, c.b, newAlpha);
