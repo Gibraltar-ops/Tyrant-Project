@@ -45,16 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f209aacebdb0a4fa38e2340f4ebae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictimSystem
+  SongData: {fileID: 11400000, guid: 6b30895883a7c4c4ead3841f9a8273b0, type: 2}
   enableSpawning: 1
-  spawnInterval: 1
   maxVictims: 10000
-  smallWaveVictimAmount: 1
-  smallWaveAmountMultiplier: 1
-  smallWaveTimerMultiplier: 1
-  LargeWaveTimer: 10
-  largeWaveVictimAmount: 10
-  largeWaveAmountMultiplier: 1
-  largeWaveTimerMultiplier: 1
   minScale: 0.1
   maxScale: 0.11
   spawnRegions:

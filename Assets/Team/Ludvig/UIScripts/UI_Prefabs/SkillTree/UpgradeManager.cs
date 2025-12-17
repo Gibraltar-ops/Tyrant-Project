@@ -205,8 +205,20 @@ public enum MainStat
     SpeedMultiplicativePercentage,
     //Gadfly variables
     GadflyCooldown,
-    GadflyHarvestDuration
+    GadflyHarvestDuration,
+    //Song variables
+    SongTrickleStrengthBase,
+    SongTrickleStrengthAdd,
+    SongTrickleStrengthAdditivePercentage,
+    SongTrickleFrequencyBase,
+    SongTrickleFrequencyAdditivePercentage,
+    SongPulseStrengthBase,
+    SongPulseStrengthAdditivePercentage,
+    SongPulseFrequencyBase,
+    SongPulseFrequencyAdditivePercentage,
+    SongPulsePerTentacleBonus
 }
+
 
 
 public class CurrencySourceStatBlock
@@ -224,22 +236,31 @@ public class CurrencySourceStatBlock
         {Currency.Keratin, new CollectTypeStatBlock()},
         {Currency.HealthPoints, new CollectTypeStatBlock()}
     };
-
     //02.___________________________________
     //ADD NEW ENTRY TO THIS DICTIONARY!!!
     //_____________v___v___v_____________
     public Dictionary<MainStat, float> MainStats = new()
     {   
-        //Auto Tentacle Stats
+        //Speed stats
         {MainStat.BaseSpeed, 0f},
         {MainStat.SpeedAdd, 0f},
         {MainStat.SpeedMultiply, 1f},
         {MainStat.SpeedAdditivePercentage, 0f},
         {MainStat.SpeedMultiplicativePercentage, 0f},
+        //Gadfly stats
         {MainStat.GadflyCooldown, 10f},
         {MainStat.GadflyHarvestDuration, 6f},
-
-
+        //Song stats
+        {MainStat.SongTrickleStrengthBase, 1f},
+        {MainStat.SongTrickleStrengthAdd, 0f},
+        {MainStat.SongTrickleStrengthAdditivePercentage, 0f},
+        {MainStat.SongTrickleFrequencyBase, 1f},
+        {MainStat.SongTrickleFrequencyAdditivePercentage, 0f},
+        {MainStat.SongPulseStrengthBase, 10f},
+        {MainStat.SongPulseStrengthAdditivePercentage, 0f},
+        {MainStat.SongPulseFrequencyBase, 10f},
+        {MainStat.SongPulseFrequencyAdditivePercentage, 0f},
+        {MainStat.SongPulsePerTentacleBonus, 0f}
     };
     //03._________________________________________________________________
     //The constructor needs an "UpgradeableObjectDataSO" scriptable object as input.
@@ -270,13 +291,26 @@ public class CurrencySourceStatBlock
         //ASSIGN THE VALUE FROM THE INPUT SCRIPTABLE OBJECT THAT YOU ADDED IN STEP 03.!!!
         //_____________v___v___v_____________
         //Source stats
+        //Speed stats
         MainStats[MainStat.BaseSpeed] = data.BaseSpeed;
         MainStats[MainStat.SpeedAdd] = data.SpeedAdd;
         MainStats[MainStat.SpeedMultiply] = data.SpeedMultiply;
         MainStats[MainStat.SpeedAdditivePercentage] = data.SpeedAdditivePercentage;
         MainStats[MainStat.SpeedMultiplicativePercentage] = data.SpeedMultiplicativePercentage;
+        //Gadfly stats
         MainStats[MainStat.GadflyCooldown] = data.GadflyCooldown;
         MainStats[MainStat.GadflyHarvestDuration] = data.GadflyHarvestDuration;
+        //Song stats
+        MainStats[MainStat.SongTrickleStrengthBase] = data.SongTrickleStrengthBase;
+        MainStats[MainStat.SongTrickleStrengthAdd] = data.SongTrickleStrengthAdd;
+        MainStats[MainStat.SongTrickleStrengthAdditivePercentage] = data.SongTrickleStrengthAdditivePercentage;
+        MainStats[MainStat.SongTrickleFrequencyBase] = data.SongTrickleFrequencyBase;
+        MainStats[MainStat.SongTrickleFrequencyAdditivePercentage] = data.SongTrickleFrequencyAdditivePercentage;
+        MainStats[MainStat.SongPulseStrengthBase] = data.SongPulseStrengthBase;
+        MainStats[MainStat.SongPulseStrengthAdditivePercentage] = data.SongPulseStrengthAdditivePercentage;
+        MainStats[MainStat.SongPulseFrequencyBase] = data.SongPulseFrequencyBase;
+        MainStats[MainStat.SongPulseFrequencyAdditivePercentage] = data.SongPulseFrequencyAdditivePercentage;
+        MainStats[MainStat.SongPulsePerTentacleBonus] = data.SongPulsePerTentacleBonus;
 
     }
 }

@@ -40,8 +40,8 @@ public class ButtonSong : MonoBehaviour
 
         if (victimSystem != null)
         {
-            // slider goes from 0–1, it gets converted it to 1–5
-            victimSystem.smallWaveAmountMultiplier = Mathf.Lerp(minSpawnRateMultiplier, maxSpawnRateMultiplier, slider1.value);
+            // slider goes from 0ï¿½1, it gets converted it to 1ï¿½5
+            //victimSystem.smallWaveAmountMultiplier = Mathf.Lerp(minSpawnRateMultiplier, maxSpawnRateMultiplier, slider1.value);
         }
     }
 

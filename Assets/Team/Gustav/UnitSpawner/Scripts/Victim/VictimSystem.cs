@@ -5,27 +5,16 @@ using UnityEngine;
 public class VictimSystem : MonoBehaviour
 {
     [Header("Spawning")]
+    //-----------------------------------------------------
+    //Public variables deleted.
+    //All spawning now draws values from the upgrade system.
+    //-----------------------------------------------------
+
+    [Tooltip("Currency Source Scriptable object")]
+    public CurrencySourceSO SongData;
     public bool enableSpawning = true;
     [Tooltip("Base interval between individual spawns.")]
-    public float spawnInterval = 1f;
-    [Tooltip("How many victims can exist at once.")]
     public int maxVictims = 10000;
-
-    [Header("Wave Settings & Upgradeable Stats")]
-    [Tooltip("How many victims spawn instantly each wave.")]
-    public int smallWaveVictimAmount = 1;
-    [Tooltip("The multiplier for the SMALL wave amount per wave.")]
-    public float smallWaveAmountMultiplier = 1f;
-    [Tooltip("The multiplier for the SMALL wave timer.")]
-    public float smallWaveTimerMultiplier = 1f;
-    [Tooltip("Time between waves.")]
-    public float LargeWaveTimer = 10f;
-    [Tooltip("How many victims spawn instantly each LARGE wave.")]
-    public int largeWaveVictimAmount = 10;
-    [Tooltip("The multiplier for the LARGE wave amount per wave.")]
-    public float largeWaveAmountMultiplier = 1f;
-    [Tooltip("The multiplier for the LARGE wave timer.")]
-    public float largeWaveTimerMultiplier = 1f;
 
     [Header("Internal Stats")]
     public float minScale = 0.15f;
@@ -49,10 +38,14 @@ public class VictimSystem : MonoBehaviour
     //    );
     //} // Magnus kommentera bort det här sedan
 
+    void Awake()
+    {
+        Lood.UpgradeManager.Instance.AddUpgradeableObject(SongData);
+    }
     void Start()
     {
-        spawnTimer = spawnInterval;
-        waveTimer = LargeWaveTimer;
+        spawnTimer = CurrentTrickleFrequency();
+        waveTimer = CurrentPulseFrequency();
 
         // Optional: spawn initial population
         for (int i = 0; i < 10; i++)
@@ -66,28 +59,28 @@ public class VictimSystem : MonoBehaviour
         // -------------------------
         // INDIVIDUAL SPAWNING
         // -------------------------
-        spawnTimer -= Time.deltaTime * smallWaveTimerMultiplier;
+        spawnTimer -= Time.deltaTime;
 
         if (spawnTimer <= 0f && victims.Count < maxVictims)
         {
-            int smallWaveAmount = Mathf.RoundToInt(smallWaveVictimAmount * smallWaveAmountMultiplier);
+            int smallWaveAmount = Mathf.RoundToInt(CurrentTrickleStrength());
             for (int i = 0; i < smallWaveAmount; i++)
             {
                 if (victims.Count < maxVictims)
                     SpawnVictim();
             }
-            spawnTimer = spawnInterval;
+            spawnTimer = CurrentTrickleFrequency();
         }
 
         // -------------------------
         // WAVE SPAWNING 
         // Every X seconds spawn Y victims instantly
         // -------------------------
-        waveTimer -= Time.deltaTime * largeWaveTimerMultiplier;
+        waveTimer -= Time.deltaTime;
 
         if (waveTimer <= 0f)
         {
-            int largeWaveAmount = Mathf.RoundToInt(largeWaveVictimAmount * largeWaveAmountMultiplier);
+            int largeWaveAmount = Mathf.RoundToInt(CurrentPulseStrength());
 
             for (int i = 0; i < largeWaveAmount; i++)
             {
@@ -96,7 +89,7 @@ public class VictimSystem : MonoBehaviour
             }
 
             AudioManager.Instance.Play("TyrantLarynx");
-            waveTimer = LargeWaveTimer;
+            waveTimer = CurrentPulseFrequency();
         }
 
         // Simulate victim units
@@ -191,5 +184,68 @@ public class VictimSystem : MonoBehaviour
         if (destinationRegions != null)
             foreach (var d in destinationRegions)
                 d.DrawGizmo(Color.green);
+    }
+
+    // --------------------------------------------
+    // Value calculations
+    // --------------------------------------------
+    public float CurrentTrickleFrequency()
+    {
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[SongData.Tag];
+
+        //Apply base frequency.
+        float _trickleFrequency = data.MainStats[MainStat.SongTrickleFrequencyBase];
+        //Apply additive percentage (If frequency goes up by 100%: frequency is doubled / trickle timer is halved). This calculation ensures frequency/timer never reaches zero.
+        _trickleFrequency *= 1f / (1f + (data.MainStats[MainStat.SongTrickleFrequencyAdditivePercentage] / 100));
+
+        //This number should be used as a timer value. It represents "spawns per second".
+        return _trickleFrequency;
+    }
+
+    public float CurrentPulseFrequency()
+    {
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[SongData.Tag];
+
+        //Apply base frequency.
+        float _pulseFrequency = data.MainStats[MainStat.SongPulseFrequencyBase];
+        //Apply additive percentage (If frequency goes up by 100%: frequency is doubled / pulse timer is halved). This calculation ensures frequency/timer never reaches zero.
+        _pulseFrequency *= 1f / (1f + (data.MainStats[MainStat.SongPulseFrequencyAdditivePercentage] / 100));
+
+        //This number should be used as a timer value. It represents "spawns per second".
+        return _pulseFrequency;
+    }
+
+    public float CurrentTrickleStrength()
+    {
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[SongData.Tag];
+
+        //Apply base strength
+        float _trickleStrength = data.MainStats[MainStat.SongTrickleStrengthBase];
+
+        //Apply add
+        _trickleStrength += data.MainStats[MainStat.SongTrickleStrengthAdd];
+
+        //Apply additivePercentage
+        _trickleStrength += _trickleStrength * data.MainStats[MainStat.SongTrickleStrengthAdditivePercentage];
+
+        //This number represents a simple spawn value every time the trickle spawn happens.
+        return _trickleStrength;
+    }
+
+    public float CurrentPulseStrength()
+    {
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[SongData.Tag];
+
+        //Apply base strength
+        float _pulseStrength = data.MainStats[MainStat.SongPulseStrengthBase];
+
+        //Apply add
+        _pulseStrength += data.MainStats[MainStat.SongTrickleStrengthAdd];
+
+        //Apply additivePercentage
+        _pulseStrength += _pulseStrength * data.MainStats[MainStat.SongPulseStrengthAdditivePercentage];
+
+        //This number represents a simple spawn value every time the trickle spawn happens.
+        return _pulseStrength;
     }
 }
