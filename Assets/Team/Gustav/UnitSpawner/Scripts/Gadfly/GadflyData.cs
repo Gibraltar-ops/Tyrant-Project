@@ -13,6 +13,18 @@ public class GadflyData
 
     // Timers
     public float wanderTimer;
+    public float personalCooldownTimer;
+    public float personalHarvestTimer;
+
+    // State Machine
+    public GadflyState state;
+    public enum GadflyState
+    {
+        IdleAtHome,
+        TravelToHarvest,
+        Harvesting,
+        ReturningHome
+    }
 
     // Currency Amounts and Multipliers
     public float biomassAmount;
@@ -25,7 +37,7 @@ public class GadflyData
     public float harvestSpeed;
     public float scale;
 
-    // Bool States
+    // Bool States (for gadflyrenderer)
     public bool isHome = false;
     public bool isHarvesting = false;
     public bool hasReachedHarvest = false;

@@ -6,10 +6,6 @@ public class GadflySystem : MonoBehaviour
     [Header("General Settings")]
     public CurrencySourceSO gadflyData;
     public int maxGadflyUnits = 500;
-    private float harvestCooldownTimer;         // The codes cooldown countdown timer
-    private float harvestDurationTimer;         // The codes harvest duration timer
-
-    private bool harvestActive = false;
 
     // Spawn region spawn & Destination Regions of gadflys
     [Header("REGION Zones")]
@@ -24,25 +20,23 @@ public class GadflySystem : MonoBehaviour
     {
         Lood.UpgradeManager.Instance.AddUpgradeableObject(gadflyData);
     }
+
     // --------------------------------------------
-    // START Set up starting variables & behaviors
+    // START 
     // --------------------------------------------
     void Start()
     {
-        harvestCooldownTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
-
         // Spawn some initial crowd (optional)
         for (int i = 0; i < 1; i++)
             SpawnGatfly();
     }
 
     // --------------------------------------------
-    // UPDATE Simulation & HarvestCycle
+    // UPDATE Simulation
     // --------------------------------------------
     void Update()
     {
-        SimulateGatflies();
-        HandleHarvestCycle();
+        SimulateAndUpdateGadflies();
     }
 
     // --------------------------------------------
@@ -56,6 +50,8 @@ public class GadflySystem : MonoBehaviour
         var gatherRegion = gatherArea[Random.Range(0, gatherArea.Count)];
         var harvestRegion = harvestArea[Random.Range(0, harvestArea.Count)];
 
+        float currentCooldown = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
+
         gadflies.Add(
             new GadflyData
             {
@@ -63,6 +59,10 @@ public class GadflySystem : MonoBehaviour
                 homeRegion = gatherRegion,
                 harvestRegion = harvestRegion,
                 destination = gatherRegion.RandomPointInside(),
+
+                state = GadflyData.GadflyState.IdleAtHome,
+                personalCooldownTimer = currentCooldown + Random.Range(0f, 2f),
+                personalHarvestTimer = 0f,
 
                 wanderSpeed = Random.Range(2f, 2.1f),
                 harvestSpeed = GetCurrentSpeed(),
@@ -75,107 +75,79 @@ public class GadflySystem : MonoBehaviour
                 arcStrength = Random.Range(-0.6f, 0.6f),
                 jitterStrength = Random.Range(0.6f, 1.2f),
 
-                isHome = false,
-                isHarvesting = false,
+                isHome = true,
+                hasPayload = false,
+                isHarvesting = false
             }
         );
     }
 
     // --------------------------------------------
-    // GLOBAL HARVEST STATE MACHINE
+    // MOVEMENT & LOGIC Simulation
     // --------------------------------------------
-    void HandleHarvestCycle()
+    private void SimulateAndUpdateGadflies()
     {
-        int total = gadflies.Count;
-        if (total == 0) return;
 
-        int atHomeCount = 0;
-        int atHarvestArrivedCount = 0;
+        float baseCooldown = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
+        float baseHarvestDuration = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyHarvestDuration];
+        float speed = GetCurrentSpeed();
 
-        for (int i = 0; i < total; i++)
-        {
-            if (gadflies[i].isHome)
-                atHomeCount++;
-
-            if (gadflies[i].hasReachedHarvest)
-                atHarvestArrivedCount++;
-        }
-
-        // ------------------------------------------------
-        // 1. ONLY COUNTDOWN TO NEXT HARVEST IF
-        //     at least HALF have returned home
-        // ------------------------------------------------
-        if (!harvestActive && atHomeCount >= total * 0.5f)
-        {
-            harvestCooldownTimer -= Time.deltaTime;
-        }
-        // ------------------------------------------------
-        // 2. WHEN TIMER HITS ZERO -> FORCE ALL TO HARVEST
-        // ------------------------------------------------
-        if (!harvestActive && harvestCooldownTimer <= 0f)
-        {
-            harvestActive = true;
-            harvestDurationTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyHarvestDuration];
-
-            for (int i = 0; i < total; i++)
-            {
-                var gadfly = gadflies[i];
-
-                gadfly.isHarvesting = true;
-                gadfly.isHome = false;
-                gadfly.hasReachedHarvest = false;
-                gadfly.destination = gadfly.harvestRegion.RandomPointInside();
-
-                gadfly.hasPayload = false;
-                gadfly.hasThrownPayload = false;
-            }
-        }
-        // ------------------------------------------------
-        // 3. START HARVEST DURATION TIMER
-        //     WHEN AT LEAST HALF REACH HARVEST
-        // ------------------------------------------------
-        if (harvestActive && atHarvestArrivedCount >= total * 0.5f)
-        {
-            harvestDurationTimer -= Time.deltaTime;
-        }
-        // ------------------------------------------------
-        // 4. WHEN HARVEST DURATION ENDS -> SEND ALL HOME
-        // ------------------------------------------------
-        if (harvestActive && harvestDurationTimer <= 0f)
-        {
-            harvestActive = false;
-            harvestCooldownTimer = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
-
-            for (int i = 0; i < total; i++)
-            {
-                var gadfly = gadflies[i];
-
-                gadfly.isHarvesting = false;
-                gadfly.isHome = false;
-                gadfly.hasReachedHarvest = false;
-                gadfly.destination = gadfly.homeRegion.RandomPointInside();
-
-                gadfly.hasPayload = true;
-                gadfly.hasThrownPayload = false;
-            }
-        }
-    }
-
-    // --------------------------------------------
-    // MOVEMENT Simulation
-    // --------------------------------------------
-    private void SimulateGatflies()
-    {
         foreach (var gadfly in gadflies)
         {
-            // Selection of movement speed
-            float targetSpeed = gadfly.isHarvesting ? GetCurrentSpeed() : gadfly.wanderSpeed;
+            // --- 1. STATE MACHINE LOGIC ---
 
-            // Target direction
+            switch (gadfly.state)
+            {
+                case GadflyData.GadflyState.IdleAtHome:
+                    gadfly.personalCooldownTimer -= Time.deltaTime;
+
+
+                    gadfly.isHome = true;
+                    gadfly.hasPayload = false;
+                    gadfly.isHarvesting = false;
+
+
+                    if (gadfly.personalCooldownTimer <= 0f)
+                    {
+                        gadfly.state = GadflyData.GadflyState.TravelToHarvest;
+                        gadfly.destination = gadfly.harvestRegion.RandomPointInside();
+                        gadfly.isHome = false;
+                    }
+                    break;
+
+                case GadflyData.GadflyState.TravelToHarvest:
+                    gadfly.isHome = false;
+                    gadfly.isHarvesting = true;
+                    break;
+
+                case GadflyData.GadflyState.Harvesting:
+                    gadfly.personalHarvestTimer -= Time.deltaTime;
+                    gadfly.isHome = false;
+
+
+                    if (gadfly.personalHarvestTimer <= 0f)
+                    {
+                        gadfly.state = GadflyData.GadflyState.ReturningHome;
+                        gadfly.destination = gadfly.homeRegion.RandomPointInside();
+                        gadfly.hasPayload = true;
+                    }
+                    break;
+
+                case GadflyData.GadflyState.ReturningHome:
+                    gadfly.isHome = false;
+                    break;
+            }
+
+            // --- 2. MOVEMENT PHYSICS  ---
+
+
+            float targetSpeed = (gadfly.state == GadflyData.GadflyState.IdleAtHome) ? gadfly.wanderSpeed : speed;
+
             Vector2 toTarget = (gadfly.destination - gadfly.position);
             Vector2 targetDir = toTarget.normalized;
+            float distToTarget = toTarget.magnitude;
 
-            // Arc Flight (Only when Traveling)
+            // Arc Flight
             if (!gadfly.isHome)
             {
                 Vector2 perp = new Vector2(-targetDir.y, targetDir.x);
@@ -187,7 +159,7 @@ public class GadflySystem : MonoBehaviour
             gadfly.velocity = Vector2.Lerp(gadfly.velocity, targetDir * targetSpeed, Time.deltaTime * 3.5f);
 
             // Apply "Micro Jitter" when home
-            if (gadfly.isHome && !gadfly.isHarvesting)
+            if (gadfly.isHome)
             {
                 Vector2 jitter = Random.insideUnitCircle * gadfly.jitterStrength;
                 gadfly.velocity += jitter * 0.4f;
@@ -196,65 +168,92 @@ public class GadflySystem : MonoBehaviour
             // Move Gadfly
             gadfly.position += gadfly.velocity * Time.deltaTime;
 
-            // Destination Reached Check
-            if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.45f)
+            // --- 3. DESTINATION REACHED CHECK ---
+
+            if (distToTarget < 0.45f)
             {
-                if (gadfly.isHarvesting)
+
+
+                if (gadfly.state == GadflyData.GadflyState.TravelToHarvest)
                 {
+
+                    gadfly.state = GadflyData.GadflyState.Harvesting;
                     gadfly.hasReachedHarvest = true;
+                    gadfly.personalHarvestTimer = baseHarvestDuration;
                 }
-                else
+                else if (gadfly.state == GadflyData.GadflyState.ReturningHome)
                 {
-                    gadfly.isHome = true;
-                    gadfly.wanderTimer = Random.Range(1f, 2f);
-                    gadfly.wanderDirection = Random.insideUnitCircle.normalized;
 
-                    // THROW ONLY ONCE PER RETURN
-                    if (gadfly.hasPayload && !gadfly.hasThrownPayload)
-                    {
-                        gadfly.hasThrownPayload = true;
-                        gadfly.hasPayload = false;
+                    gadfly.state = GadflyData.GadflyState.IdleAtHome;
+                    gadfly.personalCooldownTimer = baseCooldown;
 
 
+                    ThrowPayload(gadfly);
 
-                        var collectStats = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].CollectStats;
-                        Dictionary<Currency, int> collectAmounts = new();
 
-                        foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
-                        {
-                            int collectAmount = GetCurrentCollectAmount(item.Key, gadflyData.Tag);
-                            if (collectAmount != 0)
-                            {
-                                collectAmounts.Add(item.Key, collectAmount);
-                            }
-                        }
+                    gadfly.destination = gadfly.homeRegion.RandomPointInside();
+                }
+                else if (gadfly.state == GadflyData.GadflyState.IdleAtHome)
+                {
 
-                        ProjectileDirector.Instance.SpawnHumanProjectile(
-                            gadfly.position, collectAmounts
-                        );
-                    }
+                    HandleIdleWander(gadfly);
                 }
             }
 
-            // Idle Wander in soft circles
-            if (gadfly.isHome && !gadfly.isHarvesting)
+            // --- 4. IDLE WANDER LOGIC ---
+            if (gadfly.state == GadflyData.GadflyState.IdleAtHome)
             {
-                gadfly.wanderTimer -= Time.deltaTime;
-
-                if (gadfly.wanderTimer <= 0f)
-                {
-                    gadfly.wanderDirection = Random.insideUnitCircle.normalized;
-                    gadfly.wanderTimer = Random.Range(0.6f, 1.2f);
-                }
-
-                // Gently bias destination instead of snapping
-                gadfly.destination = gadfly.position + gadfly.wanderDirection * Random.Range(0.4f, 0.8f);
-
-                // Stay inside home region
-                if (!gadfly.homeRegion.Contains(gadfly.destination))
-                    gadfly.destination = gadfly.homeRegion.RandomPointInside();
+                HandleIdleWander(gadfly);
             }
         }
+    }
+
+
+    private void ThrowPayload(GadflyData gadfly)
+    {
+
+        if (gadfly.hasPayload)
+        {
+            gadfly.hasThrownPayload = true;
+            gadfly.hasPayload = false;
+
+            var collectStats = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].CollectStats;
+            Dictionary<Currency, int> collectAmounts = new();
+
+            foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
+            {
+                int collectAmount = GetCurrentCollectAmount(item.Key, gadflyData.Tag);
+                if (collectAmount != 0)
+                {
+                    collectAmounts.Add(item.Key, collectAmount);
+                }
+            }
+
+            ProjectileDirector.Instance.SpawnHumanProjectile(
+                gadfly.position, collectAmounts
+            );
+        }
+    }
+
+
+    private void HandleIdleWander(GadflyData gadfly)
+    {
+        gadfly.wanderTimer -= Time.deltaTime;
+
+        if (gadfly.wanderTimer <= 0f)
+        {
+            gadfly.wanderDirection = Random.insideUnitCircle.normalized;
+            gadfly.wanderTimer = Random.Range(1f, 2f);
+        }
+
+
+        if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.5f || gadfly.wanderTimer <= 0f)
+        {
+            gadfly.destination = gadfly.position + gadfly.wanderDirection * Random.Range(0.4f, 0.8f);
+        }
+
+        if (!gadfly.homeRegion.Contains(gadfly.destination))
+            gadfly.destination = gadfly.homeRegion.RandomPointInside();
     }
 
     // --------------------------------------------
@@ -270,19 +269,13 @@ public class GadflySystem : MonoBehaviour
             h.DrawGizmo(Color.brown);
     }
 
-
     public float GetCurrentSpeed()
     {
         CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag];
-        //Apply base speed (in ticks per second)
         float _speed = data.MainStats[MainStat.BaseSpeed];
-        //Apply simple add
         _speed += data.MainStats[MainStat.SpeedAdd];
-        //Apply simple multiply
         _speed *= data.MainStats[MainStat.SpeedMultiply];
-        //Apply additive percentage
         _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
-        //Apply multiplicative percentage
         _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
 
         return _speed;
@@ -290,22 +283,14 @@ public class GadflySystem : MonoBehaviour
 
     public int GetCurrentCollectAmount(Currency currency, string tag)
     {
-        //
         CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[tag];
-        //Apply base speed (in ticks per second)
         float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
-        //Apply simple add
         finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
-        //Apply simple multiply
         finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
-        //Apply additive percentage
         finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
-        //Apply multiplicative percentage
         finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
 
-        //Set current total collect amount for this currency.
         data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;
         return (int)finalCollectAmount;
-
     }
 }
