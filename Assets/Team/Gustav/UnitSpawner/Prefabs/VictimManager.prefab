@@ -55,17 +55,15 @@ MonoBehaviour:
   largeWaveVictimAmount: 10
   largeWaveAmountMultiplier: 1
   largeWaveTimerMultiplier: 1
+  minScale: 0.1
+  maxScale: 0.11
   spawnRegions:
-  - center: {x: -25, y: -12}
-    size: {x: 1, y: 10}
-  - center: {x: 25, y: -12}
-    size: {x: 1, y: 10}
-  - center: {x: 0, y: -18}
-    size: {x: 48, y: 1}
+  - center: {x: 0, y: -14}
+    size: {x: 40, y: 1}
   destinationRegions:
-  - center: {x: 0, y: -9.25}
-    radius: 2.5
-    length: 10
+  - center: {x: 0.4, y: -10.65}
+    radius: 1.5
+    length: 14
 --- !u!114 &1359637981827827607
 MonoBehaviour:
   m_ObjectHideFlags: 0
