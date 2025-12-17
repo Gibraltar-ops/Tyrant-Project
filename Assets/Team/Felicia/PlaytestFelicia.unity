@@ -5869,6 +5869,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
+      propertyPath: smoothSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: layers.Array.size
       value: 11
       objectReference: {fileID: 0}
@@ -6155,6 +6159,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paralax_World
       objectReference: {fileID: 0}
+    - target: {fileID: 4320426474894437502, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
+      propertyPath: parallaxStrength
+      value: 0.081
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817103690393179825, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
+      propertyPath: parallaxStrength
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7487175471199302555, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
+      propertyPath: parallaxStrength
+      value: 0.082
+      objectReference: {fileID: 0}
     - target: {fileID: 8183701210983557663, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6195,7 +6211,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2171804368447262016, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
+    - {fileID: 9039604805214563777, guid: 56deff8a249a3314bbe8fd2bc45af9fa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
