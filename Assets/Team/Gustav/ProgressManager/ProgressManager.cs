@@ -51,7 +51,7 @@ public class ProgressManager : MonoBehaviour
             Debug.Log("No more stages");
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         if (TransitionManager.Instance != null && TransitionManager.Instance.fader != null)
         {
