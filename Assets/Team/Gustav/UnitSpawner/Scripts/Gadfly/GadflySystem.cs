@@ -27,8 +27,8 @@ public class GadflySystem : MonoBehaviour
     void Start()
     {
         // Spawn some initial crowd (optional)
-        for (int i = 0; i < 1; i++)
-            SpawnGatfly();
+        // for (int i = 0; i < 1; i++)
+        //     SpawnGatfly();
     }
 
     // --------------------------------------------

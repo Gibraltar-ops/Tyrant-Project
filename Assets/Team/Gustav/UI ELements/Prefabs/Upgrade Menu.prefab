@@ -32,9 +32,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8004024072991853626}
-  - {fileID: 9034857725541885142}
   - {fileID: 6963350393382537015}
+  - {fileID: 9034857725541885142}
+  - {fileID: 8004024072991853626}
   - {fileID: 6814885924685292554}
   m_Father: {fileID: 3387334049894844730}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1243472921570505847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 6347281079518838439}
   - component: {fileID: 6454003776999757288}
   m_Layer: 5
-  m_Name: Tab_Btn (1)
+  m_Name: BroodChamberTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8709340439519857776, guid: 9250d89632cf26a48a83795b2332d72c, type: 3}
+  m_Sprite: {fileID: -6833069732190628969, guid: a75f7f68ef65f324485e26a0096940ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 6525375728360090310}
   - component: {fileID: 7143828979195684931}
   m_Layer: 5
-  m_Name: Page (4)
+  m_Name: SurvivalPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 3332018588458451599}
   - component: {fileID: 4750780053778289167}
   m_Layer: 5
-  m_Name: Tab_Btn (3)
+  m_Name: MawTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 2732762689635130232}
   - component: {fileID: 3991582138871465245}
   m_Layer: 5
-  m_Name: Page (1)
+  m_Name: BroodPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,9 +644,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4365856656240333972}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &4532130655880405796
 GameObject:
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gadfly
+  m_text: Brood
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52f4a613067c4d547887b362bcc39afa, type: 2}
   m_sharedMaterial: {fileID: 7265402210599724499, guid: 52f4a613067c4d547887b362bcc39afa, type: 2}
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Other
+  m_text: Survival
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52f4a613067c4d547887b362bcc39afa, type: 2}
   m_sharedMaterial: {fileID: 7265402210599724499, guid: 52f4a613067c4d547887b362bcc39afa, type: 2}
@@ -1065,7 +1065,7 @@ GameObject:
   - component: {fileID: 5984986887985789086}
   - component: {fileID: 4931775594736062012}
   m_Layer: 5
-  m_Name: Page (3)
+  m_Name: MawPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1136,9 +1136,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4974210506410978855}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &5331256751444158698
 GameObject:
@@ -1169,9 +1169,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8923007888349524042}
-  - {fileID: 2639529818441267036}
   - {fileID: 7213724871280004812}
+  - {fileID: 2639529818441267036}
+  - {fileID: 8923007888349524042}
   - {fileID: 4248847052971325183}
   m_Father: {fileID: 3387334049894844730}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 8373380947618526358}
   - component: {fileID: 8167371332836989647}
   m_Layer: 5
-  m_Name: Page (2)
+  m_Name: BrainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,7 +1289,7 @@ GameObject:
   - component: {fileID: 2305569886662749465}
   - component: {fileID: 4652130752396443881}
   m_Layer: 5
-  m_Name: Tab_Btn (4)
+  m_Name: SurvivalTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8709340439519857776, guid: 9250d89632cf26a48a83795b2332d72c, type: 3}
+  m_Sprite: {fileID: 6850856137379708932, guid: f939b197dd0914242aba67c39940fe03, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1481,6 +1481,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  menuTimeScale: 0.2
+  restoreSpeed: 5
 --- !u!114 &4387341382515832878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,14 +1498,14 @@ MonoBehaviour:
   pageIndex: 0
   toggleGroup: {fileID: 1252898377643523973}
   tabs:
-  - {fileID: 6454003776999757288}
-  - {fileID: 290914117743411355}
   - {fileID: 4750780053778289167}
+  - {fileID: 290914117743411355}
+  - {fileID: 6454003776999757288}
   - {fileID: 4652130752396443881}
   pages:
-  - {fileID: 3991582138871465245}
-  - {fileID: 8167371332836989647}
   - {fileID: 4931775594736062012}
+  - {fileID: 8167371332836989647}
+  - {fileID: 3991582138871465245}
   - {fileID: 7143828979195684931}
   OnPageIndexChanged:
     m_PersistentCalls:
@@ -1665,7 +1667,7 @@ GameObject:
   - component: {fileID: 3492146154155549216}
   - component: {fileID: 290914117743411355}
   m_Layer: 5
-  m_Name: Tab_Btn (2)
+  m_Name: BrainTab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1719,7 +1721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8709340439519857776, guid: 9250d89632cf26a48a83795b2332d72c, type: 3}
+  m_Sprite: {fileID: 3693403765366074162, guid: c955ec0623bb3c5498ada7d0cd7b40a0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
