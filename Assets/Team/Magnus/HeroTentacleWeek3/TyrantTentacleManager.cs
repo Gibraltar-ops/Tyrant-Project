@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TyrantTentacleManager : MonoBehaviour
 {
     [Header("Tentacle Management")]
-    [SerializeField]
     private List<TentacleControllerIK> tentacles;
+
+    [Tooltip("CurrencySourceSO that contains upgradeable parameters for player tentacles")]
+    public CurrencySourceSO PlayerTentacleData;
 
     [SerializeField]
     private int activeTentacleCount = 1;
@@ -53,6 +56,13 @@ public class TyrantTentacleManager : MonoBehaviour
     private float _autoClickInterval = 0.05f;
     private float _currentAutoClickTime = 0f;
 
+    void Awake()
+    {
+        Lood.UpgradeManager.Instance.AddUpgradeableObject(PlayerTentacleData);
+        //Gather all tentacles
+        TentacleControllerIK[] tentacleArray = GetComponentsInChildren<TentacleControllerIK>(true);
+        tentacles = tentacleArray.ToList();
+    }
     void Start() { }
 
     void Update()
@@ -250,44 +260,50 @@ public class TyrantTentacleManager : MonoBehaviour
 
 
         AudioManager.Instance.Play("TyrantEating");
-        EconomyManager.Instance.IncrementCurrency(Currency.Biomass, ModifiedCollectAmount());
+        AwardCurrency();
     }
 
-    public void IncrementBaseValue(float amount, HarvesterBaseValue value, Currency currency)
+    //Currency Gathering
+    private void AwardCurrency()
     {
-        switch (value)
+        var collectStats = Lood.UpgradeManager.Instance.CurrencySources[PlayerTentacleData.Tag].CollectStats;
+
+        //The currencies collected are held in a dictionary "CollectStats". 
+        //Key: Currency, Value: CollectTypeStatBlock (Holds stuff like BaseCollect and multipliers.)
+        foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
         {
-            case HarvesterBaseValue.CollectAdd:
-                collectorData.CollectAdd += (int)amount;
-                break;
-            case HarvesterBaseValue.CollectMultiplier:
-                collectorData.CollectMultiplier += amount;
-                break;
-            case HarvesterBaseValue.TicksPerSecondMultiplier:
-                break;
-            case HarvesterBaseValue.CollectAdditivePercentage:
-                collectorData.CollectAdditivePercentage += amount;
-                break;
-            case HarvesterBaseValue.CollectMultiplicativePercentage:
-                collectorData.CollectMultiplicativePercentage *= 1f + amount;
-                break;
-            default:
-                break;
+            int collectAmount = GetCurrentCollectAmount(item.Key, PlayerTentacleData.Tag);
+            if (collectAmount != 0)
+            {
+                CollectCurrency(item.Key, collectAmount);
+            }
         }
     }
 
-    public int ModifiedCollectAmount()
+    private void CollectCurrency(Currency collectedCurrency, int amount)
     {
-        float finalCurrency = collectorData.BaseCollect;
-
-        finalCurrency += collectorData.CollectAdd;
-
-        finalCurrency *= collectorData.CollectMultiplier;
-
-        finalCurrency += finalCurrency * (collectorData.CollectAdditivePercentage / 100f);
-
-        finalCurrency += finalCurrency * (collectorData.CollectMultiplicativePercentage / 100f);
-
-        return (int)finalCurrency;
+        EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
     }
+
+    public int GetCurrentCollectAmount(Currency currency, string tag)
+    {
+        //
+        CurrencySourceStatBlock data = Lood.UpgradeManager.Instance.CurrencySources[tag];
+        //Apply base speed (in ticks per second)
+        float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
+        //Apply simple add
+        finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
+        //Apply simple multiply
+        finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
+        //Apply additive percentage
+        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+        //Apply multiplicative percentage
+        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
+
+        //Set current total collect amount for this currency.
+        data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;
+        return (int)finalCollectAmount;
+
+    }
+
 }

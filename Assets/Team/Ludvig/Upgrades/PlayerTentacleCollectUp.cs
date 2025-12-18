@@ -9,7 +9,7 @@ public class PlayerTentacleCollectUp : Upgrade
     {
         tentacleManager = FindAnyObjectByType<TyrantTentacleManager>();
         base.Start();
-        CurrentValue = tentacleManager.ModifiedCollectAmount();
+        //CurrentValue = tentacleManager.ModifiedCollectAmount();
         PlayerTentacleShop.UpdateTooltip(FormatValueString(CurrentValue, ValueType));
     }
 
@@ -17,11 +17,11 @@ public class PlayerTentacleCollectUp : Upgrade
     {
         CurrentValue += AddValue;
         tentacleManager.collectorData.CollectAdd += (int)AddValue;
-        PlayerTentacleShop.UpdateTooltip(
-            FormatValueString(
-                (float)tentacleManager.ModifiedCollectAmount(),
-                UpgradeValueType.IntegerRaw
-            )
-        );
+        // PlayerTentacleShop.UpdateTooltip(
+        //     FormatValueString(
+        //         (float)tentacleManager.ModifiedCollectAmount(),
+        //         UpgradeValueType.IntegerRaw
+        //     )
+        // );
     }
 }
