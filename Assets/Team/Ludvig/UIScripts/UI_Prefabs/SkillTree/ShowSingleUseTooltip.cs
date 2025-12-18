@@ -54,22 +54,39 @@ public class ShowSingleUseTooltip : MonoBehaviour, IPointerEnterHandler, IPointe
 
     IEnumerator SetTooltipPosition()
     {
-        // Wait until the end of the frame
         yield return new WaitForEndOfFrame();
 
-        RectTransform TooltipRect = tooltipPanel.GetComponent<RectTransform>();
-        RectTransform canvasRect = TooltipRect.root.GetComponent<RectTransform>();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(TooltipRect);
+        RectTransform tooltipRect = tooltipPanel.GetComponent<RectTransform>();
+        RectTransform canvasRect = tooltipRect.root.GetComponent<RectTransform>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipRect);
 
-        // Convert desired position into canvas space
-        Vector2 desiredPosition;
-        // Or, if you want to follow another element:
-        Vector2 halfSize = new Vector2(TooltipRect.rect.width / 2f * TooltipRect.localScale.x, 0f);
-        Vector2 offset = new Vector2(((RectTransform)transform).rect.width / 2f * TooltipRect.localScale.x, 0f);
-        desiredPosition = GetComponent<RectTransform>().anchoredPosition - halfSize - offset;
+        RectTransform buttonRect = GetComponent<RectTransform>();
 
-        TooltipRect.anchoredPosition = ClampToCanvas(TooltipRect, canvasRect, desiredPosition);
+        // Use the utility method
+        Vector2 buttonPos = GetLocalPositionRelativeToCanvas(buttonRect, canvasRect);
+
+        // Apply offsets
+        Vector2 halfSize = new Vector2(tooltipRect.rect.width / 2f * tooltipRect.localScale.x, 0f);
+        Vector2 offset = new Vector2(buttonRect.rect.width / 2f * tooltipRect.localScale.x, 0f);
+
+        Vector2 desiredPosition = buttonPos - halfSize - offset;
+
+        tooltipRect.anchoredPosition = ClampToCanvas(tooltipRect, canvasRect, desiredPosition);
     }
+
+
+    public Vector2 GetLocalPositionRelativeToCanvas(RectTransform target, RectTransform canvas)
+    {
+        // Convert world position of target into screen point
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(null, target.position);
+
+        // Convert screen point into local position of the canvas
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, screenPoint, null, out Vector2 localPoint);
+
+        return localPoint;
+    }
+
+
 
     public Vector2 ClampToCanvas(RectTransform panel, RectTransform canvas, Vector2 targetPos)
     {
