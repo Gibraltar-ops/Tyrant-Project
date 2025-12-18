@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3375277202038954827}
   - component: {fileID: 3883988502213714511}
+  - component: {fileID: 5937411441943815999}
   m_Layer: 5
   m_Name: TransitionManager
   m_TagString: Untagged
@@ -226,6 +227,18 @@ MonoBehaviour:
   fader: {fileID: 9094113997110180979}
   flashImage: {fileID: 7767130485439501805}
   flashSpeed: 3
+--- !u!225 &5937411441943815999
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635823866920298236}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &8585444518991453711
 GameObject:
   m_ObjectHideFlags: 0
