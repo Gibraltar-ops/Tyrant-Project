@@ -44,11 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3e56c4a1779714ebd4cd1e50c3d3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackDirector
-  healthbar: {fileID: 950149540927658260, guid: 79129eefba9c2da49b2c23bbcd10bbf2, type: 3}
+  healthBar: {fileID: 0}
   humanProjectilePrefab: {fileID: 3266842524508258771, guid: be56f192e3856bf4fa2c1dc4eb5f7cf7, type: 3}
   grenadeProjectilePrefab: {fileID: 7557740418460931513, guid: 62da53fc7d9730849aaf12076b1e383a, type: 3}
   rocketProjectilePrefab: {fileID: 0}
   explosionFXPrefab: {fileID: 823177533608343208, guid: b987069b9eb52574cbc6935bd7160dfb, type: 3}
   humanImpactFXPrefab: {fileID: 1596016400921981985, guid: f2b91236e048fa24288b982e940c968d, type: 3}
   defaultProjectileSpeed: 20
-  tyrantImpactRegions: []
+  tyrantImpactRegions:
+  - center: {x: 0, y: 6.2}
+    radius: 4
+    length: 10
