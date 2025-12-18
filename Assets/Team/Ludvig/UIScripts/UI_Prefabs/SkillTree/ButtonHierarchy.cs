@@ -31,7 +31,7 @@ public class ButtonHierarchy : MonoBehaviour
 
     void Awake()
     {
-        lineRenderer = FindAnyObjectByType<UILineRenderer>();
+        lineRenderer = transform.parent.GetComponentInChildren<UILineRenderer>();
         Remainder = ActiveThreshold;
 
         if (ButtonParents.Count != 0)
