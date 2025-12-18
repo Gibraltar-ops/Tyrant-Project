@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class SplashToNewGame : MonoBehaviour
 {
@@ -7,7 +8,12 @@ public class SplashToNewGame : MonoBehaviour
     {
         GetComponent<VideoPlayer>().loopPointReached += (vp) =>
         {
-            TransitionManager.Instance.TransitionTo("GameSceneFinal");
+            if (TransitionManager.Instance != null)
+            {
+                TransitionManager.Instance.TransitionTo("GameSceneFinal");
+
+            }
+            SceneManager.LoadScene("GameSceneFinal");
         };
     }
 }
