@@ -7,7 +7,7 @@ public class OutroVideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
 
-    private string sceneName = "Main Menu";
+    private string sceneName = "MainMenuPlaytest";
 
     private void Start()
     {

@@ -1,13 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TransitionManager : MonoBehaviour
 {
     public static TransitionManager Instance;
 
     [Header("Fade Settings")]
-    public ScreenFader fader; // assigned in inspector
+    public ScreenFader fader;
+
+    [Header("Game Over Settings")]
+    public Image flashImage;
+    public float flashSpeed = 3f;
 
     private void Awake()
     {
@@ -21,11 +26,26 @@ public class TransitionManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        if (fader != null) StartCoroutine(fader.FadeIn());
     }
 
-    // Public call for transitions
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (fader != null)
+        {
+            StartCoroutine(fader.FadeIn());
+        }
+    }
+
     public void TransitionTo(string sceneName)
     {
         StartCoroutine(PerformTransition(sceneName));
@@ -36,19 +56,55 @@ public class TransitionManager : MonoBehaviour
         if (fader != null)
             yield return fader.FadeOut();
 
-
-        // KOlla på att sy ihop med det här - hur ser vi vilken scen vi skall ladda härnäst? (Använda Async för att ladda från intro till main menu, använd async för att ladda från MM till stages)
-        //  Se om vi kan sy ihop med Introvideocontroller (onvideofinished) 
-        //Behöver även en fade out från stage complete till blackout 
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         loadOp.allowSceneActivation = false;
 
         while (loadOp.progress < 0.9f)
+        {
             yield return null;
+        }
 
         loadOp.allowSceneActivation = true;
 
+        while (!loadOp.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    public void GameOverTransition(string sceneName)
+    {
+        StartCoroutine(PerformGameOverSequence(sceneName));
+    }
+
+    private IEnumerator PerformGameOverSequence(string sceneName)
+    {
+        if (flashImage != null)
+        {
+            flashImage.raycastTarget = true;
+
+            float t = 0;
+            while (t < 1)
+            {
+                t += Time.unscaledDeltaTime * flashSpeed;
+                flashImage.color = new Color(1, 0, 0, Mathf.Lerp(0, 1, t));
+                yield return null;
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
         if (fader != null)
-            yield return fader.FadeIn();
+        {
+            yield return fader.FadeOut();
+        }
+
+
+        if (flashImage != null)
+        {
+            flashImage.color = new Color(1, 0, 0, 0);
+            flashImage.raycastTarget = false;
+        }
+        SceneManager.LoadScene(sceneName);
     }
 }
