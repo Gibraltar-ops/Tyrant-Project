@@ -6514,9 +6514,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 600894035564039473, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 628127432442382954, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2631396737271249138, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_Name
       value: TyrantPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860195229383519295, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2925991045777483717, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6562,6 +6574,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6244347540809385056, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8750201539643437303, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
       propertyPath: shakeManager
       value: 
@@ -6579,6 +6595,26 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+--- !u!1 &1358529025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 628127432442382954, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+  m_PrefabInstance: {fileID: 1358529024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1358529026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 600894035564039473, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+  m_PrefabInstance: {fileID: 1358529024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1358529027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6244347540809385056, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+  m_PrefabInstance: {fileID: 1358529024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1358529028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860195229383519295, guid: d75eb2216eab20f468ad5cbba1d2ba8f, type: 3}
+  m_PrefabInstance: {fileID: 1358529024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1359771426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8076,6 +8112,10 @@ MonoBehaviour:
     parallaxBackground: {fileID: 425416400}
     postProcessing: {fileID: 861557594}
     ressistanceManager: {fileID: 1485233047}
+  kebabArmStage1A: {fileID: 1358529028}
+  kebabArmStage1B: {fileID: 1358529027}
+  kebabArmStage2A: {fileID: 1358529026}
+  kebabArmStage2B: {fileID: 1358529025}
   currentStageIndex: 0
 --- !u!4 &2065868311
 Transform:
