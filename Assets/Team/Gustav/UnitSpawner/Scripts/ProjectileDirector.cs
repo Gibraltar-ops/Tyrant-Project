@@ -56,6 +56,7 @@ public class ProjectileDirector : MonoBehaviour
             defaultProjectileSpeed,
             0,
             humanImpactFXPrefab,
+            "FleshImpact",
             () =>
             {
                 /// Här yeetar gadflies
@@ -87,6 +88,7 @@ public class ProjectileDirector : MonoBehaviour
             defaultProjectileSpeed,
             damage,
             explosionFXPrefab,
+            "ProjectileExplosion",
             () =>
             {
                 EconomyManager.Instance.IncrementCurrency(Currency.HealthPoints, -damage);
@@ -118,6 +120,7 @@ public class ProjectileDirector : MonoBehaviour
             defaultProjectileSpeed * 1.25f,
             damage,
             explosionFXPrefab,
+            "ProjectileExplosion",
             () =>
             {
                 EconomyManager.Instance.IncrementCurrency(Currency.HealthPoints, -damage);
@@ -140,6 +143,7 @@ public class ProjectileDirector : MonoBehaviour
         float speed,
         int payloadValue,
         GameObject impactFX,
+        string impactAudioKey,
         Action onArrive
     )
     {
@@ -155,6 +159,7 @@ public class ProjectileDirector : MonoBehaviour
             speed = speed,
             value = payloadValue,
             impactFX = impactFX,
+            impactAudioKey = impactAudioKey,
             onArrive = onArrive
         });
     }
@@ -166,20 +171,23 @@ public class ProjectileDirector : MonoBehaviour
     {
         for (int i = activeProjectiles.Count - 1; i >= 0; i--)
         {
-            var p = activeProjectiles[i];
+            var projectile = activeProjectiles[i];
 
-            Vector2 dir = (p.target - p.position).normalized;
-            p.position += dir * p.speed * Time.deltaTime;
-            p.obj.transform.position = p.position;
+            Vector2 dir = (projectile.target - projectile.position).normalized;
+            projectile.position += dir * projectile.speed * Time.deltaTime;
+            projectile.obj.transform.position = projectile.position;
 
-            if (Vector2.Distance(p.position, p.target) < 0.35f)
+            if (Vector2.Distance(projectile.position, projectile.target) < 0.35f)
             {
-                if (p.impactFX)
-                    Instantiate(p.impactFX, p.position, Quaternion.identity);
+                if (projectile.impactFX)
+                    Instantiate(projectile.impactFX, projectile.position, Quaternion.identity);
 
-                p.onArrive?.Invoke();
-                AudioManager.Instance.Play("ProjectileExplosion");
-                Destroy(p.obj);
+                projectile.onArrive?.Invoke();
+
+                if (!string.IsNullOrEmpty(projectile.impactAudioKey))
+                    AudioManager.Instance.Play(projectile.impactAudioKey);
+
+                Destroy(projectile.obj);
                 activeProjectiles.RemoveAt(i);
             }
         }
@@ -205,4 +213,6 @@ public class ProjectileData
 
     public GameObject impactFX;
     public Action onArrive;
+
+    public string impactAudioKey;
 }

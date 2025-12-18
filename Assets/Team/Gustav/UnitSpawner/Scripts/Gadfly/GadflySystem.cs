@@ -232,6 +232,7 @@ public class GadflySystem : MonoBehaviour
             ProjectileDirector.Instance.SpawnHumanProjectile(
                 gadfly.position, collectAmounts
             );
+            AudioManager.Instance.Play("HumanScream");
         }
     }
 
