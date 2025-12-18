@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Collections;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -32,12 +33,16 @@ public class MainMenuUI : MonoBehaviour
         btn_Credits.onClick.AddListener(OnCreditsClicked);
         btn_Quit.onClick.AddListener(OnQuitClicked);
 
+        SetupMainMenu();
+
+
+
         // Check if a saved game exists and enable/disable Continue button
         //bool hasSave = PlayerPrefs.HasKey(saveFileKey);
         //btn_Continue.interactable = hasSave;
 
         // Ensure only the main menu is shown on start
-        SetupMainMenu();
+
     }
 
     #region Button Handlers
