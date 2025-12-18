@@ -49,7 +49,7 @@ public class UIDrawer : MonoBehaviour
 
         isOpen = true;
         Animate(openPosition);
-        SetTimeScale(menuTimeScale);
+        //SetTimeScale(menuTimeScale);
     }
 
     public void Close()
@@ -58,7 +58,7 @@ public class UIDrawer : MonoBehaviour
 
         isOpen = false;
         Animate(closedPosition);
-        SetTimeScale(1f);
+        //SetTimeScale(1f);
     }
 
     private void SetTimeScale(float target)
