@@ -20,6 +20,20 @@ public class TabMenu : MonoBehaviour
 
     public int CurrentPageIndex => pageIndex;
 
+    void OnEnable()
+    {
+        ProgressEventTrigger.onProgressEvent += EventHandler;
+    }
+    void OnDisable()
+    {
+
+    }
+
+    void EventHandler(ProgressEvent progressEvent)
+    {
+
+    }
+
     private void Initialize()
     {
         toggleGroup = GetComponentInChildren<ToggleGroup>();
@@ -45,7 +59,7 @@ public class TabMenu : MonoBehaviour
 
     private void Awake()
     {
-        foreach(var toggle in tabs)
+        foreach (var toggle in tabs)
         {
             toggle.onValueChanged.AddListener(CheckForTab);
             toggle.group = toggleGroup;
@@ -75,7 +89,7 @@ public class TabMenu : MonoBehaviour
             pages[i].interactable = isActivePage;
             pages[i].blocksRaycasts = isActivePage;
         }
-        
+
         if (Application.isPlaying)
             OnPageIndexChanged?.Invoke(pageIndex);
     }

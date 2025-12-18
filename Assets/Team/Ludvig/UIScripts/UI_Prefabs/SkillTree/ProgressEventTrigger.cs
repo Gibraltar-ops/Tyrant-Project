@@ -3,7 +3,7 @@ public class ProgressEventTrigger : Upgrader
 {
     private bool _canBuy = true;
 
-    public delegate ProgressEvent OnProgressEvent(ProgressEvent progressEvent);
+    public delegate void OnProgressEvent(ProgressEvent progressEvent);
     public static event OnProgressEvent onProgressEvent;
 
     public ProgressEvent ProgressEvent;
