@@ -14,6 +14,8 @@ public class TransitionManager : MonoBehaviour
     public Image flashImage;
     public float flashSpeed = 3f;
 
+    private bool isTransitioning = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,16 +43,10 @@ public class TransitionManager : MonoBehaviour
         ProgressEventTrigger.onProgressEvent -= HandleProgressEvent;
     }
 
-    private void HandleProgressEvent(ProgressEvent progressEvent)
-    {
-        if (progressEvent == ProgressEvent.WIN)
-        {
-            TransitionTo("OutroCinematic");
-        }
-    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        isTransitioning = false;
         if (fader != null)
         {
             StartCoroutine(fader.FadeIn());
@@ -59,15 +55,24 @@ public class TransitionManager : MonoBehaviour
 
     public void TransitionTo(string sceneName)
     {
+        if (isTransitioning) return;
         StartCoroutine(PerformTransition(sceneName));
     }
 
     private IEnumerator PerformTransition(string sceneName)
     {
+        isTransitioning = true;
         if (fader != null)
             yield return fader.FadeOut();
 
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        if (loadOp == null)
+        {
+            Debug.LogError($"[TransitionManager] Kunde inte ladda scenen '{sceneName}'. Kontrollera stavning och Build Settings.");
+            isTransitioning = false;
+            if (fader != null) StartCoroutine(fader.FadeIn()); // Fadea tillbaka så vi inte fastnar i svart
+            yield break;
+        }
         loadOp.allowSceneActivation = false;
 
         while (loadOp.progress < 0.9f)
@@ -121,5 +126,12 @@ public class TransitionManager : MonoBehaviour
 
         }
         SceneManager.LoadScene(sceneName);
+    }
+    private void HandleProgressEvent(ProgressEvent progressEvent)
+    {
+        if (progressEvent == ProgressEvent.WIN)
+        {
+            TransitionTo("OutroCinematic_Final");
+        }
     }
 }
