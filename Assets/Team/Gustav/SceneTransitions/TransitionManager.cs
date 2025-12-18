@@ -70,8 +70,7 @@ public class TransitionManager : MonoBehaviour
         {
             Debug.LogError($"[TransitionManager] Kunde inte ladda scenen '{sceneName}'. Kontrollera stavning och Build Settings.");
             isTransitioning = false;
-            if (fader != null) StartCoroutine(fader.FadeIn()); // Fadea tillbaka så vi inte fastnar i svart
-            yield break;
+            if (fader != null) StartCoroutine(fader.FadeIn());
         }
         loadOp.allowSceneActivation = false;
 

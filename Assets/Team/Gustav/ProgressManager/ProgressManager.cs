@@ -43,6 +43,8 @@ public class ProgressManager : MonoBehaviour
 
     void MyFunction(ProgressEvent receivedProgressEvent)
     {
+        if (receivedProgressEvent == ProgressEvent.WIN) return;
+
         NextStage();
         //Filter based on event and call the right function
     }
