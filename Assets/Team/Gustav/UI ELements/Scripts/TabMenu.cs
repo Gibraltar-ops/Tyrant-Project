@@ -26,12 +26,17 @@ public class TabMenu : MonoBehaviour
     }
     void OnDisable()
     {
-
+        ProgressEventTrigger.onProgressEvent -= EventHandler;
     }
 
     void EventHandler(ProgressEvent progressEvent)
     {
+        // switch (progressEvent)
+        // {
+        //     case ProgressEvent.UnlockBrain:
 
+        //     default:
+        // }
     }
 
     private void Initialize()

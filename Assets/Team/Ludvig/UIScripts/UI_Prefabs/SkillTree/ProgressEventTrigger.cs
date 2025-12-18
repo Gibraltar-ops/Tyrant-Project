@@ -32,8 +32,8 @@ public enum ProgressEvent
     SetStage1,
     SetStage2,
     SetStage3,
-    UnlockLarynx,
+    WIN,
+    UnlockBrain,
     UnlockBroodChamber,
-    UnlockKebabArms,
 }
 
