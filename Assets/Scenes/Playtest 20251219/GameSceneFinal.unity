@@ -3256,6 +3256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResistanceManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7887457422423889654, guid: f7a50e825ae6e254eb6f76e29fc2d6c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6495,6 +6499,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ThresholdSpawn
   HasSpawned: 0
   Threshold: 0
+--- !u!1001 &1298737761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1635823866920298236, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_Name
+      value: TransitionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.12743
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.74111
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375277202038954827, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54a41356de7653f4da2e4bae6f0a5ad3, type: 3}
 --- !u!114 &1324837633 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1476979663119034996, guid: 44125f489edb7504d8070135cd864ff5, type: 3}
@@ -8101,17 +8162,17 @@ MonoBehaviour:
     playerTyrant: {fileID: 1093492937}
     parallaxBackground: {fileID: 41897330}
     postProcessing: {fileID: 172518482}
-    ressistanceManager: {fileID: 0}
+    resistanceManager: {fileID: 1485233047}
   - stageName: Stage2
     playerTyrant: {fileID: 906515537}
     parallaxBackground: {fileID: 1623224055}
     postProcessing: {fileID: 0}
-    ressistanceManager: {fileID: 1485233047}
+    resistanceManager: {fileID: 1485233047}
   - stageName: Stage3
     playerTyrant: {fileID: 375709790}
     parallaxBackground: {fileID: 425416400}
     postProcessing: {fileID: 861557594}
-    ressistanceManager: {fileID: 1485233047}
+    resistanceManager: {fileID: 1485233047}
   kebabArmStage1A: {fileID: 1358529028}
   kebabArmStage1B: {fileID: 1358529027}
   kebabArmStage2A: {fileID: 1358529026}
@@ -8390,3 +8451,4 @@ SceneRoots:
   - {fileID: 648061468}
   - {fileID: 273414083}
   - {fileID: 2115027553}
+  - {fileID: 1298737761}

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+
 public class ProgressManager : MonoBehaviour
 {
     [System.Serializable]
@@ -12,7 +13,7 @@ public class ProgressManager : MonoBehaviour
         public GameObject playerTyrant;
         public GameObject parallaxBackground;
         public GameObject postProcessing;
-        public GameObject ressistanceManager;
+        public GameObject resistanceManager;
     }
 
     [Header("Stages")]
@@ -35,7 +36,16 @@ public class ProgressManager : MonoBehaviour
 
     // -------- PUBLIC API --------
 
+    void OnEnable()
+    { ProgressEventTrigger.onProgressEvent += MyFunction; }
+    void OnDisable()
+    { ProgressEventTrigger.onProgressEvent -= MyFunction; }
 
+    void MyFunction(ProgressEvent receivedProgressEvent)
+    {
+        NextStage();
+        //Filter based on event and call the right function
+    }
 
     public void NextStage()
     {
@@ -105,11 +115,18 @@ public class ProgressManager : MonoBehaviour
         if (kebabArmStage1B != null)
             kebabArmStage1B.SetActive(isStage2OrHigher);
 
+        if (stages[index].resistanceManager != null)
+        {
+            stages[index].resistanceManager.SetActive(isStage2OrHigher);
+        }
+
         bool isStage3OrHigher = index >= 2;
         if (kebabArmStage2A != null)
             kebabArmStage2A.SetActive(isStage3OrHigher);
         if (kebabArmStage2B != null)
             kebabArmStage2B.SetActive(isStage3OrHigher);
+
+
 
     }
 
@@ -123,5 +140,8 @@ public class ProgressManager : MonoBehaviour
 
         if (stage.postProcessing != null)
             stage.postProcessing.SetActive(active);
+
+        if (stage.resistanceManager != null)
+            stage.resistanceManager.SetActive(active);
     }
 }
