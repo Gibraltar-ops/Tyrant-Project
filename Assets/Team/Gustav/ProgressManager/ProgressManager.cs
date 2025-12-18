@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ProgressManager : MonoBehaviour
 {
@@ -29,14 +30,32 @@ public class ProgressManager : MonoBehaviour
 
     public void NextStage()
     {
+        StartCoroutine(NextStageSequence());
+    }
+
+    private IEnumerator NextStageSequence()
+    {
+        if (TransitionManager.Instance != null && TransitionManager.Instance.fader != null)
+        {
+            yield return TransitionManager.Instance.fader.FadeOut();
+        }
+
         int nextIndex = currentStageIndex + 1;
         if (nextIndex < stages.Count)
         {
             SetStage(nextIndex);
         }
+
         else
         {
-            Debug.Log("No more stages.");
+            Debug.Log("No more stages");
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (TransitionManager.Instance != null && TransitionManager.Instance.fader != null)
+        {
+            yield return TransitionManager.Instance.fader.FadeIn();
         }
     }
 
