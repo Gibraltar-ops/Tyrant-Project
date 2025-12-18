@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901c1211a4d5cf44eabe2991114ea104, type: 3}
   m_Name: BrainBug
   m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
-  Tag: BrainBug
+  Tag: Stage2Evolution
   Shop:
     Name: Brain Bug
     Description: Automatically harvest brain mass from victims
     EffectString: Per victim
-    Lore: 
+    Lore: Lorem ipsum
     CurrentModifierString: 
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 25
-    StartingPrice: 25
-    NextPrice: 25
+    MaxOwned: 1
+    StartingPrice: 20000
+    NextPrice: 20000
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -37,6 +37,20 @@ MonoBehaviour:
   SpeedMultiplicativePercentage: 0
   GadflyCooldown: 10
   GadflyHarvestDuration: 6
+  SongTrickleStrengthBase: 1
+  SongTrickleStrengthAdd: 0
+  SongTrickleStrengthAdditivePercentage: 0
+  SongTrickleFrequencyBase: 1
+  SongTrickleFrequencyAdditivePercentage: 0
+  SongPulseStrengthBase: 10
+  SongPulseStrengthAdditivePercentage: 0
+  SongPulseFrequencyBase: 10
+  SongPulseFrequencyAdditivePercentage: 0
+  SongPulsePerTentacleBonus: 0
+  HealthMaxBase: 1000
+  HealthMaxMultiplier: 1
+  HealthMaxAdditivePercentage: 0
+  HealthMaxCurrentTotal: 0
   BiomassCollect:
     BaseCollect: 0
     CollectMultiplier: 1

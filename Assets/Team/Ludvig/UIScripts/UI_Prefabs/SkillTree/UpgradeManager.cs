@@ -83,6 +83,8 @@ namespace Lood
         public GameObject UpgradeableTooltipPanel;
         public GameObject UpgradeTooltipPanel;
 
+        public GameObject SinglePurchaseTooltip;
+
         public void AddUpgradeableObject(CurrencySourceSO data)
         {
             if (!CurrencySources.ContainsKey(data.Tag))
