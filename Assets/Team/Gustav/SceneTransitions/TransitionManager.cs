@@ -31,11 +31,22 @@ public class TransitionManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        ProgressEventTrigger.onProgressEvent += HandleProgressEvent;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        ProgressEventTrigger.onProgressEvent -= HandleProgressEvent;
+    }
+
+    private void HandleProgressEvent(ProgressEvent progressEvent)
+    {
+        if (progressEvent == ProgressEvent.WIN)
+        {
+            TransitionTo("OutroCinematic");
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
