@@ -89,6 +89,8 @@ public class TransitionManager : MonoBehaviour
                 t += Time.unscaledDeltaTime * flashSpeed;
                 flashImage.color = new Color(1, 0, 0, Mathf.Lerp(0, 1, t));
                 yield return null;
+
+
             }
         }
 
@@ -97,6 +99,7 @@ public class TransitionManager : MonoBehaviour
         if (fader != null)
         {
             yield return fader.FadeOut();
+
         }
 
 
@@ -104,6 +107,7 @@ public class TransitionManager : MonoBehaviour
         {
             flashImage.color = new Color(1, 0, 0, 0);
             flashImage.raycastTarget = false;
+
         }
         SceneManager.LoadScene(sceneName);
     }
