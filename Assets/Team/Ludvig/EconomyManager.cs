@@ -214,10 +214,12 @@ public class EconomyManager : MonoBehaviour
         }
     }
 
+    public bool _isDying = false;
     public void CheckDead()
     {
-        if (HealthPoints <= 0)
+        if (HealthPoints <= 0 && !_isDying)
         {
+            _isDying = true;
             Death();
         }
     }
@@ -228,7 +230,7 @@ public class EconomyManager : MonoBehaviour
 
         if (TransitionManager.Instance != null)
         {
-            TransitionManager.Instance.TransitionTo(sceneToLoad);
+            TransitionManager.Instance.GameOverTransition(sceneToLoad);
         }
         else
         {
