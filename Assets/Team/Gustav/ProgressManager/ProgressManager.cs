@@ -18,6 +18,13 @@ public class ProgressManager : MonoBehaviour
     [Header("Stages")]
     [SerializeField] private List<Stage> stages = new List<Stage>();
 
+    [Header("Kebabarmar")]
+    [SerializeField] private GameObject kebabArmStage1A;
+    [SerializeField] private GameObject kebabArmStage1B;
+    [SerializeField] private GameObject kebabArmStage2A;
+    [SerializeField] private GameObject kebabArmStage2B;
+
+
     [Header("Debug")]
     [SerializeField] private int currentStageIndex = 0;
 
@@ -77,6 +84,8 @@ public class ProgressManager : MonoBehaviour
         currentStageIndex = stageIndex;
         SetStageActive(stages[currentStageIndex], true);
 
+        UpdateKebabArmar(stageIndex);
+
         Debug.Log($"Stage set to: {stages[currentStageIndex].stageName}");
     }
 
@@ -86,6 +95,21 @@ public class ProgressManager : MonoBehaviour
     }
 
     // -------- INTERNAL --------
+    private void UpdateKebabArmar(int index)
+    {
+        bool isStage2OrHigher = index >= 1;
+        if (kebabArmStage1A != null)
+            kebabArmStage1A.SetActive(isStage2OrHigher);
+        if (kebabArmStage1B != null)
+            kebabArmStage1B.SetActive(isStage2OrHigher);
+
+        bool isStage3OrHigher = index >= 2;
+        if (kebabArmStage2A != null)
+            kebabArmStage2A.SetActive(isStage3OrHigher);
+        if (kebabArmStage2B != null)
+            kebabArmStage2B.SetActive(isStage3OrHigher);
+
+    }
 
     private void SetStageActive(Stage stage, bool active)
     {
