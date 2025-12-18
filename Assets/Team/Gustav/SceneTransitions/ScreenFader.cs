@@ -12,9 +12,9 @@ public class ScreenFader : MonoBehaviour
         GetImageComponent();
         if (image != null)
         {
-            image.raycastTarget = true;
             Color c = image.color;
-            image.color = new Color(c.r, c.g, c.b, 0f);
+            image.color = new Color(c.r, c.g, c.b, 1f);
+            image.raycastTarget = true;
         }
     }
 
@@ -49,6 +49,7 @@ public class ScreenFader : MonoBehaviour
 
     private IEnumerator Fade(float targetAlpha)
     {
+        Debug.Log($"ScreenFader: Startar fade till {targetAlpha}");
         GetImageComponent();
 
         float t = 0f;
@@ -65,4 +66,5 @@ public class ScreenFader : MonoBehaviour
         }
         image.color = new Color(c.r, c.g, c.b, targetAlpha);
     }
+
 }
