@@ -58,13 +58,21 @@ public class TyrantTentacleManager : MonoBehaviour
 
     void Awake()
     {
-        Lood.UpgradeManager.Instance.AddUpgradeableObject(PlayerTentacleData);
+        //Lood.UpgradeManager.Instance.AddUpgradeableObject(PlayerTentacleData);
         //Gather all tentacles
         TentacleControllerIK[] tentacleArray = GetComponentsInChildren<TentacleControllerIK>(true);
         tentacles = tentacleArray.ToList();
     }
     void Start() { }
 
+    void OnEnable()
+    {
+        EconomyManager.onCurrencyChanged += UpdateValues;
+    }
+    void OnDisable()
+    {
+        EconomyManager.onCurrencyChanged -= UpdateValues;
+    }
     void Update()
     {
         _currentAutoClickTime += Time.deltaTime;
@@ -296,14 +304,28 @@ public class TyrantTentacleManager : MonoBehaviour
         //Apply simple multiply
         finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
         //Apply additive percentage
-        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+        finalCollectAmount *= 1 + (data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100);
         //Apply multiplicative percentage
         finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
+
+        //Apply special bonus - Collect per tentacle owned.
+        finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectBonus1] * EconomyManager.Instance.TentacleCount;
+
 
         //Set current total collect amount for this currency.
         data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;
         return (int)finalCollectAmount;
 
+    }
+
+    //This is only for updating UI values for final collect amounts.
+    public void UpdateValues(Currency currency)
+    {
+        var collectStats = Lood.UpgradeManager.Instance.CurrencySources[PlayerTentacleData.Tag].CollectStats;
+        foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
+        {
+            GetCurrentCollectAmount(item.Key, PlayerTentacleData.Tag);
+        }
     }
 
 }

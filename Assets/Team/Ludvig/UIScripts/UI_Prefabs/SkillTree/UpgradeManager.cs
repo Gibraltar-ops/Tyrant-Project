@@ -92,6 +92,10 @@ namespace Lood
                 CurrencySources.Add(data.Tag, new CurrencySourceStatBlock(data));
                 Debug.Log("Upgrade manager added upgradeable object with key: " + data.Tag);
             }
+            else
+            {
+                Debug.LogWarning("WARNING: attempted to add duplicate CurrencySourceSO key. Duplicate key " + data.Tag + " on: " + data.name);
+            }
         }
 
         public void AddUpgrade(UpgradeDataSO data)
@@ -100,6 +104,10 @@ namespace Lood
             {
                 Upgrades.Add(data.Tag, new UpgradeStatBlock(data));
                 Debug.Log("Upgrade manager added upgrade with key: " + data.Tag);
+            }
+            else
+            {
+                Debug.LogWarning("WARNING: attempted to add duplicate UpgradeDataSO key. Duplicate key " + data.Tag + " on: " + data.name);
             }
         }
 
@@ -373,7 +381,10 @@ public enum CollectStat
     CollectAdd,
     CollectAdditivePercentage,
     CollectMultiplicativePercentage,
-    CollectTotalCurrent
+    CollectTotalCurrent,
+    CollectBonus1,
+    CollectBonus2,
+    CollectBonus3
 }
 public class CollectTypeStatBlock
 {
@@ -390,6 +401,9 @@ public class CollectTypeStatBlock
         {CollectStat.CollectAdditivePercentage, 0f},
         {CollectStat.CollectMultiplicativePercentage, 0f},
         {CollectStat.CollectTotalCurrent, 0f},
+        {CollectStat.CollectBonus1, 0f},
+        {CollectStat.CollectBonus2, 0f},
+        {CollectStat.CollectBonus3, 0f},
 
     };
     public CollectTypeStatBlock()
@@ -408,6 +422,9 @@ public class CollectTypeStatBlock
         Stats[CollectStat.CollectAdditivePercentage] = stats.CollectAdditivePercentage;
         Stats[CollectStat.CollectMultiplicativePercentage] = stats.CollectMultiplicativePercentage;
         Stats[CollectStat.CollectTotalCurrent] = stats.BaseCollect;
+        Stats[CollectStat.CollectBonus1] = stats.CollectBonus1;
+        Stats[CollectStat.CollectBonus2] = stats.CollectBonus2;
+        Stats[CollectStat.CollectBonus3] = stats.CollectBonus3;
     }
 }
 
@@ -425,6 +442,9 @@ public class CollectType
     public float CollectAdditivePercentage = 0f;
     public float CollectMultiplicativePercentage = 0f;
     public float CollectTotalCurrent = 0f;
+    public float CollectBonus1 = 0f;
+    public float CollectBonus2 = 0f;
+    public float CollectBonus3 = 0f;
 }
 #endregion
 

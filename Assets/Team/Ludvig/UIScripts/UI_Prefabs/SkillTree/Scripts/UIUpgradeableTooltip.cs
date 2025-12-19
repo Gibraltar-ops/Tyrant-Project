@@ -128,6 +128,7 @@ public class UIUpgradeableTooltip : MonoBehaviour
 
         UpdateCollectLabels();
         StopAllCoroutines();
+        UpdateFields();
         float previousNormalizedScale = ProgressSlider.localScale.x;
 
         long currentCurrency = EconomyManager.Instance.GetCurrent(Lood.UpgradeManager.Instance.CurrencySources[Data.Tag].Shop.BoughtWithCurrency);

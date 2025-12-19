@@ -30,9 +30,12 @@ public class ButtonHierarchy : MonoBehaviour
 
     void Awake()
     {
-        lineRenderer = transform.parent.GetComponentInChildren<UILineRenderer>();
         Remainder = ActiveThreshold;
+    }
 
+    public void AddLines()
+    {
+        lineRenderer = transform.parent.GetComponentInChildren<UILineRenderer>();
         if (ButtonParents.Count != 0)
         {
             foreach (var parent in ButtonParents)
@@ -43,7 +46,14 @@ public class ButtonHierarchy : MonoBehaviour
                 Debug.DrawLine(parent.transform.position, transform.position, Color.red);
             }
         }
+    }
 
+    void OnDrawGizmos()
+    {
+        foreach (var parent in ButtonParents)
+        {
+            Debug.DrawLine(parent.transform.position, transform.position, Color.red);
+        }
     }
 
     void OnEnable()

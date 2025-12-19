@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
-  m_Name: AutoTentacleSpeedUp
+  m_Name: 04 - AutoTentacleSpeedUp
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
-  Tag: AutoTentacleSpeedUp
+  Tag: 04 - AutoTentacleSpeedUp
   Shop:
     Name: Fibrous Tissue
-    Description: Increases the speed of Harvester Tentacles
+    Description: Increases the speed of Harvester Arms.
     EffectString: Tentacle speed
     Lore: 'Sit dolor '
     CurrentModifierString: Amet
@@ -23,7 +23,7 @@ MonoBehaviour:
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 5
+    MaxOwned: 10
     StartingPrice: 25
     NextPrice: 25
     PriceIncrease: 1.2
@@ -38,4 +38,4 @@ MonoBehaviour:
   CurrentModifier: 0
   AddValue: 15
   FormatAs: 6
-  ColorStyle: {fileID: 11400000, guid: cd068c4f898846844952070fa5b1455d, type: 2}
+  ColorStyle: {fileID: 11400000, guid: a90b710b46d6897469bf0fa99247a899, type: 2}

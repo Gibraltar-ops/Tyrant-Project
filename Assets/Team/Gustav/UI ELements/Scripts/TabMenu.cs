@@ -55,6 +55,12 @@ public class TabMenu : MonoBehaviour
         Initialize();
     }
 
+    private void Start()
+    {
+        JumpToPage(0); // ensures correct tab is active at runtime
+    }
+
+
     private void OnValidate()
     {
         Initialize();

@@ -24,6 +24,11 @@ public class EconomyManager : MonoBehaviour
 
     public long BiomassLifetime = 12;
 
+    public int TentacleCount = 1;
+    public int HunterTentacleCount = 1;
+
+    private long _globalMultiplier = 1;
+
     public CurrencyPerSecond BiomassPerSecond = new CurrencyPerSecond();
     public CurrencyPerSecond BrainsPerSecond = new CurrencyPerSecond();
     public CurrencyPerSecond KeratinPerSecond = new CurrencyPerSecond();
@@ -99,7 +104,7 @@ public class EconomyManager : MonoBehaviour
         switch (currency)
         {
             case Currency.Biomass:
-                Biomass += value;
+                Biomass += value * _globalMultiplier;
                 if (!_biomassActive) _biomassActive = true;
                 BiomassPerSecond.AddCurrency((float)value);
 
@@ -111,7 +116,7 @@ public class EconomyManager : MonoBehaviour
                 onCurrencyChanged?.Invoke(Currency.Biomass);
                 break;
             case Currency.Brains:
-                Brains += value;
+                Brains += value * _globalMultiplier;
                 if (!_brainsActive) _brainsActive = true;
                 BrainsPerSecond.AddCurrency((float)value);
 
@@ -119,7 +124,7 @@ public class EconomyManager : MonoBehaviour
                 onCurrencyChanged?.Invoke(Currency.Brains);
                 break;
             case Currency.Keratin:
-                Keratin += value;
+                Keratin += value * _globalMultiplier;
                 if (!_keratinActive) _keratinActive = true;
                 KeratinPerSecond.AddCurrency((float)value);
 
@@ -132,12 +137,12 @@ public class EconomyManager : MonoBehaviour
                 onCurrencyChanged?.Invoke(Currency.Victims);
                 break;
             case Currency.BiomassLifetime:
-                BiomassLifetime += value;
+                BiomassLifetime += value * _globalMultiplier;
                 BiomassLifetime = BiomassLifetime <= 0 ? 0 : BiomassLifetime;
                 onCurrencyChanged?.Invoke(Currency.BiomassLifetime);
                 break;
             case Currency.HealthPoints:
-                HealthPoints += value;
+                HealthPoints += value * _globalMultiplier;
                 HealthPoints = HealthPoints <= 0 ? 0 : HealthPoints;
                 HealthPoints = HealthPoints >= MaxHealth ? MaxHealth : HealthPoints;
                 onCurrencyChanged?.Invoke(Currency.HealthPoints);

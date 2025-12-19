@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
-  m_Name: AutoTentacleBrainsUp
+  m_Name: 05 - AutoTentaclePerTentacleBonus
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
-  Tag: AutoTentacleBrainsUp
+  Tag: 05 - AutoTentaclePerTentacleBonus
   Shop:
-    Name: Brain Extraction
-    Description: Harvester Tentacles also extract some brains
-    EffectString: Brains
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Name: Feeding Frenzy
+    Description: Harvester Arms gather more Biomass for every arm you have.
+    EffectString: Biomass per active arm
+    Lore: 'Sit dolor '
     CurrentModifierString: Amet
     IsActive: 1
-    BoughtWithCurrency: 1
+    BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 5
@@ -32,10 +32,10 @@ MonoBehaviour:
   UpgradeEffects:
   - CurrencySource: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
     StatCategory: 0
-    CurrencyToAffect: 1
-    CollectType: 3
+    CurrencyToAffect: 0
+    CollectType: 7
     UpgradeStat: 0
   CurrentModifier: 0
-  AddValue: 1
-  FormatAs: 3
-  ColorStyle: {fileID: 11400000, guid: b2555faff2dfc274c96d489036ec01ad, type: 2}
+  AddValue: 0.2
+  FormatAs: 2
+  ColorStyle: {fileID: 11400000, guid: a90b710b46d6897469bf0fa99247a899, type: 2}

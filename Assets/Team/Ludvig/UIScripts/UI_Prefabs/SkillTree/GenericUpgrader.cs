@@ -14,15 +14,15 @@ public class GenericUpgrader : Upgrader
 
     public override void ApplyUpgrade(bool maxedOut)
     {
-        if (!_canBuy)
-        {
-            return;
-        }
+        // if (!_canBuy)
+        // {
+        //     return;
+        // }
 
-        if (maxedOut)
-        {
-            _canBuy = false;
-        }
+        // if (maxedOut)
+        // {
+        //     _canBuy = false;
+        // }
 
         if (!Lood.UpgradeManager.Instance.Upgrades.ContainsKey(_upgradeData.Tag))
         {

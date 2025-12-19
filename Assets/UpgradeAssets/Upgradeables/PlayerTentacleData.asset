@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
   Tag: PlayerTentacle
   Shop:
-    Name: Harvester Arm
+    Name: Hunter Arm
     Description: Click to harvest victims.
     EffectString: Per victim
     Lore: Lorem ipsum dolor sit amet.
@@ -23,13 +23,13 @@ MonoBehaviour:
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 1
-    MaxOwned: 20
-    StartingPrice: 25
-    NextPrice: 25
-    PriceIncrease: 1.5
+    MaxOwned: 3
+    StartingPrice: 2
+    NextPrice: 2
+    PriceIncrease: 3
     CanAfford: 0
     MaxedOut: 0
-  ColorStyle: {fileID: 11400000, guid: cd068c4f898846844952070fa5b1455d, type: 2}
+  ColorStyle: {fileID: 11400000, guid: a90b710b46d6897469bf0fa99247a899, type: 2}
   BaseSpeed: 0.5
   SpeedAdd: 0
   SpeedMultiply: 1
@@ -58,6 +58,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   BrainsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -65,6 +68,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   KeratinCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -72,6 +78,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   HealthPointsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -79,3 +88,6 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0

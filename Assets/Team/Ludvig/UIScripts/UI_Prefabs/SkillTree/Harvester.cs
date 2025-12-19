@@ -38,6 +38,15 @@ namespace Lood
 
         }
 
+        public void UpdateValues()
+        {
+            var collectStats = UpgradeManager.Instance.CurrencySources[currencySourceData.Tag].CollectStats;
+            foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
+            {
+                GetCurrentCollectAmount(item.Key, currencySourceData.Tag);
+            }
+        }
+
         public float GetCurrentTicksPerSecond()
         {
             CurrencySourceStatBlock data = UpgradeManager.Instance.CurrencySources[currencySourceData.Tag];
@@ -49,9 +58,9 @@ namespace Lood
             //Apply simple multiply
             _ticksPerSecondCurrent *= data.MainStats[MainStat.SpeedMultiply];
             //Apply additive percentage
-            _ticksPerSecondCurrent += _ticksPerSecondCurrent * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
+            _ticksPerSecondCurrent = _ticksPerSecondCurrent * (1 + (data.MainStats[MainStat.SpeedAdditivePercentage] / 100));
             //Apply multiplicative percentage
-            _ticksPerSecondCurrent += _ticksPerSecondCurrent * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
+            _ticksPerSecondCurrent += _ticksPerSecondCurrent * data.MainStats[MainStat.SpeedMultiplicativePercentage] / 100;
 
             return _ticksPerSecondCurrent;
         }
@@ -67,9 +76,14 @@ namespace Lood
             //Apply simple multiply
             finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
             //Apply additive percentage
-            finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+            finalCollectAmount = finalCollectAmount * (1 + (data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100));
             //Apply multiplicative percentage
             finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
+
+            //Apply special bonus - Per Tentacle Count.
+            finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectBonus1] * EconomyManager.Instance.TentacleCount;
+            //Apply special bonus - Per Hunter Tentacle Count.
+            finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectBonus2] * EconomyManager.Instance.HunterTentacleCount;
 
             //Set current total collect amount for this currency.
             data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;

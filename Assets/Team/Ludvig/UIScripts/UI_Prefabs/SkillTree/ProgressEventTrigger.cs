@@ -34,6 +34,7 @@ public enum ProgressEvent
     SetStage3,
     WIN,
     UnlockBrain,
-    UnlockBroodChamber,
+    UnlockBrood,
+    UnlockSurvival
 }
 

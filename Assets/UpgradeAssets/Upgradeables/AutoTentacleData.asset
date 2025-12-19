@@ -23,20 +23,34 @@ MonoBehaviour:
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 25
-    StartingPrice: 25
-    NextPrice: 25
+    MaxOwned: 2
+    StartingPrice: 150
+    NextPrice: 150
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
-  ColorStyle: {fileID: 11400000, guid: cd068c4f898846844952070fa5b1455d, type: 2}
-  BaseSpeed: 0.5
+  ColorStyle: {fileID: 11400000, guid: a90b710b46d6897469bf0fa99247a899, type: 2}
+  BaseSpeed: 0.2
   SpeedAdd: 0
   SpeedMultiply: 1
   SpeedAdditivePercentage: 0
   SpeedMultiplicativePercentage: 0
   GadflyCooldown: 10
   GadflyHarvestDuration: 6
+  SongTrickleStrengthBase: 1
+  SongTrickleStrengthAdd: 0
+  SongTrickleStrengthAdditivePercentage: 0
+  SongTrickleFrequencyBase: 1
+  SongTrickleFrequencyAdditivePercentage: 0
+  SongPulseStrengthBase: 10
+  SongPulseStrengthAdditivePercentage: 0
+  SongPulseFrequencyBase: 10
+  SongPulseFrequencyAdditivePercentage: 0
+  SongPulsePerTentacleBonus: 0
+  HealthMaxBase: 1000
+  HealthMaxMultiplier: 1
+  HealthMaxAdditivePercentage: 0
+  HealthMaxCurrentTotal: 0
   BiomassCollect:
     BaseCollect: 10
     CollectMultiplier: 1
@@ -44,6 +58,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   BrainsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -51,6 +68,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   KeratinCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -58,6 +78,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   HealthPointsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -65,3 +88,6 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0

@@ -37,15 +37,16 @@ public class ProgressManager : MonoBehaviour
     // -------- PUBLIC API --------
 
     void OnEnable()
-    { ProgressEventTrigger.onProgressEvent += MyFunction; }
+    { ProgressEventTrigger.onProgressEvent += EventHandler; }
     void OnDisable()
-    { ProgressEventTrigger.onProgressEvent -= MyFunction; }
+    { ProgressEventTrigger.onProgressEvent -= EventHandler; }
 
-    void MyFunction(ProgressEvent receivedProgressEvent)
+    void EventHandler(ProgressEvent receivedProgressEvent)
     {
-        if (receivedProgressEvent == ProgressEvent.WIN) return;
-
-        NextStage();
+        if (receivedProgressEvent == ProgressEvent.SetStage2 || receivedProgressEvent == ProgressEvent.SetStage3)
+        {
+            NextStage();
+        }
         //Filter based on event and call the right function
     }
 

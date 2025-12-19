@@ -226,7 +226,7 @@ public class VictimSystem : MonoBehaviour
         _trickleStrength += data.MainStats[MainStat.SongTrickleStrengthAdd];
 
         //Apply additivePercentage
-        _trickleStrength += _trickleStrength * data.MainStats[MainStat.SongTrickleStrengthAdditivePercentage];
+        _trickleStrength += _trickleStrength * data.MainStats[MainStat.SongTrickleStrengthAdditivePercentage] / 100;
 
         //This number represents a simple spawn value every time the trickle spawn happens.
         return _trickleStrength;
@@ -243,7 +243,7 @@ public class VictimSystem : MonoBehaviour
         _pulseStrength += data.MainStats[MainStat.SongTrickleStrengthAdd];
 
         //Apply additivePercentage
-        _pulseStrength += _pulseStrength * data.MainStats[MainStat.SongPulseStrengthAdditivePercentage];
+        _pulseStrength += _pulseStrength * data.MainStats[MainStat.SongPulseStrengthAdditivePercentage] / 100;
 
         //This number represents a simple spawn value every time the trickle spawn happens.
         return _pulseStrength;

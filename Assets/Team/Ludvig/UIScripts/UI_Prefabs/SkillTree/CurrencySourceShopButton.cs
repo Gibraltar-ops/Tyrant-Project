@@ -16,6 +16,7 @@ namespace Lood
         public bool _maxedOut = false;
         public bool Active = false;
         public List<GameObject> ProgressBars;
+        private bool _progressBarsEnabled = false;
 
         //Event is received on the shop objects in the scene.
         public delegate void OnCollectorPurchased(string tag);
@@ -49,6 +50,7 @@ namespace Lood
             buttonHierarchy.ActiveParentLineColor = CurrencySourceData.ColorStyle.MainColor;
             buttonHierarchy.InactiveParentLineColor = CurrencySourceData.ColorStyle.SecondaryColor;
             buttonHierarchy.Lock.GetComponent<Image>().color = CurrencySourceData.ColorStyle.MainColor;
+            buttonHierarchy.AddLines();
 
             foreach (GameObject bar in ProgressBars)
             {
@@ -71,6 +73,38 @@ namespace Lood
         {
             Active = true;
             CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
+            EnableProgressBars();
+        }
+
+        private void Initialize()
+        {
+
+            CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
+            if (!Active) DisableProgressBars();
+        }
+
+        private void DisableProgressBars()
+        {
+            Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency).OverlayColor;
+
+            foreach (GameObject bar in ProgressBars)
+            {
+                Image image = bar.GetComponent<Image>();
+                if (bar.TryGetComponent(out RadialProgressTracker tracker))
+                {
+                    bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 0f);
+                }
+                else
+                {
+                    bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+                }
+            }
+
+            _progressBarsEnabled = false;
+        }
+        private void EnableProgressBars()
+
+        {
             Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency).OverlayColor;
             foreach (GameObject bar in ProgressBars)
             {
@@ -84,30 +118,8 @@ namespace Lood
                     bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 1f);
                 }
             }
+            _progressBarsEnabled = true;
         }
-
-        private void Initialize()
-        {
-
-            CheckInteractable(UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency);
-            Color ProgressTrackerColor = EconomyManager.Instance.GetCurrencySpriteData(Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency).OverlayColor;
-            if (!Active)
-            {
-                foreach (GameObject bar in ProgressBars)
-                {
-                    Image image = bar.GetComponent<Image>();
-                    if (bar.TryGetComponent(out RadialProgressTracker tracker))
-                    {
-                        bar.GetComponent<Image>().color = new Color(ProgressTrackerColor.r, ProgressTrackerColor.g, ProgressTrackerColor.b, 0f);
-                    }
-                    else
-                    {
-                        bar.GetComponent<Image>().color = new Color(image.color.r, image.color.g, image.color.b, 0f);
-                    }
-                }
-            }
-        }
-
         private void CheckInteractable(Currency currency)
         {
             if (!Active)
@@ -116,13 +128,23 @@ namespace Lood
                 return;
             }
 
-            if (_maxedOut) return;
+            // if (_maxedOut) return;
 
-            if (UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut)
+            if (Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.CurrentOwned == Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxOwned)
             {
+
                 _button.interactable = false;
-                _maxedOut = true;
+                DisableProgressBars();
+                Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut = true;
                 return;
+            }
+
+            Lood.UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.MaxedOut = false;
+
+            if (!_progressBarsEnabled)
+            {
+                Debug.Log("max");
+                EnableProgressBars();
             }
 
             if (currency != UpgradeManager.Instance.CurrencySources[CurrencySourceData.Tag].Shop.BoughtWithCurrency)
