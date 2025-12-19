@@ -692,6 +692,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8623148696886480997, guid: d206239774afea94aa74362adfb31126, type: 3}
   m_PrefabInstance: {fileID: 869891798}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1049288250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1049288252}
+  - component: {fileID: 1049288251}
+  m_Layer: 0
+  m_Name: GameSceneCleanUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1049288251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049288250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea77f812f2ea68f438ec203f85a62b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneCleanup
+--- !u!4 &1049288252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049288250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.13286, y: -3.21462, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085927910
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,3 +916,4 @@ SceneRoots:
   - {fileID: 172892261}
   - {fileID: 774846256}
   - {fileID: 834296460}
+  - {fileID: 1049288252}
