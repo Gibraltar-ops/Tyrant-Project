@@ -37,6 +37,10 @@ public class GadflyData
     public float harvestSpeed;
     public float scale;
 
+    public string currentLayerName;
+    public float noiseOffset;
+    public float swarmSpeed;
+
     // Bool States (for gadflyrenderer)
     public bool isHome = false;
     public bool isHarvesting = false;

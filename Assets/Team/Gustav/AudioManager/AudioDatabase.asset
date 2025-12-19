@@ -21,11 +21,21 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0cb73bca75198534182168a59d233b2c, type: 3}
     - {fileID: 8300000, guid: 0fbfdd163a03bd74cb55569d1956644c, type: 3}
     - {fileID: 8300000, guid: ee6d954fff12b8f4cb985cb3d6440456, type: 3}
-    volume: 0.06
+    volume: 0.15
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 5
+    minDelay: 0.05
+    category: 4
+  - id: FleshImpact
+    clips:
+    - {fileID: 8300000, guid: fbe0613cc7d596f4da0551e7b8d1f525, type: 3}
+    volume: 0.15
+    pitchRange: {x: 0.8, y: 1.2}
+    looping: 0
+    limitInstances: 1
+    maxInstances: 6
     minDelay: 0.05
     category: 4
   - id: ProjectileLaunch

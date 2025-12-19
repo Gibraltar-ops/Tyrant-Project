@@ -24,13 +24,10 @@ public class UnitVisual : MonoBehaviour
         transform.position = position;
 
         // Flip left/right
-        if (movementDirection.x < -0.01f)
+        if (movementDirection.x < -0.08f)
             spriteRenderer.flipX = false;
-        else if (movementDirection.x > 0.01f)
+        else if (movementDirection.x > 0.08f)
             spriteRenderer.flipX = true;
-
-        //// Always play walk animation (we only have one)
-        //animator.Play("ManWalking");
     }
 }
 
