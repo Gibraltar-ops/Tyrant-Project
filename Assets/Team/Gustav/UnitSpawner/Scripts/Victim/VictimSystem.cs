@@ -30,6 +30,8 @@ public class VictimSystem : MonoBehaviour
     public List<VictimData> victims = new List<VictimData>();
     public event Action<int> OnVictimCountChanged;
 
+    [SerializeField] FullscreenEffectToggle fullscreenEffect;
+
     //void Awake() // Använd Awake för att logga tidigt
     //{
     //    Debug.Log(
@@ -88,6 +90,7 @@ public class VictimSystem : MonoBehaviour
                     SpawnVictim();
             }
 
+            fullscreenEffect.PlayEffect();
             AudioManager.Instance.Play("TyrantLarynx");
             waveTimer = CurrentPulseFrequency();
         }
