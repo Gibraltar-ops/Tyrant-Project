@@ -15,11 +15,6 @@ public class GameSceneCleanup : MonoBehaviour
             Destroy(Lood.UpgradeManager.Instance.gameObject);
         }
 
-        if (Lood.UpgradeManager.Instance != null)
-        {
-            Destroy(Lood.UpgradeManager.Instance.gameObject);
-        }
-
         if (EconomyManager.Instance != null)
         {
             Destroy(EconomyManager.Instance.gameObject);
