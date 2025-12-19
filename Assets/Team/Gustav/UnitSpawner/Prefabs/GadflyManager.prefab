@@ -45,25 +45,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71565e1f974190f469ab2d1734a81210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GadflySystem
+  gadflyData: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
   maxGadflyUnits: 500
-  biomassAmount: 10
-  biomassMultiplier: 1
-  brainmassAmount: 1
-  brainmassMultiplier: 1
-  harvestMovementSpeed: 4.5
-  harvestCooldown: 10
-  harvestDuration: 6
   spawnArea:
-  - center: {x: -6, y: 8}
+  - center: {x: -7.71, y: 8}
     size: {x: 2, y: 2}
-  gatherArea:
-  - center: {x: -14, y: 7}
-    radius: 3
+  gatherAreaFront:
+  - center: {x: -15.37, y: 7.01}
+    radius: 2.68
     length: 0
-  harvestArea:
-  - center: {x: -30, y: 13}
-    radius: 3
+  gatherAreaBack:
+  - center: {x: 14.21, y: 6.13}
+    radius: 2.69
     length: 0
+  harvestAreaLeft:
+  - center: {x: -31.61, y: 9.8}
+    radius: 2.53
+    length: 0
+  harvestAreaRight:
+  - center: {x: 31.87, y: 10.39}
+    radius: 2.58
+    length: 0
+  frontLayerName: Gadflies_Front
+  backLayerName: Gadflies_Behind
 --- !u!114 &7969190856221877749
 MonoBehaviour:
   m_ObjectHideFlags: 0

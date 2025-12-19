@@ -7,6 +7,7 @@ public class GadflyRenderer : MonoBehaviour
     public GadflySystem gadflySystem;
     public GameObject gadflyPrefab;
 
+
     private IObjectPool<GameObject> pool;
     private readonly List<GameObject> activeVisuals = new(); // All currently active visual objects
 
@@ -79,9 +80,9 @@ public class GadflyRenderer : MonoBehaviour
             // Scale
             visual.GetComponent<UnitVisual>().ApplyScale(data.scale);
 
-            
-            
-            
+
+
+
             var unitVisual = visual.GetComponent<UnitVisual>();
 
             unitVisual.UpdateVisual(data.position, dir);
@@ -91,6 +92,14 @@ public class GadflyRenderer : MonoBehaviour
             if (unitVisual.dummyVisual)
             {
                 unitVisual.dummyVisual.SetActive(data.hasPayload);
+            }
+            var sr = unitVisual.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                if (sr.sortingLayerName != data.currentLayerName)
+                {
+                    sr.sortingLayerName = data.currentLayerName;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class GadflySystem : MonoBehaviour
@@ -7,13 +8,21 @@ public class GadflySystem : MonoBehaviour
     public CurrencySourceSO gadflyData;
     public int maxGadflyUnits = 500;
 
-    // Spawn region spawn & Destination Regions of gadflys
     [Header("REGION Zones")]
     public List<SpawnRegion> spawnArea = new();
-    public List<DestinationRegion> gatherArea = new();
-    public List<DestinationRegion> harvestArea = new();
 
-    // Holds all active resistance fighters
+
+    public List<DestinationRegion> gatherAreaFront = new();
+    public List<DestinationRegion> gatherAreaBack = new();
+
+    public List<DestinationRegion> harvestAreaLeft = new();
+    public List<DestinationRegion> harvestAreaRight = new();
+
+    [Header("Layer Settings")]
+    public string frontLayerName = "Gadflies_Front";
+    public string backLayerName = "Gadflies_Behind";
+
+
     public List<GadflyData> gadflies = new();
 
     void Awake()
@@ -21,34 +30,35 @@ public class GadflySystem : MonoBehaviour
         Lood.UpgradeManager.Instance.AddUpgradeableObject(gadflyData);
     }
 
-    // --------------------------------------------
-    // START 
-    // --------------------------------------------
     void Start()
     {
-        // Spawn some initial crowd (optional)
-        // for (int i = 0; i < 1; i++)
-        //     SpawnGatfly();
+        // Optional start spawn
     }
 
-    // --------------------------------------------
-    // UPDATE Simulation
-    // --------------------------------------------
     void Update()
     {
         SimulateAndUpdateGadflies();
     }
 
     // --------------------------------------------
-    // SPAWNING new Gadfly Unit
+    // SPAWNING 
     // --------------------------------------------
     public void SpawnGatfly()
     {
         if (gadflies.Count >= maxGadflyUnits) return;
 
         var spawnRegion = spawnArea[Random.Range(0, spawnArea.Count)];
-        var gatherRegion = gatherArea[Random.Range(0, gatherArea.Count)];
-        var harvestRegion = harvestArea[Random.Range(0, harvestArea.Count)];
+        var harvestRegion = GetRandomHarvestRegion();
+        if (harvestRegion == null) return;
+
+        bool startInFront = Random.value > 0.5f;
+        var targetList = startInFront ? gatherAreaFront : gatherAreaBack;
+
+        if (targetList.Count == 0) targetList = startInFront ? gatherAreaBack : gatherAreaFront;
+        if (targetList.Count == 0) return;
+
+        var gatherRegion = targetList[Random.Range(0, targetList.Count)];
+        string startLayer = startInFront ? frontLayerName : backLayerName;
 
         float currentCooldown = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
 
@@ -59,6 +69,11 @@ public class GadflySystem : MonoBehaviour
                 homeRegion = gatherRegion,
                 harvestRegion = harvestRegion,
                 destination = gatherRegion.RandomPointInside(),
+
+                currentLayerName = startLayer,
+
+                noiseOffset = Random.Range(0f, 100f),
+                swarmSpeed = Random.Range(0.5f, 1.5f),
 
                 state = GadflyData.GadflyState.IdleAtHome,
                 personalCooldownTimer = currentCooldown + Random.Range(0f, 2f),
@@ -87,7 +102,6 @@ public class GadflySystem : MonoBehaviour
     // --------------------------------------------
     private void SimulateAndUpdateGadflies()
     {
-
         float baseCooldown = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyCooldown];
         float baseHarvestDuration = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].MainStats[MainStat.GadflyHarvestDuration];
         float speed = GetCurrentSpeed();
@@ -95,22 +109,23 @@ public class GadflySystem : MonoBehaviour
         foreach (var gadfly in gadflies)
         {
             // --- 1. STATE MACHINE LOGIC ---
-
             switch (gadfly.state)
             {
                 case GadflyData.GadflyState.IdleAtHome:
                     gadfly.personalCooldownTimer -= Time.deltaTime;
-
-
                     gadfly.isHome = true;
                     gadfly.hasPayload = false;
                     gadfly.isHarvesting = false;
 
+                    HandleSwarmBehavior(gadfly);
 
                     if (gadfly.personalCooldownTimer <= 0f)
                     {
                         gadfly.state = GadflyData.GadflyState.TravelToHarvest;
-                        gadfly.destination = gadfly.harvestRegion.RandomPointInside();
+                        gadfly.harvestRegion = GetRandomHarvestRegion();
+
+                        if (gadfly.harvestRegion != null)
+                            gadfly.destination = gadfly.harvestRegion.RandomPointInside();
                         gadfly.isHome = false;
                     }
                     break;
@@ -123,7 +138,6 @@ public class GadflySystem : MonoBehaviour
                 case GadflyData.GadflyState.Harvesting:
                     gadfly.personalHarvestTimer -= Time.deltaTime;
                     gadfly.isHome = false;
-
 
                     if (gadfly.personalHarvestTimer <= 0f)
                     {
@@ -139,79 +153,100 @@ public class GadflySystem : MonoBehaviour
             }
 
             // --- 2. MOVEMENT PHYSICS  ---
-
-
             float targetSpeed = (gadfly.state == GadflyData.GadflyState.IdleAtHome) ? gadfly.wanderSpeed : speed;
 
             Vector2 toTarget = (gadfly.destination - gadfly.position);
             Vector2 targetDir = toTarget.normalized;
             float distToTarget = toTarget.magnitude;
 
-            // Arc Flight
             if (!gadfly.isHome)
             {
                 Vector2 perp = new Vector2(-targetDir.y, targetDir.x);
                 targetDir += perp * gadfly.arcStrength;
                 targetDir.Normalize();
             }
+            else
+            {
+                float noiseX = Mathf.PerlinNoise(Time.time * gadfly.swarmSpeed, gadfly.noiseOffset) - 0.5f;
+                float noiseY = Mathf.PerlinNoise(Time.time * gadfly.swarmSpeed, gadfly.noiseOffset + 50f) - 0.5f;
+                Vector2 noiseDir = new Vector2(noiseX, noiseY).normalized;
+
+                targetDir = Vector2.Lerp(targetDir, noiseDir, 0.6f).normalized;
+            }
 
             // Smooth velocity blend
             gadfly.velocity = Vector2.Lerp(gadfly.velocity, targetDir * targetSpeed, Time.deltaTime * 3.5f);
-
-            // Apply "Micro Jitter" when home
-            if (gadfly.isHome)
-            {
-                Vector2 jitter = Random.insideUnitCircle * gadfly.jitterStrength;
-                gadfly.velocity += jitter * 0.4f;
-            }
 
             // Move Gadfly
             gadfly.position += gadfly.velocity * Time.deltaTime;
 
             // --- 3. DESTINATION REACHED CHECK ---
-
             if (distToTarget < 0.45f)
             {
-
-
                 if (gadfly.state == GadflyData.GadflyState.TravelToHarvest)
                 {
-
                     gadfly.state = GadflyData.GadflyState.Harvesting;
                     gadfly.hasReachedHarvest = true;
                     gadfly.personalHarvestTimer = baseHarvestDuration;
                 }
                 else if (gadfly.state == GadflyData.GadflyState.ReturningHome)
                 {
-
                     gadfly.state = GadflyData.GadflyState.IdleAtHome;
                     gadfly.personalCooldownTimer = baseCooldown;
-
-
                     ThrowPayload(gadfly);
 
-
-                    gadfly.destination = gadfly.homeRegion.RandomPointInside();
+                    PickNewSwarmDestination(gadfly);
                 }
                 else if (gadfly.state == GadflyData.GadflyState.IdleAtHome)
                 {
-
-                    HandleIdleWander(gadfly);
+                    PickNewSwarmDestination(gadfly);
                 }
-            }
-
-            // --- 4. IDLE WANDER LOGIC ---
-            if (gadfly.state == GadflyData.GadflyState.IdleAtHome)
-            {
-                HandleIdleWander(gadfly);
             }
         }
     }
 
+    private DestinationRegion GetRandomHarvestRegion()
+    {
+        bool goLeft = Random.value > 0.5f;
+        var targetList = goLeft ? harvestAreaLeft : harvestAreaRight;
+
+        if (targetList.Count == 0) targetList = goLeft ? harvestAreaRight : harvestAreaLeft;
+
+        if (targetList.Count == 0) return null;
+
+        return targetList[Random.Range(0, targetList.Count)];
+    }
+    private void PickNewSwarmDestination(GadflyData gadfly)
+    {
+        bool switchToFront = Random.value > 0.5f;
+
+        var targetList = switchToFront ? gatherAreaFront : gatherAreaBack;
+        if (targetList.Count == 0) targetList = switchToFront ? gatherAreaBack : gatherAreaFront;
+
+        gadfly.homeRegion = targetList[Random.Range(0, targetList.Count)];
+        gadfly.destination = gadfly.homeRegion.RandomPointInside();
+
+        gadfly.currentLayerName = switchToFront ? frontLayerName : backLayerName;
+
+        // Reset timer
+        gadfly.wanderTimer = Random.Range(1f, 3f);
+    }
+
+    private void HandleSwarmBehavior(GadflyData gadfly)
+    {
+        gadfly.wanderTimer -= Time.deltaTime;
+
+        if (gadfly.wanderTimer <= 0f)
+        {
+            PickNewSwarmDestination(gadfly);
+        }
+
+        if (!gadfly.homeRegion.Contains(gadfly.destination))
+            gadfly.destination = gadfly.homeRegion.RandomPointInside();
+    }
 
     private void ThrowPayload(GadflyData gadfly)
     {
-
         if (gadfly.hasPayload)
         {
             gadfly.hasThrownPayload = true;
@@ -236,38 +271,13 @@ public class GadflySystem : MonoBehaviour
         }
     }
 
-
-    private void HandleIdleWander(GadflyData gadfly)
-    {
-        gadfly.wanderTimer -= Time.deltaTime;
-
-        if (gadfly.wanderTimer <= 0f)
-        {
-            gadfly.wanderDirection = Random.insideUnitCircle.normalized;
-            gadfly.wanderTimer = Random.Range(1f, 2f);
-        }
-
-
-        if (Vector2.Distance(gadfly.position, gadfly.destination) < 0.5f || gadfly.wanderTimer <= 0f)
-        {
-            gadfly.destination = gadfly.position + gadfly.wanderDirection * Random.Range(0.4f, 0.8f);
-        }
-
-        if (!gadfly.homeRegion.Contains(gadfly.destination))
-            gadfly.destination = gadfly.homeRegion.RandomPointInside();
-    }
-
-    // --------------------------------------------
-    // Editor Gizmos
-    // --------------------------------------------
     private void OnDrawGizmosSelected()
     {
-        foreach (var s in spawnArea)
-            s.DrawGizmo(Color.yellow);
-        foreach (var g in gatherArea)
-            g.DrawGizmo(Color.orange);
-        foreach (var h in harvestArea)
-            h.DrawGizmo(Color.brown);
+        foreach (var s in spawnArea) s.DrawGizmo(Color.yellow);
+        foreach (var g in gatherAreaFront) g.DrawGizmo(Color.cyan);
+        foreach (var g in gatherAreaBack) g.DrawGizmo(Color.blue);
+        foreach (var h in harvestAreaLeft) h.DrawGizmo(Color.red);
+        foreach (var h in harvestAreaRight) h.DrawGizmo(Color.magenta);
     }
 
     public float GetCurrentSpeed()
