@@ -249,7 +249,7 @@ public class TyrantTentacleManager : MonoBehaviour
             tentacles[activeTentacleCount].transform.parent.gameObject.SetActive(true);
             activeTentacleCount++;
 
-            // Here we can add visual feedback or stuff!! / Magnus
+            // Here we can add visual feedback (on spawn) or stuff!! / Magnus
         }
         else { }
     }
