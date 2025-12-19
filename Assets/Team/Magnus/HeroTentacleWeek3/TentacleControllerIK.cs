@@ -146,6 +146,8 @@ public class TentacleControllerIK : MonoBehaviour
 
             case TentacleState.Reaching:
                 // set target to grabbable pos
+
+                AudioManager.Instance.Play("TyrantTentacle");
                 if (currentItem != null)
                 {
                     currentTarget = currentItem.Position;

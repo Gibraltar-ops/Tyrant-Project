@@ -142,7 +142,6 @@ public class TentacleSprawlController : MonoBehaviour
                 HandleReachingLogic();
                 break;
             case SprawlState.Attacking:
-                AudioManager.Instance.Play("HumanScream");
                 HandleAttackMotion();
                 break;
             case SprawlState.Retracting:
@@ -193,6 +192,7 @@ public class TentacleSprawlController : MonoBehaviour
 
     void StartAttack()
     {
+        AudioManager.Instance.Play("HumanScream");
         currentState = SprawlState.Attacking;
 
         foreach (var leg in legs)
