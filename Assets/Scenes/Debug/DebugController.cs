@@ -101,4 +101,21 @@ public class DebugController : MonoBehaviour
             );
         }
     }
+
+    public void Add1KBiomass()
+    {
+        EconomyManager.Instance.IncrementCurrency(Currency.Biomass, 1000);
+    }
+    public void Add1MBiomass()
+    {
+        EconomyManager.Instance.IncrementCurrency(Currency.Biomass, 1000000);
+    }
+    public void Add1KBrains()
+    {
+        EconomyManager.Instance.IncrementCurrency(Currency.Brains, 1000);
+    }
+    public void Add1MBrains()
+    {
+        EconomyManager.Instance.IncrementCurrency(Currency.Brains, 1000000);
+    }
 }

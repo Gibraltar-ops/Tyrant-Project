@@ -27,12 +27,22 @@ public class GadflySystem : MonoBehaviour
 
     void Awake()
     {
-        Lood.UpgradeManager.Instance.AddUpgradeableObject(gadflyData);
+        //Lood.UpgradeManager.Instance.AddUpgradeableObject(gadflyData);
     }
 
     void Start()
     {
         // Optional start spawn
+    }
+
+    void OnEnable()
+    {
+        EconomyManager.onCurrencyChanged += UpdateValues;
+    }
+
+    void OnDisable()
+    {
+        EconomyManager.onCurrencyChanged -= UpdateValues;
     }
 
     void Update()
@@ -271,6 +281,15 @@ public class GadflySystem : MonoBehaviour
         }
     }
 
+    public void UpdateValues(Currency currency)
+    {
+        var collectStats = Lood.UpgradeManager.Instance.CurrencySources[gadflyData.Tag].CollectStats;
+        foreach (KeyValuePair<Currency, CollectTypeStatBlock> item in collectStats)
+        {
+            GetCurrentCollectAmount(item.Key, gadflyData.Tag);
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         foreach (var s in spawnArea) s.DrawGizmo(Color.yellow);
@@ -286,7 +305,7 @@ public class GadflySystem : MonoBehaviour
         float _speed = data.MainStats[MainStat.BaseSpeed];
         _speed += data.MainStats[MainStat.SpeedAdd];
         _speed *= data.MainStats[MainStat.SpeedMultiply];
-        _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
+        _speed *= 1 + (data.MainStats[MainStat.SpeedAdditivePercentage] / 100);
         _speed += _speed * data.MainStats[MainStat.SpeedAdditivePercentage] / 100;
 
         return _speed;
@@ -298,7 +317,7 @@ public class GadflySystem : MonoBehaviour
         float finalCollectAmount = data.CollectStats[currency].Stats[CollectStat.BaseCollect];
         finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
         finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
-        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+        finalCollectAmount = finalCollectAmount * (1 + (data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100));
         finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
 
         data.CollectStats[currency].Stats[CollectStat.CollectTotalCurrent] = finalCollectAmount;

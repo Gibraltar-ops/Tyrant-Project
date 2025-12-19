@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectorDataSO
   Tag: WIN
   Shop:
-    Name: Win the game
-    Description: Kill everyone
+    Name: Ascend
+    Description: Finish the job
     EffectString: 
     Lore: Lorem ipsum
     CurrentModifierString: 
@@ -24,12 +24,12 @@ MonoBehaviour:
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 1
-    StartingPrice: 10
-    NextPrice: 10
+    StartingPrice: 20000
+    NextPrice: 20000
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 1062de9b42deca648b13424ade7879b6, type: 2}
   BaseSpeed: 0.5
   SpeedAdd: 0
   SpeedMultiply: 1

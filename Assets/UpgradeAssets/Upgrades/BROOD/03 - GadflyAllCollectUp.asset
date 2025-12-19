@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
+  m_Name: 03 - GadflyAllCollectUp
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
+  Tag: 03 - AutoTentacleSpeedUp
+  Shop:
+    Name: Pseudosapience
+    Description: Smarter Gadflies collect a little bit more of everything
+    EffectString: All resources
+    Lore: 'Sit dolor '
+    CurrentModifierString: Amet
+    IsActive: 1
+    BoughtWithCurrency: 1
+    CollectsCurrency: 0
+    CurrentOwned: 0
+    MaxOwned: 10
+    StartingPrice: 3000
+    NextPrice: 3000
+    PriceIncrease: 1.2
+    CanAfford: 0
+    MaxedOut: 0
+  UpgradeEffects:
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 0
+    CollectType: 3
+    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 1
+    CollectType: 3
+    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 5
+    CollectType: 3
+    UpgradeStat: 0
+  CurrentModifier: 0
+  AddValue: 1
+  FormatAs: 3
+  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}

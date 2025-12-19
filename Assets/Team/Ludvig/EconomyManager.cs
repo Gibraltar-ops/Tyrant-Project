@@ -27,6 +27,8 @@ public class EconomyManager : MonoBehaviour
     public int TentacleCount = 1;
     public int HunterTentacleCount = 1;
 
+    public int GadflyCount = 0;
+
     private long _globalMultiplier = 1;
 
     public CurrencyPerSecond BiomassPerSecond = new CurrencyPerSecond();

@@ -10,33 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
-  m_Name: 09 - AutoTentacleBrainsPerPlayerTentacleBonus
+  m_Name: 02 - GadflySpeedUp
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
-  Tag: 09 - AutoTentacleBrainsPerPlayerTentacleBonus
+  Tag: 02 - PlayerTentacleEfficiencyUp
   Shop:
-    Name: Behavioral Mimicry
-    Description: 'Harvester Arms extract some brain mass for every active Hunter
-      Arm. '
-    EffectString: Brain mass per Hunter Arm
+    Name: Bioeffectors
+    Description: Increases Gadfly speed
+    EffectString: Gadfly speed
     Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 10
-    StartingPrice: 1500
-    NextPrice: 25
+    MaxOwned: 20
+    StartingPrice: 2000
+    NextPrice: 2000
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
-  - CurrencySource: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
-    StatCategory: 0
-    CurrencyToAffect: 1
-    CollectType: 8
-    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 1
+    CurrencyToAffect: 6
+    CollectType: 0
+    UpgradeStat: 4
   CurrentModifier: 0
-  AddValue: 0.5
-  FormatAs: 2
-  ColorStyle: {fileID: 11400000, guid: a90b710b46d6897469bf0fa99247a899, type: 2}
+  AddValue: 20
+  FormatAs: 6
+  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}

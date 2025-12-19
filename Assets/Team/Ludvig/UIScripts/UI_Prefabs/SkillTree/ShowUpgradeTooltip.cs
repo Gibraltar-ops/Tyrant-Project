@@ -128,12 +128,16 @@ public class ShowUpgradeTooltip : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerExit(PointerEventData eventData)
     {
         RectTransform rTransform = GetComponent<RectTransform>();
-        if (eventData.position.x <= rTransform.position.x && eventData.position.y <= rTransform.position.y + 50 && eventData.position.y >= rTransform.position.y - 50)
-        {
-            Invoke("SetInactive", 0.5f);
-            return;
-        }
+
         tooltipPanel.SetActive(false);
+        return;
+
+        // if (eventData.position.x <= rTransform.position.x && eventData.position.y <= rTransform.position.y + 50 && eventData.position.y >= rTransform.position.y - 50)
+        // {
+        //     Invoke("SetInactive", 0.5f);
+        //     return;
+        // }
+        // tooltipPanel.SetActive(false);
 
     }
     private void SetInactive()

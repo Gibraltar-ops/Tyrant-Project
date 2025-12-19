@@ -143,7 +143,7 @@ namespace Lood
 
             if (!_progressBarsEnabled)
             {
-                Debug.Log("max");
+                //Debug.Log("max");
                 EnableProgressBars();
             }
 

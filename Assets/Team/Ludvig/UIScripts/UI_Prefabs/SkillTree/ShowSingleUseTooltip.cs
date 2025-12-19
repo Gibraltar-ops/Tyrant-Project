@@ -103,6 +103,8 @@ public class ShowSingleUseTooltip : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        tooltipPanel.SetActive(false);
+        return;
         RectTransform rTransform = GetComponent<RectTransform>();
         if (eventData.position.x <= rTransform.position.x && eventData.position.y <= rTransform.position.y + 50 && eventData.position.y >= rTransform.position.y - 50)
         {

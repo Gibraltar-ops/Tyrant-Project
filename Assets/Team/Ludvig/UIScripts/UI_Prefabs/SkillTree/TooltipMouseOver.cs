@@ -8,25 +8,26 @@ public class TooltipMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        IsHovering = true;
-        gameObject.SetActive(true);
+        // IsHovering = true;
+        // gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        SetInactive();
+        // SetInactive();
     }
     private void SetInactive()
     {
-        IsHovering = false;
-        gameObject.SetActive(false);
+        // IsHovering = false;
+        // gameObject.SetActive(false);
     }
 
     public void TryClose()
     {
-        if (!IsHovering)
-        {
-            SetInactive();
-        }
+        // SetInactive();
+        // if (!IsHovering)
+        // {
+        //     // SetInactive();
+        // }
     }
 }
