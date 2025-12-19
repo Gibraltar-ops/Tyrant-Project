@@ -24,8 +24,8 @@ MonoBehaviour:
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 1
-    StartingPrice: 30
-    NextPrice: 30
+    StartingPrice: 10
+    NextPrice: 10
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -58,6 +58,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   BrainsCollect:
     BaseCollect: 2
     CollectMultiplier: 1
@@ -65,6 +68,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   KeratinCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -72,6 +78,9 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
   HealthPointsCollect:
     BaseCollect: 0
     CollectMultiplier: 1
@@ -79,3 +88,6 @@ MonoBehaviour:
     CollectAdditivePercentage: 0
     CollectMultiplicativePercentage: 0
     CollectTotalCurrent: 0
+    CollectBonus1: 0
+    CollectBonus2: 0
+    CollectBonus3: 0
