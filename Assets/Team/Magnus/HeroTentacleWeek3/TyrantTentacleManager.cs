@@ -53,7 +53,7 @@ public class TyrantTentacleManager : MonoBehaviour
     [SerializeField]
     private float explosionShakeDuration = 0.5f;
 
-    private float _autoClickInterval = 0.05f;
+    private float _autoClickInterval = 0.2f;
     private float _currentAutoClickTime = 0f;
 
     void Awake()
