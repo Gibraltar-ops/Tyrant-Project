@@ -5,7 +5,7 @@ public class KebabThrust : MonoBehaviour
 {
     [Header("reaches")]
     [Tooltip("Inner arms reach")]
-    public float innerRange = 14.0f;
+    public float innerRange = 25.0f;
 
     [Tooltip("Outer arms reach")]
     public float outerRange = 25.0f;
