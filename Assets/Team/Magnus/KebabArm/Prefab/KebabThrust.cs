@@ -10,6 +10,12 @@ public class KebabThrust : MonoBehaviour
     [Tooltip("Outer arms reach")]
     public float outerRange = 25.0f;
 
+    [Header("Upgrade settings")]
+    public int maxStrikeCount = 4;
+
+    public bool debugMultiStrike = false;
+    public int CurrentStrikeCount => debugMultiStrike ? 4 : maxStrikeCount;
+
     [Header("Arm references")]
     public Transform leftMostArm;
     public Transform leftCenterArm;
@@ -25,8 +31,18 @@ public class KebabThrust : MonoBehaviour
 
     public void AttackAtPosition(Vector3 targetPosition, System.Action onHit = null)
     {
+        AttackMultipleTargets(new List<Vector3> { targetPosition }, (i) => onHit?.Invoke());
+    }
+
+    public void AttackMultipleTargets(List<Vector3> targetPositions, System.Action<int> onHit = null)
+    {
+        if (targetPositions == null || targetPositions.Count == 0) return;
+
         Transform bestArm = null;
         float shortestDistance = Mathf.Infinity;
+
+        // We choose the best arm based on the first target (primary target)
+        Vector3 primaryTarget = targetPositions[0];
 
         foreach (Transform arm in _allArms)
         {
@@ -42,7 +58,7 @@ public class KebabThrust : MonoBehaviour
             }
 
             float currentMaxRange = GetRangeForArm(arm);
-            float distanceToTarget = Vector2.Distance(targetPosition, arm.position);
+            float distanceToTarget = Vector2.Distance(primaryTarget, arm.position);
 
             // In range and closer than current arm?
             if (distanceToTarget <= currentMaxRange && distanceToTarget < shortestDistance)
@@ -56,11 +72,10 @@ public class KebabThrust : MonoBehaviour
         if (bestArm != null)
         {
             var muscle = bestArm.GetComponent<KebabMuscleMemory>();
-            muscle.Thrust(targetPosition, onHit);
+            muscle.Thrust(targetPositions, onHit);
         }
         else { }
     }
-
     // Range help funktion
     float GetRangeForArm(Transform arm)
     {

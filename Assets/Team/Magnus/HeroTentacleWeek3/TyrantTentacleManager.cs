@@ -114,13 +114,30 @@ public class TyrantTentacleManager : MonoBehaviour
         {
             if (kebabManager != null)
             {
-                kebabManager.AttackAtPosition(
-                    closestFighter.position,
-                    () =>
+                // how many strikes check
+                int strikeCount = kebabManager.CurrentStrikeCount;
+
+
+                List<ResistanceData> targets = FindClosestFighters(clickPosition, grabRadius, strikeCount);
+
+
+                List<Vector3> targetPositions = new List<Vector3>();
+                foreach (var t in targets) targetPositions.Add(t.position);
+
+                kebabManager.AttackMultipleTargets(
+                    targetPositions,
+                    (index) =>
                     {
-                        AudioManager.Instance.Play("TyrantStrike");
-                        AudioManager.Instance.Play("ProjectileExplosion");
-                        DestroyFighter(closestFighter);
+                        if (index >= 0 && index < targets.Count)
+                        {
+                            var fighter = targets[index];
+                            if (fighter != null)
+                            {
+                                AudioManager.Instance.Play("TyrantStrike");
+                                AudioManager.Instance.Play("ProjectileExplosion");
+                                DestroyFighter(fighter);
+                            }
+                        }
                     }
                 );
             }
@@ -137,6 +154,21 @@ public class TyrantTentacleManager : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private List<ResistanceData> FindClosestFighters(Vector2 position, float maxDistance, int count)
+    {
+        if (resistanceSystem == null || resistanceSystem.fighters == null)
+            return new List<ResistanceData>();
+        return resistanceSystem.fighters
+            .Where(f => f != null)
+            .Select(f => new { Fighter = f, DistSq = (f.position - position).sqrMagnitude })
+            .Where(x => x.DistSq <= maxDistance * maxDistance)
+            .OrderBy(x => x.DistSq)
+            .Take(count)
+            .Select(x => x.Fighter)
+            .ToList();
     }
 
     public void DestroyFighter(ResistanceData fighter)
