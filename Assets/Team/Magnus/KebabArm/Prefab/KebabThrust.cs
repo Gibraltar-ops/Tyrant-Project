@@ -41,7 +41,7 @@ public class KebabThrust : MonoBehaviour
         Transform bestArm = null;
         float shortestDistance = Mathf.Infinity;
 
-        // We choose the best arm based on the first target (primary target)
+
         Vector3 primaryTarget = targetPositions[0];
 
         foreach (Transform arm in _allArms)
@@ -49,9 +49,9 @@ public class KebabThrust : MonoBehaviour
             if (arm == null)
                 continue;
 
-            // Muscle script check
+
             var muscle = arm.GetComponent<KebabMuscleMemory>();
-            // arm skip if attackimg
+
             if (muscle == null || muscle.IsAttacking)
             {
                 continue;
@@ -79,12 +79,12 @@ public class KebabThrust : MonoBehaviour
     // Range help funktion
     float GetRangeForArm(Transform arm)
     {
-        // Outer arm check
+        // Outer arm
         if (arm == leftMostArm || arm == rightMostArm)
         {
             return outerRange;
         }
-        // Inner arm check
+        // Inner arm 
         return innerRange;
     }
 
@@ -94,14 +94,14 @@ public class KebabThrust : MonoBehaviour
         if (leftMostArm == null)
             return;
 
-        // Outer arms range (RED)
+        // Outer arms range = (RED)
         Gizmos.color = new Color(1, 0, 0, 0.2f);
         if (leftMostArm)
             Gizmos.DrawWireSphere(leftMostArm.position, outerRange);
         if (rightMostArm)
             Gizmos.DrawWireSphere(rightMostArm.position, outerRange);
 
-        // Inner arms range (Yellow)
+        // Inner arms range =  (Yellow)
         Gizmos.color = new Color(1, 0.92f, 0.016f, 0.2f);
         if (leftCenterArm)
             Gizmos.DrawWireSphere(leftCenterArm.position, innerRange);

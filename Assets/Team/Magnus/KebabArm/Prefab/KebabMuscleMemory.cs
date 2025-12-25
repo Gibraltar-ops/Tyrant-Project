@@ -22,7 +22,7 @@ public class KebabMuscleMemory : MonoBehaviour
 
     [Header("Mutlistrike settings")]
     public float multiStrikeRetractTime = 0.15f;
-    public float multiStrikeHeightMultiplier = 0.5f;
+    public float multiStrikeHeightMultiplier = 1.2f;
 
     [Tooltip("Attack speed downwards")]
     public float attackSpeed = 0.12f;
