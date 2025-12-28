@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Collections;
 
 public class TyrantTentacleManager : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class TyrantTentacleManager : MonoBehaviour
     public GameObject BloodSplatter;
 
     public GameObject Explosion;
+
+    [SerializeField] private ParticleSystem eatingParticleSystem;
+
+
+    [SerializeField] private float eatingEffectDelay = 0.2f;
 
     [SerializeField]
     private int explosionCount = 5;
@@ -297,11 +303,25 @@ public class TyrantTentacleManager : MonoBehaviour
             }
         }
 
-
+        if (eatingParticleSystem != null)
+        {
+            StartCoroutine(PlayEatingParticles());
+        }
 
         AudioManager.Instance.Play("TyrantEating");
         AwardCurrency();
     }
+
+    private IEnumerator PlayEatingParticles()
+    {
+        yield return new WaitForSeconds(eatingEffectDelay);
+        if (eatingParticleSystem != null)
+        {
+            eatingParticleSystem.Play();
+        }
+    }
+
+
 
     //Currency Gathering
     private void AwardCurrency()
