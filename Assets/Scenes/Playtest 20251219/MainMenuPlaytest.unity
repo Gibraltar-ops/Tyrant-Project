@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 9684512}
   - component: {fileID: 9684511}
   - component: {fileID: 9684514}
+  - component: {fileID: 9684515}
   m_Layer: 5
   m_Name: Canvas - Menu
   m_TagString: Untagged
@@ -381,6 +382,23 @@ MonoBehaviour:
   canvas_Extras: {fileID: 724322982}
   canvas_Credits: {fileID: 474697309}
   saveFileKey: SaveExists
+--- !u!114 &9684515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9684509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972e4c4cf29571f4d990355d09a20566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIHoverEffect
+  newGameButton: {fileID: 1876463654}
+  creditsButton: {fileID: 1093221847}
+  quitButton: {fileID: 1526828327}
+  hoverColor: {r: 0.53333336, g: 0, b: 0, a: 1}
+  colorFadeDuration: 0.8
 --- !u!1 &66197547
 GameObject:
   m_ObjectHideFlags: 0
