@@ -12,7 +12,7 @@ public class UIHoverEffect : MonoBehaviour
 
     [Header("Color Settings")]
     public Color hoverColor = Color.darkRed;
-    public float colorFadeDuration = 1.5f;
+    public float colorFadeDuration = 0.8f;
 
     private Dictionary<Transform, Color> originalColors = new Dictionary<Transform, Color>();
 
