@@ -13,11 +13,11 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
     public GameObject BloodSplatter;
 
     void Start()
-    {   
+    {
         victimSystem = FindAnyObjectByType<VictimSystem>();
         animator = GetComponent<Animator>();
-        
-        if(Random.Range(0, 2) == 1)
+
+        if (Random.Range(0, 2) == 1)
         {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
@@ -25,49 +25,50 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
     }
     public override void UpdateAnimation()
     {
-            animator.SetFloat("Time", collector.NormalizedTime);
-            collector.position = transform.position;
-        
+        animator.SetFloat("Time", collector.NormalizedTime);
+        collector.position = transform.position;
 
-        if(collector.NormalizedTime < 0.02f && _victimDestroyed == true)
-        {   
+
+        if (collector.NormalizedTime < 0.02f && _victimDestroyed == true)
+        {
             _victimDestroyed = false;
             closestVictim = FindAnyVictim();
             originPosition = new Vector2(transform.position.x, transform.position.y);
 
-            if(closestVictim == null)
+            if (closestVictim == null)
             {
-                
+
                 collector.Reset();
                 _victimDestroyed = true;
             }
-            
+
+
         }
 
-        if(collector.NormalizedTime > 0.02f && closestVictim != null)
+        if (collector.NormalizedTime > 0.02f && closestVictim != null)
         {
-            transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime *4f);
+            transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime * 4f);
             //transform.position = Vector2.Lerp(originPosition, closestVictim.position, collector.NormalizedTime *2f);
         }
 
-        if(collector.NormalizedTime > 0.52f && !_victimDestroyed)
-        { 
-            
-            if(closestVictim != null)
+        if (collector.NormalizedTime > 0.52f && !_victimDestroyed)
+        {
+
+            if (closestVictim != null)
             {
                 Instantiate(BloodSplatter, closestVictim.position, Quaternion.identity);
                 DestroyVictim(closestVictim);
                 closestVictim = null;
-            
+
             }
-            
+
             _victimDestroyed = true;
         }
-        
-        
+
+
     }
 
-     private VictimData FindAnyVictim()
+    private VictimData FindAnyVictim()
     {
         VictimData closest = null;
 
@@ -82,10 +83,10 @@ public class CollectorCurveAnimationAutoTentacle : CollectorDrivenAnimation
                 continue;
             }
 
-                victim.isMarkedForDeath = true;
-                closest = victim;
-                return closest;
-              
+            victim.isMarkedForDeath = true;
+            closest = victim;
+            return closest;
+
         }
         return closest;
     }
