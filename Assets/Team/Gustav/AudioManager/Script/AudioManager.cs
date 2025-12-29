@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioDatabase database;
 
     [Header("Mixer Routing")]
+    public AudioMixer mainMixer;
     public AudioMixerGroup musicGroup;
     public AudioMixerGroup ambienceGroup;
     public AudioMixerGroup uiGroup;
@@ -47,7 +48,7 @@ public class AudioManager : MonoBehaviour
             src.playOnAwake = false;
             pool.Add(src);
         }
-        
+
         if (database == null)
         {
             Debug.LogError("[Audio] No AudioDatabase assigned!");
@@ -84,8 +85,8 @@ public class AudioManager : MonoBehaviour
         var src = GetFreeSource();
         if (src == null)
         {
-          Debug.Log($"[Audio] Pool exhausted, skipping '{id}'");
-          return;
+            Debug.Log($"[Audio] Pool exhausted, skipping '{id}'");
+            return;
         }
 
         src.clip = s.clips[Random.Range(0, s.clips.Length)];
@@ -137,6 +138,15 @@ public class AudioManager : MonoBehaviour
             case AudioCategory.Ambience: return ambienceGroup;
             case AudioCategory.UI: return uiGroup;
             default: return sfxGroup;
+        }
+    }
+
+    public void SetVolume(string parameterName, float sliderValue)
+    {
+        float db = Mathf.Log10(Mathf.Clamp(sliderValue, 0.0001f, 1f)) * 20;
+        if (mainMixer != null)
+        {
+            mainMixer.SetFloat(parameterName, db);
         }
     }
 }

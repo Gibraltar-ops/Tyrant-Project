@@ -1187,7 +1187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5017982822751020721, guid: f21e8d60db7f08d47899c64a4558d52f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: -24.99997
       objectReference: {fileID: 0}
     - target: {fileID: 5528255639560361805, guid: f21e8d60db7f08d47899c64a4558d52f, type: 3}
       propertyPath: m_fontSize
@@ -12438,6 +12438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1069744197439446508, guid: b963cd781484ed740b49fc8286dd8c24, type: 3}
+      propertyPath: mainMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: f52994ac0fc59eb4b82780b294e7e049, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
