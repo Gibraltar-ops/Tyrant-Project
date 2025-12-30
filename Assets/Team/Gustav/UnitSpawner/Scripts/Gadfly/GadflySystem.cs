@@ -190,7 +190,7 @@ public class GadflySystem : MonoBehaviour
             gadfly.position += gadfly.velocity * Time.deltaTime;
 
             // --- 3. DESTINATION REACHED CHECK ---
-            if (distToTarget < 4f)
+            if (distToTarget < 3f)
             {
                 if (gadfly.state == GadflyData.GadflyState.TravelToHarvest)
                 {
