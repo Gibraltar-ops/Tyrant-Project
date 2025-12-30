@@ -11,10 +11,10 @@ public class KebabThrust : MonoBehaviour
     public float outerRange = 25.0f;
 
     [Header("Upgrade settings")]
-    public int maxStrikeCount = 4;
+    public CurrencySourceSO kebabStats;
 
     public bool debugMultiStrike = false;
-    public int CurrentStrikeCount => debugMultiStrike ? 4 : maxStrikeCount;
+    public int CurrentStrikeCount => debugMultiStrike ? 4 : (kebabStats != null ? kebabStats.KebabMaxStrikeCount : 1);
 
     [Header("Arm references")]
     public Transform leftMostArm;

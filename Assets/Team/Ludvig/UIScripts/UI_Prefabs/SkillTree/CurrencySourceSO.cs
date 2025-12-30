@@ -41,4 +41,7 @@ public class CurrencySourceSO : PurchaseableSO
     public CollectType KeratinCollect;
     public CollectType HealthPointsCollect;
 
+    [Header("Kebabarm Stats")]
+    public int KebabMaxStrikeCount = 4;
+
 }
