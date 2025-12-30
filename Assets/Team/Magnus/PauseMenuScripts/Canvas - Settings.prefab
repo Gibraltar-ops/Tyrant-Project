@@ -33,7 +33,7 @@ RectTransform:
   m_Father: {fileID: 3146716426269487030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -108,7 +108,7 @@ RectTransform:
   m_Father: {fileID: 3718275621234335993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1602765092385914825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ RectTransform:
   m_Father: {fileID: 3389936413127690624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -917,7 +917,7 @@ RectTransform:
   m_Father: {fileID: 5494485704002759452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1178,7 +1178,7 @@ RectTransform:
   m_Father: {fileID: 2744953377876415623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1253,7 +1253,7 @@ RectTransform:
   m_Father: {fileID: 5583141574430129048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1500,7 +1500,7 @@ RectTransform:
   m_Father: {fileID: 5443386381254897078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1631,7 +1631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7002694698579949205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,7 @@ RectTransform:
   m_Father: {fileID: 4559217845597098014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2552,14 +2552,14 @@ GameObject:
   - component: {fileID: 7344055645859686319}
   - component: {fileID: 6778615964901500278}
   - component: {fileID: 1150491692771972631}
-  - component: {fileID: 1527809085777452225}
+  - component: {fileID: 155539076088697965}
   m_Layer: 5
   m_Name: Canvas - Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4129014227375173437
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2654,7 +2654,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1527809085777452225
+--- !u!114 &155539076088697965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2663,12 +2663,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6991399243532485490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c670d0e7ef4ddf459a0fa77dbba440d, type: 3}
+  m_Script: {fileID: 11500000, guid: 972e4c4cf29571f4d990355d09a20566, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExtrasUI
-  btn_Back: {fileID: 0}
-  canvas_MainMenu: {fileID: 0}
-  canvas_Credits: {fileID: 6991399243532485490}
+  m_EditorClassIdentifier: Assembly-CSharp::UIHoverEffect
+  newGameButton: {fileID: 8304784875269304676}
+  creditsButton: {fileID: 0}
+  quitButton: {fileID: 7293585862496366632}
+  hoverColor: {r: 0.5450981, g: 0, b: 0, a: 1}
+  colorFadeDuration: 0.8
 --- !u!1 &7029304186643736663
 GameObject:
   m_ObjectHideFlags: 0

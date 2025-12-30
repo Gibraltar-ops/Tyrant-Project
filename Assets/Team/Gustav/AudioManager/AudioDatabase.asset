@@ -21,94 +21,94 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0cb73bca75198534182168a59d233b2c, type: 3}
     - {fileID: 8300000, guid: 0fbfdd163a03bd74cb55569d1956644c, type: 3}
     - {fileID: 8300000, guid: ee6d954fff12b8f4cb985cb3d6440456, type: 3}
-    volume: 0.15
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 5
     minDelay: 0.05
-    category: 4
+    category: 3
   - id: FleshImpact
     clips:
     - {fileID: 8300000, guid: fbe0613cc7d596f4da0551e7b8d1f525, type: 3}
-    volume: 0.15
+    volume: 1
     pitchRange: {x: 0.8, y: 1.2}
     looping: 0
     limitInstances: 1
     maxInstances: 6
     minDelay: 0.05
-    category: 4
+    category: 3
   - id: ProjectileLaunch
     clips:
     - {fileID: 8300000, guid: abab50d877ff4574d9fbf15eb526b18a, type: 3}
     - {fileID: 8300000, guid: 21d1446807bcd1749a7fc561b17fb45e, type: 3}
     - {fileID: 8300000, guid: 5ce2b4837bd13d34589eb071284c69e1, type: 3}
-    volume: 0.01
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 4
     minDelay: 0.05
-    category: 6
+    category: 3
   - id: ProjectileExplosion
     clips:
     - {fileID: 8300000, guid: e998552c511e4f94b82dd0f2b41b0145, type: 3}
     - {fileID: 8300000, guid: 10bfc5e372b39bd4fa3abe8389271cd8, type: 3}
     - {fileID: 8300000, guid: 8aacba5108f0c2e439c159426fd7d831, type: 3}
     - {fileID: 8300000, guid: 3a99f8daf1e85604fa3df003fa7ee48b, type: 3}
-    volume: 0.05
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 5
     minDelay: 0.05
-    category: 4
+    category: 3
   - id: TyrantEating
     clips:
     - {fileID: 8300000, guid: cd4168c180b7ec246a765ebc86ceeae2, type: 3}
-    volume: 0.1
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 2
     minDelay: 0.5
-    category: 5
+    category: 3
   - id: TyrantStrike
     clips:
     - {fileID: 8300000, guid: 811014be9749c3240a5912369661045d, type: 3}
-    volume: 0.1
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 5
     minDelay: 0.05
-    category: 5
+    category: 3
   - id: TyrantLarynx
     clips:
     - {fileID: 8300000, guid: 29a5bd8873d016f4b90f7a8063daf498, type: 3}
-    volume: 0.2
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 2
     minDelay: 0.5
-    category: 5
+    category: 3
   - id: TyrantTentacle
     clips:
     - {fileID: 8300000, guid: 71466b305a59686488c73766ab159325, type: 3}
     - {fileID: 8300000, guid: 692048860a0ddb54e873e73ba8d6b916, type: 3}
     - {fileID: 8300000, guid: 02f6bb93877841e4cad77a77fb24867a, type: 3}
-    volume: 0.15
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 5
     minDelay: 0.05
-    category: 5
+    category: 3
   - id: UIClick
     clips:
     - {fileID: 8300000, guid: f061e1871d446984493ba88e2b2c1d9d, type: 3}
-    volume: 0.3
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
   - id: UIUpgrade1
     clips:
     - {fileID: 8300000, guid: efc66cae375523c4d870c7522bcef7ec, type: 3}
-    volume: 0.3
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
   - id: UIUpgrade2
     clips:
     - {fileID: 8300000, guid: 50ec3bdbd615e7e48b3bbd856f856fbd, type: 3}
-    volume: 0.3
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
@@ -138,10 +138,20 @@ MonoBehaviour:
   - id: UIUpgrade3
     clips:
     - {fileID: 8300000, guid: 36cdebdd6204d5947b0b5212a7bfbf1d, type: 3}
-    volume: 0.3
+    volume: 1
     pitchRange: {x: 0.9, y: 1.1}
     looping: 0
     limitInstances: 1
     maxInstances: 1
     minDelay: 0.5
     category: 2
+  - id: Music
+    clips:
+    - {fileID: 8300000, guid: 48cd952596577dc46af4ab46fec76c91, type: 3}
+    volume: 1
+    pitchRange: {x: 1, y: 1}
+    looping: 1
+    limitInstances: 1
+    maxInstances: 1
+    minDelay: 0.5
+    category: 0

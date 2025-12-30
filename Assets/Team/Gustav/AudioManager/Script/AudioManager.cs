@@ -57,6 +57,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Play("Music");
+    }
+
     // ------------------- API -------------------- //
 
     public void Play(string id)
