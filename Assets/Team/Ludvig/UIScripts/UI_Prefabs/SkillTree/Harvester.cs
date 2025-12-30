@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Lood
 
         private CurrencySourceTag _tag;
         private CurrencySourceSO currencySourceData;
+
+        public Vector2 PopUpNumberOffset;
 
         private CollectorObjectSpawner _objectSpawner;
         private List<Collector> _collectors;
@@ -96,6 +99,20 @@ namespace Lood
             EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
         }
 
+        private void DoPopup(Currency collectedCurrency, int amount, Vector2 position)
+        {
+            Vector2 offsetPosition = position + Random.insideUnitCircle + PopUpNumberOffset;
+            PopupTextData data = new PopupTextData(offsetPosition, FormatNumbers.FormatValueString(amount, ValueFormatType.IntegerAdditive), Color.white, collectedCurrency);
+            StartCoroutine(DelayedPopup(data));
+
+        }
+        private IEnumerator DelayedPopup(PopupTextData data)
+        {
+            float delay = Random.Range(0f, 0.5f);
+            yield return new WaitForSeconds(delay);
+            EconomyManager.Instance.PopUp(data);
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -115,6 +132,7 @@ namespace Lood
                             if (collectAmount != 0)
                             {
                                 CollectCurrency(item.Key, collectAmount);
+                                DoPopup(item.Key, collectAmount, collector.position);
                             }
                         }
 

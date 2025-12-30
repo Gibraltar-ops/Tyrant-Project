@@ -1,7 +1,8 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopupTextHandler : MonoBehaviour
 {
@@ -37,14 +38,20 @@ public class PopupTextHandler : MonoBehaviour
 
     public void PopUp(PopupTextData data)
     {
-        
+
         foreach (GameObject label in _textPool)
         {
             if (!label.activeSelf)
             {
                 label.SetActive(true);
-                label.GetComponent<TMP_Text>().text = data.Text;
-                label.GetComponent<TMP_Text>().color = data.Color;
+                TMP_Text text = label.GetComponent<PopUpText>()._text;
+                Image image = label.GetComponent<PopUpText>()._image;
+                CurrencySpriteData spriteData = EconomyManager.Instance.GetCurrencySpriteData(data.Currency);
+
+                text.text = data.Text;
+                text.color = spriteData.OverlayColor;
+                image.sprite = spriteData.Sprite;
+                image.color = spriteData.OverlayColor;
                 label.transform.position = Camera.main.WorldToScreenPoint(data.Position);
                 return;
             }
@@ -57,11 +64,14 @@ public struct PopupTextData
     public Vector2 Position;
     public string Text;
     public Color Color;
+    public Currency Currency;
 
-    public PopupTextData(Vector2 position, string text, Color color)
+
+    public PopupTextData(Vector2 position, string text, Color color, Currency currency)
     {
         Position = position;
         Text = text;
         Color = color;
+        Currency = currency;
     }
 }

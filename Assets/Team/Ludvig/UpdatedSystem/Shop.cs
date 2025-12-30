@@ -18,12 +18,12 @@ public class Shop : MonoBehaviour
     public Currency BoughtWithCurrency;
 
     //public GameObject ParentMenu;
-    public TMP_Text ItemNameLabel {get; private set;}
-    public TMP_Text CurrencyCountLabel {get; private set;}
-    public TMP_Text NextPriceLabel {get; private set;}
-    public Button PurchaseButton {get; private set;}
-    public RectTransform ProgressBar {get; private set;}
-    public GameObject InstancedUIPanel {get; private set;}
+    public TMP_Text ItemNameLabel { get; private set; }
+    public TMP_Text CurrencyCountLabel { get; private set; }
+    public TMP_Text NextPriceLabel { get; private set; }
+    public Button PurchaseButton { get; private set; }
+    public RectTransform ProgressBar { get; private set; }
+    public GameObject InstancedUIPanel { get; private set; }
     public bool Active = false;
     private bool _upgradeButtonClicked = false;
 
@@ -36,8 +36,8 @@ public class Shop : MonoBehaviour
         EconomyManager.onCurrencyChanged -= CheckAffordability;
     }
     void Start()
-    {   
-        
+    {
+
     }
 
     public void CreateStoreItem()
@@ -45,11 +45,11 @@ public class Shop : MonoBehaviour
         MenuCreator menu = transform.parent.gameObject.GetComponent<MenuCreator>();
 
         Transform shopRoot = menu.MenuInstance.GetComponent<UIMenuInfo>().ShopRoot.transform;
-        Transform instanceParent = null;;
+        Transform instanceParent = null; ;
 
         foreach (Transform subcategory in shopRoot)
         {
-            if(subcategory.gameObject.GetComponent<UISubcategoryInfo>().category == Category)
+            if (subcategory.gameObject.GetComponent<UISubcategoryInfo>().category == Category)
             {
                 instanceParent = subcategory.gameObject.GetComponent<UISubcategoryInfo>().ShopPanel.transform;
                 //Debug.Log(instanceParent.name);
@@ -61,7 +61,7 @@ public class Shop : MonoBehaviour
             InstancedUIPanel = Instantiate(UIPrefab, instanceParent);
             InstancedUIPanel.GetComponent<TooltipTrigger>().Tooltip = Tooltip;
             InstancedUIPanel.GetComponent<TooltipTrigger>().InitializeTooltipData("0");
-            
+
             ItemNameLabel = InstancedUIPanel.GetComponent<UIItemPanelInfo>().ItemName;
             CurrencyCountLabel = InstancedUIPanel.GetComponent<UIItemPanelInfo>().CurrentCount;
             NextPriceLabel = InstancedUIPanel.GetComponent<UIItemPanelInfo>().Price;
@@ -82,7 +82,7 @@ public class Shop : MonoBehaviour
         // _nextPriceLabel = StoreItem.transform.Find("NextPrice").GetComponent<TMP_Text>();
         // _purchaseButton = StoreItem.transform.Find("PurchaseButton").GetComponent<Button>();
 
-        
+
         // _purchaseButton.onClick.AddListener(PurchaseUpgrade);
         // UpdateLabels();
     }
@@ -104,14 +104,14 @@ public class Shop : MonoBehaviour
             return;
         }
         if (currency == BoughtWithCurrency)
-        {   
+        {
             long currentCurrency = EconomyManager.Instance.GetCurrent(BoughtWithCurrency);
 
             float normalizedProgressBarScale;
 
-            if(currentCurrency >= 1)
+            if (currentCurrency >= 1)
             {
-                normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency/shopSettings.NextPrice, 0f, 1f);
+                normalizedProgressBarScale = Mathf.Clamp((float)currentCurrency / shopSettings.NextPrice, 0f, 1f);
             }
             else
             {
@@ -138,11 +138,11 @@ public class Shop : MonoBehaviour
         NextPriceLabel.text = shopSettings.NextPrice.ToString();
 
         if (!_upgradeButtonClicked)
-        {   
+        {
             _upgradeButtonClicked = true;
-             CurrencyCountLabel.gameObject.transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), .5f, 1, 0f).onComplete = ResetButton;
+            CurrencyCountLabel.gameObject.transform.DOPunchScale(new Vector3(0.6f, 0.6f, 0.6f), .5f, 1, 0f).onComplete = ResetButton;
         }
- 
+
     }
 
     public void UpdateTooltip(string value)
@@ -164,31 +164,31 @@ public class Shop : MonoBehaviour
     }
 
     public void PurchaseUpgrade()
-    { 
+    {
 
         Upgrade[] upgrades = GetComponents<Upgrade>();
         foreach (Upgrade upgrade in upgrades)
         {
             upgrade.ApplyUpgrade();
-        } 
+        }
 
         EconomyManager.Instance.IncrementCurrency(BoughtWithCurrency, -shopSettings.NextPrice);
         shopSettings.NumberOwned++;
 
-        if(shopSettings.NumberOwned < shopSettings.MaxOwned)
+        if (shopSettings.NumberOwned < shopSettings.MaxOwned)
         {
-        IncrementPrice();
-        UpdateLabels();
-        PopupTextData data = new PopupTextData((Vector2)Camera.main.ScreenToWorldPoint((Vector2)PurchaseButton.gameObject.transform.position) + Random.insideUnitCircle, "+1", Color.green);
-        EconomyManager.Instance.PopUp(data);
+            IncrementPrice();
+            UpdateLabels();
+            //PopupTextData data = new PopupTextData((Vector2)Camera.main.ScreenToWorldPoint((Vector2)PurchaseButton.gameObject.transform.position) + Random.insideUnitCircle, "+1", Color.green);
+            //EconomyManager.Instance.PopUp(data);
         }
         else
         {
             MaxOutLabels();
         }
-        
+
     }
 
-    
+
 
 }

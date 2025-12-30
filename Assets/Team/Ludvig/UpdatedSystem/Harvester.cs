@@ -14,7 +14,7 @@ public class Harvester : MonoBehaviour
 
     private CollectorObjectSpawner _objectSpawner;
     private List<Collector> _collectors;
-    private ValueLinker valueLinker; 
+    private ValueLinker valueLinker;
 
     public delegate void OnCollectionPopup(PopupTextData data);
     public static event OnCollectionPopup onCollectionPopup;
@@ -35,7 +35,7 @@ public class Harvester : MonoBehaviour
         {
             _objectSpawner.SpawnObject(newCollector);
         }
-    
+
     }
 
     public float CurrentTicksPerSecond()
@@ -43,7 +43,7 @@ public class Harvester : MonoBehaviour
         float _ticksPerSecondCurrent = TicksPerSecondBase * Data.TicksPerSecondMultiplier;
         return _ticksPerSecondCurrent;
     }
-    
+
     public int ModifiedCollectAmount(CollectionType type)
     {
         float finalCurrency = type.BaseCollect;
@@ -52,9 +52,9 @@ public class Harvester : MonoBehaviour
 
         finalCurrency *= type.CollectMultiplier;
 
-        finalCurrency += finalCurrency * (type.CollectAdditivePercentage/100f);
+        finalCurrency += finalCurrency * (type.CollectAdditivePercentage / 100f);
 
-        finalCurrency += finalCurrency * (type.CollectMultiplicativePercentage/100f);
+        finalCurrency += finalCurrency * (type.CollectMultiplicativePercentage / 100f);
 
 
 
@@ -64,27 +64,27 @@ public class Harvester : MonoBehaviour
 
     private void CollectCurrency(Currency collectedCurrency, int amount, Collector collector)
     {
-        PopupTextData popupData = new PopupTextData(collector.position + PopupNumberOffset, "+" + amount.ToString(), Color.white);
+        //PopupTextData popupData = new PopupTextData(collector.position + PopupNumberOffset, "+" + amount.ToString(), Color.white);
         EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
-        EconomyManager.Instance.PopUp(popupData);
+        //EconomyManager.Instance.PopUp(popupData);
     }
 
     // Update is called once per frame
     void Update()
     {
-          if (Data.Active)
+        if (Data.Active)
         {
             foreach (var collector in _collectors)
             {
                 if (collector.Collect(Time.deltaTime, CurrentTicksPerSecond()))
                 {
                     foreach (var type in Data.CollectorTypes)
-                    {   
+                    {
                         int amount = ModifiedCollectAmount(type);
-                        if(amount != 0)
-                        {   
+                        if (amount != 0)
+                        {
                             CollectCurrency(type.CollectedCurrency, amount, collector);
-                        }               
+                        }
                     }
 
                 }
@@ -124,11 +124,11 @@ public class Harvester : MonoBehaviour
             default: break;
         }
 
-        if(TryGetComponent(out Shop shop))
+        if (TryGetComponent(out Shop shop))
         {
             shop.UpdateTooltip(Upgrade.FormatValueString(ModifiedCollectAmount(type), UpgradeValueType.IntegerRaw));
         }
-        
+
     }
 
 }

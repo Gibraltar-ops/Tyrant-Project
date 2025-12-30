@@ -294,11 +294,13 @@ public class TyrantTentacleManager : MonoBehaviour
 
     public void DestroyGrabbable(IGrabbable grabbable)
     {
+        Vector2 grabbedPosition = Vector2.zero;
         if (grabbable is VictimData victim)
         {
             if (victimSystem != null && victimSystem.victims.Contains(victim))
             {
                 Instantiate(BloodSplatter, victim.position, Quaternion.identity);
+                grabbedPosition = victim.position;
                 victimSystem.victims.Remove(victim);
             }
         }
@@ -309,7 +311,7 @@ public class TyrantTentacleManager : MonoBehaviour
         }
 
         AudioManager.Instance.Play("TyrantEating");
-        AwardCurrency();
+        AwardCurrency(grabbedPosition);
     }
 
     private IEnumerator PlayEatingParticles()
@@ -324,7 +326,7 @@ public class TyrantTentacleManager : MonoBehaviour
 
 
     //Currency Gathering
-    private void AwardCurrency()
+    private void AwardCurrency(Vector2 collectPosition)
     {
         var collectStats = Lood.UpgradeManager.Instance.CurrencySources[PlayerTentacleData.Tag].CollectStats;
 
@@ -336,6 +338,7 @@ public class TyrantTentacleManager : MonoBehaviour
             if (collectAmount != 0)
             {
                 CollectCurrency(item.Key, collectAmount);
+                DoPopup(item.Key, collectAmount, collectPosition);
             }
         }
     }
@@ -343,6 +346,20 @@ public class TyrantTentacleManager : MonoBehaviour
     private void CollectCurrency(Currency collectedCurrency, int amount)
     {
         EconomyManager.Instance.IncrementCurrency(collectedCurrency, amount);
+    }
+
+    private void DoPopup(Currency collectedCurrency, int amount, Vector2 position)
+    {
+        Vector2 offsetPosition = position + Random.insideUnitCircle + new Vector2(0f, 4f); ;
+        PopupTextData data = new PopupTextData(offsetPosition, FormatNumbers.FormatValueString(amount, ValueFormatType.IntegerAdditive), Color.white, collectedCurrency);
+        StartCoroutine(DelayedPopup(data));
+
+    }
+    private IEnumerator DelayedPopup(PopupTextData data)
+    {
+        float delay = Random.Range(0f, 0.5f);
+        yield return new WaitForSeconds(delay);
+        EconomyManager.Instance.PopUp(data);
     }
 
     public int GetCurrentCollectAmount(Currency currency, string tag)
