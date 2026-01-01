@@ -30,7 +30,7 @@ public static class FormatNumbers
         }
         else
         {
-            var unitInt=n- units.Count;
+            var unitInt = n - units.Count;
             var secondUnit = unitInt % 26;
             var firstUnit = unitInt / 26;
             unit = Convert.ToChar(firstUnit + charA).ToString() + Convert.ToChar(secondUnit + charA).ToString();
@@ -43,7 +43,7 @@ public static class FormatNumbers
     {
         switch (valueType)
         {
-             case ValueFormatType.FloatRaw:
+            case ValueFormatType.FloatRaw:
                 return value.ToString("0.0");
             case ValueFormatType.IntegerRaw:
                 return value.ToString("0");
@@ -59,6 +59,8 @@ public static class FormatNumbers
                 return "+" + value.ToString("0") + "%";
             case ValueFormatType.PercentageMultiplicative:
                 return "x" + value.ToString("0") + "%";
+            case ValueFormatType.FloatMultiplicative:
+                return "x" + value.ToString("0.0");
             case ValueFormatType.SinglePurchase:
                 return "";
             default: return "";
@@ -76,7 +78,8 @@ public enum ValueFormatType
     FloatPerSecond,
     PercentageAdditive,
     PercentageMultiplicative,
-    SinglePurchase
+    SinglePurchase,
+    FloatMultiplicative
 }
 
 //Deprecated

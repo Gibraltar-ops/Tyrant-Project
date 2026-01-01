@@ -24,9 +24,9 @@ MonoBehaviour:
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 3
-    StartingPrice: 2000
-    NextPrice: 2000
-    PriceIncrease: 1.1
+    StartingPrice: 200
+    NextPrice: 200
+    PriceIncrease: 1.15
     CanAfford: 0
     MaxedOut: 0
   ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
@@ -91,3 +91,4 @@ MonoBehaviour:
     CollectBonus1: 0
     CollectBonus2: 0
     CollectBonus3: 0
+  KebabMaxStrikeCount: 4

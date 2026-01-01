@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
+  m_Name: 05 - BrainUpgrade - SongPulseFrequencyUp
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
+  Tag: 05 - BrainUpgrade - SongPulseFrequencyUp
+  Shop:
+    Name: Faster Beat
+    Description: Song pulses become more frequent
+    EffectString: Song pulse frequency
+    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    CurrentModifierString: Amet
+    IsActive: 1
+    BoughtWithCurrency: 1
+    CollectsCurrency: 0
+    CurrentOwned: 0
+    MaxOwned: 20
+    StartingPrice: 600
+    NextPrice: 600
+    PriceIncrease: 1.3
+    CanAfford: 0
+    MaxedOut: 0
+  UpgradeEffects:
+  - CurrencySource: {fileID: 11400000, guid: 6b30895883a7c4c4ead3841f9a8273b0, type: 2}
+    StatCategory: 1
+    CurrencyToAffect: 1
+    CollectType: 2
+    UpgradeStat: 16
+  CurrentModifier: 0
+  AddValue: 10
+  FormatAs: 6
+  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
