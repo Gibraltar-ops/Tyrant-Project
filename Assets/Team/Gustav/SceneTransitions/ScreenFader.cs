@@ -35,6 +35,28 @@ public class ScreenFader : MonoBehaviour
         yield return currentFadeRoutine;
     }
 
+    public void SetVisible(bool visible)
+    {
+        GetImageComponent();
+        if (image != null)
+        {
+            Color color = image.color;
+            color.a = visible ? 1f : 0f;
+            image.color = color;
+        }
+    }
+
+    public void SetToBlack()
+    {
+        GetImageComponent();
+        if (image != null)
+        {
+            Color color = image.color;
+            color.a = 1f;
+            image.color = color;
+        }
+    }
+
     public IEnumerator FadeIn()
     {
         GetImageComponent();

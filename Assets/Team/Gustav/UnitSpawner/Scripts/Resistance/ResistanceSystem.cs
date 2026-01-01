@@ -109,6 +109,12 @@ public class ResistanceSystem : MonoBehaviour
         }
     }
 
+    public void ClearAllFighters()
+    {
+        fighters.Clear();
+        OnFighterCountChanged?.Invoke(0);
+    }
+
     // --------------------------------------------
     // Editor Gizmos
     // --------------------------------------------
