@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Video;
 
 
 public class ProgressManager : MonoBehaviour
 {
+    private bool isChangingStage = false;
+
     [System.Serializable]
     public class Stage
     {
@@ -15,6 +18,12 @@ public class ProgressManager : MonoBehaviour
         public GameObject postProcessing;
         public GameObject resistanceManager;
     }
+
+
+    [Header("Video Transitions")]
+    [SerializeField] private VideoClip stage1To2Video;
+    [SerializeField] private VideoClip stage2To3Video;
+
 
     [Header("Stages")]
     [SerializeField] private List<Stage> stages = new List<Stage>();
@@ -52,22 +61,57 @@ public class ProgressManager : MonoBehaviour
 
     public void NextStage()
     {
+        if (isChangingStage) return;
         StartCoroutine(NextStageSequence());
     }
 
     private IEnumerator NextStageSequence()
     {
-        if (TransitionManager.Instance != null && TransitionManager.Instance.fader != null)
+        isChangingStage = true;
+
+        var fader = TransitionManager.Instance?.fader;
+
+        if (fader != null)
         {
-            yield return TransitionManager.Instance.fader.FadeOut();
+            yield return fader.FadeOut();
         }
+
+
+        if (stages[currentStageIndex].resistanceManager != null)
+        {
+            ResistanceSystem rs = stages[currentStageIndex].resistanceManager.GetComponent<ResistanceSystem>();
+            if (rs != null)
+            {
+                rs.ClearAllFighters();
+            }
+        }
+
+        VideoClip clipToPlay = null;
+        if (currentStageIndex == 0 && stage1To2Video != null)
+        {
+            clipToPlay = stage1To2Video;
+        }
+        else if (currentStageIndex == 1 && stage2To3Video != null)
+        {
+            clipToPlay = stage2To3Video;
+        }
+
+        if (clipToPlay != null && VideoManager.Instance != null)
+        {
+            if (fader != null) fader.SetVisible(false);
+
+            yield return VideoManager.Instance.PlayVideo(clipToPlay);
+
+            if (fader != null) fader.SetToBlack();
+        }
+
+
 
         int nextIndex = currentStageIndex + 1;
         if (nextIndex < stages.Count)
         {
             SetStage(nextIndex);
         }
-
         else
         {
             Debug.Log("No more stages");
@@ -75,10 +119,12 @@ public class ProgressManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if (TransitionManager.Instance != null && TransitionManager.Instance.fader != null)
+        if (fader != null)
         {
-            yield return TransitionManager.Instance.fader.FadeIn();
+            yield return fader.FadeIn();
         }
+
+        isChangingStage = false;
     }
 
     public void SetStage(int stageIndex)
@@ -129,8 +175,15 @@ public class ProgressManager : MonoBehaviour
         if (kebabArmStage2B != null)
             kebabArmStage2B.SetActive(isStage3OrHigher);
 
+    }
 
-
+    private IEnumerator EnableResistanceAfterDelay(GameObject resistanceManager, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (resistanceManager != null)
+        {
+            resistanceManager.SetActive(true);
+        }
     }
 
     private void SetStageActive(Stage stage, bool active)
@@ -145,6 +198,17 @@ public class ProgressManager : MonoBehaviour
             stage.postProcessing.SetActive(active);
 
         if (stage.resistanceManager != null)
-            stage.resistanceManager.SetActive(active);
+        {
+
+            if (active && currentStageIndex == 2)
+            {
+                stage.resistanceManager.SetActive(false);
+                StartCoroutine(EnableResistanceAfterDelay(stage.resistanceManager, 30f));
+            }
+            else
+            {
+                stage.resistanceManager.SetActive(active);
+            }
+        }
     }
 }
