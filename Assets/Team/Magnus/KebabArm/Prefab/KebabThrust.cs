@@ -23,6 +23,7 @@ public class KebabThrust : MonoBehaviour
     public Transform rightMostArm;
 
     private List<Transform> _allArms;
+    private int _nextArmIndex = 0;
 
     void Awake()
     {
@@ -38,43 +39,33 @@ public class KebabThrust : MonoBehaviour
     {
         if (targetPositions == null || targetPositions.Count == 0) return;
 
-        Transform bestArm = null;
-        float shortestDistance = Mathf.Infinity;
-
-
         Vector3 primaryTarget = targetPositions[0];
 
-        foreach (Transform arm in _allArms)
+        for (int i = 0; i < _allArms.Count; i++)
         {
-            if (arm == null)
+            int armIndex = (_nextArmIndex + i) % _allArms.Count;
+            Transform currentArm = _allArms[armIndex];
+
+            if (currentArm == null)
                 continue;
 
-
-            var muscle = arm.GetComponent<KebabMuscleMemory>();
+            var muscle = currentArm.GetComponent<KebabMuscleMemory>();
 
             if (muscle == null || muscle.IsAttacking)
             {
                 continue;
             }
 
-            float currentMaxRange = GetRangeForArm(arm);
-            float distanceToTarget = Vector2.Distance(primaryTarget, arm.position);
+            float currentMaxRange = GetRangeForArm(currentArm);
+            float distanceToTarget = Vector2.Distance(primaryTarget, currentArm.position);
 
-            // In range and closer than current arm?
-            if (distanceToTarget <= currentMaxRange && distanceToTarget < shortestDistance)
+            if (distanceToTarget <= currentMaxRange)
             {
-                shortestDistance = distanceToTarget;
-                bestArm = arm;
+                _nextArmIndex = (armIndex + 1) % _allArms.Count;
+                muscle.Thrust(targetPositions, onHit);
+                return;
             }
         }
-
-        // Found free arm
-        if (bestArm != null)
-        {
-            var muscle = bestArm.GetComponent<KebabMuscleMemory>();
-            muscle.Thrust(targetPositions, onHit);
-        }
-        else { }
     }
     // Range help funktion
     float GetRangeForArm(Transform arm)
