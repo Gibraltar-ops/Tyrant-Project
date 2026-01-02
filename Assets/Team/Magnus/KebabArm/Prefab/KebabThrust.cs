@@ -14,7 +14,24 @@ public class KebabThrust : MonoBehaviour
     public CurrencySourceSO kebabStats;
 
     public bool debugMultiStrike = false;
-    public int CurrentStrikeCount => debugMultiStrike ? 4 : (kebabStats != null ? kebabStats.KebabMaxStrikeCount : 1);
+    public int CurrentStrikeCount
+    {
+        get
+        {
+            if (debugMultiStrike)
+            {
+                return 4;
+            }
+
+            if (kebabStats != null)
+            {
+                return (int)Lood.UpgradeManager.Instance.CurrencySources[kebabStats.Tag].MainStats[MainStat.BaseSpeed];
+            }
+
+            return 1;
+        }
+    }
+
 
     [Header("Arm references")]
     public Transform leftMostArm;
@@ -27,6 +44,7 @@ public class KebabThrust : MonoBehaviour
 
     void Awake()
     {
+        Lood.UpgradeManager.Instance.AddUpgradeableObject(kebabStats);
         _allArms = new List<Transform> { leftMostArm, leftCenterArm, rightCenterArm, rightMostArm };
     }
 

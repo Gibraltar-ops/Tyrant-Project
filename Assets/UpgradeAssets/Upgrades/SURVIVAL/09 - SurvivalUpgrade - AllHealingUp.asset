@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
+  m_Name: 09 - SurvivalUpgrade - AllHealingUp
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
+  Tag: 09 - SurvivalUpgrade - AllHealingUp
+  Shop:
+    Name: Teleonomics
+    Description: All sources of healing become more efficient
+    EffectString: Healing efficiency
+    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    CurrentModifierString: Amet
+    IsActive: 1
+    BoughtWithCurrency: 0
+    CollectsCurrency: 0
+    CurrentOwned: 0
+    MaxOwned: 20
+    StartingPrice: 500
+    NextPrice: 500
+    PriceIncrease: 1.2
+    CanAfford: 0
+    MaxedOut: 0
+  UpgradeEffects:
+  - CurrencySource: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 5
+    CollectType: 4
+    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 5
+    CollectType: 4
+    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: b5de34e450cf42f4ea539de46c63f009, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 5
+    CollectType: 4
+    UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: 1b53043660b186d49b42913969d0b963, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 5
+    CollectType: 4
+    UpgradeStat: 0
+  CurrentModifier: 0
+  AddValue: 10
+  FormatAs: 6
+  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
