@@ -333,8 +333,13 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectAdd];
         //Apply simple multiply
         finalCollectAmount *= data.CollectStats[currency].Stats[CollectStat.CollectMultiplier];
+        //Apply special bonus - Per Tentacle Count.
+        finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectBonus1] * EconomyManager.Instance.TentacleCount;
         //Apply additive percentage
-        finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100;
+        finalCollectAmount = finalCollectAmount * (1 + (data.CollectStats[currency].Stats[CollectStat.CollectAdditivePercentage] / 100));
+
+        //Apply special bonus - Per Tentacle Count.
+        finalCollectAmount += data.CollectStats[currency].Stats[CollectStat.CollectBonus1] * EconomyManager.Instance.TentacleCount;
         //Apply multiplicative percentage
         finalCollectAmount += finalCollectAmount * data.CollectStats[currency].Stats[CollectStat.CollectMultiplicativePercentage] / 100;
 
