@@ -62,6 +62,9 @@ public class TyrantTentacleManager : MonoBehaviour
     private float _autoClickInterval = 0.2f;
     private float _currentAutoClickTime = 0f;
 
+    ///Eat counter
+    public static System.Action VictimEaten;
+
     void Awake()
     {
         //Lood.UpgradeManager.Instance.AddUpgradeableObject(PlayerTentacleData);
@@ -302,6 +305,8 @@ public class TyrantTentacleManager : MonoBehaviour
                 Instantiate(BloodSplatter, victim.position, Quaternion.identity);
                 grabbedPosition = victim.position;
                 victimSystem.victims.Remove(victim);
+
+                VictimEaten?.Invoke();
             }
         }
 
