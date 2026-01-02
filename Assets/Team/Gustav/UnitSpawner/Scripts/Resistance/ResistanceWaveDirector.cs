@@ -50,6 +50,9 @@ public class ResistanceWaveDirector : MonoBehaviour
         if (altWaveFlag)
             baseBudget += perWaveIncrease;
 
+        if (currentBudget >= 100)   // Ensure budget cap
+            currentBudget = 100;
+
         altWaveFlag = !altWaveFlag;
 
         SpawnEnemiesFromBudget();
