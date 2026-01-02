@@ -14,6 +14,7 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [Header("References")]
     public Slider slider1;
     public Slider slider2;
+    private Transform popupPosition;
 
 
 
@@ -71,6 +72,7 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (fillImage2 != null) originalColor2 = fillImage2.color;
 
         UpdateText();
+        popupPosition = GameObject.Find("RegenPopupPosition").transform;
     }
 
     void Update()
@@ -96,6 +98,7 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             if (collectAmount != 0)
             {
                 CollectCurrency(item.Key, collectAmount);
+                DoPopup(item.Key, collectAmount, transform.position);
             }
         }
         // if (currentHealth >= maxHealth) return;
@@ -104,6 +107,21 @@ public class HealthBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         // currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
 
         UpdateUI();
+    }
+
+    private void DoPopup(Currency collectedCurrency, int amount, Vector2 position)
+    {
+
+        Vector2 offsetPosition = (Vector2)popupPosition.position + UnityEngine.Random.insideUnitCircle;
+        PopupTextData data = new PopupTextData(offsetPosition, FormatNumbers.FormatValueString(amount, ValueFormatType.IntegerAdditive), Color.white, collectedCurrency);
+        StartCoroutine(DelayedPopup(data));
+
+    }
+    private IEnumerator DelayedPopup(PopupTextData data)
+    {
+        float delay = UnityEngine.Random.Range(0f, 0.5f);
+        yield return new WaitForSeconds(delay);
+        EconomyManager.Instance.PopUp(data);
     }
 
     private void CollectCurrency(Currency collectedCurrency, int amount)

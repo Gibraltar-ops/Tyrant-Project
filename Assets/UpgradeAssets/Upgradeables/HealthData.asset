@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901c1211a4d5cf44eabe2991114ea104, type: 3}
   m_Name: HealthData
   m_EditorClassIdentifier: Assembly-CSharp::CurrencySourceSO
-  Tag: 
+  Tag: HealthData
   Shop:
     Name: 
     Description: 
@@ -33,7 +33,7 @@ MonoBehaviour:
   BaseSpeed: 1
   SpeedAdd: 0
   SpeedMultiply: 1
-  SpeedAdditivePercentage: 300
+  SpeedAdditivePercentage: 0
   SpeedMultiplicativePercentage: 0
   GadflyCooldown: 10
   GadflyHarvestDuration: 6

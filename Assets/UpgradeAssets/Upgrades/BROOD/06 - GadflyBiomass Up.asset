@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad29358cb92a344385af44c7cb3edaa, type: 3}
-  m_Name: 06 - GadflyBrainsUp
+  m_Name: 06 - GadflyBiomass Up
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
   Tag: 06 - GadflyBrainsUp
   Shop:
     Name: Brain Probosces
-    Description: Gadflies collect more Brain Matter
-    EffectString: Brain matter
+    Description: Gadflies collect more Biomass
+    EffectString: Biomass
     Lore: Lorem ipsum
     CurrentModifierString: 
     IsActive: 1
@@ -32,10 +32,10 @@ MonoBehaviour:
   UpgradeEffects:
   - CurrencySource: {fileID: 11400000, guid: 95892eb8ebe6d104c9f6e42471db0e82, type: 2}
     StatCategory: 0
-    CurrencyToAffect: 1
+    CurrencyToAffect: 0
     CollectType: 3
     UpgradeStat: 12
   CurrentModifier: 0
-  AddValue: 1
+  AddValue: 2
   FormatAs: 3
   ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
