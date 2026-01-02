@@ -7,7 +7,7 @@ public class OutroVideoController : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
 
-    private string sceneName = "MainMenuPlaytest";
+    private string sceneName = "StatsScene";
 
     private void Start()
     {
@@ -31,6 +31,14 @@ public class OutroVideoController : MonoBehaviour
         Debug.Log("Video finished!");
         // Do anything here: load next scene, fade out, etc.
 
-        SceneManager.LoadScene(sceneName);
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.TransitionTo(sceneName);
+        }
+        else
+        {
+
+            SceneManager.LoadScene(sceneName); //Fallback
+        }
     }
 }
