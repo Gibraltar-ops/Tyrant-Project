@@ -169,6 +169,7 @@ namespace Lood
 
         public void Buy()
         {
+            AudioManager.Instance.Play("UIClick");
             onCollectorPurchased?.Invoke(CurrencySourceData.Tag);
         }
     }
