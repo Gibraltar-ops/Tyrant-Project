@@ -2651,6 +2651,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: victimToSpawn.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: objectsToSpawn.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'victimToSpawn.Array.data[0]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: f443202f02c5b8041beb9a68618e9577, type: 3}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'victimToSpawn.Array.data[1]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: 49472bf72a341144c8fff4dea2f871d4, type: 3}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'victimToSpawn.Array.data[2]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: 44717faff4e6a9c40aeed9e5c30e717a, type: 3}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'objectsToSpawn.Array.data[0]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: f443202f02c5b8041beb9a68618e9577, type: 3}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'objectsToSpawn.Array.data[1]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: 49472bf72a341144c8fff4dea2f871d4, type: 3}
+    - target: {fileID: 1359637981827827607, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: 'objectsToSpawn.Array.data[2]'
+      value: 
+      objectReference: {fileID: 441874911214380755, guid: 44717faff4e6a9c40aeed9e5c30e717a, type: 3}
     - target: {fileID: 3664445610999413223, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
       propertyPath: m_Name
       value: VictimManager
@@ -5666,7 +5698,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: layers.Array.size
-      value: 54
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[0]'
@@ -5847,15 +5879,15 @@ PrefabInstance:
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[44]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 41897321}
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[45]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 41897309}
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[46]'
       value: 
-      objectReference: {fileID: 41897321}
+      objectReference: {fileID: 41897293}
     - target: {fileID: 5726101509569669027, guid: df36b45f1907ddd498ca6defe231ec8d, type: 3}
       propertyPath: 'layers.Array.data[47]'
       value: 
@@ -9762,6 +9794,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7178187357355956736, guid: ff26142f8b82d9a4ab1387fd4650d42c, type: 3}
+      propertyPath: sourceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: d8c5a4f01b67ad24db15b0b68b0ba4c8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class VictimRenderer : MonoBehaviour
 {
+    public List<GameObject> victimToSpawn;
+
     public VictimSystem victimSystem;
-    public GameObject victimPrefab;
 
     private IObjectPool<GameObject> pool;
 
@@ -38,6 +39,7 @@ public class VictimRenderer : MonoBehaviour
     // -------------------------------------------------------
     GameObject CreateVisual()
     {
+        GameObject victimPrefab = victimToSpawn[Random.Range(0, victimToSpawn.Count)];
         GameObject obj = Instantiate(victimPrefab, transform);
         obj.SetActive(false);
         return obj;
