@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Video;
+using UnityEngine.EventSystems;
 
 
 public class ProgressManager : MonoBehaviour
@@ -69,6 +70,8 @@ public class ProgressManager : MonoBehaviour
     {
         isChangingStage = true;
 
+
+
         var fader = TransitionManager.Instance?.fader;
 
         if (fader != null)
@@ -123,6 +126,8 @@ public class ProgressManager : MonoBehaviour
         {
             yield return fader.FadeIn();
         }
+
+
 
         isChangingStage = false;
     }
