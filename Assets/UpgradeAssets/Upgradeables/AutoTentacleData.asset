@@ -17,13 +17,14 @@ MonoBehaviour:
     Name: Harvester Arm
     Description: Automatically harvest victims
     EffectString: Per victim
-    Lore: Lorem ipsum dolor sit amet.
+    Lore: A fringe of simple light-sensitive eyes and primitive reflexive pathways
+      allow Harvester tentacles to seek out their own prey.
     CurrentModifierString: 
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 2
+    MaxOwned: 10
     StartingPrice: 150
     NextPrice: 150
     PriceIncrease: 1.2
@@ -91,3 +92,4 @@ MonoBehaviour:
     CollectBonus1: 0
     CollectBonus2: 0
     CollectBonus3: 0
+  KebabMaxStrikeCount: 4

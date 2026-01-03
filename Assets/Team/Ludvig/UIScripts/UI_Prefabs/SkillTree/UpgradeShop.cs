@@ -12,6 +12,8 @@ public class UpgradeShop : MonoBehaviour
     public bool Active = false;
     public int Level1Max = 3;
     public int Level2Max = 5;
+    public int StartingPrice = 100;
+    public float PriceIncrease = 1.2f;
 
     public int Level3Max = 7;
     void OnEnable()
@@ -29,6 +31,9 @@ public class UpgradeShop : MonoBehaviour
     void Awake()
     {
         upgradeData.Shop.MaxOwned = Level1Max;
+        upgradeData.Shop.StartingPrice = StartingPrice;
+        upgradeData.Shop.NextPrice = StartingPrice;
+        upgradeData.Shop.PriceIncrease = PriceIncrease;
         Lood.UpgradeManager.Instance.AddUpgrade(upgradeData);
         UpgradeTag = upgradeData.Tag;
     }

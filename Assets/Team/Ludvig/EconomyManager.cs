@@ -7,7 +7,7 @@ public class EconomyManager : MonoBehaviour
 {
 
 
-    public long Biomass = 100;
+    public long Biomass = 0;
     private bool _biomassActive = false;
     public long Brains;
     private bool _brainsActive = false;

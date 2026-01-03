@@ -16,7 +16,7 @@ MonoBehaviour:
   Shop:
     Name: Fibrous Tissue
     Description: Increases the speed of Harvester Arms.
-    EffectString: Tentacle speed
+    EffectString: Arm speed
     Lore: 'Sit dolor '
     CurrentModifierString: Amet
     IsActive: 1
@@ -24,8 +24,8 @@ MonoBehaviour:
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 10
-    StartingPrice: 150
-    NextPrice: 150
+    StartingPrice: 100
+    NextPrice: 100
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0

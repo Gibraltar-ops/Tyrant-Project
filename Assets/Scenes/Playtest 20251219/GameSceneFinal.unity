@@ -672,6 +672,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 1000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &155768953
 MonoBehaviour:
@@ -734,8 +736,10 @@ MonoBehaviour:
   upgradeData: {fileID: 11400000, guid: 95d0441874e4cae4b8623d1cfed82295, type: 2}
   Active: 1
   Level1Max: 10
-  Level2Max: 20
-  Level3Max: 30
+  Level2Max: 15
+  StartingPrice: 100
+  PriceIncrease: 1.2
+  Level3Max: 20
 --- !u!114 &160370719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1484,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 3500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &229396493
 MonoBehaviour:
@@ -1715,6 +1721,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &344198268
 MonoBehaviour:
@@ -1823,6 +1831,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 1
   Level2Max: 1
+  StartingPrice: 3000
+  PriceIncrease: 1.2
   Level3Max: 1
 --- !u!114 &371851964
 MonoBehaviour:
@@ -1891,6 +1901,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 1000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &392134341
 MonoBehaviour:
@@ -4104,7 +4116,7 @@ GameObject:
   - component: {fileID: 633503398}
   - component: {fileID: 633503397}
   m_Layer: 0
-  m_Name: 02 - Upgrade - GadflyBrainsUp
+  m_Name: 02 - Upgrade - GadflyBiomassUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4142,6 +4154,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &633503398
 MonoBehaviour:
@@ -4885,6 +4899,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &789829121
 MonoBehaviour:
@@ -4953,6 +4969,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 10
   Level2Max: 20
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 30
 --- !u!114 &811411585
 MonoBehaviour:
@@ -5016,6 +5034,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 15
   Level2Max: 30
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &823864476
 MonoBehaviour:
@@ -5079,6 +5099,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 10
   Level2Max: 20
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 30
 --- !u!114 &841548396
 MonoBehaviour:
@@ -5161,9 +5183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeableObjectShop
   CurrencySourceData: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
-  Level1Max: 7
-  Level2Max: 15
-  Level3Max: 20
+  Level1Max: 10
+  Level2Max: 20
+  Level3Max: 40
   Active: 1
 --- !u!114 &844679673
 MonoBehaviour:
@@ -5357,6 +5379,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 1000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &898761440
 MonoBehaviour:
@@ -6169,6 +6193,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 700
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &998098855
 MonoBehaviour:
@@ -6334,6 +6360,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1008530974
 MonoBehaviour:
@@ -6630,7 +6658,7 @@ GameObject:
   - component: {fileID: 1082386207}
   - component: {fileID: 1082386206}
   m_Layer: 0
-  m_Name: 06 - SurvivalUpgrade - MaxHPPerTentacleUp
+  m_Name: 06 - SurvivalUpgrade - BiomassOnGeneration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6668,6 +6696,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1082386207
 MonoBehaviour:
@@ -6747,6 +6777,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 10
   Level2Max: 10
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 10
 --- !u!114 &1094074608
 MonoBehaviour:
@@ -6810,6 +6842,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 5000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1100794609
 MonoBehaviour:
@@ -7095,6 +7129,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 50
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 100
 --- !u!114 &1131594821
 MonoBehaviour:
@@ -8994,6 +9030,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 4000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1380513371
 MonoBehaviour:
@@ -9190,6 +9228,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 700
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1450799001
 MonoBehaviour:
@@ -9377,6 +9417,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 700
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1549626911
 MonoBehaviour:
@@ -10172,6 +10214,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 5000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1742922846
 MonoBehaviour:
@@ -10235,6 +10279,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 3000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1743756891
 MonoBehaviour:
@@ -10401,6 +10447,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1764727539
 MonoBehaviour:
@@ -10919,6 +10967,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 10
   Level2Max: 20
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 30
 --- !u!114 &1897314095
 MonoBehaviour:
@@ -11180,6 +11230,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 700
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1935154033
 MonoBehaviour:
@@ -11243,6 +11295,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 100
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1942978121
 MonoBehaviour:
@@ -11537,6 +11591,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 1000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &1993317432
 MonoBehaviour:
@@ -11600,6 +11656,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 1000
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &2008489953
 MonoBehaviour:
@@ -11987,6 +12045,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
+  StartingPrice: 500
+  PriceIncrease: 1.2
   Level3Max: 60
 --- !u!114 &2102853820
 MonoBehaviour:

@@ -15,8 +15,8 @@ MonoBehaviour:
   Tag: 02 - BrainUpgrade - PlayerTentacleBiomassMult
   Shop:
     Name: Active Cell Selection
-    Description: Hunter tentacles gather more Biomass and Brain Matter
-    EffectString: Biomass / Brain Matter
+    Description: Hunter tentacles gather more Biomass
+    EffectString: Biomass
     Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
     CurrentModifierString: Amet
     IsActive: 1
@@ -24,20 +24,15 @@ MonoBehaviour:
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 1000
-    NextPrice: 1000
-    PriceIncrease: 1.3
+    StartingPrice: 100
+    NextPrice: 100
+    PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
   - CurrencySource: {fileID: 11400000, guid: b5de34e450cf42f4ea539de46c63f009, type: 2}
     StatCategory: 0
-    CurrencyToAffect: 1
-    CollectType: 2
-    UpgradeStat: 0
-  - CurrencySource: {fileID: 11400000, guid: b5de34e450cf42f4ea539de46c63f009, type: 2}
-    StatCategory: 0
-    CurrencyToAffect: 1
+    CurrencyToAffect: 0
     CollectType: 2
     UpgradeStat: 0
   CurrentModifier: 1
