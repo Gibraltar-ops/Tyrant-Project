@@ -17,16 +17,17 @@ MonoBehaviour:
     Name: Social Behavior
     Description: Harvester Arms gather more Brain Matter for every arm you have.
     EffectString: Brain Matter per arm
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Lore: Improvements in flocking algorithms give Harvester Arms a form of limited
+      sentience.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 1000
-    NextPrice: 1000
-    PriceIncrease: 1.3
+    StartingPrice: 700
+    NextPrice: 700
+    PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
@@ -36,6 +37,6 @@ MonoBehaviour:
     CollectType: 7
     UpgradeStat: 0
   CurrentModifier: 0
-  AddValue: 0.2
+  AddValue: 0.3
   FormatAs: 2
   ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}

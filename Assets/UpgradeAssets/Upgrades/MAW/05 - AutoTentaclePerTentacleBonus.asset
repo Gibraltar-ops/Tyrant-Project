@@ -17,15 +17,16 @@ MonoBehaviour:
     Name: Feeding Frenzy
     Description: Harvester Arms gather more Biomass for every arm you have.
     EffectString: Biomass per active arm
-    Lore: 'Sit dolor '
+    Lore: Harvester Arms have limited flock awareness that allow them to into a frenzy,
+      increasing efficiency.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 0
     CollectsCurrency: 0
     CurrentOwned: 0
-    MaxOwned: 5
-    StartingPrice: 750
-    NextPrice: 750
+    MaxOwned: 20
+    StartingPrice: 100
+    NextPrice: 100
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
