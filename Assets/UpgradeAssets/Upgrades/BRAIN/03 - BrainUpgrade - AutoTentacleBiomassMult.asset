@@ -15,17 +15,17 @@ MonoBehaviour:
   Tag: 03 - BrainUpgrade - AutoTentacleBiomassMult
   Shop:
     Name: Optimized Pathways
-    Description: Harvester tentacles gather more Biomass
-    EffectString: Biomass
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Description: Harvester arms gather more Biomass and Brain Matter
+    EffectString: Biomass / Brain Matter
+    Lore: Harvester arms start approaching a theoretically optimal configuration.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 100
-    NextPrice: 100
+    StartingPrice: 700
+    NextPrice: 700
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -35,7 +35,12 @@ MonoBehaviour:
     CurrencyToAffect: 1
     CollectType: 4
     UpgradeStat: 0
+  - CurrencySource: {fileID: 11400000, guid: ad3210094781ccd44bc144f1c7a1f373, type: 2}
+    StatCategory: 0
+    CurrencyToAffect: 0
+    CollectType: 4
+    UpgradeStat: 0
   CurrentModifier: 0
   AddValue: 25
   FormatAs: 6
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 6d17e155452bb6345b9f4727e18fd4b3, type: 2}

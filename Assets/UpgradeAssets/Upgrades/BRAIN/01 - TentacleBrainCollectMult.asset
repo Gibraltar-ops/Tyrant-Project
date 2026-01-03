@@ -17,16 +17,16 @@ MonoBehaviour:
     Name: Neuron Separation
     Description: All tentacles gather more Brain Matter
     EffectString: Brain Matter
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Lore: Separates Neurons from other types of cells on the microscopic level.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 300
-    NextPrice: 300
-    PriceIncrease: 1.3
+    StartingPrice: 500
+    NextPrice: 500
+    PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
@@ -43,4 +43,4 @@ MonoBehaviour:
   CurrentModifier: 1
   AddValue: 0.3
   FormatAs: 9
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 6d17e155452bb6345b9f4727e18fd4b3, type: 2}

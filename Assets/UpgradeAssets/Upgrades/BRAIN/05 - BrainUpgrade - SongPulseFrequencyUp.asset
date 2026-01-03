@@ -17,16 +17,16 @@ MonoBehaviour:
     Name: Faster Beat
     Description: Song pulses become more frequent
     EffectString: Song pulse frequency
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Lore: Thicker song membranes can support a faster pulse rate.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 600
-    NextPrice: 600
-    PriceIncrease: 1.3
+    StartingPrice: 1000
+    NextPrice: 1000
+    PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
   UpgradeEffects:
@@ -38,4 +38,4 @@ MonoBehaviour:
   CurrentModifier: 0
   AddValue: 10
   FormatAs: 6
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 6d17e155452bb6345b9f4727e18fd4b3, type: 2}

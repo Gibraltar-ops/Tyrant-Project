@@ -15,17 +15,18 @@ MonoBehaviour:
   Tag: 02 - BrainUpgrade - PlayerTentacleBiomassMult
   Shop:
     Name: Active Cell Selection
-    Description: Hunter tentacles gather more Biomass
+    Description: Hunter arms gather more Biomass
     EffectString: Biomass
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Lore: 'Pseudosapient sub-networks allow Hunter arms to separate undamaged cells
+      from damaged. '
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 100
-    NextPrice: 100
+    StartingPrice: 700
+    NextPrice: 700
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -38,4 +39,4 @@ MonoBehaviour:
   CurrentModifier: 1
   AddValue: 0.5
   FormatAs: 9
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 6d17e155452bb6345b9f4727e18fd4b3, type: 2}

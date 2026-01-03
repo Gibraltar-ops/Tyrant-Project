@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDataSO
   Tag: 07 - BrainUpgrade - SongTrickleFrequencyUpgrade
   Shop:
-    Name: Musical Subroutines
+    Name: Actor-Network Theory
     Description: Increases how many victims you attract.
     EffectString: Attract frequency
-    Lore: Lorem ipsum dolor sit amet. Lorem ipsum. Ipsum lorem.
+    Lore: Decreases victim resistance, making it almost impossibe to resist the summons.
     CurrentModifierString: Amet
     IsActive: 1
     BoughtWithCurrency: 1
     CollectsCurrency: 0
     CurrentOwned: 0
     MaxOwned: 20
-    StartingPrice: 2000
-    NextPrice: 2000
+    StartingPrice: 1000
+    NextPrice: 1000
     PriceIncrease: 1.2
     CanAfford: 0
     MaxedOut: 0
@@ -38,4 +38,4 @@ MonoBehaviour:
   CurrentModifier: 0
   AddValue: 20
   FormatAs: 6
-  ColorStyle: {fileID: 11400000, guid: 855703ae8f1a34a4d9191ad57fb558c2, type: 2}
+  ColorStyle: {fileID: 11400000, guid: 6d17e155452bb6345b9f4727e18fd4b3, type: 2}

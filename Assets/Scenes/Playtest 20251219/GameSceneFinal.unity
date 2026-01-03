@@ -2691,6 +2691,14 @@ PrefabInstance:
       propertyPath: fullscreenEffect
       value: 
       objectReference: {fileID: 1571010916}
+    - target: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: destinationRegions.Array.data[0].length
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033727170748230060, guid: 22b9e3d70799f8c4a874ec869b89b27b, type: 3}
+      propertyPath: destinationRegions.Array.data[0].center.x
+      value: 0.18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6874,8 +6882,8 @@ MonoBehaviour:
   Active: 1
   Level1Max: 20
   Level2Max: 40
-  StartingPrice: 5000
-  PriceIncrease: 1.2
+  StartingPrice: 3000
+  PriceIncrease: 1.1
   Level3Max: 60
 --- !u!114 &1100794609
 MonoBehaviour:
