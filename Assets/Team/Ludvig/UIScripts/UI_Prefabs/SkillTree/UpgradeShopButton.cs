@@ -160,6 +160,7 @@ public class UpgradeShopButton : MonoBehaviour
 
     public void Buy()
     {
+        AudioManager.Instance.Play("UIClick");
         onUpgradePurchased?.Invoke(upgradeData.Tag);
     }
 }
