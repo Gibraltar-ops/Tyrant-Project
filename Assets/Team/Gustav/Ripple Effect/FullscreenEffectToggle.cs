@@ -4,43 +4,36 @@ using System.Collections;
 
 public class FullscreenEffectToggle : MonoBehaviour
 {
-    [Header("Renderer Feature")]
     public ScriptableRendererFeature fullscreenFeature;
-
-    [Header("Fullscreen Render Material")]
     public Material sourceMaterial;
+    public float activeTime = 1.4f;
 
-    [Header("Duration")]
-    public float activeTime = 1f;
-
-    Coroutine currentRoutine;
-    Material runtimeMaterial;
+    FullScreenPassRendererFeature pass;
 
     void Awake()
     {
-        if (fullscreenFeature != null)
-            fullscreenFeature.SetActive(false);
+        pass = fullscreenFeature as FullScreenPassRendererFeature;
+
+        // Force known safe state BEFORE first render
+        fullscreenFeature.SetActive(false);
+
+        // Initialize shader time offset immediately
+        sourceMaterial.SetFloat("_EffectStartTime", Time.timeSinceLevelLoad);
+
+        // Ensure the renderer feature references the source material
+        pass.passMaterial = sourceMaterial;
     }
 
     public void PlayEffect()
     {
-        if (currentRoutine != null)
-            StopCoroutine(currentRoutine);
-
-        currentRoutine = StartCoroutine(EffectRoutine());
+        StopAllCoroutines();
+        StartCoroutine(EffectRoutine());
     }
 
     IEnumerator EffectRoutine()
     {
-        // Destroy previous runtime material (safety)
-        if (runtimeMaterial != null)
-            Destroy(runtimeMaterial);
-
-        // Create a fresh instance / resets all shader time/state
-        runtimeMaterial = new Material(sourceMaterial);
-
-        // Assign it to the Full Screen Pass Renderer Feature
-        AssignMaterialToFeature(runtimeMaterial);
+        // Reset start time EXACTLY when effect begins
+        sourceMaterial.SetFloat("_EffectStartTime", Time.timeSinceLevelLoad);
 
         fullscreenFeature.SetActive(true);
 
@@ -49,23 +42,8 @@ public class FullscreenEffectToggle : MonoBehaviour
         fullscreenFeature.SetActive(false);
     }
 
-    void AssignMaterialToFeature(Material mat)
+    void OnDisable()
     {
-        var fullScreenPass = fullscreenFeature as FullScreenPassRendererFeature;
-
-        if (fullScreenPass != null)
-        {
-            fullScreenPass.passMaterial = mat;
-        }
-        else
-        {
-            Debug.LogWarning("Renderer Feature is not a FullScreenPassRendererFeature.");
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (runtimeMaterial != null)
-            Destroy(runtimeMaterial);
+        fullscreenFeature.SetActive(false);
     }
 }
