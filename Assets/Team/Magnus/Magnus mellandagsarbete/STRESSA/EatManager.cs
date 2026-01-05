@@ -22,15 +22,18 @@ public class EatManager : MonoBehaviour
 
     private void OnEnable()
     {
-        TyrantTentacleManager.VictimEaten += IncrementEatenCount;
+        EconomyManager.onCurrencyChanged += HandleCurrencyChange;
     }
     private void OnDisable()
     {
-        TyrantTentacleManager.VictimEaten -= IncrementEatenCount;
+        EconomyManager.onCurrencyChanged -= HandleCurrencyChange;
     }
-    private void IncrementEatenCount()
+    private void HandleCurrencyChange(Currency changedCurrency)
     {
-        totalHumansConsumed++;
+        if (changedCurrency == Currency.Biomass)
+        {
+            totalHumansConsumed++;
+        }
     }
 
     public void ResetStats() /// Call on this when leaving scene (To main menu)
